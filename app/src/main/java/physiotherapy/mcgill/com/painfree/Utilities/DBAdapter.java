@@ -110,6 +110,10 @@ public class DBAdapter {
         return db.delete(DATA_TABLE, where, null) != 0;
     }
 
+    public boolean deleteAllRowData() {
+        return db.delete(DATA_TABLE, null, null) != 0;
+    }
+
 
     // Return all data in the database.
     public Cursor getAllRowData() {
