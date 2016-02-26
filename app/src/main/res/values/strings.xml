@@ -15,4 +15,13 @@
     <string name="title_sectionD">D</string>
     <string name="title_sectionE">E</string>
     <string name="title_sectionF">F</string>
+    <string name="site">Site:</string>
+    <string name="completed_by">Completed by:</string>
+    <string name="date">Date:</string>
+    <string name="select_date">Select date</string>
+    <string name="subject_id">Subject ID:</string>
+    <string name="date_of_arrival">Date of arrival to ED:</string>
+    <string name="select_time">Select time</string>
+    <string name="time_of_arrival">Time of arrival to ED:</string>
+    <string name="save">Save</string>
 </resources>

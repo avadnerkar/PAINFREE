@@ -64,8 +64,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     ViewPager mViewPager;
     public static DBAdapter myDb;
     public static int currentPatientId;
-    public static String currentSubjectId;
-    public String[] patientListString;
     public static Context context;
     public static ActionBar actionBar;
 
@@ -91,7 +89,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setOffscreenPageLimit(5);
+        mViewPager.setOffscreenPageLimit(7);
 
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -387,7 +385,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         invalidateOptionsMenu();
 
-        currentSubjectId = null;
     }
 
     @Override
@@ -467,8 +464,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             clearPatientSelection();
 
             //TODO: Add New Patient activity
-            //Intent intent = new Intent(MainActivity.this, PatientFormActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(context, NewPatientActivity.class);
+            startActivity(intent);
         }
     };
 
@@ -492,7 +489,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     public void exportToCSV() {
 
-        verifyStoragePermissions(this);
         ActivityIndicator.showProgressDialog(this);
 
         Thread thread = new Thread(){
@@ -523,6 +519,17 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     writer.close();
                     c.close();
 
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ActivityIndicator.dismissProgressDialog();
+                            CharSequence toastMessage = "Export successful";
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, toastMessage, duration);
+                            toast.show();
+                        }
+                    });
+
 
                 } catch (final IOException e){
 
@@ -547,61 +554,5 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     }
 
-
-
-    // Storage Permissions
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-
-    /**
-     * Checks if the app has permission to write to device storage
-     *
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity
-     */
-    public static void verifyStoragePermissions(Activity activity) {
-        // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-
-//        switch (requestCode) {
-//            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//
-//                    // permission was granted, yay! Do the
-//                    // contacts-related task you need to do.
-//
-//                } else {
-//
-//                    // permission denied, boo! Disable the
-//                    // functionality that depends on this permission.
-//                }
-//                return;
-//            }
-//
-//            // other 'case' lines to check for other
-//            // permissions this app might request
-//        }
-    }
 
 }

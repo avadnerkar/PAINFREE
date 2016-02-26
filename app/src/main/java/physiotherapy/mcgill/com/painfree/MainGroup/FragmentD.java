@@ -25,9 +25,9 @@ public class FragmentD extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.tab_a, container, false);
+        View v = inflater.inflate(R.layout.tab_d, container, false);
 
-        ListView listView = (ListView) v.findViewById(R.id.list_a);
+        ListView listView = (ListView) v.findViewById(R.id.list_d);
 
         //items = new ArrayList<>();
 
