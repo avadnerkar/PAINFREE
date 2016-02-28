@@ -66,7 +66,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public static long currentPatientId;
     public static Context context;
     public static ActionBar actionBar;
-    public static ArrayList<Fragment> fragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +85,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
 
-        //fragments.add(FragmentA.newInstance());
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -144,26 +142,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onResume() {
         super.onResume();
         invalidateOptionsMenu();
-
-
-
-        if (currentPatientId == -1){
-
-        } else {
-            ListView layoutA = (ListView) findViewById(R.id.list_a);
-            layoutA.setVisibility(View.VISIBLE);
-            ListView layoutB = (ListView) findViewById(R.id.list_b);
-            layoutB.setVisibility(View.VISIBLE);
-            ListView layoutC = (ListView) findViewById(R.id.list_c);
-            layoutC.setVisibility(View.VISIBLE);
-            ListView layoutD = (ListView) findViewById(R.id.list_d);
-            layoutD.setVisibility(View.VISIBLE);
-            ListView layoutE = (ListView) findViewById(R.id.list_e);
-            layoutE.setVisibility(View.VISIBLE);
-            ListView layoutF = (ListView) findViewById(R.id.list_f);
-            layoutF.setVisibility(View.VISIBLE);
-
-        }
 
     }
 

@@ -182,7 +182,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 int mDay=mcurrentDate.get(Calendar.DAY_OF_MONTH);
                 if (cursor.moveToFirst()){
                     String dateString = cursor.getString(0);
-                    if (!dateString.equals("")){
+                    if (dateString !=null && !dateString.equals("")){
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         try {
                             Date date = format.parse(dateString);

@@ -19,12 +19,13 @@ import physiotherapy.mcgill.com.painfree.R;
 public class FragmentF extends Fragment {
 
     public static FragmentListAdapter adapter;
+    private ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tab_f, container, false);
 
-        ListView listView = (ListView) v.findViewById(R.id.list_f);
+        listView = (ListView) v.findViewById(R.id.list_f);
 
         ArrayList<FragmentItem> items = new ArrayList<>();
         adapter = new FragmentListAdapter(getActivity(), items);
@@ -36,5 +37,16 @@ public class FragmentF extends Fragment {
     public static FragmentF newInstance() {
 
         return new FragmentF();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+        if (MainActivity.currentPatientId == -1){
+            listView.setVisibility(View.INVISIBLE);
+        } else {
+            listView.setVisibility(View.VISIBLE);
+        }
     }
 }

@@ -16,13 +16,9 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/text_medium"
             android:text="TITLE"
             android:layout_alignParentLeft="true"
-            android:padding="@dimen/text_padding"/>
+            style="@style/textFormStyle"/>
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/rg"
