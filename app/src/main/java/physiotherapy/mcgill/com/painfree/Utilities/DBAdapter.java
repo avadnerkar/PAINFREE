@@ -32,6 +32,7 @@ public class DBAdapter {
     public static final String KEY_ARRIVALDATE = "ArrivalDate";
     public static final String KEY_ARRIVALTIME = "ArrivalTime";
 
+    public static final String KEY_DATEOFBIRTH = "DateOfBirth";
     public static final String KEY_SEX = "Sex";
 
 
@@ -44,7 +45,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
 
 
     //Table Create Statements
@@ -77,6 +78,7 @@ public class DBAdapter {
         dataMap.add(KEY_ARRIVALDATE);
         dataMap.add(KEY_ARRIVALTIME);
 
+        dataMap.add(KEY_DATEOFBIRTH);
         dataMap.add(KEY_SEX);
 
         generateCreateDataString();

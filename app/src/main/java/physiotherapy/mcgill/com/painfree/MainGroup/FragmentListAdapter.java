@@ -1,5 +1,6 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.Editable;
@@ -9,11 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import physiotherapy.mcgill.com.painfree.R;
 
@@ -164,13 +171,52 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 rowView = inflater.inflate(R.layout.cell_fragment_datepicker, parent, false);
                 textView = (TextView) rowView.findViewById(R.id.title);
                 textView.setText(items.get(position).title);
-                
-                Button button = (Button) rowView.findViewById(R.id.button);
+
+                final Button button = (Button) rowView.findViewById(R.id.button);
+                button.setText(context.getString(R.string.select_date));
+
+                cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
+                Calendar mcurrentDate=Calendar.getInstance();
+                int mYear=mcurrentDate.get(Calendar.YEAR);
+                int mMonth=mcurrentDate.get(Calendar.MONTH);
+                int mDay=mcurrentDate.get(Calendar.DAY_OF_MONTH);
+                if (cursor.moveToFirst()){
+                    String dateString = cursor.getString(0);
+                    if (!dateString.equals("")){
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            Date date = format.parse(dateString);
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(date);
+                            mYear = cal.get(Calendar.YEAR);
+                            mMonth = cal.get(Calendar.MONTH);
+                            mDay = cal.get(Calendar.DAY_OF_MONTH);
+
+                            button.setText(mYear + "-" + String.format("%02d", mMonth+1) + "-" + String.format("%02d", mDay));
+                        } catch (ParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                final int year = mYear;
+                final int month = mMonth;
+                final int day = mDay;
+
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                    }
+
+                        DatePickerDialog mDatePicker=new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                            public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                                String text = selectedyear + "-" + String.format("%02d", selectedmonth+1) + "-" + String.format("%02d", selectedday);
+                                button.setText(text);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, text);
+                            }
+                        },year, month, day);
+                        mDatePicker.show();  }
                 });
         }
 

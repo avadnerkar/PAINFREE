@@ -119,7 +119,7 @@ public class NewPatientActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year,
                                   int monthOfYear, int dayOfMonth) {
                 // Display Selected date in textbox
-                final String value = year + "-" + String.format("%02d", monthOfYear+1) + "-" + dayOfMonth;
+                final String value = year + "-" + String.format("%02d", monthOfYear+1) + "-" + String.format("%02d", dayOfMonth);
                 button.setText(value);
                 switch (button.getId()){
                     case (R.id.select_date):
@@ -144,7 +144,7 @@ public class NewPatientActivity extends AppCompatActivity {
         TimePickerDialog tpd = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String value = hourOfDay + ":" + minute;
+                String value = String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute);
                 button.setText(value);
                 arrivalTimeString = value;
             }

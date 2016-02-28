@@ -66,6 +66,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public static long currentPatientId;
     public static Context context;
     public static ActionBar actionBar;
+    public static ArrayList<Fragment> fragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
+
+        fragments.add(FragmentA.newInstance(0));
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.

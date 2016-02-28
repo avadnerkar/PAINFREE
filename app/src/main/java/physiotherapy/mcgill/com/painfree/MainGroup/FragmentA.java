@@ -23,6 +23,7 @@ public class FragmentA extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+    public static FragmentListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,10 +32,11 @@ public class FragmentA extends Fragment {
         ListView listView = (ListView) v.findViewById(R.id.list_a);
 
         ArrayList<FragmentItem> items = new ArrayList<>();
+
+        items.add(new FragmentItem(getString(R.string.date_of_birth), FragmentItem.CellType.DATEPICKER, null, null, DBAdapter.KEY_DATEOFBIRTH));
         items.add(new FragmentItem(getString(R.string.sex), FragmentItem.CellType.RADIO, new String[]{getString(R.string.female), getString(R.string.male)}, null, DBAdapter.KEY_SEX));
 
-
-        FragmentListAdapter adapter = new FragmentListAdapter(getActivity(), items);
+        adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 
         return v;

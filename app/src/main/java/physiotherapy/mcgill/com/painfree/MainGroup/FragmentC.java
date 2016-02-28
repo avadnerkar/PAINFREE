@@ -22,6 +22,7 @@ public class FragmentC extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+    public static FragmentListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class FragmentC extends Fragment {
         ListView listView = (ListView) v.findViewById(R.id.list_c);
 
         ArrayList<FragmentItem> items = new ArrayList<>();
-        FragmentListAdapter adapter = new FragmentListAdapter(getActivity(), items);
+        adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 
         return v;

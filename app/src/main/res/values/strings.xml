@@ -35,9 +35,10 @@
 
 
     <!-- Section A-->
-    <string name="sex">Sex</string>
+    <string name="sex">Sex:</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="date_of_birth">Date of birth:</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
