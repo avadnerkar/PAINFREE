@@ -86,7 +86,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
 
-        fragments.add(FragmentA.newInstance(0));
+        //fragments.add(FragmentA.newInstance());
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -116,9 +116,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
-
-
-
     }
 
     @Override
@@ -422,13 +419,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             // Return a PlaceholderFragment (defined as a static inner class below).
 
             switch(position){
-                case 0: return FragmentA.newInstance(position + 1);
-                case 1: return FragmentB.newInstance(position + 1);
-                case 2: return FragmentC.newInstance(position + 1);
-                case 3: return FragmentD.newInstance(position + 1);
-                case 4: return FragmentE.newInstance(position + 1);
-                case 5: return FragmentF.newInstance(position + 1);
-                default: return FragmentA.newInstance(position + 1);
+                case 0: return FragmentA.newInstance();
+                case 1: return FragmentB.newInstance();
+                case 2: return FragmentC.newInstance();
+                case 3: return FragmentD.newInstance();
+                case 4: return FragmentE.newInstance();
+                case 5: return FragmentF.newInstance();
+                default: return FragmentA.newInstance();
             }
 
 

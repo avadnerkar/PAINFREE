@@ -18,11 +18,7 @@ import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentA extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    private static final String ARG_SECTION_NUMBER = "section_number";
+
     public static FragmentListAdapter adapter;
 
     @Override
@@ -42,14 +38,8 @@ public class FragmentA extends Fragment {
         return v;
     }
 
-    public static FragmentA newInstance(int sectionNumber) {
+    public static FragmentA newInstance() {
 
-        FragmentA f = new FragmentA();
-        Bundle b = new Bundle();
-
-        b.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        f.setArguments(b);
-
-        return f;
+        return new FragmentA();
     }
 }
