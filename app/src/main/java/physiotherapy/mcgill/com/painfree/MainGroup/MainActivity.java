@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      */
     ViewPager mViewPager;
     public static DBAdapter myDb;
-    public static int currentPatientId;
+    public static long currentPatientId;
     public static Context context;
     public static ActionBar actionBar;
 
@@ -354,9 +354,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         if (id == R.id.patient_list) {
 
-            //TODO: Select patient activity
-            //Intent intent = new Intent(this, SelectPatientActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, PatientListActivity.class);
+            startActivity(intent);
 
             return true;
         }

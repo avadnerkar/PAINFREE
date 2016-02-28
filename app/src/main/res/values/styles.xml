@@ -6,7 +6,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/Crimson</item>
         <item name="colorPrimaryDark">@color/DarkRed</item>
-        <item name="colorAccent">@color/Black</item>
+        <item name="colorAccent">@color/BlackLight</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/list_activated_background</item>
     </style>
 
     <!-- Styles -->

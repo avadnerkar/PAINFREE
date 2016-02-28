@@ -1,6 +1,7 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +11,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import physiotherapy.mcgill.com.painfree.R;
+import physiotherapy.mcgill.com.painfree.Utilities.AppUtils;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 
 public class NewPatientActivity extends AppCompatActivity {
@@ -53,6 +58,20 @@ public class NewPatientActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.patient_save) {
 
+            EditText editSubjectID = (EditText) findViewById(R.id.edit_subject_id);
+            EditText editSite = (EditText) findViewById(R.id.edit_site);
+            EditText editCompletedBy = (EditText) findViewById(R.id.edit_completed_by);
+            String subjectID = editSubjectID.getText().toString();
+            String site = editSite.getText().toString();
+            String completedBy = editCompletedBy.getText().toString();
+
+            if (subjectID.equals("")){
+                AppUtils.showSimpleDialog(getString(R.string.error_id), context);
+                return true;
+            }
+
+            MainActivity.currentPatientId = MainActivity.myDb.insertNewRow(subjectID, site, completedBy, dateString, arrivalDateString, arrivalTimeString);
+
             finish();
             return true;
         }
@@ -78,11 +97,11 @@ public class NewPatientActivity extends AppCompatActivity {
             }
         });
 
-        Button arrivalTimeButton = (Button) findViewById(R.id.select_arrival_time);
+        final Button arrivalTimeButton = (Button) findViewById(R.id.select_arrival_time);
         arrivalTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                launchTimePickerDialog(arrivalTimeButton);
             }
         });
     }
@@ -100,33 +119,38 @@ public class NewPatientActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year,
                                   int monthOfYear, int dayOfMonth) {
                 // Display Selected date in textbox
-                final String value = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                final String value = year + "-" + String.format("%02d", monthOfYear+1) + "-" + dayOfMonth;
                 button.setText(value);
-                dateString = value;
+                switch (button.getId()){
+                    case (R.id.select_date):
+                        dateString = value;
+                        break;
+                    case (R.id.select_arrival_date):
+                        arrivalDateString = value;
+                        break;
+                }
             }
         }, mYear, mMonth, mDay);
         dpd.show();
     }
 
-    private void launchArrivalDatePickerDialog(final Button button){
+
+    private void launchTimePickerDialog(final Button button){
+
         final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
 
-        // Launch Date Picker Dialog
-        DatePickerDialog dpd = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-
+        TimePickerDialog tpd = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year,
-                                  int monthOfYear, int dayOfMonth) {
-                // Display Selected date in textbox
-                final String value = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String value = hourOfDay + ":" + minute;
                 button.setText(value);
-                arrivalDateString = value;
+                arrivalTimeString = value;
             }
-        }, mYear, mMonth, mDay);
-        dpd.show();
+        }, hour, minute, false);
+        tpd.show();
+
     }
 
 

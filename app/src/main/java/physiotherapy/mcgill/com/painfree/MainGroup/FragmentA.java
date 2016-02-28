@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import physiotherapy.mcgill.com.painfree.R;
+import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 
 
 /**
@@ -20,8 +23,6 @@ public class FragmentA extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
-    //private static ArrayList<CellItem> items;
-    //private static CellListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,12 +30,12 @@ public class FragmentA extends Fragment {
 
         ListView listView = (ListView) v.findViewById(R.id.list_a);
 
-        //items = new ArrayList<>();
+        ArrayList<FragmentItem> items = new ArrayList<>();
+        items.add(new FragmentItem(getString(R.string.sex), FragmentItem.CellType.RADIO, new String[]{getString(R.string.female), getString(R.string.male)}, null, DBAdapter.KEY_SEX));
 
-        //adapter = new CellListAdapter(getActivity(), items);
 
-        //listView.setAdapter(nurseAdapter);
-
+        FragmentListAdapter adapter = new FragmentListAdapter(getActivity(), items);
+        listView.setAdapter(adapter);
 
         return v;
     }

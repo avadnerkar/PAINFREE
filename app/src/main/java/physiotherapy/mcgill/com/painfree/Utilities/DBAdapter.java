@@ -26,6 +26,13 @@ public class DBAdapter {
 
     public static final String KEY_ROWID = "_id";
     public static final String KEY_SUBJECTID = "SubjectID";
+    public static final String KEY_SITE = "Site";
+    public static final String KEY_COMPLETED_BY = "CompletedBy";
+    public static final String KEY_DATE = "Date";
+    public static final String KEY_ARRIVALDATE = "ArrivalDate";
+    public static final String KEY_ARRIVALTIME = "ArrivalTime";
+
+    public static final String KEY_SEX = "Sex";
 
 
     // TODO: Setup your data fields here:
@@ -37,7 +44,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
 
 
     //Table Create Statements
@@ -64,6 +71,13 @@ public class DBAdapter {
         dataMap = new ArrayList<>();
         dataMap.add(KEY_ROWID);
         dataMap.add(KEY_SUBJECTID);
+        dataMap.add(KEY_SITE);
+        dataMap.add(KEY_COMPLETED_BY);
+        dataMap.add(KEY_DATE);
+        dataMap.add(KEY_ARRIVALDATE);
+        dataMap.add(KEY_ARRIVALTIME);
+
+        dataMap.add(KEY_SEX);
 
         generateCreateDataString();
 
@@ -97,9 +111,14 @@ public class DBAdapter {
     /////////////////////////////////////////////////////////////////////
 
 
-    public long insertNewRow(int subjectID){
+    public long insertNewRow(String subjectID, String site, String completedBy, String date, String arrivalDate, String arrivalTime){
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_SUBJECTID, subjectID);
+        initialValues.put(KEY_SITE, site);
+        initialValues.put(KEY_COMPLETED_BY, completedBy);
+        initialValues.put(KEY_DATE, date);
+        initialValues.put(KEY_ARRIVALDATE, arrivalDate);
+        initialValues.put(KEY_ARRIVALTIME, arrivalTime);
 
         return db.insert(DATA_TABLE, null, initialValues);
     }
@@ -136,7 +155,7 @@ public class DBAdapter {
     }
 
     // Get a specific row (by rowId)
-    public Cursor getRowData(int rowId) {
+    public Cursor getRowData(long rowId) {
 
         String where = KEY_ROWID + "=" + rowId;
         Cursor c = db.query(true, DATA_TABLE, null, where, null, null, null, null, null);
@@ -148,7 +167,7 @@ public class DBAdapter {
     }
 
 
-    public boolean updateFieldData(int rowId, String key, String value) {
+    public boolean updateFieldData(long rowId, String key, String value) {
 
         Cursor c = getDataField(rowId, key);
 
@@ -163,7 +182,7 @@ public class DBAdapter {
     }
 
 
-    public Cursor getDataField(int rowId, String key){
+    public Cursor getDataField(long rowId, String key){
         String where = KEY_ROWID + "= ?";
         Cursor c = db.query(DATA_TABLE, new String[]{key}, where, new String[]{String.valueOf(rowId)}, null, null, null);
         if (c != null){

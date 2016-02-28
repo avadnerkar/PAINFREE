@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import physiotherapy.mcgill.com.painfree.R;
 
 
@@ -20,8 +22,6 @@ public class FragmentC extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
-    //private static ArrayList<CellItem> items;
-    //private static CellListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,12 +29,9 @@ public class FragmentC extends Fragment {
 
         ListView listView = (ListView) v.findViewById(R.id.list_c);
 
-        //items = new ArrayList<>();
-
-        //adapter = new CellListAdapter(getActivity(), items);
-
-        //listView.setAdapter(nurseAdapter);
-
+        ArrayList<FragmentItem> items = new ArrayList<>();
+        FragmentListAdapter adapter = new FragmentListAdapter(getActivity(), items);
+        listView.setAdapter(adapter);
 
         return v;
     }
