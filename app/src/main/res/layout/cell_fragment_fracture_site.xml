@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="@dimen/card_border"
+    android:clipToPadding="false"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card"
+        android:elevation="2dp"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:text="@string/fracture_title"
+            style="@style/textFormStyle"/>
+
+        <CheckBox
+            android:id="@+id/foot"
+            android:tag="foot"
+            android:text="@string/foot"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+        <LinearLayout
+            android:id="@+id/footLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftFoot"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightFoot"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
+        <CheckBox
+            android:id="@+id/ankle"
+            android:tag="ankle"
+            android:text="@string/ankle"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+        <LinearLayout
+            android:id="@+id/ankleLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftAnkle"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightAnkle"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
+        <CheckBox
+            android:id="@+id/tibiaFibula"
+            android:tag="tibiaFibula"
+            android:text="@string/tibia_fibula"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+        <LinearLayout
+            android:id="@+id/tibiaFibulaLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftTibiaFibula"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightTibiaFibula"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
+        <CheckBox
+            android:id="@+id/femur"
+            android:tag="femur"
+            android:text="@string/femur"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+        <LinearLayout
+            android:id="@+id/femurLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftFemur"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightFemur"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
+        <CheckBox
+            android:id="@+id/hip"
+            android:tag="hip"
+            android:text="@string/hip"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+        <LinearLayout
+            android:id="@+id/hipLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftHip"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightHip"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
+        <CheckBox
+            android:id="@+id/pelvis"
+            android:tag="pelvis"
+            android:text="@string/pelvis"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+
+        <CheckBox
+            android:id="@+id/vertebra"
+            android:tag="vertebra"
+            android:text="@string/vertebra"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+
+        <CheckBox
+            android:id="@+id/rib"
+            android:tag="rib"
+            android:text="@string/ribs"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+        <LinearLayout
+            android:id="@+id/ribLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftRib"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightRib"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
+
+        <CheckBox
+            android:id="@+id/humerus"
+            android:tag="humerus"
+            android:text="@string/humerus"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+        <LinearLayout
+            android:id="@+id/humerusLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftHumerus"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightHumerus"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+        <CheckBox
+            android:id="@+id/forearm"
+            android:tag="forearm"
+            android:text="@string/forearm"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+        <LinearLayout
+            android:id="@+id/forearmLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftForearm"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightForearm"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+
+        <CheckBox
+            android:id="@+id/wrist"
+            android:tag="wrist"
+            android:text="@string/wrist"
+            android:checked="false"
+            style="@style/checkboxStyle" />
+
+        <LinearLayout
+            android:id="@+id/wristLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftWrist"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightWrist"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>

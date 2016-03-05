@@ -28,6 +28,8 @@ public class FragmentB extends Fragment {
         listView = (ListView) v.findViewById(R.id.list_b);
 
         ArrayList<FragmentItem> items = new ArrayList<>();
+        items.add(new FragmentItem(null, FragmentItem.CellType.FRACTURESITE, null, null, null));
+
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 

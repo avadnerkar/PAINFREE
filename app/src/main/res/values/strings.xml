@@ -43,4 +43,21 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_delete">Delete</string>
+    <string name="fracture_title">Anatomical site of fractures (please select all that apply):</string>
+    <string name="foot">Foot</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="ankle">Ankle</string>
+    <string name="tibia_fibula">Tibia/Fibula</string>
+    <string name="femur">Femur</string>
+    <string name="hip">Hip</string>
+    <string name="pelvis">Pelvis</string>
+    <string name="vertebra">Vertebra(e)</string>
+    <string name="ribs">Rib(s)</string>
+    <string name="humerus">Humerus</string>
+    <string name="wrist">Wrist</string>
+    <string name="forearm">Forearm</string>
+    <string name="other">Other</string>
+    <string name="unspecified">Unspecified</string>
+    <string name="yes">Yes</string>
 </resources>

@@ -35,6 +35,19 @@ public class DBAdapter {
     public static final String KEY_DATEOFBIRTH = "DateOfBirth";
     public static final String KEY_SEX = "Sex";
 
+    public static final String KEY_FRACTURESITE_FOOT = "Foot";
+    public static final String KEY_FRACTURESITE_ANKLE = "Ankle";
+    public static final String KEY_FRACTURESITE_TIBIA = "TibiaOrFibula";
+    public static final String KEY_FRACTURESITE_FEMUR = "Femur";
+    public static final String KEY_FRACTURESITE_HIP = "Hip";
+    public static final String KEY_FRACTURESITE_PELVIS = "Pelvis";
+    public static final String KEY_FRACTURESITE_VERTEBRA = "Vertebra";
+    public static final String KEY_FRACTURESITE_RIB = "Rib";
+    public static final String KEY_FRACTURESITE_HUMERUS = "Humerus";
+    public static final String KEY_FRACTURESITE_FOREARM = "Forearm";
+    public static final String KEY_FRACTURESITE_WRIST = "Wrist";
+
+
 
     // TODO: Setup your data fields here:
     public static List<String> dataMap;
@@ -45,7 +58,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
 
 
     //Table Create Statements
@@ -80,6 +93,19 @@ public class DBAdapter {
 
         dataMap.add(KEY_DATEOFBIRTH);
         dataMap.add(KEY_SEX);
+
+        dataMap.add(KEY_FRACTURESITE_FOOT);
+        dataMap.add(KEY_FRACTURESITE_ANKLE);
+        dataMap.add(KEY_FRACTURESITE_TIBIA);
+        dataMap.add(KEY_FRACTURESITE_FEMUR);
+        dataMap.add(KEY_FRACTURESITE_HIP);
+        dataMap.add(KEY_FRACTURESITE_PELVIS);
+        dataMap.add(KEY_FRACTURESITE_VERTEBRA);
+        dataMap.add(KEY_FRACTURESITE_RIB);
+        dataMap.add(KEY_FRACTURESITE_HUMERUS);
+        dataMap.add(KEY_FRACTURESITE_FOREARM);
+        dataMap.add(KEY_FRACTURESITE_WRIST);
+
 
         generateCreateDataString();
 

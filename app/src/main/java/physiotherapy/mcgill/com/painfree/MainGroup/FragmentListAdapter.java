@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import physiotherapy.mcgill.com.painfree.R;
+import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 
 /**
  * Created by Abhishek Vadnerkar on 16-02-28.
@@ -218,11 +222,185 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         },year, month, day);
                         mDatePicker.show();  }
                 });
+                break;
+
+            case FRACTURESITE:
+                rowView = inflater.inflate(R.layout.cell_fragment_fracture_site, parent, false);
+                CheckBox cbFoot = (CheckBox) rowView.findViewById(R.id.foot);
+                CheckBox cbAnkle = (CheckBox) rowView.findViewById(R.id.ankle);
+                CheckBox cbTibia = (CheckBox) rowView.findViewById(R.id.tibiaFibula);
+                CheckBox cbFemur = (CheckBox) rowView.findViewById(R.id.femur);
+                CheckBox cbHip = (CheckBox) rowView.findViewById(R.id.hip);
+                CheckBox cbPelvis = (CheckBox) rowView.findViewById(R.id.pelvis);
+                CheckBox cbVertebra = (CheckBox) rowView.findViewById(R.id.vertebra);
+                CheckBox cbRib = (CheckBox) rowView.findViewById(R.id.rib);
+                CheckBox cbHumerus = (CheckBox) rowView.findViewById(R.id.humerus);
+                CheckBox cbForearm = (CheckBox) rowView.findViewById(R.id.forearm);
+                CheckBox cbWrist = (CheckBox) rowView.findViewById(R.id.wrist);
+
+                CheckBox cbFootLeft = (CheckBox) rowView.findViewById(R.id.leftFoot);
+                CheckBox cbFootRight = (CheckBox) rowView.findViewById(R.id.rightFoot);
+                CheckBox cbAnkleLeft = (CheckBox) rowView.findViewById(R.id.leftAnkle);
+                CheckBox cbAnkleRight = (CheckBox) rowView.findViewById(R.id.rightAnkle);
+                CheckBox cbTibiaLeft = (CheckBox) rowView.findViewById(R.id.leftTibiaFibula);
+                CheckBox cbTibiaRight = (CheckBox) rowView.findViewById(R.id.rightTibiaFibula);
+                CheckBox cbFemurLeft = (CheckBox) rowView.findViewById(R.id.leftFemur);
+                CheckBox cbFemurRight = (CheckBox) rowView.findViewById(R.id.rightFemur);
+                CheckBox cbHipLeft = (CheckBox) rowView.findViewById(R.id.leftHip);
+                CheckBox cbHipRight = (CheckBox) rowView.findViewById(R.id.rightHip);
+                CheckBox cbRibLeft = (CheckBox) rowView.findViewById(R.id.leftRib);
+                CheckBox cbRibRight = (CheckBox) rowView.findViewById(R.id.rightRib);
+                CheckBox cbHumerusLeft = (CheckBox) rowView.findViewById(R.id.leftHumerus);
+                CheckBox cbHumerusRight = (CheckBox) rowView.findViewById(R.id.rightHumerus);
+                CheckBox cbForearmLeft = (CheckBox) rowView.findViewById(R.id.leftForearm);
+                CheckBox cbForearmRight = (CheckBox) rowView.findViewById(R.id.rightForearm);
+                CheckBox cbWristLeft = (CheckBox) rowView.findViewById(R.id.leftWrist);
+                CheckBox cbWristRight = (CheckBox) rowView.findViewById(R.id.rightWrist);
+
+                setupFractureSiteClickListener(cbFoot, cbFootLeft, cbFootRight, DBAdapter.KEY_FRACTURESITE_FOOT, rowView);
+                setupFractureSiteClickListener(cbAnkle, cbAnkleLeft, cbAnkleRight, DBAdapter.KEY_FRACTURESITE_ANKLE, rowView);
+                setupFractureSiteClickListener(cbTibia, cbTibiaLeft, cbTibiaRight, DBAdapter.KEY_FRACTURESITE_TIBIA, rowView);
+                setupFractureSiteClickListener(cbFemur, cbFemurLeft, cbFemurRight, DBAdapter.KEY_FRACTURESITE_FEMUR, rowView);
+                setupFractureSiteClickListener(cbHip, cbHipLeft, cbHipRight, DBAdapter.KEY_FRACTURESITE_HIP, rowView);
+                setupFractureSiteClickListener(cbPelvis, null, null, DBAdapter.KEY_FRACTURESITE_PELVIS, rowView);
+                setupFractureSiteClickListener(cbVertebra, null, null, DBAdapter.KEY_FRACTURESITE_VERTEBRA, rowView);
+                setupFractureSiteClickListener(cbRib, cbRibLeft, cbRibRight, DBAdapter.KEY_FRACTURESITE_RIB, rowView);
+                setupFractureSiteClickListener(cbHumerus, cbHumerusLeft, cbHumerusRight, DBAdapter.KEY_FRACTURESITE_HUMERUS, rowView);
+                setupFractureSiteClickListener(cbForearm, cbForearmLeft, cbForearmRight, DBAdapter.KEY_FRACTURESITE_FOREARM, rowView);
+                setupFractureSiteClickListener(cbWrist, cbWristLeft, cbWristRight, DBAdapter.KEY_FRACTURESITE_WRIST, rowView);
+
+                break;
         }
 
         return rowView;
     }
 
+
+    private void setupFractureSiteClickListener(final CheckBox cb, final CheckBox cbLeft, final CheckBox cbRight, final String dbKey, final View view){
+
+        loadFractureSiteCheckbox(cb, cbLeft, cbRight, dbKey, view);
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setFractureSiteVisibility(cb, cbLeft, cbRight, isChecked, view);
+                writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
+            }
+        });
+
+        if (cbLeft != null){
+            cbLeft.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
+                }
+            });
+        }
+
+        if (cbRight != null){
+            cbRight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
+                }
+            });
+        }
+    }
+
+    private void setFractureSiteVisibility(CheckBox cb, CheckBox cbLeft, CheckBox cbRight, boolean isChecked, View view){
+        if (cbLeft != null) {
+
+            String tag = cb.getTag().toString();
+            String layoutName = tag + "Layout";
+            int layoutID = context.getResources().getIdentifier(layoutName, "id", context.getPackageName());
+            LinearLayout layout = (LinearLayout) view.findViewById(layoutID);
+            if (isChecked) {
+                layout.setVisibility(View.VISIBLE);
+            } else {
+                layout.setVisibility(View.GONE);
+                cbLeft.setChecked(false);
+                cbRight.setChecked(false);
+            }
+        }
+    }
+
+    private void writeFractureSiteVisibility(CheckBox cb, CheckBox cbLeft, CheckBox cbRight, final String dbKey){
+        String value = "";
+        if (cb.isChecked()){
+            if (cbLeft != null){
+
+                if (cbLeft.isChecked()){
+                    value = context.getString(R.string.left);
+                }
+
+                if (cbRight.isChecked()){
+                    value = value + context.getString(R.string.right);
+                }
+
+                if (value.equals("")){
+                    value = context.getString(R.string.unspecified);
+                }
+
+            } else {
+                value = context.getString(R.string.yes);
+            }
+        } else {
+            value = "";
+        }
+
+        final String finalValue = value;
+
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, dbKey, finalValue);
+            }
+        };
+        thread.start();
+
+
+    }
+
+
+    private void loadFractureSiteCheckbox(final CheckBox cb, final CheckBox cbLeft, final CheckBox cbRight, final String dbKey, final View view){
+        Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, dbKey);
+
+        if (cursor.moveToFirst()){
+            String checkValue = cursor.getString(0);
+            if (checkValue != null  && !checkValue.equals("")){
+
+                cb.setChecked(true);
+                setFractureSiteVisibility(cb, cbLeft, cbRight, true, view);
+
+                if (cbLeft != null){
+                    if (checkValue.equals(context.getString(R.string.unspecified))){
+                        cbLeft.setChecked(false);
+                        cbRight.setChecked(false);
+                    } else {
+                        if (checkValue.contains(context.getString(R.string.left))){
+                            cbLeft.setChecked(true);
+                        } else {
+                            cbLeft.setChecked(false);
+                        }
+
+                        if (checkValue.contains(context.getString(R.string.right))){
+                            cbRight.setChecked(true);
+                        } else {
+                            cbRight.setChecked(false);
+                        }
+                    }
+                }
+
+            } else {
+                cb.setChecked(false);
+                setFractureSiteVisibility(cb, cbLeft, cbRight, false, view);
+
+                if (cbLeft != null){
+                    cbLeft.setChecked(false);
+                    cbRight.setChecked(false);
+                }
+            }
+        }
+    }
 
 
 }
