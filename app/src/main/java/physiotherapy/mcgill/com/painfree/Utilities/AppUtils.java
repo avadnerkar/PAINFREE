@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import physiotherapy.mcgill.com.painfree.Dialogs.DialogEditText;
 import physiotherapy.mcgill.com.painfree.Dialogs.DialogSimple;
 import physiotherapy.mcgill.com.painfree.Dialogs.DialogThreeButton;
 import physiotherapy.mcgill.com.painfree.Dialogs.DialogTwoButton;
@@ -103,6 +104,15 @@ public class AppUtils {
 
     public interface ListHandler{
         void onClick(int i);
+    }
+
+
+    public static void showEditTextDialog(String title, Context context, final DialogEditText.ClickHandler h){
+        final DialogEditText dialog = new DialogEditText(context, h);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+        TextView textView = (TextView) dialog.findViewById(R.id.dialog_title);
+        textView.setText(title);
     }
 
 

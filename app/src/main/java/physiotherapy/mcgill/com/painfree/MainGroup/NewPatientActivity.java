@@ -71,7 +71,7 @@ public class NewPatientActivity extends AppCompatActivity {
             }
 
             MainActivity.actionBar.setTitle(subjectID);
-            MainActivity.currentPatientId = MainActivity.myDb.insertNewRow(subjectID, site, completedBy, dateString, arrivalDateString, arrivalTimeString);
+            MainActivity.currentPatientId = MainActivity.myDb.insertNewRow(String extractionPeriod);
 
             finish();
             return true;

@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
@@ -42,8 +43,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import physiotherapy.mcgill.com.painfree.Dialogs.DialogEditText;
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.ActivityIndicator;
+import physiotherapy.mcgill.com.painfree.Utilities.AppUtils;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener{
@@ -66,6 +69,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public static long currentPatientId;
     public static Context context;
     public static ActionBar actionBar;
+    public static final String PREFS_NAME = "PAINFREE_PREFS";
+    public static String deviceID;
+    public static String KEY_DEVICE_ID = "device_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +119,21 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
+        }
+
+        final SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+        deviceID = sharedPreferences.getString(KEY_DEVICE_ID, null);
+
+        if (deviceID == null){
+            AppUtils.showEditTextDialog(getString(R.string.device_id_message), context, new DialogEditText.ClickHandler() {
+                @Override
+                public void onClick(String text) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(KEY_DEVICE_ID, text);
+                    deviceID = text;
+                    editor.apply();
+                }
+            });
         }
     }
 

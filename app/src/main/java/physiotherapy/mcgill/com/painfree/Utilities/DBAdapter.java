@@ -25,6 +25,8 @@ public class DBAdapter {
 
 
     public static final String KEY_ROWID = "_id";
+    public static final String KEY_UNIQUEID = "DeviceSpecificID";
+    public static final String KEY_EXTRACTIONPERIOD = "PeriodOfExtraction";
     public static final String KEY_SUBJECTID = "SubjectID";
     public static final String KEY_SITE = "Site";
     public static final String KEY_COMPLETED_BY = "CompletedBy";
@@ -58,7 +60,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 6;
 
 
     //Table Create Statements
@@ -84,6 +86,9 @@ public class DBAdapter {
 
         dataMap = new ArrayList<>();
         dataMap.add(KEY_ROWID);
+        dataMap.add(KEY_UNIQUEID);
+        dataMap.add(KEY_EXTRACTIONPERIOD);
+
         dataMap.add(KEY_SUBJECTID);
         dataMap.add(KEY_SITE);
         dataMap.add(KEY_COMPLETED_BY);
@@ -139,15 +144,9 @@ public class DBAdapter {
     /////////////////////////////////////////////////////////////////////
 
 
-    public long insertNewRow(String subjectID, String site, String completedBy, String date, String arrivalDate, String arrivalTime){
+    public long insertNewRow(String extractionPeriod){
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_SUBJECTID, subjectID);
-        initialValues.put(KEY_SITE, site);
-        initialValues.put(KEY_COMPLETED_BY, completedBy);
-        initialValues.put(KEY_DATE, date);
-        initialValues.put(KEY_ARRIVALDATE, arrivalDate);
-        initialValues.put(KEY_ARRIVALTIME, arrivalTime);
-
+        initialValues.put(KEY_EXTRACTIONPERIOD, extractionPeriod);
         return db.insert(DATA_TABLE, null, initialValues);
     }
 

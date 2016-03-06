@@ -60,4 +60,5 @@
     <string name="other">Other</string>
     <string name="unspecified">Unspecified</string>
     <string name="yes">Yes</string>
+    <string name="device_id_message">Please enter a unique device ID</string>
 </resources>
