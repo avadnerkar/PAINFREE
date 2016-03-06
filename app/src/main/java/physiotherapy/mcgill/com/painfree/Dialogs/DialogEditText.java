@@ -32,7 +32,7 @@ public class DialogEditText extends Dialog{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_edit_text);
 
-        final EditText editText = (EditText) findViewById(R.id.edit);
+        final EditText editText = (EditText) findViewById(R.id.editDialog);
         ok = (Button) findViewById(R.id.dialog_ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override

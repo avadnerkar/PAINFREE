@@ -90,20 +90,20 @@ public class AppUtils {
     /*
     Displays custom list dialog
      */
-    public static void showListDialog(String title, String[] items, Context context, final ListHandler h){
+    public static void showListDialog(String title, final String[] items, Context context, final ListHandler h){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                h.onClick(i);
+                h.onClick(items[i]);
             }
         });
         builder.show();
     }
 
     public interface ListHandler{
-        void onClick(int i);
+        void onClick(String text);
     }
 
 

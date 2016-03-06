@@ -8,7 +8,7 @@ public class FragmentItem {
     public String dbKey;
     public String title;
     public enum CellType {
-        RADIO, NUMERIC, DATEPICKER, FRACTURESITE
+        RADIO, NUMERIC, DATEPICKER, TIMEPICKER, FRACTURESITE, TEXT
     }
     public CellType cellType;
     public enum Group {

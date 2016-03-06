@@ -70,8 +70,8 @@ public class NewPatientActivity extends AppCompatActivity {
                 return true;
             }
 
-            MainActivity.actionBar.setTitle(subjectID);
-            MainActivity.currentPatientId = MainActivity.myDb.insertNewRow(String extractionPeriod);
+            //MainActivity.actionBar.setTitle(subjectID);
+            //MainActivity.currentPatientId = MainActivity.myDb.insertNewRow(String extractionPeriod);
 
             finish();
             return true;
@@ -134,7 +134,6 @@ public class NewPatientActivity extends AppCompatActivity {
         }, mYear, mMonth, mDay);
         dpd.show();
     }
-
 
     private void launchTimePickerDialog(final Button button){
 

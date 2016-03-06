@@ -20,7 +20,7 @@
         android:layout_height="@dimen/text_padding"/>
 
     <EditText
-        android:id="@+id/edit"
+        android:id="@+id/editDialog"
         android:inputType="number"
         style="@style/editTextFormStyle" />
 

@@ -61,4 +61,9 @@
     <string name="unspecified">Unspecified</string>
     <string name="yes">Yes</string>
     <string name="device_id_message">Please enter a unique device ID</string>
+    <string name="period_of_extraction">Period of extraction:</string>
+    <string name="pre1">Pre 1</string>
+    <string name="pre2">Pre 2</string>
+    <string name="post1">Post 1</string>
+    <string name="post2">Post 2</string>
 </resources>

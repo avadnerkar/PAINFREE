@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import physiotherapy.mcgill.com.painfree.MainGroup.MainActivity;
+
 /**
  * Created by Abhishek Vadnerkar on 16-02-20.
  */
@@ -147,8 +149,17 @@ public class DBAdapter {
     public long insertNewRow(String extractionPeriod){
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_EXTRACTIONPERIOD, extractionPeriod);
-        return db.insert(DATA_TABLE, null, initialValues);
+        long id = db.insert(DATA_TABLE, null, initialValues);
+
+        ContentValues updatedValues = new ContentValues();
+        String value = MainActivity.deviceID + "-" + id;
+
+        updateFieldData(id, KEY_UNIQUEID, value);
+
+        return id;
     }
+
+
 
     // Delete a row from the database, by rowId (primary key)
     public boolean deleteRowData(long rowId) {

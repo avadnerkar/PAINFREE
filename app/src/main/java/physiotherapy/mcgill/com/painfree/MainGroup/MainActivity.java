@@ -354,6 +354,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         if (id == R.id.patient_list) {
 
+            currentPatientId = -1;
             Intent intent = new Intent(this, PatientListActivity.class);
             startActivity(intent);
 
@@ -462,9 +463,21 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public void run(){
             clearPatientSelection();
 
-            //TODO: Add New Patient activity
-            Intent intent = new Intent(context, NewPatientActivity.class);
-            startActivity(intent);
+            AppUtils.showListDialog(getString(R.string.period_of_extraction), new String[]{getString(R.string.pre1), getString(R.string.pre2), getString(R.string.post1), getString(R.string.post2)}, context, new AppUtils.ListHandler() {
+                @Override
+                public void onClick(final String text) {
+                    long id = MainActivity.myDb.insertNewRow(text);
+                    actionBar.setTitle(deviceID + "-" + id);
+                    MainActivity.currentPatientId = id;
+                    invalidateOptionsMenu();
+                    FragmentA.setFragmentVisibility();
+                    FragmentB.setFragmentVisibility();
+                    FragmentC.setFragmentVisibility();
+                    FragmentD.setFragmentVisibility();
+                    FragmentE.setFragmentVisibility();
+                    FragmentF.setFragmentVisibility();
+                }
+            });
         }
     };
 

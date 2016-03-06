@@ -19,7 +19,7 @@ import physiotherapy.mcgill.com.painfree.R;
 public class FragmentF extends Fragment {
 
     public static FragmentListAdapter adapter;
-    private ListView listView;
+    private static ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +42,11 @@ public class FragmentF extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        adapter.notifyDataSetChanged();
+        setFragmentVisibility();
+    }
+
+    public static void setFragmentVisibility(){
         adapter.notifyDataSetChanged();
         if (MainActivity.currentPatientId == -1){
             listView.setVisibility(View.INVISIBLE);

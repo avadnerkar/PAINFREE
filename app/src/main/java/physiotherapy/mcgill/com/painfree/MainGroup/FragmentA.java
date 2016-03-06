@@ -20,7 +20,7 @@ import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 public class FragmentA extends Fragment {
 
     public static FragmentListAdapter adapter;
-    private ListView listView;
+    private static ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,10 +29,12 @@ public class FragmentA extends Fragment {
         listView = (ListView) v.findViewById(R.id.list_a);
 
         ArrayList<FragmentItem> items = new ArrayList<>();
-
-        items.add(new FragmentItem(getString(R.string.date_of_birth), FragmentItem.CellType.DATEPICKER, null, null, DBAdapter.KEY_DATEOFBIRTH));
-        items.add(new FragmentItem(getString(R.string.sex), FragmentItem.CellType.RADIO, new String[]{getString(R.string.female), getString(R.string.male)}, null, DBAdapter.KEY_SEX));
-
+        items.add(new FragmentItem(getString(R.string.site), FragmentItem.CellType.TEXT, null, null, DBAdapter.KEY_SITE));
+        items.add(new FragmentItem(getString(R.string.completed_by), FragmentItem.CellType.TEXT, null, null, DBAdapter.KEY_COMPLETED_BY));
+        items.add(new FragmentItem(getString(R.string.date), FragmentItem.CellType.DATEPICKER, null, null, DBAdapter.KEY_DATE));
+        items.add(new FragmentItem(getString(R.string.subject_id), FragmentItem.CellType.NUMERIC, null, null, DBAdapter.KEY_SUBJECTID));
+        items.add(new FragmentItem(getString(R.string.date_of_arrival), FragmentItem.CellType.DATEPICKER, null, null, DBAdapter.KEY_ARRIVALDATE));
+        items.add(new FragmentItem(getString(R.string.time_of_arrival), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_ARRIVALTIME));
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 
@@ -47,6 +49,10 @@ public class FragmentA extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        setFragmentVisibility();
+    }
+
+    public static void setFragmentVisibility(){
         adapter.notifyDataSetChanged();
         if (MainActivity.currentPatientId == -1){
             listView.setVisibility(View.INVISIBLE);

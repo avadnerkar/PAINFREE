@@ -1,6 +1,7 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,8 +67,12 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 rowView = inflater.inflate(R.layout.cell_fragment_numeric, parent, false);
                 textView = (TextView) rowView.findViewById(R.id.title);
                 textView.setText(items.get(position).title);
-                EditText editText = (EditText) rowView.findViewById(R.id.edit_numeric);
-                editText.setHint(items.get(position).uiOptions[0]);
+                EditText editText = (EditText) rowView.findViewById(R.id.edit);
+
+
+                if (items.get(position).uiOptions != null){
+                    editText.setHint(items.get(position).uiOptions[0]);
+                }
 
                 cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 
@@ -215,14 +221,73 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
                         DatePickerDialog mDatePicker=new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                                String text = selectedyear + "-" + String.format("%02d", selectedmonth+1) + "-" + String.format("%02d", selectedday);
+                                final String text = selectedyear + "-" + String.format("%02d", selectedmonth+1) + "-" + String.format("%02d", selectedday);
                                 button.setText(text);
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, text);
+                                Thread thread = new Thread(){
+                                    @Override
+                                    public void run() {
+                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, text);
+                                    }
+                                };
+                                thread.start();
+
                             }
                         },year, month, day);
                         mDatePicker.show();  }
                 });
                 break;
+
+            case TIMEPICKER:
+                rowView = inflater.inflate(R.layout.cell_fragment_datepicker, parent, false);
+                textView = (TextView) rowView.findViewById(R.id.title);
+                textView.setText(items.get(position).title);
+
+                final Button timePickerButton = (Button) rowView.findViewById(R.id.button);
+                timePickerButton.setText(context.getString(R.string.select_date));
+
+                final Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+
+                cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
+
+                if (cursor.moveToFirst()) {
+                    String timeString = cursor.getString(0);
+                    if (timeString != null && !timeString.equals("")) {
+                        timePickerButton.setText(timeString);
+                        String[] parts = timeString.split(":");
+                        hour = Integer.parseInt(parts[0]);
+                        minute = Integer.parseInt(parts[1]);
+                    }
+                }
+
+                final int mHour = hour;
+                final int mMinute = minute;
+
+                timePickerButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        TimePickerDialog tpd = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                final String value = String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute);
+                                timePickerButton.setText(value);
+                                Thread thread = new Thread(){
+                                    @Override
+                                    public void run() {
+                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, value);
+                                    }
+                                };
+                                thread.start();
+                            }
+                        }, mHour, mMinute, false);
+                        tpd.show();
+                    }
+                });
+                break;
+
 
             case FRACTURESITE:
                 rowView = inflater.inflate(R.layout.cell_fragment_fracture_site, parent, false);
@@ -269,6 +334,58 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 setupFractureSiteClickListener(cbForearm, cbForearmLeft, cbForearmRight, DBAdapter.KEY_FRACTURESITE_FOREARM, rowView);
                 setupFractureSiteClickListener(cbWrist, cbWristLeft, cbWristRight, DBAdapter.KEY_FRACTURESITE_WRIST, rowView);
 
+                break;
+
+            case TEXT:
+                rowView = inflater.inflate(R.layout.cell_fragment_text, parent, false);
+                textView = (TextView) rowView.findViewById(R.id.title);
+                textView.setText(items.get(position).title);
+                EditText edit = (EditText) rowView.findViewById(R.id.text);
+
+                if (items.get(position).uiOptions != null){
+                    edit.setHint(items.get(position).uiOptions[0]);
+                }
+
+
+                cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
+
+                if (cursor.moveToFirst()){
+                    String text = cursor.getString(0);
+                    if (text !=null){
+                        edit.setText(text);
+                    } else {
+                        edit.setText("");
+                    }
+
+                } else {
+                    edit.setText("");
+                }
+
+                edit.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
+                        Thread thread = new Thread(){
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, charSequence.toString());
+                            }
+                        };
+                        thread.start();
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+
+                cursor.close();
                 break;
         }
 
@@ -401,6 +518,5 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             }
         }
     }
-
 
 }

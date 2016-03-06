@@ -11,6 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import physiotherapy.mcgill.com.painfree.R;
+import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 
 
 /**
@@ -19,7 +20,7 @@ import physiotherapy.mcgill.com.painfree.R;
 public class FragmentB extends Fragment {
 
     public static FragmentListAdapter adapter;
-    private ListView listView;
+    private static ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,7 +29,9 @@ public class FragmentB extends Fragment {
         listView = (ListView) v.findViewById(R.id.list_b);
 
         ArrayList<FragmentItem> items = new ArrayList<>();
-        items.add(new FragmentItem(null, FragmentItem.CellType.FRACTURESITE, null, null, null));
+
+        items.add(new FragmentItem(getString(R.string.date_of_birth), FragmentItem.CellType.DATEPICKER, null, null, DBAdapter.KEY_DATEOFBIRTH));
+        items.add(new FragmentItem(getString(R.string.sex), FragmentItem.CellType.RADIO, new String[]{getString(R.string.female), getString(R.string.male)}, null, DBAdapter.KEY_SEX));
 
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
@@ -44,6 +47,10 @@ public class FragmentB extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        setFragmentVisibility();
+    }
+
+    public static void setFragmentVisibility(){
         adapter.notifyDataSetChanged();
         if (MainActivity.currentPatientId == -1){
             listView.setVisibility(View.INVISIBLE);

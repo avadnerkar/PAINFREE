@@ -49,10 +49,10 @@ public class PatientListActivity extends AppCompatActivity {
             do {
                 // Process the data:
                 int id = cursor.getInt(cursor.getColumnIndex(DBAdapter.KEY_ROWID));
-                String hospitalID = cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_SUBJECTID))!=null ? cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_SUBJECTID)): "";
+                String uniqueID = cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_UNIQUEID))!=null ? cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_UNIQUEID)): "";
 
                 IDarray[cursor.getPosition()] = id;
-                items.add(hospitalID);
+                items.add(uniqueID);
 
             } while(cursor.moveToNext());
         }
