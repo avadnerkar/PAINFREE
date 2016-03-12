@@ -51,7 +51,7 @@ public class DBAdapter {
     public static final String KEY_FRACTURESITE_FOREARM = "Forearm";
     public static final String KEY_FRACTURESITE_WRIST = "Wrist";
 
-
+    public static final String KEY_INJURY_MECHANISM = "InjuryMechanism";
 
     // TODO: Setup your data fields here:
     public static List<String> dataMap;
@@ -62,7 +62,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 7;
 
 
     //Table Create Statements
@@ -112,6 +112,8 @@ public class DBAdapter {
         dataMap.add(KEY_FRACTURESITE_HUMERUS);
         dataMap.add(KEY_FRACTURESITE_FOREARM);
         dataMap.add(KEY_FRACTURESITE_WRIST);
+
+        dataMap.add(KEY_INJURY_MECHANISM);
 
 
         generateCreateDataString();

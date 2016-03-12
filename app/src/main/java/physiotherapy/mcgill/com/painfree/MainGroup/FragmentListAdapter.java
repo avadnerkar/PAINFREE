@@ -9,7 +9,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -18,12 +20,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -186,10 +190,28 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 button.setText(context.getString(R.string.select_date));
 
                 cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
+
                 Calendar mcurrentDate=Calendar.getInstance();
                 int mYear=mcurrentDate.get(Calendar.YEAR);
                 int mMonth=mcurrentDate.get(Calendar.MONTH);
                 int mDay=mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                if (items.get(position).uiOptions != null && items.get(position).uiOptions[0] != null){
+                    SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        Date defaultDate = f.parse(items.get(position).uiOptions[0]);
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(defaultDate);
+                        mYear = cal.get(Calendar.YEAR);
+                        mMonth = cal.get(Calendar.MONTH);
+                        mDay = cal.get(Calendar.DAY_OF_MONTH);
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
                 if (cursor.moveToFirst()){
                     String dateString = cursor.getString(0);
                     if (dateString !=null && !dateString.equals("")){
@@ -233,8 +255,24 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
                             }
                         },year, month, day);
+                        if (items.get(position).uiOptions != null && items.get(position).uiOptions.length >= 3){
+                            SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+                            try {
+                                Date minDate = f.parse(items.get(position).uiOptions[1]);
+                                mDatePicker.getDatePicker().setMinDate(minDate.getTime());
+
+                                Date maxDate = f.parse(items.get(position).uiOptions[2]);
+                                mDatePicker.getDatePicker().setMaxDate(maxDate.getTime());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
                         mDatePicker.show();  }
                 });
+
+                cursor.close();
                 break;
 
             case TIMEPICKER:
@@ -286,6 +324,8 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         tpd.show();
                     }
                 });
+
+                cursor.close();
                 break;
 
 
@@ -386,6 +426,188 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 });
 
                 cursor.close();
+                break;
+
+            case SPINNER:
+
+                rowView = inflater.inflate(R.layout.cell_fragment_spinner, parent, false);
+                textView = (TextView) rowView.findViewById(R.id.title);
+                textView.setText(items.get(position).title);
+
+                Spinner spinner = (Spinner) rowView.findViewById(R.id.spinner);
+                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, items.get(position).uiOptions);
+                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(spinnerAdapter);
+
+                cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
+
+                final String[] databaseArray;
+                if (items.get(position).databaseOptions == null){
+                    databaseArray = items.get(position).uiOptions;
+                } else {
+                    databaseArray = items.get(position).databaseOptions;
+                }
+
+                spinner.setSelection(0);
+                if (cursor.moveToFirst()){
+                    String value = cursor.getString(0);
+                    if (value != null && !value.equals("")){
+                        for (int i =0; i<databaseArray.length; i++){
+                            if (value.equals(databaseArray[i])){
+                                spinner.setSelection(i);
+                                break;
+                            }
+                        }
+                    }
+                }
+                cursor.close();
+
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, final int j, long id) {
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, databaseArray[j]);
+                            }
+                        };
+                        thread.start();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+                break;
+
+            case SPINNER_WITH_OTHER:
+
+                rowView = inflater.inflate(R.layout.cell_fragment_spinner_with_other, parent, false);
+                textView = (TextView) rowView.findViewById(R.id.title);
+                textView.setText(items.get(position).title);
+
+                final String[] spinnerOptions = Arrays.copyOf(items.get(position).uiOptions, items.get(position).uiOptions.length + 1);
+                spinnerOptions[spinnerOptions.length - 1] = context.getString(R.string.other);
+
+                String[] extraOptions = Arrays.copyOf(items.get(position).extraOptions, items.get(position).extraOptions.length + 1);
+                extraOptions[extraOptions.length - 1] = "";
+
+                final EditText editOther = (EditText) rowView.findViewById(R.id.other);
+
+                final Spinner spinnerWithOther = (Spinner) rowView.findViewById(R.id.spinner);
+                SpinnerAdapter spinnerWithOtherAdapter = new SpinnerAdapter(context, spinnerOptions, extraOptions);
+                spinnerWithOther.setAdapter(spinnerWithOtherAdapter);
+
+                cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
+
+                final String[] dataArray;
+                if (items.get(position).databaseOptions == null){
+                    dataArray = items.get(position).uiOptions;
+                } else {
+                    dataArray = items.get(position).databaseOptions;
+                }
+
+                spinnerWithOther.setSelection(0, false);
+                if (cursor.moveToFirst()){
+                    String value = cursor.getString(0);
+                    if (value != null && !value.equals("")){
+
+                        if (value.startsWith(context.getString(R.string.other))){
+                            spinnerWithOther.setSelection(spinnerOptions.length - 1, false);
+                            editOther.setVisibility(View.VISIBLE);
+
+                            editOther.setTag("tag");
+                            if (value.length() > context.getString(R.string.other).length()){
+                                editOther.setText(value.substring(context.getString(R.string.other).length() + 3));
+                            } else {
+                                editOther.setText("");
+                            }
+
+                            editOther.setTag(null);
+                        } else {
+                            editOther.setVisibility(View.GONE);
+                            editOther.setTag("tag");
+                            editOther.setText("");
+                            editOther.setTag(null);
+                            for (int i =0; i<dataArray.length; i++){
+                                if (value.equals(dataArray[i])){
+                                    spinnerWithOther.setSelection(i, false);
+                                    break;
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+                cursor.close();
+
+                spinnerWithOther.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, final int j, long id) {
+
+                        editOther.setTag("tag");
+                        editOther.setText("");
+                        editOther.setTag(null);
+                        if (j == spinnerOptions.length - 1) {
+                            editOther.setVisibility(View.VISIBLE);
+
+                            Thread thread = new Thread() {
+                                @Override
+                                public void run() {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.other) + " - " + editOther.getText().toString());
+                                }
+                            };
+                            thread.start();
+                        } else {
+                            editOther.setVisibility(View.GONE);
+
+                            Thread thread = new Thread() {
+                                @Override
+                                public void run() {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, dataArray[j]);
+                                }
+                            };
+                            thread.start();
+                        }
+                    }
+
+
+
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+                editOther.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
+                        if (editOther.getTag() == null){
+                            Thread thread = new Thread() {
+                                @Override
+                                public void run() {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.other) + " - " + charSequence.toString());
+                                }
+                            };
+                            thread.start();
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+
                 break;
         }
 
@@ -516,6 +738,53 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     cbRight.setChecked(false);
                 }
             }
+        }
+
+        cursor.close();
+    }
+
+
+    private class SpinnerAdapter extends BaseAdapter
+    {
+        LayoutInflater inflater;
+        String[] titles;
+        String[] subtitles;
+
+        public SpinnerAdapter( Context context, String[] titles, String[] subtitles)
+        {
+            this.inflater = LayoutInflater.from(context);
+            this.titles = titles;
+            this.subtitles = subtitles;
+        }
+
+        @Override
+        public int getCount()
+        {
+            return titles.length;
+        }
+
+        @Override
+        public Object getItem(int position)
+        {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position)
+        {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            convertView = inflater.inflate(R.layout.cell_spinner_subtitle, null);
+            TextView title = (TextView) convertView.findViewById(R.id.title);
+            TextView subtitle = (TextView) convertView.findViewById(R.id.subtitle);
+            title.setText(titles[position]);
+            subtitle.setText(subtitles[position]);
+            return convertView;
+
         }
     }
 

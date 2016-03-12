@@ -66,4 +66,41 @@
     <string name="pre2">Pre 2</string>
     <string name="post1">Post 1</string>
     <string name="post2">Post 2</string>
+    <string name="jgh">JGH</string>
+    <string name="mgh">MGH</string>
+    <string name="lgh">LGH</string>
+    <string name="rvh">RVH</string>
+    <string name="hsc">HSC</string>
+    <string name="smh">SMH</string>
+    <string name="hdv">HDV</string>
+    <string name="mechanism_of_injury">Mechanism of Injury</string>
+    <string name="none">None</string>
+    <string name="mechanism1">Fall on same level due to ice and snow</string>
+    <string name="mechanism2">Unspecified fall due to ice and snow</string>
+    <string name="mechanism3">Fall on same level from slipping, tripping and stumbling without subsequent striking against object</string>
+    <string name="mechanism4">Fall from non-moving wheelchair, nonmotorized and motorized mobility scooter</string>
+    <string name="mechanism5">Fall involving bed</string>
+    <string name="mechanism6">Fall from chair</string>
+    <string name="mechanism7">Fall from other furniture</string>
+    <string name="mechanism8">Fall on and from stairs and steps</string>
+    <string name="mechanism9">Fall on and from ladder</string>
+    <string name="mechanism10">Other slipping, tripping and stumbling and falls</string>
+    <string name="mechanism11">Unspecified fall</string>
+    <string name="mechanism12">Person boarding or alighting a car injured in noncollision transport accident</string>
+    <string name="mechanism13">Person boarding or alighting from bus injured in noncollision transport accident</string>
+    <string name="mechanismCode1">W00</string>
+    <string name="mechanismCode2">W19</string>
+    <string name="mechanismCode3">W01</string>
+    <string name="mechanismCode4">W05</string>
+    <string name="mechanismCode5">W06</string>
+    <string name="mechanismCode6">W07</string>
+    <string name="mechanismCode7">W08</string>
+    <string name="mechanismCode8">W10</string>
+    <string name="mechanismCode9">W11</string>
+    <string name="mechanismCode10">W18</string>
+    <string name="mechanismCode11">W19</string>
+    <string name="mechanismCode12">V48.4</string>
+    <string name="mechanismCode13">V78.4</string>
+
+
 </resources>

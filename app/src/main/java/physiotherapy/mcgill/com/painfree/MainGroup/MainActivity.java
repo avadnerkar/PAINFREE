@@ -354,7 +354,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         if (id == R.id.patient_list) {
 
-            currentPatientId = -1;
+            clearPatientSelection();
             Intent intent = new Intent(this, PatientListActivity.class);
             startActivity(intent);
 
@@ -370,18 +370,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.app_name);
         currentPatientId = -1;
-        ListView layoutA = (ListView) findViewById(R.id.list_a);
-        layoutA.setVisibility(View.INVISIBLE);
-        ListView layoutB = (ListView) findViewById(R.id.list_b);
-        layoutB.setVisibility(View.INVISIBLE);
-        ListView layoutC = (ListView) findViewById(R.id.list_c);
-        layoutC.setVisibility(View.INVISIBLE);
-        ListView layoutD = (ListView) findViewById(R.id.list_d);
-        layoutD.setVisibility(View.INVISIBLE);
-        ListView layoutE = (ListView) findViewById(R.id.list_e);
-        layoutE.setVisibility(View.INVISIBLE);
-        ListView layoutF = (ListView) findViewById(R.id.list_f);
-        layoutF.setVisibility(View.INVISIBLE);
+        FragmentA.setFragmentVisibility();
+        FragmentB.setFragmentVisibility();
+        FragmentC.setFragmentVisibility();
+        FragmentD.setFragmentVisibility();
+        FragmentE.setFragmentVisibility();
+        FragmentF.setFragmentVisibility();
 
         invalidateOptionsMenu();
 
