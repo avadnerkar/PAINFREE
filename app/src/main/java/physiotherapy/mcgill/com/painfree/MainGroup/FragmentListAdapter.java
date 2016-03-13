@@ -189,6 +189,13 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 final Button button = (Button) rowView.findViewById(R.id.button);
                 button.setText(context.getString(R.string.select_date));
 
+                final Button clearButton = (Button) rowView.findViewById(R.id.clear);
+                if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].equals("optional")){
+                    clearButton.setVisibility(View.VISIBLE);
+                } else {
+                    clearButton.setVisibility(View.GONE);
+                }
+
                 cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 
                 Calendar mcurrentDate=Calendar.getInstance();
@@ -272,6 +279,20 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         mDatePicker.show();  }
                 });
 
+                clearButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        button.setText(context.getString(R.string.select_date));
+                        Thread thread = new Thread(){
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
+                            }
+                        };
+                        thread.start();
+                    }
+                });
+
                 cursor.close();
                 break;
 
@@ -281,7 +302,14 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 textView.setText(items.get(position).title);
 
                 final Button timePickerButton = (Button) rowView.findViewById(R.id.button);
-                timePickerButton.setText(context.getString(R.string.select_date));
+                timePickerButton.setText(context.getString(R.string.select_time));
+
+                final Button clearButton1 = (Button) rowView.findViewById(R.id.clear);
+                if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].equals("optional")){
+                    clearButton1.setVisibility(View.VISIBLE);
+                } else {
+                    clearButton1.setVisibility(View.GONE);
+                }
 
                 final Calendar c = Calendar.getInstance();
                 int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -322,6 +350,20 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                             }
                         }, mHour, mMinute, false);
                         tpd.show();
+                    }
+                });
+
+                clearButton1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        timePickerButton.setText(context.getString(R.string.select_date));
+                        Thread thread = new Thread(){
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
+                            }
+                        };
+                        thread.start();
                     }
                 });
 
@@ -609,7 +651,89 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 });
 
                 break;
+
+            case CHECKBOX:
+                rowView = inflater.inflate(R.layout.cell_fragment_checkbox, parent, false);
+
+                textView = (TextView) rowView.findViewById(R.id.title);
+                textView.setText(items.get(position).title);
+
+                final LinearLayout cg = (LinearLayout) rowView.findViewById(R.id.checkGroup);
+
+                if (items.get(position).uiOptions.length >2){
+                    cg.setOrientation(RadioGroup.VERTICAL);
+                } else {
+                    cg.setOrientation(RadioGroup.HORIZONTAL);
+                }
+
+                final String[] checkboxDataArray;
+                if (items.get(position).databaseOptions == null){
+                    checkboxDataArray = items.get(position).uiOptions;
+                } else {
+                    checkboxDataArray = items.get(position).databaseOptions;
+                }
+
+                for (int i=0; i<items.get(position).uiOptions.length; i++){
+                    CheckBox cb = new CheckBox(context);
+                    cb.setText(items.get(position).uiOptions[i]);
+                    cg.addView(cb);
+
+
+                    cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                            Thread thread = new Thread() {
+                                @Override
+                                public void run() {
+                                    String answer = "";
+                                    for (int i = 0; i < cg.getChildCount(); i++) {
+                                        CheckBox cb = (CheckBox) cg.getChildAt(i);
+                                        if (cb.isChecked()) {
+                                            answer = answer + " " + checkboxDataArray[i];
+                                        }
+                                    }
+
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, answer);
+                                }
+                            };
+                            thread.start();
+                        }
+                    });
+
+                }
+
+                cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
+
+                if (cursor.moveToFirst()){
+                    String answer = cursor.getString(cursor.getColumnIndex(items.get(position).dbKey));
+
+                    if (answer != null){
+                        for (int i =0; i<cg.getChildCount(); i++){
+                            if (answer.contains(checkboxDataArray[i])){
+                                ((CheckBox) cg.getChildAt(i)).setChecked(true);
+                            } else {
+                                ((CheckBox) cg.getChildAt(i)).setChecked(false);
+                            }
+                        }
+                    } else {
+                        for (int i=0; i<cg.getChildCount(); i++){
+                            CheckBox box = (CheckBox) cg.getChildAt(i);
+                            box.setChecked(false);
+                        }
+                    }
+
+                } else {
+                    for (int i=0; i<cg.getChildCount(); i++){
+                        CheckBox box = (CheckBox) cg.getChildAt(i);
+                        box.setChecked(false);
+                    }
+                }
+
+                cursor.close();
+                break;
         }
+
+
 
         return rowView;
     }

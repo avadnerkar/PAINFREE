@@ -17,6 +17,7 @@
 
         <TextView
             android:text="@string/fracture_title"
+            android:textStyle="bold"
             style="@style/textFormStyle"/>
 
         <CheckBox

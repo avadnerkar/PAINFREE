@@ -15,12 +15,32 @@
 
         <TextView
             android:id="@+id/title"
+            android:textStyle="bold"
             style="@style/textFormStyle"/>
 
-        <Button
-            android:id="@+id/button"
-            style="@style/buttonCard"
-            android:text="@string/select_date"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                style="@style/buttonCard"
+                android:text="@string/select_date"/>
+
+            <Button
+                android:id="@+id/clear"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/buttonCardSecondary"
+                android:text="@string/button_clear"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>

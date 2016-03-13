@@ -11,6 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import physiotherapy.mcgill.com.painfree.R;
+import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 
 
 /**
@@ -28,6 +29,8 @@ public class FragmentE extends Fragment {
         listView = (ListView) v.findViewById(R.id.list_e);
 
         ArrayList<FragmentItem> items = new ArrayList<>();
+        items.add(new FragmentItem(getString(R.string.physician_examination_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE));
+        items.add(new FragmentItem(getString(R.string.physician_examination_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_PHYSICIAN_EXAMINATION_TIME));
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 

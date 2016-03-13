@@ -55,6 +55,19 @@
 
     </style>
 
+    <style name="buttonCardSecondary">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/Crimson</item>
+        <item name="android:background">@drawable/button_secondary</item>
+        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:layout_margin">@dimen/button_layout_margin</item>
+
+
+    </style>
+
     <dimen name="text_medium">16sp</dimen>
     <dimen name="text_padding">10dp</dimen>
     <dimen name="button_padding">0dp</dimen>

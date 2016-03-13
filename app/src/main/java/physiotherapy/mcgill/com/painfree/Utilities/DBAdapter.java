@@ -53,6 +53,18 @@ public class DBAdapter {
 
     public static final String KEY_INJURY_MECHANISM = "InjuryMechanism";
 
+    public static final String KEY_TRIAGE_DATE = "TriageDate";
+    public static final String KEY_TRIAGE_TIME = "TriageTime";
+    public static final String KEY_CTAS = "CTASPriority";
+    public static final String KEY_GLASGOW = "GlasgowScale";
+    public static final String KEY_PAINSCALE = "PainScaleScore";
+    public static final String KEY_COLLECTIVEORDER = "CollectiveOrder";
+    public static final String KEY_HISTORYOFDEMENTIA = "HistoryOfDementia";
+    public static final String KEY_ALTEREDCOGNITION = "AlteredCognition";
+
+    public static final String KEY_PHYSICIAN_EXAMINATION_DATE = "PhysicianExaminationDate";
+    public static final String KEY_PHYSICIAN_EXAMINATION_TIME = "PhysicianExaminationTime";
+
     // TODO: Setup your data fields here:
     public static List<String> dataMap;
 
@@ -62,7 +74,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = 11;
 
 
     //Table Create Statements
@@ -114,6 +126,18 @@ public class DBAdapter {
         dataMap.add(KEY_FRACTURESITE_WRIST);
 
         dataMap.add(KEY_INJURY_MECHANISM);
+
+        dataMap.add(KEY_TRIAGE_DATE);
+        dataMap.add(KEY_TRIAGE_TIME);
+        dataMap.add(KEY_CTAS);
+        dataMap.add(KEY_GLASGOW);
+        dataMap.add(KEY_PAINSCALE);
+        dataMap.add(KEY_COLLECTIVEORDER);
+        dataMap.add(KEY_HISTORYOFDEMENTIA);
+        dataMap.add(KEY_ALTEREDCOGNITION);
+
+        dataMap.add(KEY_PHYSICIAN_EXAMINATION_DATE);
+        dataMap.add(KEY_PHYSICIAN_EXAMINATION_TIME);
 
 
         generateCreateDataString();

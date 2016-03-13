@@ -9,11 +9,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_sectionA">A</string>
-    <string name="title_sectionB">B</string>
-    <string name="title_sectionC">C</string>
-    <string name="title_sectionD">D</string>
-    <string name="title_sectionE">E</string>
+    <string name="title_sectionA">Site</string>
+    <string name="title_sectionB">Demographic</string>
+    <string name="title_sectionC">Injury</string>
+    <string name="title_sectionD">Triage</string>
+    <string name="title_sectionE">ED Stay</string>
     <string name="title_sectionF">F</string>
 
     <!-- General strings-->
@@ -73,7 +73,7 @@
     <string name="hsc">HSC</string>
     <string name="smh">SMH</string>
     <string name="hdv">HDV</string>
-    <string name="mechanism_of_injury">Mechanism of Injury</string>
+    <string name="mechanism_of_injury">Mechanism of Injury:</string>
     <string name="none">None</string>
     <string name="mechanism1">Fall on same level due to ice and snow</string>
     <string name="mechanism2">Unspecified fall due to ice and snow</string>
@@ -101,6 +101,29 @@
     <string name="mechanismCode11">W19</string>
     <string name="mechanismCode12">V48.4</string>
     <string name="mechanismCode13">V78.4</string>
+    <string name="physician_examination_date">Physician examination date:</string>
+    <string name="physician_examination_time">Physician examination time:</string>
+    <string name="triage_date">Date of triage:</string>
+    <string name="triage_time">Time of triage:</string>
+    <string name="button_clear">Clear</string>
+    <string name="ctas_priority">CTAS Priority:</string>
+    <string name="ctas_1">I</string>
+    <string name="ctas_2">II</string>
+    <string name="ctas_3">III</string>
+    <string name="ctas_4">IV</string>
+    <string name="ctas_5">V</string>
+    <string name="glasgow">Glasgow scale score:</string>
+    <string name="pain_scale_score">Pain scale score:</string>
+    <string name="collective_order">Collective order:</string>
+    <string name="history_of_dementia">History of dementia:</string>
+    <string name="acetaminophen">Acetaminophen</string>
+    <string name="nsaids">NSAIDs</string>
+    <string name="opioid">Opioid</string>
+    <string name="no">No</string>
+    <string name="altered_cognition">Evidence of altered cognition:</string>
+    <string name="confusion">Confusion</string>
+    <string name="agitation">Agitation</string>
+    <string name="disorientation">Disorientation</string>
 
 
 </resources>
