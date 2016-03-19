@@ -17,13 +17,29 @@
         <TextView
             android:id="@+id/title"
             android:textStyle="bold"
-            android:text="@string/site"
+            android:text="@string/pain_assessments"
             style="@style/textFormStyle"/>
 
-        <EditText
-            android:id="@+id/edit"
-            android:inputType="numberDecimal"
-            style="@style/editTextFormStyle"/>
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_add_white"
+            app:elevation="4dp"
+            app:backgroundTint="@color/DarkRed"
+            android:layout_margin="@dimen/button_layout_margin"/>
 
 
     </LinearLayout>

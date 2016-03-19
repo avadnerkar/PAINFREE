@@ -124,6 +124,8 @@
     <string name="confusion">Confusion</string>
     <string name="agitation">Agitation</string>
     <string name="disorientation">Disorientation</string>
+    <string name="assessment1">Assessment 1</string>
+    <string name="pain_assessments">Pain assessments</string>
 
 
 </resources>

@@ -65,6 +65,26 @@ public class DBAdapter {
     public static final String KEY_PHYSICIAN_EXAMINATION_DATE = "PhysicianExaminationDate";
     public static final String KEY_PHYSICIAN_EXAMINATION_TIME = "PhysicianExaminationTime";
 
+    public static final String KEY_PAIN_ASSESSMENT_NUM = "NumberOfPainAssessments";
+    public static final String KEY_PAIN_ASSESSMENT_1_DATE = "PainAssessment1Date";
+    public static final String KEY_PAIN_ASSESSMENT_1_TIME = "PainAssessment1Time";
+    public static final String KEY_PAIN_ASSESSMENT_1_SCORE = "PainAssessment1Score";
+    public static final String KEY_PAIN_ASSESSMENT_2_DATE = "PainAssessment2Date";
+    public static final String KEY_PAIN_ASSESSMENT_2_TIME = "PainAssessment2Time";
+    public static final String KEY_PAIN_ASSESSMENT_2_SCORE = "PainAssessment2Score";
+    public static final String KEY_PAIN_ASSESSMENT_3_DATE = "PainAssessment3Date";
+    public static final String KEY_PAIN_ASSESSMENT_3_TIME = "PainAssessment3Time";
+    public static final String KEY_PAIN_ASSESSMENT_3_SCORE = "PainAssessment3Score";
+    public static final String KEY_PAIN_ASSESSMENT_4_DATE = "PainAssessment4Date";
+    public static final String KEY_PAIN_ASSESSMENT_4_TIME = "PainAssessment4Time";
+    public static final String KEY_PAIN_ASSESSMENT_4_SCORE = "PainAssessment4Score";
+    public static final String KEY_PAIN_ASSESSMENT_5_DATE = "PainAssessment5Date";
+    public static final String KEY_PAIN_ASSESSMENT_5_TIME = "PainAssessment5Time";
+    public static final String KEY_PAIN_ASSESSMENT_5_SCORE = "PainAssessment5Score";
+    public static final String KEY_PAIN_ASSESSMENT_6_DATE = "PainAssessment6Date";
+    public static final String KEY_PAIN_ASSESSMENT_6_TIME = "PainAssessment6Time";
+    public static final String KEY_PAIN_ASSESSMENT_6_SCORE = "PainAssessment6Score";
+
     // TODO: Setup your data fields here:
     public static List<String> dataMap;
 
@@ -74,7 +94,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 11;
+    public static final int DATABASE_VERSION = 12;
 
 
     //Table Create Statements
@@ -139,6 +159,26 @@ public class DBAdapter {
         dataMap.add(KEY_PHYSICIAN_EXAMINATION_DATE);
         dataMap.add(KEY_PHYSICIAN_EXAMINATION_TIME);
 
+        dataMap.add(KEY_PAIN_ASSESSMENT_NUM);
+        dataMap.add(KEY_PAIN_ASSESSMENT_1_DATE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_1_TIME);
+        dataMap.add(KEY_PAIN_ASSESSMENT_1_SCORE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_2_DATE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_2_TIME);
+        dataMap.add(KEY_PAIN_ASSESSMENT_2_SCORE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_3_DATE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_3_TIME);
+        dataMap.add(KEY_PAIN_ASSESSMENT_3_SCORE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_4_DATE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_4_TIME);
+        dataMap.add(KEY_PAIN_ASSESSMENT_4_SCORE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_5_DATE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_5_TIME);
+        dataMap.add(KEY_PAIN_ASSESSMENT_5_SCORE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_6_DATE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_6_TIME);
+        dataMap.add(KEY_PAIN_ASSESSMENT_6_SCORE);
+
 
         generateCreateDataString();
 
@@ -181,6 +221,7 @@ public class DBAdapter {
         String value = MainActivity.deviceID + "-" + id;
 
         updateFieldData(id, KEY_UNIQUEID, value);
+        updateFieldData(id, KEY_PAIN_ASSESSMENT_NUM, "0");
 
         return id;
     }
@@ -249,6 +290,15 @@ public class DBAdapter {
     public Cursor getDataField(long rowId, String key){
         String where = KEY_ROWID + "= ?";
         Cursor c = db.query(DATA_TABLE, new String[]{key}, where, new String[]{String.valueOf(rowId)}, null, null, null);
+        if (c != null){
+            c.moveToFirst();
+        }
+        return c;
+    }
+
+    public Cursor getDataFields(long rowId, String[] keys){
+        String where = KEY_ROWID + "= ?";
+        Cursor c = db.query(DATA_TABLE, keys, where, new String[]{String.valueOf(rowId)}, null, null, null);
         if (c != null){
             c.moveToFirst();
         }
