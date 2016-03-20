@@ -32,6 +32,7 @@ public class FragmentE extends Fragment {
         items.add(new FragmentItem(getString(R.string.physician_examination_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE));
         items.add(new FragmentItem(getString(R.string.physician_examination_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_PHYSICIAN_EXAMINATION_TIME));
         items.add(new FragmentItem(null, FragmentItem.CellType.PAIN_ASSESSMENTS, null, null, null));
+        items.add(new FragmentItem(null, FragmentItem.CellType.ANALGESIC_PRESCRIPTION, null, null, null));
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 

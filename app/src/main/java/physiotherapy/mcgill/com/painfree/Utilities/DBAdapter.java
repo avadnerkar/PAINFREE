@@ -27,63 +27,89 @@ public class DBAdapter {
 
 
     public static final String KEY_ROWID = "_id";
-    public static final String KEY_UNIQUEID = "DeviceSpecificID";
-    public static final String KEY_EXTRACTIONPERIOD = "PeriodOfExtraction";
-    public static final String KEY_SUBJECTID = "SubjectID";
-    public static final String KEY_SITE = "Site";
-    public static final String KEY_COMPLETED_BY = "CompletedBy";
-    public static final String KEY_DATE = "Date";
-    public static final String KEY_ARRIVALDATE = "ArrivalDate";
-    public static final String KEY_ARRIVALTIME = "ArrivalTime";
+    public static final String KEY_UNIQUEID = "[Device Specific ID]";
+    public static final String KEY_EXTRACTIONPERIOD = "[Period of extraction]";
+    public static final String KEY_SUBJECTID = "[Subject ID]";
+    public static final String KEY_SITE = "[Site]";
+    public static final String KEY_COMPLETED_BY = "[Completed by]";
+    public static final String KEY_DATE = "[Date]";
+    public static final String KEY_ARRIVALDATE = "[Arrival date]";
+    public static final String KEY_ARRIVALTIME = "[Arrival time]";
 
-    public static final String KEY_DATEOFBIRTH = "DateOfBirth";
-    public static final String KEY_SEX = "Sex";
+    public static final String KEY_DATEOFBIRTH = "[Date of birth]";
+    public static final String KEY_SEX = "[Sex]";
 
-    public static final String KEY_FRACTURESITE_FOOT = "Foot";
-    public static final String KEY_FRACTURESITE_ANKLE = "Ankle";
-    public static final String KEY_FRACTURESITE_TIBIA = "TibiaOrFibula";
-    public static final String KEY_FRACTURESITE_FEMUR = "Femur";
-    public static final String KEY_FRACTURESITE_HIP = "Hip";
-    public static final String KEY_FRACTURESITE_PELVIS = "Pelvis";
-    public static final String KEY_FRACTURESITE_VERTEBRA = "Vertebra";
-    public static final String KEY_FRACTURESITE_RIB = "Rib";
-    public static final String KEY_FRACTURESITE_HUMERUS = "Humerus";
-    public static final String KEY_FRACTURESITE_FOREARM = "Forearm";
-    public static final String KEY_FRACTURESITE_WRIST = "Wrist";
+    public static final String KEY_FRACTURESITE_FOOT = "[Foot]";
+    public static final String KEY_FRACTURESITE_ANKLE = "[Ankle]";
+    public static final String KEY_FRACTURESITE_TIBIA = "[Tibia or fibula]";
+    public static final String KEY_FRACTURESITE_FEMUR = "[Femur]";
+    public static final String KEY_FRACTURESITE_HIP = "[Hip]";
+    public static final String KEY_FRACTURESITE_PELVIS = "[Pelvis]";
+    public static final String KEY_FRACTURESITE_VERTEBRA = "[Vertebra]";
+    public static final String KEY_FRACTURESITE_RIB = "[Rib]";
+    public static final String KEY_FRACTURESITE_HUMERUS = "[Humerus]";
+    public static final String KEY_FRACTURESITE_FOREARM = "[Forearm]";
+    public static final String KEY_FRACTURESITE_WRIST = "[Wrist]";
 
-    public static final String KEY_INJURY_MECHANISM = "InjuryMechanism";
+    public static final String KEY_INJURY_MECHANISM = "[Injury mechanism]";
 
-    public static final String KEY_TRIAGE_DATE = "TriageDate";
-    public static final String KEY_TRIAGE_TIME = "TriageTime";
-    public static final String KEY_CTAS = "CTASPriority";
-    public static final String KEY_GLASGOW = "GlasgowScale";
-    public static final String KEY_PAINSCALE = "PainScaleScore";
-    public static final String KEY_COLLECTIVEORDER = "CollectiveOrder";
-    public static final String KEY_HISTORYOFDEMENTIA = "HistoryOfDementia";
-    public static final String KEY_ALTEREDCOGNITION = "AlteredCognition";
+    public static final String KEY_TRIAGE_DATE = "[Triage date]";
+    public static final String KEY_TRIAGE_TIME = "[Triage time]";
+    public static final String KEY_CTAS = "[CTAS priority]";
+    public static final String KEY_GLASGOW = "[Glasgow scale]";
+    public static final String KEY_PAINSCALE = "[Pain scale score]";
+    public static final String KEY_COLLECTIVEORDER = "[Collective order]";
+    public static final String KEY_HISTORYOFDEMENTIA = "[History of dementia]";
+    public static final String KEY_ALTEREDCOGNITION = "[Altered cognition]";
 
-    public static final String KEY_PHYSICIAN_EXAMINATION_DATE = "PhysicianExaminationDate";
-    public static final String KEY_PHYSICIAN_EXAMINATION_TIME = "PhysicianExaminationTime";
+    public static final String KEY_PHYSICIAN_EXAMINATION_DATE = "[Physician examination date]";
+    public static final String KEY_PHYSICIAN_EXAMINATION_TIME = "[Physician examination time]";
 
-    public static final String KEY_PAIN_ASSESSMENT_NUM = "NumberOfPainAssessments";
-    public static final String KEY_PAIN_ASSESSMENT_1_DATE = "PainAssessment1Date";
-    public static final String KEY_PAIN_ASSESSMENT_1_TIME = "PainAssessment1Time";
-    public static final String KEY_PAIN_ASSESSMENT_1_SCORE = "PainAssessment1Score";
-    public static final String KEY_PAIN_ASSESSMENT_2_DATE = "PainAssessment2Date";
-    public static final String KEY_PAIN_ASSESSMENT_2_TIME = "PainAssessment2Time";
-    public static final String KEY_PAIN_ASSESSMENT_2_SCORE = "PainAssessment2Score";
-    public static final String KEY_PAIN_ASSESSMENT_3_DATE = "PainAssessment3Date";
-    public static final String KEY_PAIN_ASSESSMENT_3_TIME = "PainAssessment3Time";
-    public static final String KEY_PAIN_ASSESSMENT_3_SCORE = "PainAssessment3Score";
-    public static final String KEY_PAIN_ASSESSMENT_4_DATE = "PainAssessment4Date";
-    public static final String KEY_PAIN_ASSESSMENT_4_TIME = "PainAssessment4Time";
-    public static final String KEY_PAIN_ASSESSMENT_4_SCORE = "PainAssessment4Score";
-    public static final String KEY_PAIN_ASSESSMENT_5_DATE = "PainAssessment5Date";
-    public static final String KEY_PAIN_ASSESSMENT_5_TIME = "PainAssessment5Time";
-    public static final String KEY_PAIN_ASSESSMENT_5_SCORE = "PainAssessment5Score";
-    public static final String KEY_PAIN_ASSESSMENT_6_DATE = "PainAssessment6Date";
-    public static final String KEY_PAIN_ASSESSMENT_6_TIME = "PainAssessment6Time";
-    public static final String KEY_PAIN_ASSESSMENT_6_SCORE = "PainAssessment6Score";
+    public static final String KEY_PAIN_ASSESSMENT_NUM = "[Number of pain assessments]";
+    public static final String KEY_PAIN_ASSESSMENT_1_DATE = "[Pain assessment 1 date]";
+    public static final String KEY_PAIN_ASSESSMENT_1_TIME = "[Pain assessment 1 time]";
+    public static final String KEY_PAIN_ASSESSMENT_1_SCORE = "[Pain assessment 1 score]";
+    public static final String KEY_PAIN_ASSESSMENT_2_DATE = "[Pain assessment 2 date]";
+    public static final String KEY_PAIN_ASSESSMENT_2_TIME = "[Pain assessment 2 time]";
+    public static final String KEY_PAIN_ASSESSMENT_2_SCORE = "[Pain assessment 2 score]";
+    public static final String KEY_PAIN_ASSESSMENT_3_DATE = "[Pain assessment 3 date]";
+    public static final String KEY_PAIN_ASSESSMENT_3_TIME = "[Pain assessment 3 time]";
+    public static final String KEY_PAIN_ASSESSMENT_3_SCORE = "[Pain assessment 3 score]";
+    public static final String KEY_PAIN_ASSESSMENT_4_DATE = "[Pain assessment 4 date]";
+    public static final String KEY_PAIN_ASSESSMENT_4_TIME = "[Pain assessment 4 time]";
+    public static final String KEY_PAIN_ASSESSMENT_4_SCORE = "[Pain assessment 4 score]";
+    public static final String KEY_PAIN_ASSESSMENT_5_DATE = "[Pain assessment 5 date]";
+    public static final String KEY_PAIN_ASSESSMENT_5_TIME = "[Pain assessment 5 time]";
+    public static final String KEY_PAIN_ASSESSMENT_5_SCORE = "[Pain assessment 5 score]";
+    public static final String KEY_PAIN_ASSESSMENT_6_DATE = "[Pain assessment 6 date]";
+    public static final String KEY_PAIN_ASSESSMENT_6_TIME = "[Pain assessment 6 time]";
+    public static final String KEY_PAIN_ASSESSMENT_6_SCORE = "[Pain assessment 6 score]";
+
+    public static final String KEY_ANALGESIC_PRES_NUM = "[Number of analgesic prescriptions]";
+    public static final String KEY_ANALGESIC_PRES_1_DATE = "[Analgesic prescription 1 date]";
+    public static final String KEY_ANALGESIC_PRES_1_TIME = "[Analgesic prescription 1 time]";
+    public static final String KEY_ANALGESIC_PRES_1_TYPE = "[Analgesic prescription 1 type]";
+    public static final String KEY_ANALGESIC_PRES_1_MODE = "[Analgesic prescription 1 mode]";
+    public static final String KEY_ANALGESIC_PRES_2_DATE = "[Analgesic prescription 2 date]";
+    public static final String KEY_ANALGESIC_PRES_2_TIME = "[Analgesic prescription 2 time]";
+    public static final String KEY_ANALGESIC_PRES_2_TYPE = "[Analgesic prescription 2 type]";
+    public static final String KEY_ANALGESIC_PRES_2_MODE = "[Analgesic prescription 2 mode]";
+    public static final String KEY_ANALGESIC_PRES_3_DATE = "[Analgesic prescription 3 date]";
+    public static final String KEY_ANALGESIC_PRES_3_TIME = "[Analgesic prescription 3 time]";
+    public static final String KEY_ANALGESIC_PRES_3_TYPE = "[Analgesic prescription 3 type]";
+    public static final String KEY_ANALGESIC_PRES_3_MODE = "[Analgesic prescription 3 mode]";
+    public static final String KEY_ANALGESIC_PRES_4_DATE = "[Analgesic prescription 4 date]";
+    public static final String KEY_ANALGESIC_PRES_4_TIME = "[Analgesic prescription 4 time]";
+    public static final String KEY_ANALGESIC_PRES_4_TYPE = "[Analgesic prescription 4 type]";
+    public static final String KEY_ANALGESIC_PRES_4_MODE = "[Analgesic prescription 4 mode]";
+    public static final String KEY_ANALGESIC_PRES_5_DATE = "[Analgesic prescription 5 date]";
+    public static final String KEY_ANALGESIC_PRES_5_TIME = "[Analgesic prescription 5 time]";
+    public static final String KEY_ANALGESIC_PRES_5_TYPE = "[Analgesic prescription 5 type]";
+    public static final String KEY_ANALGESIC_PRES_5_MODE = "[Analgesic prescription 5 mode]";
+    public static final String KEY_ANALGESIC_PRES_6_DATE = "[Analgesic prescription 6 date]";
+    public static final String KEY_ANALGESIC_PRES_6_TIME = "[Analgesic prescription 6 time]";
+    public static final String KEY_ANALGESIC_PRES_6_TYPE = "[Analgesic prescription 6 type]";
+    public static final String KEY_ANALGESIC_PRES_6_MODE = "[Analgesic prescription 6 mode]";
 
     // TODO: Setup your data fields here:
     public static List<String> dataMap;
@@ -94,7 +120,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 12;
+    public static final int DATABASE_VERSION = 14;
 
 
     //Table Create Statements
@@ -178,6 +204,32 @@ public class DBAdapter {
         dataMap.add(KEY_PAIN_ASSESSMENT_6_DATE);
         dataMap.add(KEY_PAIN_ASSESSMENT_6_TIME);
         dataMap.add(KEY_PAIN_ASSESSMENT_6_SCORE);
+
+        dataMap.add(KEY_ANALGESIC_PRES_NUM);
+        dataMap.add(KEY_ANALGESIC_PRES_1_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_1_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_1_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_1_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_2_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_2_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_2_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_2_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_3_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_3_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_3_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_3_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_4_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_4_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_4_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_4_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_5_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_5_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_5_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_5_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_6_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_6_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_6_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_6_MODE);
 
 
         generateCreateDataString();

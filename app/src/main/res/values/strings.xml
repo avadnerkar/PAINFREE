@@ -126,6 +126,11 @@
     <string name="disorientation">Disorientation</string>
     <string name="assessment1">Assessment 1</string>
     <string name="pain_assessments">Pain assessments</string>
+    <string name="analgesic_prescriptions">Analgesic prescriptions</string>
+    <string name="mode_of_prescription">Mode of prescription</string>
+    <string name="type_of_analgesic_prescribed">Type of analgesic prescribed</string>
+    <string name="standard_order">Standard order</string>
+    <string name="pharmaceutical_algorithm">Pharmaceutical algorithm</string>
 
 
 </resources>

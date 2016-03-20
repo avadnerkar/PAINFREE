@@ -40,7 +40,7 @@ public class PatientListActivity extends AppCompatActivity {
         context = this;
         listView = (ListView) findViewById(R.id.list);
 
-        Cursor cursor = MainActivity.myDb.getAllRowData();
+        Cursor cursor = MainActivity.myDb.getAllRowDataWithKeys(new String[]{DBAdapter.KEY_ROWID, DBAdapter.KEY_UNIQUEID});
 
         items = new ArrayList<>();
         final int[] IDarray = new int[cursor.getCount()];
@@ -48,8 +48,8 @@ public class PatientListActivity extends AppCompatActivity {
         if (cursor.moveToFirst()) {
             do {
                 // Process the data:
-                int id = cursor.getInt(cursor.getColumnIndex(DBAdapter.KEY_ROWID));
-                String uniqueID = cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_UNIQUEID))!=null ? cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_UNIQUEID)): "";
+                int id = cursor.getInt(0);
+                String uniqueID = cursor.getString(1)!=null ? cursor.getString(1): "";
 
                 IDarray[cursor.getPosition()] = id;
                 items.add(uniqueID);

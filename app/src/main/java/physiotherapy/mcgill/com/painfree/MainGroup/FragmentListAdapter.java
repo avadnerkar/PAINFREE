@@ -84,7 +84,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 
             if (cursor.moveToFirst()) {
-                String text = cursor.getString(cursor.getColumnIndex(items.get(position).dbKey));
+                String text = cursor.getString(0);
                 if (text != null) {
                     editText.setText(text);
                 } else {
@@ -164,7 +164,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 
             if (cursor.moveToFirst()) {
-                String radioValue = cursor.getString(cursor.getColumnIndex(items.get(position).dbKey));
+                String radioValue = cursor.getString(0);
                 if (radioValue != null && !radioValue.equals("")) {
                     for (int i = 0; i < items.get(position).databaseOptions.length; i++) {
                         String rbString = items.get(position).databaseOptions[i];
@@ -696,7 +696,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 
             if (cursor.moveToFirst()) {
-                String answer = cursor.getString(cursor.getColumnIndex(items.get(position).dbKey));
+                String answer = cursor.getString(0);
 
                 if (answer != null) {
                     for (int i = 0; i < cg.getChildCount(); i++) {
@@ -723,223 +723,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cursor.close();
 
         } else if (i1 == FragmentItem.CellType.PAIN_ASSESSMENTS) {
-            int mMonth;
-            Button button;
-            Calendar mcurrentDate;
-            int mDay;
-            int mYear;
-            rowView = inflater.inflate(R.layout.cell_fragment_pain_assessment, parent, false);
-
-            final String[] keys = new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_NUM,
-                    DBAdapter.KEY_PAIN_ASSESSMENT_1_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_1_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_1_SCORE,
-                    DBAdapter.KEY_PAIN_ASSESSMENT_2_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_2_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_2_SCORE,
-                    DBAdapter.KEY_PAIN_ASSESSMENT_3_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_3_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_3_SCORE,
-                    DBAdapter.KEY_PAIN_ASSESSMENT_4_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_4_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_4_SCORE,
-                    DBAdapter.KEY_PAIN_ASSESSMENT_5_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_5_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_5_SCORE,
-                    DBAdapter.KEY_PAIN_ASSESSMENT_6_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_6_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_6_SCORE};
-
-            final LinearLayout container = (LinearLayout) rowView.findViewById(R.id.container);
-            container.removeAllViews();
-
-            final String[] painSpinnerOptions = new String[]{"None", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-
-            cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
-
-            if (cursor.moveToFirst()) {
-                final int numAssessments = cursor.getInt(0);
-
-                FloatingActionButton addButton = (FloatingActionButton) rowView.findViewById(R.id.fabPlus);
-                addButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int addedIndex = Math.min(numAssessments + 1, 6);
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(addedIndex));
-                        notifyDataSetChanged();
-                    }
-                });
-
-
-                for (int i = 0; i < 6; i++) {
-                    final View assessmentView = inflater.inflate(R.layout.subcell_pain_assessment, container, false);
-                    TextView assessmentTitle = (TextView) assessmentView.findViewById(R.id.title);
-                    assessmentTitle.setText("Assessment" + " " + String.valueOf(i + 1));
-
-
-                    //Spinner
-                    final Spinner painSpinner = (Spinner) assessmentView.findViewById(R.id.spinner);
-                    ArrayAdapter<String> painSpinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, painSpinnerOptions);
-                    painSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    painSpinner.setAdapter(painSpinnerAdapter);
-
-                    painSpinner.setSelection(0);
-                    String value = cursor.getString(i*3+3);
-                    if (value != null && !value.equals("")) {
-                        for (int k = 0; k < painSpinnerOptions.length; k++) {
-                            if (value.equals(painSpinnerOptions[k])) {
-                                painSpinner.setSelection(k);
-                                break;
-                            }
-                        }
-                    }
-
-                    final int I = i;
-                    painSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * 3 + 3], painSpinnerOptions[position]);
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
-
-                    //Datepicker
-
-                    final Button buttonDate = (Button) assessmentView.findViewById(R.id.buttonDate);
-
-                    mcurrentDate = Calendar.getInstance();
-                    mYear = mcurrentDate.get(Calendar.YEAR);
-                    mMonth = mcurrentDate.get(Calendar.MONTH);
-                    mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
-
-                    String dateString = cursor.getString(i * 3 + 1);
-                    if (dateString != null && !dateString.equals("")) {
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                        try {
-                            Date date = format.parse(dateString);
-                            Calendar cal = Calendar.getInstance();
-                            cal.setTime(date);
-                            mYear = cal.get(Calendar.YEAR);
-                            mMonth = cal.get(Calendar.MONTH);
-                            mDay = cal.get(Calendar.DAY_OF_MONTH);
-
-                            buttonDate.setText(mYear + "-" + String.format("%02d", mMonth + 1) + "-" + String.format("%02d", mDay));
-                        } catch (ParseException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                    }
-
-                    final int year = mYear;
-                    final int month = mMonth;
-                    final int day = mDay;
-
-                    buttonDate.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-
-                            DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                                public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                                    final String text = selectedyear + "-" + String.format("%02d", selectedmonth + 1) + "-" + String.format("%02d", selectedday);
-                                    buttonDate.setText(text);
-                                    Thread thread = new Thread() {
-                                        @Override
-                                        public void run() {
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * 3 + 1], text);
-                                        }
-                                    };
-                                    thread.start();
-
-                                }
-                            }, year, month, day);
-                            SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-                            try {
-                                Date minDate = f.parse("2016-02-01");
-                                mDatePicker.getDatePicker().setMinDate(minDate.getTime());
-
-                                Date maxDate = f.parse("2019-12-31");
-                                mDatePicker.getDatePicker().setMaxDate(maxDate.getTime());
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-
-
-                            mDatePicker.show();
-                        }
-                    });
-
-
-                    //Time picker
-                    final Button timePickerButton = (Button) assessmentView.findViewById(R.id.buttonTime);
-                    timePickerButton.setText(context.getString(R.string.select_time));
-
-                    final Calendar c = Calendar.getInstance();
-                    int hour = c.get(Calendar.HOUR_OF_DAY);
-                    int minute = c.get(Calendar.MINUTE);
-
-                    String timeString = cursor.getString(I*3+2);
-                    if (timeString != null && !timeString.equals("")) {
-                        timePickerButton.setText(timeString);
-                        String[] parts = timeString.split(":");
-                        hour = Integer.parseInt(parts[0]);
-                        minute = Integer.parseInt(parts[1]);
-                    }
-
-                    final int mHour = hour;
-                    final int mMinute = minute;
-
-                    timePickerButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-
-                            TimePickerDialog tpd = new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                    final String value = String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute);
-                                    timePickerButton.setText(value);
-                                    Thread thread = new Thread() {
-                                        @Override
-                                        public void run() {
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I*3+2], value);
-                                        }
-                                    };
-                                    thread.start();
-                                }
-                            }, mHour, mMinute, false);
-                            tpd.show();
-                        }
-                    });
-
-
-
-                    if (i >= numAssessments) {
-                        assessmentView.setVisibility(View.GONE);
-                    } else {
-                        assessmentView.setVisibility(View.VISIBLE);
-                    }
-
-                    FloatingActionButton minusButton = (FloatingActionButton) assessmentView.findViewById(R.id.fabMinus);
-                    minusButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            Cursor tempCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
-
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(Math.max(numAssessments - 1, 0)));
-
-                            for (int j=I; j<numAssessments-1; j++){
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*3+1], tempCursor.getString((j+1)*3+1));
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*3+2], tempCursor.getString((j+1)*3+2));
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*3+3], tempCursor.getString((j+1)*3+3));
-                            }
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1) * 3 + 1], null);
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*3+2], null);
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*3+3], null);
-
-                            tempCursor.close();
-
-                            notifyDataSetChanged();
-                        }
-                    });
-
-                    container.addView(assessmentView);
-
-                }
-            }
+            rowView = PainAssessments.setupPainAssessmentSection(context, parent, this);
+        } else if (i1 == FragmentItem.CellType.ANALGESIC_PRESCRIPTION){
+            rowView = AnalgesicPrescription.setupAnalgesicPrescriptionSection(context, parent, this);
         }
 
 
