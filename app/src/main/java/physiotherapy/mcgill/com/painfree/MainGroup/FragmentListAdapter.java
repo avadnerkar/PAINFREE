@@ -527,8 +527,14 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             final String[] spinnerOptions = Arrays.copyOf(items.get(position).uiOptions, items.get(position).uiOptions.length + 1);
             spinnerOptions[spinnerOptions.length - 1] = context.getString(R.string.other);
 
-            String[] extraOptions = Arrays.copyOf(items.get(position).extraOptions, items.get(position).extraOptions.length + 1);
-            extraOptions[extraOptions.length - 1] = "";
+            String[] extraOptions;
+            if (items.get(position).extraOptions != null){
+                extraOptions = Arrays.copyOf(items.get(position).extraOptions, items.get(position).extraOptions.length + 1);
+                extraOptions[extraOptions.length - 1] = "";
+            } else {
+                extraOptions = null;
+            }
+
 
             final EditText editOther = (EditText) rowView.findViewById(R.id.other);
 
@@ -901,7 +907,13 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             TextView title = (TextView) convertView.findViewById(R.id.title);
             TextView subtitle = (TextView) convertView.findViewById(R.id.subtitle);
             title.setText(titles[position]);
-            subtitle.setText(subtitles[position]);
+
+            if (subtitles != null){
+                subtitle.setText(subtitles[position]);
+            } else {
+                subtitle.setText("");
+            }
+
             return convertView;
 
         }

@@ -221,7 +221,7 @@ public class AnalgesicPrescription {
 
 
                 //Checkbox
-                final LinearLayout cg = (LinearLayout) rowView.findViewById(R.id.checkGroup);
+                final LinearLayout cg = (LinearLayout) assessmentView.findViewById(R.id.checkGroup);
 
                 if (checkBoxItems.length > 2) {
                     cg.setOrientation(RadioGroup.VERTICAL);

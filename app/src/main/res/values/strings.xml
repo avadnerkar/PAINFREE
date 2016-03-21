@@ -14,7 +14,8 @@
     <string name="title_sectionC">Injury</string>
     <string name="title_sectionD">Triage</string>
     <string name="title_sectionE">ED Stay</string>
-    <string name="title_sectionF">F</string>
+    <string name="title_sectionF">Cognition</string>
+    <string name="title_sectionG">Discharge</string>
 
     <!-- General strings-->
     <string name="save">Save</string>
@@ -131,6 +132,29 @@
     <string name="type_of_analgesic_prescribed">Type of analgesic prescribed</string>
     <string name="standard_order">Standard order</string>
     <string name="pharmaceutical_algorithm">Pharmaceutical algorithm</string>
+    <string name="evidence_altered_cognition">Evidence of altered cognition:</string>
+    <string name="not_specified">Not specified</string>
+    <string name="short_cam_score">Short CAM score</string>
+    <string name="not_applicable">Not applicable</string>
+    <string name="discharge_date">Discharge date</string>
+    <string name="discharge_time">Discharge time</string>
+    <string name="discharge_destination">Discharge destination:</string>
+    <string name="return_home">Return home</string>
+    <string name="admitting">Admitting</string>
+    <string name="transfer">Transfer</string>
+    <string name="lwbs">LWBS</string>
+    <string name="death">Death</string>
+    <string name="not_available">Not available</string>
+    <string name="discharge_tool_given">Discharge tool given</string>
+    <string name="return_to_ed">Return to ED within 7 days:</string>
+    <string name="if_yes_why">If yes, why?</string>
+    <string name="description">Description</string>
+    <string name="uncontrolled_pain">Uncontrolled pain</string>
+    <string name="scheduled_cast_check">Scheduled cast check</string>
+    <string name="issues_with_cast">Issues with cast</string>
+    <string name="swelling">Swelling; Compartment Syndrome</string>
+    <string name="worsening_of_health_status">Worsening of health status</string>
+    <string name="new_fracture">New fracture</string>
 
 
 </resources>

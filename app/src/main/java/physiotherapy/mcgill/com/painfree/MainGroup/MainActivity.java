@@ -376,6 +376,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         FragmentD.setFragmentVisibility();
         FragmentE.setFragmentVisibility();
         FragmentF.setFragmentVisibility();
+        FragmentG.setFragmentVisibility();
 
         invalidateOptionsMenu();
 
@@ -419,6 +420,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 case 3: return FragmentD.newInstance();
                 case 4: return FragmentE.newInstance();
                 case 5: return FragmentF.newInstance();
+                case 6: return FragmentG.newInstance();
                 default: return FragmentA.newInstance();
             }
 
@@ -428,7 +430,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         @Override
         public int getCount() {
             // Show 6 total pages.
-            return 6;
+            return 7;
         }
 
         @Override
@@ -447,6 +449,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     return getString(R.string.title_sectionE).toUpperCase(l);
                 case 5:
                     return getString(R.string.title_sectionF).toUpperCase(l);
+                case 6:
+                    return getString(R.string.title_sectionG).toUpperCase(l);
             }
             return null;
         }
@@ -470,6 +474,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     FragmentD.setFragmentVisibility();
                     FragmentE.setFragmentVisibility();
                     FragmentF.setFragmentVisibility();
+                    FragmentG.setFragmentVisibility();
                 }
             });
         }

@@ -10,6 +10,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import physiotherapy.mcgill.com.painfree.MainGroup.MainActivity;
 
@@ -111,6 +112,30 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_6_TYPE = "[Analgesic prescription 6 type]";
     public static final String KEY_ANALGESIC_PRES_6_MODE = "[Analgesic prescription 6 mode]";
 
+//    public static final String KEY_ANALGESIC_ADMIN_NUM = "[Number of analgesic administrations]";
+//    public static final String KEY_ANALGESIC_ADMIN_1_DATE = "[Analgesic administration 1 date]";
+//    public static final String KEY_ANALGESIC_ADMIN_1_TIME = "[Analgesic administration 1 time]";
+//    public static final String KEY_ANALGESIC_ADMIN_1_ORDER = "[Analgesic administration 1 type of order]";
+//    public static final String KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN = "[Analgesic administration 1 Acetaminophen]";
+//    public static final String KEY_ANALGESIC_ADMIN_1_NSAIDS = "[Analgesic administration 1 NSAIDs]";
+//    public static final String KEY_ANALGESIC_ADMIN_1_OPIOID = "[Analgesic administration 1 Opioid]";
+//    public static final String KEY_ANALGESIC_ADMIN_1_ROUTE = "[Analgesic administration 1 Route]";
+//    public static final String KEY_ANALGESIC_ADMIN_1_FREQUENCY = "[Analgesic administration 1 Frequency]";
+
+
+    public static final String KEY_EVIDENCE_ALTERED_COGNITION = "[Evidence of altered cognition]";
+    public static final String KEY_SHORT_CAM_SCORE = "[Short CAM score]";
+    public static final String KEY_MENTAL_WORSENING = "[Worsening of mental status]";
+
+    public static final String KEY_DISCHARGE_DATE = "[Discharge date]";
+    public static final String KEY_DISCHARGE_TIME = "[Discharge time]";
+    public static final String KEY_DISCHARGE_DESTINATION = "[Discharge destination]";
+    public static final String KEY_DISCHARGE_TOOL = "[Discharge tool given to patient]";
+    public static final String KEY_RETURN_ED = "[Return to ED within 7 days]";
+    public static final String KEY_RETURN_ED_REASON = "[Return to ED reason]";
+
+
+
     // TODO: Setup your data fields here:
     public static List<String> dataMap;
 
@@ -120,7 +145,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 14;
+    public static final int DATABASE_VERSION = 15;
 
 
     //Table Create Statements
@@ -231,6 +256,16 @@ public class DBAdapter {
         dataMap.add(KEY_ANALGESIC_PRES_6_TYPE);
         dataMap.add(KEY_ANALGESIC_PRES_6_MODE);
 
+        dataMap.add(KEY_EVIDENCE_ALTERED_COGNITION);
+        dataMap.add(KEY_SHORT_CAM_SCORE);
+        dataMap.add(KEY_MENTAL_WORSENING);
+
+        dataMap.add(KEY_DISCHARGE_DATE);
+        dataMap.add(KEY_DISCHARGE_TIME);
+        dataMap.add(KEY_DISCHARGE_DESTINATION);
+        dataMap.add(KEY_DISCHARGE_TOOL);
+        dataMap.add(KEY_RETURN_ED);
+        dataMap.add(KEY_RETURN_ED_REASON);
 
         generateCreateDataString();
 
@@ -392,7 +427,13 @@ public class DBAdapter {
             List<String> columnList = Arrays.asList(columnNames);
 
             for (String key : dataMap){
-                if (!columnList.contains(key)){
+
+                String charToDel = "[]";
+                String pat = "[" + Pattern.quote(charToDel) + "]";
+                String strippedkey = key.replaceAll(pat,"");
+
+
+                if (!columnList.contains(strippedkey)){
                     Log.d("DEBUG","Adding column " + key);
                     _db.execSQL("ALTER TABLE " + DATA_TABLE + " ADD COLUMN " + key + " text");
                 }
