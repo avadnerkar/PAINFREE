@@ -340,12 +340,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
 
 
-        if (id == R.id.action_update_patient) {
-            updatePatientRunnable.run();
-            return true;
-        }
-
-
         if (item.getItemId() == R.id.action_export_csv) {
             exportRunnable.run();
             return true;
@@ -477,16 +471,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     FragmentG.setFragmentVisibility();
                 }
             });
-        }
-    };
-
-
-    Runnable updatePatientRunnable = new Runnable(){
-        public void run(){
-
-            //TODO: Add New Patient activity
-            //Intent intent = new Intent(MainActivity.this, PatientFormActivity.class);
-            //startActivity(intent);
         }
     };
 

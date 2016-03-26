@@ -155,6 +155,15 @@
     <string name="swelling">Swelling; Compartment Syndrome</string>
     <string name="worsening_of_health_status">Worsening of health status</string>
     <string name="new_fracture">New fracture</string>
+    <string name="type_of_analgesic_administered">Type of analgesic administered</string>
+    <string name="type_of_order">Type of order</string>
+    <string name="route">Route</string>
+    <string name="frequency">Frequency</string>
+    <string name="nerve_block">Nerve block</string>
+    <string name="type_of_nerve_block">Type of nerve block</string>
+    <string name="alternative_pain_relief">Alternative pain relief</string>
+    <string name="refusal_of_analgesia">Refusal of analgesia</string>
+    <string name="analgesic_administrations">Analgesic administrations</string>
 
 
 </resources>

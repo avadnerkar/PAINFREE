@@ -7,8 +7,6 @@
         app:showAsAction="always" />
     <item android:id="@+id/patient_list" android:title="@string/patient_list" android:icon="@drawable/ic_action_database"
         app:showAsAction="always" />
-    <item android:id="@+id/action_update_patient" android:title="@string/action_update_patient"
-        android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_export_csv" android:title="@string/action_export_csv"
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/clear" android:title="@string/clear"
