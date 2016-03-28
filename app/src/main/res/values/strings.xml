@@ -128,16 +128,16 @@
     <string name="assessment1">Assessment 1</string>
     <string name="pain_assessments">Pain assessments</string>
     <string name="analgesic_prescriptions">Analgesic prescriptions</string>
-    <string name="mode_of_prescription">Mode of prescription</string>
-    <string name="type_of_analgesic_prescribed">Type of analgesic prescribed</string>
+    <string name="mode_of_prescription">Mode of prescription:</string>
+    <string name="type_of_analgesic_prescribed">Type of analgesic prescribed:</string>
     <string name="standard_order">Standard order</string>
     <string name="pharmaceutical_algorithm">Pharmaceutical algorithm</string>
     <string name="evidence_altered_cognition">Evidence of altered cognition:</string>
     <string name="not_specified">Not specified</string>
-    <string name="short_cam_score">Short CAM score</string>
+    <string name="short_cam_score">Short CAM score:</string>
     <string name="not_applicable">Not applicable</string>
-    <string name="discharge_date">Discharge date</string>
-    <string name="discharge_time">Discharge time</string>
+    <string name="discharge_date">Discharge date:</string>
+    <string name="discharge_time">Discharge time:</string>
     <string name="discharge_destination">Discharge destination:</string>
     <string name="return_home">Return home</string>
     <string name="admitting">Admitting</string>
@@ -145,7 +145,7 @@
     <string name="lwbs">LWBS</string>
     <string name="death">Death</string>
     <string name="not_available">Not available</string>
-    <string name="discharge_tool_given">Discharge tool given</string>
+    <string name="discharge_tool_given">Discharge tool given:</string>
     <string name="return_to_ed">Return to ED within 7 days:</string>
     <string name="if_yes_why">If yes, why?</string>
     <string name="description">Description</string>
@@ -155,14 +155,14 @@
     <string name="swelling">Swelling; Compartment Syndrome</string>
     <string name="worsening_of_health_status">Worsening of health status</string>
     <string name="new_fracture">New fracture</string>
-    <string name="type_of_analgesic_administered">Type of analgesic administered</string>
-    <string name="type_of_order">Type of order</string>
-    <string name="route">Route</string>
-    <string name="frequency">Frequency</string>
-    <string name="nerve_block">Nerve block</string>
-    <string name="type_of_nerve_block">Type of nerve block</string>
-    <string name="alternative_pain_relief">Alternative pain relief</string>
-    <string name="refusal_of_analgesia">Refusal of analgesia</string>
+    <string name="type_of_analgesic_administered">Type of analgesic administered:</string>
+    <string name="type_of_order">Type of order:</string>
+    <string name="route">Route:</string>
+    <string name="frequency">Frequency:</string>
+    <string name="nerve_block">Nerve block:</string>
+    <string name="type_of_nerve_block">Type of nerve block:</string>
+    <string name="alternative_pain_relief">Alternative pain relief:</string>
+    <string name="refusal_of_analgesia">Analgesia refused</string>
     <string name="analgesic_administrations">Analgesic administrations</string>
     <string name="written">Written</string>
     <string name="verbal">Verbal</string>
@@ -176,6 +176,7 @@
     <string name="cool_cloths">Cool cloths</string>
     <string name="soft_cushions">Soft cushions</string>
     <string name="other_pain_relief">Other pain relief</string>
+    <string name="worsening_of_mental_status">Worsening of mental status while in ED:</string>
 
 
 </resources>

@@ -1,6 +1,8 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,8 +16,10 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,22 +90,72 @@ public class PatientListActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            public boolean onActionItemClicked(final ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.delete:
-                        // Calls getSelectedIds method from ListViewAdapter Class
-                        SparseBooleanArray selected = adapter.getSelectedIds();
-                        // Captures all selected ids with a loop
-                        for (int i = (selected.size() - 1); i >= 0; i--) {
-                            if (selected.valueAt(i)) {
-                                String selecteditem = adapter.getItem(selected.keyAt(i));
-                                // Remove selected items following the ids
-                                MainActivity.myDb.deleteRowData(IDarray[selected.keyAt(i)]);
-                                adapter.remove(selecteditem);
+
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Delete selected patients?");
+                        builder.setMessage("This cannot be undone");
+                        builder.setCancelable(true);
+
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, close
+                                // current activity
+                                AlertDialog.Builder alert = new AlertDialog.Builder(PatientListActivity.this);
+                                alert.setTitle("Delete...");
+                                alert.setMessage("Enter Pin :");
+
+                                // Set an EditText view to get user input
+                                final EditText input = new EditText(PatientListActivity.this);
+                                alert.setView(input);
+
+                                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        String value = input.getText().toString();
+                                        if (value.equals("1379")) {
+                                            // Calls getSelectedIds method from ListViewAdapter Class
+                                            SparseBooleanArray selected = adapter.getSelectedIds();
+                                            // Captures all selected ids with a loop
+                                            for (int i = (selected.size() - 1); i >= 0; i--) {
+                                                if (selected.valueAt(i)) {
+                                                    String selecteditem = adapter.getItem(selected.keyAt(i));
+                                                    // Remove selected items following the ids
+                                                    MainActivity.myDb.deleteRowData(IDarray[selected.keyAt(i)]);
+                                                    adapter.remove(selecteditem);
+                                                }
+                                            }
+                                            // Close CAB
+                                            mode.finish();
+                                        } else {
+                                            Context context = getApplicationContext();
+                                            CharSequence toastMessage = "Incorrect PIN";
+                                            int duration = Toast.LENGTH_SHORT;
+                                            Toast toast = Toast.makeText(context, toastMessage, duration);
+                                            toast.show();
+                                        }
+                                    }
+                                });
+                                alert.show();
                             }
-                        }
-                        // Close CAB
-                        mode.finish();
+                        });
+
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+
+                        // create alert dialog
+                        AlertDialog alertDialog = builder.create();
+
+                        // show it
+                        alertDialog.show();
+
                         return true;
                     default:
                         return false;
