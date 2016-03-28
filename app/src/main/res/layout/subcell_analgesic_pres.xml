@@ -3,67 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:id="@+id/title"
-            android:textStyle="bold"
-            android:text="@string/assessment1"
-            android:gravity="center"
-            style="@style/textFormStyle"/>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabMinus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_action_cancel"
-            app:elevation="4dp"
-            app:backgroundTint="@color/DarkRed"
-            app:fabSize="mini"
-            android:layout_margin="@dimen/button_layout_margin"/>
-
-
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/buttonDate"
-        style="@style/buttonCard"
-        android:text="@string/select_date"/>
-
-    <Button
-        android:id="@+id/buttonTime"
-        style="@style/buttonCard"
-        android:text="@string/select_time"/>
-
-    <TextView
-        android:text="@string/type_of_analgesic_prescribed"
-        style="@style/textFormStyle" />
+    android:layout_height="match_parent"
+    android:padding="@dimen/card_border"
+    android:clipToPadding="false">
 
     <LinearLayout
-        android:id="@+id/checkGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"/>
-
-    <TextView
-        android:text="@string/mode_of_prescription"
-        style="@style/textFormStyle" />
-
-    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"/>
+        android:orientation="vertical"
+        android:background="@drawable/card_secondary"
+        android:elevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/title"
+                android:textStyle="bold"
+                android:text="@string/assessment1"
+                android:gravity="center"
+                style="@style/textFormStyle"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_action_cancel"
+                app:elevation="4dp"
+                app:backgroundTint="@color/DarkRed"
+                app:fabSize="mini"
+                android:layout_margin="@dimen/button_layout_margin"/>
+
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/buttonDate"
+            style="@style/buttonCard"
+            android:text="@string/select_date"/>
+
+        <Button
+            android:id="@+id/buttonTime"
+            style="@style/buttonCard"
+            android:text="@string/select_time"/>
+
+        <TextView
+            android:text="@string/type_of_analgesic_prescribed"
+            android:textStyle="bold"
+            style="@style/textFormStyle" />
+
+        <LinearLayout
+            android:id="@+id/checkGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/mode_of_prescription"
+            style="@style/textFormStyle" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"/>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

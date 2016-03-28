@@ -3,55 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/card_border"
+    android:clipToPadding="false">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@drawable/card_secondary"
+        android:elevation="4dp">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:id="@+id/title"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/title"
+                android:textStyle="bold"
+                android:text="@string/assessment1"
+                android:gravity="center"
+                style="@style/textFormStyle"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_action_cancel"
+                app:elevation="4dp"
+                app:backgroundTint="@color/DarkRed"
+                app:fabSize="mini"
+                android:layout_margin="@dimen/button_layout_margin"/>
+
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/buttonDate"
+            style="@style/buttonCard"
+            android:text="@string/select_date"/>
+
+        <Button
+            android:id="@+id/buttonTime"
+            style="@style/buttonCard"
+            android:text="@string/select_time"/>
+
+        <TextView
+            android:text="@string/pain_scale_score"
             android:textStyle="bold"
-            android:text="@string/assessment1"
-            android:gravity="center"
-            style="@style/textFormStyle"/>
+            style="@style/textFormStyle" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabMinus"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_action_cancel"
-            app:elevation="4dp"
-            app:backgroundTint="@color/DarkRed"
-            app:fabSize="mini"
-            android:layout_margin="@dimen/button_layout_margin"/>
+            android:id="@+id/spinner"/>
 
+    </LinearLayout>
 
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/buttonDate"
-        style="@style/buttonCard"
-        android:text="@string/select_date"/>
-
-    <Button
-        android:id="@+id/buttonTime"
-        style="@style/buttonCard"
-        android:text="@string/select_time"/>
-
-    <TextView
-        android:text="@string/pain_scale_score"
-        style="@style/textFormStyle" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner"/>
 
 </LinearLayout>

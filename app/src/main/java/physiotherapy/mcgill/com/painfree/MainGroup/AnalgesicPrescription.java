@@ -54,7 +54,7 @@ public class AnalgesicPrescription {
         final LinearLayout container = (LinearLayout) rowView.findViewById(R.id.container);
         container.removeAllViews();
 
-        final String[] spinnerOptions = new String[]{context.getString(R.string.standard_order), context.getString(R.string.collective_order), context.getString(R.string.pharmaceutical_algorithm)};
+        final String[] spinnerOptions = new String[]{"", context.getString(R.string.standard_order), context.getString(R.string.collective_order), context.getString(R.string.pharmaceutical_algorithm)};
         final String[] checkBoxItems = new String[]{context.getString(R.string.acetaminophen), context.getString(R.string.nsaids), context.getString(R.string.opioid)};
 
 
@@ -74,7 +74,7 @@ public class AnalgesicPrescription {
             });
 
 
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < numAssessments; i++) {
                 final View assessmentView = inflater.inflate(R.layout.subcell_analgesic_pres, container, false);
                 TextView assessmentTitle = (TextView) assessmentView.findViewById(R.id.title);
                 assessmentTitle.setText("Prescription" + " " + String.valueOf(i + 1));
@@ -269,13 +269,6 @@ public class AnalgesicPrescription {
                             ((CheckBox) cg.getChildAt(j)).setChecked(false);
                         }
                     }
-                }
-
-
-                if (i >= numAssessments) {
-                    assessmentView.setVisibility(View.GONE);
-                } else {
-                    assessmentView.setVisibility(View.VISIBLE);
                 }
 
                 FloatingActionButton minusButton = (FloatingActionButton) assessmentView.findViewById(R.id.fabMinus);

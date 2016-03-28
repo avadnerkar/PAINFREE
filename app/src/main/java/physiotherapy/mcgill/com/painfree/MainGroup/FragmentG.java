@@ -31,11 +31,11 @@ public class FragmentG extends Fragment {
         ArrayList<FragmentItem> items = new ArrayList<>();
         items.add(new FragmentItem(getString(R.string.discharge_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_DISCHARGE_DATE));
         items.add(new FragmentItem(getString(R.string.discharge_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_DISCHARGE_TIME));
-        items.add(new FragmentItem(getString(R.string.discharge_destination), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{getString(R.string.return_home), getString(R.string.admitting), getString(R.string.transfer), getString(R.string.lwbs), getString(R.string.death), getString(R.string.not_available)}, null, DBAdapter.KEY_DISCHARGE_DESTINATION));
+        items.add(new FragmentItem(getString(R.string.discharge_destination), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{"", getString(R.string.return_home), getString(R.string.admitting), getString(R.string.transfer), getString(R.string.lwbs), getString(R.string.death), getString(R.string.not_available)}, null, DBAdapter.KEY_DISCHARGE_DESTINATION));
         items.add(new FragmentItem(getString(R.string.discharge_tool_given), FragmentItem.CellType.RADIO, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_DISCHARGE_TOOL));
 
         items.add(new FragmentItem(getString(R.string.return_to_ed), FragmentItem.CellType.RADIO, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_RETURN_ED));
-        items.add(new FragmentItem(getString(R.string.if_yes_why), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{getString(R.string.description), getString(R.string.uncontrolled_pain), getString(R.string.scheduled_cast_check), getString(R.string.issues_with_cast), getString(R.string.swelling), getString(R.string.worsening_of_health_status), getString(R.string.new_fracture)}, null, DBAdapter.KEY_RETURN_ED_REASON));
+        items.add(new FragmentItem(getString(R.string.if_yes_why), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{"", getString(R.string.description), getString(R.string.uncontrolled_pain), getString(R.string.scheduled_cast_check), getString(R.string.issues_with_cast), getString(R.string.swelling), getString(R.string.worsening_of_health_status), getString(R.string.new_fracture)}, null, DBAdapter.KEY_RETURN_ED_REASON));
 
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);

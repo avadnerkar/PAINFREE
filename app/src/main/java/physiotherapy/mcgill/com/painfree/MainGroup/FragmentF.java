@@ -31,7 +31,7 @@ public class FragmentF extends Fragment {
         ArrayList<FragmentItem> items = new ArrayList<>();
         items.add(new FragmentItem(getString(R.string.evidence_altered_cognition), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.confusion), getString(R.string.agitation), getString(R.string.disorientation), getString(R.string.not_specified)}, null, DBAdapter.KEY_EVIDENCE_ALTERED_COGNITION));
         items.add(new FragmentItem(getString(R.string.short_cam_score), FragmentItem.CellType.SPINNER, new String[]{"None", "0", "1", "2", "3", "4", "5", "6", "7"}, null, DBAdapter.KEY_SHORT_CAM_SCORE));
-        items.add(new FragmentItem("Worsening of mental status while in ED", FragmentItem.CellType.SPINNER, new String[]{getString(R.string.yes), getString(R.string.no), getString(R.string.not_applicable)}, null, DBAdapter.KEY_MENTAL_WORSENING));
+        items.add(new FragmentItem("Worsening of mental status while in ED", FragmentItem.CellType.SPINNER, new String[]{"", getString(R.string.yes), getString(R.string.no), getString(R.string.not_applicable)}, null, DBAdapter.KEY_MENTAL_WORSENING));
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 

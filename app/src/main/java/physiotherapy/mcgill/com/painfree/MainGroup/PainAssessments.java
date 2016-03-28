@@ -69,7 +69,7 @@ public class PainAssessments {
             });
 
 
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < numAssessments; i++) {
                 final View assessmentView = inflater.inflate(R.layout.subcell_pain_assessment, container, false);
                 TextView assessmentTitle = (TextView) assessmentView.findViewById(R.id.title);
                 assessmentTitle.setText("Assessment" + " " + String.valueOf(i + 1));
@@ -213,14 +213,6 @@ public class PainAssessments {
                         tpd.show();
                     }
                 });
-
-
-
-                if (i >= numAssessments) {
-                    assessmentView.setVisibility(View.GONE);
-                } else {
-                    assessmentView.setVisibility(View.VISIBLE);
-                }
 
                 FloatingActionButton minusButton = (FloatingActionButton) assessmentView.findViewById(R.id.fabMinus);
                 minusButton.setOnClickListener(new View.OnClickListener() {

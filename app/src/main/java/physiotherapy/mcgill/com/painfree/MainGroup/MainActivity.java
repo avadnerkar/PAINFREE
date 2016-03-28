@@ -185,11 +185,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public boolean onPrepareOptionsMenu(Menu menu) {
 
         if(currentPatientId==-1){
-            menu.findItem(R.id.action_update_patient).setVisible(false);
             menu.findItem(R.id.clear).setVisible(false);
         }
         else{
-            menu.findItem(R.id.action_update_patient).setVisible(true);
             menu.findItem(R.id.clear).setVisible(true);
         }
         return super.onPrepareOptionsMenu(menu);
@@ -504,7 +502,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                         do {
                             List<String> list = new ArrayList<>();
                             for (int i=0; i<c.getColumnCount(); i++){
-                                list.add(c.getString(i));
+
+                                if (c.getColumnName(i).equals(DBAdapter.KEY_SUBJECTID)){
+                                    list.add("Confidential");
+                                } else {
+                                    list.add(c.getString(i));
+                                }
+
                             }
                             String[] arrStr = list.toArray(new String[list.size()]);
                             writer.writeNext(arrStr);
@@ -524,6 +528,29 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                             toast.show();
                         }
                     });
+
+                    File idFilename = new File(path, "/PainFree_ids.csv");
+                    CSVWriter idWriter = new CSVWriter(new FileWriter(idFilename), '\t');
+                    c = myDb.getAllRowDataWithKeys(new String[]{DBAdapter.KEY_UNIQUEID, DBAdapter.KEY_SUBJECTID});
+
+                    idWriter.writeNext(new String[]{"sep=\t"});
+                    idWriter.writeNext(c.getColumnNames());
+
+                    if (c.moveToFirst()){
+                        do {
+                            List<String> list = new ArrayList<>();
+                            list.add(c.getString(0));
+                            list.add(c.getString(1));
+                            String[] arrStr = list.toArray(new String[list.size()]);
+                            idWriter.writeNext(arrStr);
+
+                        } while (c.moveToNext());
+                    }
+
+                    c.close();
+                    idWriter.close();
+
+
 
 
                 } catch (final IOException e){

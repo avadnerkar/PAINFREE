@@ -3,161 +3,183 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:id="@+id/title"
-            android:textStyle="bold"
-            android:text="@string/assessment1"
-            android:gravity="center"
-            style="@style/textFormStyle"/>
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabMinus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_action_cancel"
-            app:elevation="4dp"
-            app:backgroundTint="@color/DarkRed"
-            app:fabSize="mini"
-            android:layout_margin="@dimen/button_layout_margin"/>
-
-
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/buttonDate"
-        style="@style/buttonCard"
-        android:text="@string/select_date"/>
-
-    <Button
-        android:id="@+id/buttonTime"
-        style="@style/buttonCard"
-        android:text="@string/select_time"/>
-
-    <TextView
-        android:text="@string/type_of_analgesic_administered"
-        style="@style/textFormStyle" />
+    android:orientation="vertical"
+    android:padding="@dimen/card_border"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:background="@drawable/card_secondary"
+        android:elevation="4dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/title"
+                android:textStyle="bold"
+                android:text="@string/assessment1"
+                android:gravity="center"
+                style="@style/textFormStyle"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_action_cancel"
+                app:elevation="4dp"
+                app:backgroundTint="@color/DarkRed"
+                app:fabSize="mini"
+                android:layout_margin="@dimen/button_layout_margin"/>
+
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/buttonDate"
+            style="@style/buttonCard"
+            android:text="@string/select_date"/>
+
+        <Button
+            android:id="@+id/buttonTime"
+            style="@style/buttonCard"
+            android:text="@string/select_time"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/type_of_analgesic_administered"
+            style="@style/textFormStyle" />
 
         <LinearLayout
-            android:id="@+id/checkGroup"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/checkGroup"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"/>
+
+            <LinearLayout
+                android:id="@+id/doseGroup"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"/>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/type_of_order"
+            style="@style/textFormStyle" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerOrder"/>
+
+
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/route"
+            style="@style/textFormStyle" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerRoute"/>
+
+
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/frequency"
+            style="@style/textFormStyle" />
+
+        <EditText
+            android:id="@+id/editFrequency"
+            style="@style/editTextFormStyle"/>
+
+
+        <TextView
+            android:text="@string/nerve_block"
+            style="@style/textFormStyle"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/nerveBlockButtonDate"
+            style="@style/buttonCard"
+            android:text="@string/select_date"/>
+
+        <Button
+            android:id="@+id/nerveBlockButtonTime"
+            style="@style/buttonCard"
+            android:text="@string/select_time"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/type_of_order"
+            style="@style/textFormStyle" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerNerveBlockOrder"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/type_of_nerve_block"
+            style="@style/textFormStyle" />
+
+        <EditText
+            android:id="@+id/editNerveBlockType"
+            style="@style/editTextFormStyle"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/alternative_pain_relief"
+            style="@style/textFormStyle" />
+
+        <LinearLayout
+            android:id="@+id/checkGroupPainRelief"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"/>
 
-        <LinearLayout
-            android:id="@+id/doseGroup"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical"/>
+        <EditText
+            android:hint="@string/other_pain_relief"
+            android:id="@+id/editPainReliefOther"
+            style="@style/editTextFormStyle"/>
 
+        <CheckBox
+            android:text="@string/refusal_of_analgesia"
+            android:id="@+id/analgesia_refused"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
 
-    <TextView
-        android:text="@string/type_of_order"
-        style="@style/textFormStyle" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerOrder"/>
-
-
-    <TextView
-        android:text="@string/route"
-        style="@style/textFormStyle" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerRoute"/>
-
-
-    <TextView
-        android:text="@string/frequency"
-        style="@style/textFormStyle" />
-
-    <EditText
-        android:id="@+id/editFrequency"
-        style="@style/editTextFormStyle"/>
-
-
-    <TextView
-        android:text="@string/nerve_block"
-        style="@style/textFormStyle"
-        android:textStyle="bold"/>
-
-    <Button
-        android:id="@+id/nerveBlockButtonDate"
-        style="@style/buttonCard"
-        android:text="@string/select_date"/>
-
-    <Button
-        android:id="@+id/nerveBlockButtonTime"
-        style="@style/buttonCard"
-        android:text="@string/select_time"/>
-
-    <TextView
-        android:text="@string/type_of_order"
-        style="@style/textFormStyle" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerNerveBlockOrder"/>
-
-    <TextView
-        android:text="@string/type_of_nerve_block"
-        style="@style/textFormStyle" />
-
-    <EditText
-        android:id="@+id/editNerveBlockType"
-        style="@style/editTextFormStyle"/>
-
-    <TextView
-        android:text="@string/alternative_pain_relief"
-        style="@style/textFormStyle" />
-
-    <LinearLayout
-        android:id="@+id/checkGroupPainRelief"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"/>
-
-    <EditText
-        android:id="@+id/editPainReliefOther"
-        style="@style/editTextFormStyle"/>
-
-    <CheckBox
-        android:text="@string/refusal_of_analgesia"
-        android:id="@+id/analgesia_refused"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

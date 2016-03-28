@@ -164,6 +164,18 @@
     <string name="alternative_pain_relief">Alternative pain relief</string>
     <string name="refusal_of_analgesia">Refusal of analgesia</string>
     <string name="analgesic_administrations">Analgesic administrations</string>
+    <string name="written">Written</string>
+    <string name="verbal">Verbal</string>
+    <string name="enter_dose">Enter dose</string>
+    <string name="im">IM</string>
+    <string name="iv">IV</string>
+    <string name="po">PO</string>
+    <string name="sc">SC</string>
+    <string name="pr">PR</string>
+    <string name="ice">Ice</string>
+    <string name="cool_cloths">Cool cloths</string>
+    <string name="soft_cushions">Soft cushions</string>
+    <string name="other_pain_relief">Other pain relief</string>
 
 
 </resources>
