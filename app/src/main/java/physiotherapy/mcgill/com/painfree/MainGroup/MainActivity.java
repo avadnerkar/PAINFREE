@@ -109,6 +109,23 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             }
         });
 
+//        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+
         // For each of the sections in the app, add a tab to the action bar.
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
             // Create a tab with text corresponding to the page title defined by
@@ -316,22 +333,17 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public void run(){
             clearPatientSelection();
 
-            AppUtils.showListDialog(getString(R.string.period_of_extraction), new String[]{getString(R.string.pre1), getString(R.string.pre2), getString(R.string.post1), getString(R.string.post2)}, context, new AppUtils.ListHandler() {
-                @Override
-                public void onClick(final String text) {
-                    long id = MainActivity.myDb.insertNewRow(text);
-                    actionBar.setTitle(deviceID + "-" + id);
-                    MainActivity.currentPatientId = id;
-                    invalidateOptionsMenu();
-                    FragmentA.setFragmentVisibility();
-                    FragmentB.setFragmentVisibility();
-                    FragmentC.setFragmentVisibility();
-                    FragmentD.setFragmentVisibility();
-                    FragmentE.setFragmentVisibility();
-                    FragmentF.setFragmentVisibility();
-                    FragmentG.setFragmentVisibility();
-                }
-            });
+            long id = MainActivity.myDb.insertNewRow();
+            actionBar.setTitle(deviceID + "-" + id);
+            MainActivity.currentPatientId = id;
+            invalidateOptionsMenu();
+            FragmentA.setFragmentVisibility();
+            FragmentB.setFragmentVisibility();
+            FragmentC.setFragmentVisibility();
+            FragmentD.setFragmentVisibility();
+            FragmentE.setFragmentVisibility();
+            FragmentF.setFragmentVisibility();
+            FragmentG.setFragmentVisibility();
         }
     };
 

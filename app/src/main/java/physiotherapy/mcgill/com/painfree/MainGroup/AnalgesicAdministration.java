@@ -717,7 +717,7 @@ public class AnalgesicAdministration {
                         for (int j=I; j<numAssessments-1; j++){
 
                             for (int k=1; k<=numFields; k++){
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+k], tempCursor.getString((j+1)*4+k));
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+k], tempCursor.getString((j+1)*numFields+k));
                             }
 
                         }

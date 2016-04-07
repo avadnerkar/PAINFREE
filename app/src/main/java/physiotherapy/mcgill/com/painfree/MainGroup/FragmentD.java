@@ -30,7 +30,7 @@ public class FragmentD extends Fragment {
 
         ArrayList<FragmentItem> items = new ArrayList<>();
         items.add(new FragmentItem(getString(R.string.triage_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_TRIAGE_DATE));
-        items.get(items.size()-1).extraOptions = new String[]{"optional"};
+        items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.add(new FragmentItem(getString(R.string.triage_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_TRIAGE_TIME));
         items.get(items.size()-1).extraOptions = new String[]{"optional"};
         items.add(new FragmentItem(getString(R.string.ctas_priority), FragmentItem.CellType.SPINNER, new String[]{getString(R.string.none), getString(R.string.ctas_1), getString(R.string.ctas_2), getString(R.string.ctas_3), getString(R.string.ctas_4), getString(R.string.ctas_5)}, null, DBAdapter.KEY_CTAS));

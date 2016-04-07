@@ -261,8 +261,8 @@ public class DBAdapter {
         dataMap = new ArrayList<>();
         dataMap.add(KEY_ROWID);
         dataMap.add(KEY_UNIQUEID);
-        dataMap.add(KEY_EXTRACTIONPERIOD);
 
+        dataMap.add(KEY_EXTRACTIONPERIOD);
         dataMap.add(KEY_SUBJECTID);
         dataMap.add(KEY_SITE);
         dataMap.add(KEY_COMPLETED_BY);
@@ -487,16 +487,15 @@ public class DBAdapter {
     /////////////////////////////////////////////////////////////////////
 
 
-    public long insertNewRow(String extractionPeriod){
+    public long insertNewRow(){
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_EXTRACTIONPERIOD, extractionPeriod);
+        initialValues.put(KEY_PAIN_ASSESSMENT_NUM, "0");
+        initialValues.put(KEY_ANALGESIC_PRES_NUM, "0");
+        initialValues.put(KEY_ANALGESIC_ADMIN_NUM, "0");
         long id = db.insert(DATA_TABLE, null, initialValues);
 
-        ContentValues updatedValues = new ContentValues();
         String value = MainActivity.deviceID + "-" + id;
-
         updateFieldData(id, KEY_UNIQUEID, value);
-        updateFieldData(id, KEY_PAIN_ASSESSMENT_NUM, "0");
 
         return id;
     }

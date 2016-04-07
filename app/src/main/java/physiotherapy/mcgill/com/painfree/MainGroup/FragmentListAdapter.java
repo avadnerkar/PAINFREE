@@ -191,10 +191,18 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             button.setText(context.getString(R.string.select_date));
 
             final Button clearButton = (Button) rowView.findViewById(R.id.clear);
-            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].equals("optional")) {
+            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("optional")) {
                 clearButton.setVisibility(View.VISIBLE);
             } else {
                 clearButton.setVisibility(View.GONE);
+            }
+
+            final CheckBox noneBox = (CheckBox) rowView.findViewById(R.id.noneCheckbox);
+
+            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("none")) {
+                noneBox.setVisibility(View.VISIBLE);
+            } else {
+                noneBox.setVisibility(View.GONE);
             }
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
@@ -219,23 +227,28 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 }
             }
 
-
             if (cursor.moveToFirst()) {
                 String dateString = cursor.getString(0);
-                if (dateString != null && !dateString.equals("")) {
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                    try {
-                        Date date = format.parse(dateString);
-                        Calendar cal = Calendar.getInstance();
-                        cal.setTime(date);
-                        mYear = cal.get(Calendar.YEAR);
-                        mMonth = cal.get(Calendar.MONTH);
-                        mDay = cal.get(Calendar.DAY_OF_MONTH);
 
-                        button.setText(mYear + "-" + String.format("%02d", mMonth + 1) + "-" + String.format("%02d", mDay));
-                    } catch (ParseException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+                if (dateString != null){
+
+                    if (dateString.equals("None")){
+                        noneBox.setChecked(true);
+                    } else if (!dateString.equals("")) {
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            Date date = format.parse(dateString);
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(date);
+                            mYear = cal.get(Calendar.YEAR);
+                            mMonth = cal.get(Calendar.MONTH);
+                            mDay = cal.get(Calendar.DAY_OF_MONTH);
+
+                            button.setText(mYear + "-" + String.format("%02d", mMonth + 1) + "-" + String.format("%02d", mDay));
+                        } catch (ParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -253,6 +266,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                             final String text = selectedyear + "-" + String.format("%02d", selectedmonth + 1) + "-" + String.format("%02d", selectedday);
                             button.setText(text);
+                            noneBox.setChecked(false);
                             Thread thread = new Thread() {
                                 @Override
                                 public void run() {
@@ -260,6 +274,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                                 }
                             };
                             thread.start();
+
 
                         }
                     }, year, month, day);
@@ -292,6 +307,32 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         }
                     };
                     thread.start();
+                }
+            });
+
+            noneBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    if (isChecked){
+                        button.setText(context.getString(R.string.select_date));
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.none));
+                            }
+                        };
+                        thread.start();
+                    } else {
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
+                            }
+                        };
+                        thread.start();
+                    }
+
                 }
             });
 
