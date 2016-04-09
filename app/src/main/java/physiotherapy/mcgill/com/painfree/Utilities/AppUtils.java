@@ -115,6 +115,12 @@ public class AppUtils {
         textView.setText(title);
     }
 
+    public static AlertDialog showDefaultAlertDialog(String title, String message, Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message).setTitle(title);
+        return builder.create();
+    }
+
 
 
 

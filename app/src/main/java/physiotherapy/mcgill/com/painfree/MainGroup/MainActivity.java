@@ -1,34 +1,22 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.opencsv.CSVWriter;
@@ -36,20 +24,18 @@ import com.opencsv.CSVWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import physiotherapy.mcgill.com.painfree.Dialogs.DialogEditText;
+import physiotherapy.mcgill.com.painfree.Dialogs.DialogTwoButton;
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.ActivityIndicator;
 import physiotherapy.mcgill.com.painfree.Utilities.AppUtils;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener{
+public class MainActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -68,10 +54,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public static DBAdapter myDb;
     public static long currentPatientId;
     public static Context context;
-    public static ActionBar actionBar;
+    public static Toolbar actionBar;
     public static final String PREFS_NAME = "PAINFREE_PREFS";
     public static String deviceID;
     public static String KEY_DEVICE_ID = "device_ID";
+    public TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +70,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         context = this;
 
         // Set up the action bar.
-        actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Crimson)));
-        actionBar.setStackedBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Crimson)));
+        actionBar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(actionBar);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -99,32 +84,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setOffscreenPageLimit(7);
 
-        // When swiping between different sections, select the corresponding
-        // tab. We can also use ActionBar.Tab#select() to do this if we have
-        // a reference to the Tab.
-        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
-
-//        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
         // For each of the sections in the app, add a tab to the action bar.
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -132,11 +92,49 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             // the adapter. Also specify this Activity object, which implements
             // the TabListener interface, as the callback (listener) for when
             // this tab is selected.
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            .setTabListener(this));
+
+            tabLayout.addTab(tabLayout.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)));
         }
+
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                Log.d("Debug", "Page scrolled");
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.d("Debug", "Page selected");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                Log.d("Debug", "Page scroll state changed");
+            }
+        });
+
+        assert tabLayout != null;
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+                if (checkMandatoryFields(tab.getPosition())){
+
+                }
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         final SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
         deviceID = sharedPreferences.getString(KEY_DEVICE_ID, null);
@@ -239,7 +237,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
 
     public void clearPatientSelection(){
-        actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.app_name);
         currentPatientId = -1;
         FragmentA.setFragmentVisibility();
@@ -254,21 +251,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     }
 
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        // When the given tab is selected, switch to the corresponding page in
-        // the ViewPager.
-        mViewPager.setCurrentItem(tab.getPosition());
-
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -325,6 +307,29 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     return getString(R.string.title_sectionG).toUpperCase(l);
             }
             return null;
+        }
+    }
+
+    public boolean checkMandatoryFields(final int tabPosition){
+        ArrayList<String> unfilledMandatoryFields = new ArrayList<>();
+        switch (tabPosition){
+            case 0:
+                unfilledMandatoryFields = FragmentA.unfilledMandatoryFields();
+                break;
+            default:
+                break;
+        }
+
+        String message = "";
+        for (String field : unfilledMandatoryFields){
+            message = message + field + "\n";
+        }
+
+        if (!message.equals("")){
+            AppUtils.showDefaultAlertDialog(getString(R.string.mandatory_fields_title), message, context);
+            return true;
+        } else {
+            return false;
         }
     }
 

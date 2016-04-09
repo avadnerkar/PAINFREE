@@ -177,6 +177,7 @@
     <string name="soft_cushions">Soft cushions</string>
     <string name="other_pain_relief">Other pain relief</string>
     <string name="worsening_of_mental_status">Worsening of mental status while in ED:</string>
+    <string name="mandatory_fields_title">The following mandatory fields must be filled</string>
 
 
 </resources>
