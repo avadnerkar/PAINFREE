@@ -387,22 +387,23 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 }
             });
 
-            noneBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            noneBox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
-                    if (isChecked){
+                public void onClick(View v) {
+                    final boolean isChecked = ((CheckBox)v).isChecked();
+                    if (isChecked) {
                         button.setText(context.getString(R.string.select_date));
                     }
 
-                    Thread thread = new Thread(){
+                    Thread thread = new Thread() {
                         @Override
                         public void run() {
-                            if (isChecked){
+                            if (isChecked) {
                                 MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.none));
                             } else {
                                 MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
                             }
-                            if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALDATE)){
+                            if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALDATE)) {
                                 ((Activity) context).runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -529,9 +530,10 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 }
             });
 
-            noneBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            noneBox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+                public void onClick(View v) {
+                    final boolean isChecked = ((CheckBox) v).isChecked();
                     if (isChecked) {
                         timePickerButton.setText(context.getString(R.string.select_time));
                     }
@@ -560,6 +562,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
                 }
             });
+
 
             cursor.close();
 
@@ -880,15 +883,28 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 checkboxDataArray = items.get(position).databaseOptions;
             }
 
+            CheckBox cbNone = null;
+            if (items.get(position).hasNone){
+                cbNone = new CheckBox(context);
+                cbNone.setText(items.get(position).extraOptions[0]);
+            }
+            final CheckBox cbNoneFinal = cbNone;
+
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 CheckBox cb = new CheckBox(context);
                 cb.setText(items.get(position).uiOptions[i]);
                 cg.addView(cb);
 
 
-                cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                cb.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    public void onClick(View v) {
+                        if (((CheckBox) v).isChecked()) {
+                            if (cbNoneFinal != null) {
+                                cbNoneFinal.setChecked(false);
+                            }
+                        }
+
                         Thread thread = new Thread() {
                             @Override
                             public void run() {
@@ -907,6 +923,34 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     }
                 });
 
+
+
+            }
+
+            if (cbNoneFinal != null){
+                cg.addView(cbNoneFinal);
+
+                cbNoneFinal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, cbNoneFinal.getText().toString());
+                                if (cbNoneFinal.isChecked()) {
+                                    ((Activity) context).runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            notifyDataSetChanged();
+                                        }
+                                    });
+                                }
+                            }
+                        };
+                        thread.start();
+                    }
+                });
+
             }
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
@@ -915,12 +959,17 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 String answer = cursor.getString(0);
 
                 if (answer != null) {
-                    for (int i = 0; i < cg.getChildCount(); i++) {
+                    for (int i = 0; i < cg.getChildCount()-1; i++) {
                         if (answer.contains(checkboxDataArray[i])) {
                             ((CheckBox) cg.getChildAt(i)).setChecked(true);
                         } else {
                             ((CheckBox) cg.getChildAt(i)).setChecked(false);
                         }
+                    }
+                    if (items.get(position).hasNone && answer.equals(items.get(position).extraOptions[0])){
+                        ((CheckBox) cg.getChildAt(cg.getChildCount()-1)).setChecked(true);
+                    } else {
+                        ((CheckBox) cg.getChildAt(cg.getChildCount()-1)).setChecked(false);
                     }
                 } else {
                     for (int i = 0; i < cg.getChildCount(); i++) {
@@ -955,27 +1004,30 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
     private void setupFractureSiteClickListener(final CheckBox cb, final CheckBox cbLeft, final CheckBox cbRight, final String dbKey, final View view){
 
         loadFractureSiteCheckbox(cb, cbLeft, cbRight, dbKey, view);
-        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        cb.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setFractureSiteVisibility(cb, cbLeft, cbRight, isChecked, view);
+            public void onClick(View v) {
+                setFractureSiteVisibility(cb, cbLeft, cbRight, ((CheckBox)v).isChecked(), view);
                 writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
             }
         });
 
         if (cbLeft != null){
-            cbLeft.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            cbLeft.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                public void onClick(View v) {
                     writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
                 }
             });
         }
 
         if (cbRight != null){
-            cbRight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            cbRight.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                public void onClick(View v) {
                     writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
                 }
             });

@@ -19,6 +19,7 @@ public class FragmentItem {
     public String[] databaseOptions;
     public String[] extraOptions;
     public boolean isMandatory;
+    public boolean hasNone;
 
 
     public FragmentItem(String title, CellType cellType, String[] uiOptions, String[] databaseOptions, String dbKey){
@@ -28,6 +29,7 @@ public class FragmentItem {
         this.databaseOptions = databaseOptions;
         this.dbKey = dbKey;
         this.isMandatory = false;
+        this.hasNone = false;
     }
 
 }

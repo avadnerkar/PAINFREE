@@ -180,6 +180,7 @@
     <string name="mandatory_fields_title">The following mandatory fields must be filled</string>
     <string name="title_activity_launch">LaunchActivity</string>
     <string name="start">Start</string>
+    <string name="medical_record_number">Medical record number:</string>
 
 
 </resources>

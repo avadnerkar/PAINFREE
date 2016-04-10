@@ -31,6 +31,7 @@ public class DBAdapter {
     public static final String KEY_UNIQUEID = "[Device Specific ID]";
     public static final String KEY_EXTRACTIONPERIOD = "[Period of extraction]";
     public static final String KEY_SUBJECTID = "[Subject ID]";
+    public static final String KEY_MEDICALRECORDNUMBER = "[Medical record number]";
     public static final String KEY_SITE = "[Site]";
     public static final String KEY_COMPLETED_BY = "[Completed by]";
     public static final String KEY_DATE = "[Date]";
@@ -264,6 +265,7 @@ public class DBAdapter {
 
         dataMap.add(KEY_EXTRACTIONPERIOD);
         dataMap.add(KEY_SUBJECTID);
+        dataMap.add(KEY_MEDICALRECORDNUMBER);
         dataMap.add(KEY_SITE);
         dataMap.add(KEY_COMPLETED_BY);
         dataMap.add(KEY_DATE);

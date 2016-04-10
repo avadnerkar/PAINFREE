@@ -40,6 +40,9 @@ public class FragmentA extends Fragment {
         items.add(new FragmentItem(getString(R.string.date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_DATE));
         items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.subject_id), FragmentItem.CellType.NUMERIC, null, null, DBAdapter.KEY_SUBJECTID));
+        items.get(items.size()-1).isMandatory = true;
+        items.add(new FragmentItem(getString(R.string.medical_record_number), FragmentItem.CellType.NUMERIC, null, null, DBAdapter.KEY_MEDICALRECORDNUMBER));
+        items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.date_of_arrival), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_ARRIVALDATE));
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.get(items.size()-1).isMandatory = true;

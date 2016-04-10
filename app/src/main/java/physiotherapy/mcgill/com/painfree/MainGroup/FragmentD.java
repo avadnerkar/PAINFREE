@@ -37,6 +37,8 @@ public class FragmentD extends Fragment {
         items.add(new FragmentItem(getString(R.string.glasgow), FragmentItem.CellType.SPINNER, new String[]{"None", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"}, null, DBAdapter.KEY_GLASGOW));
         items.add(new FragmentItem(getString(R.string.pain_scale_score), FragmentItem.CellType.SPINNER, new String[]{"None", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}, null, DBAdapter.KEY_PAINSCALE));
         items.add(new FragmentItem(getString(R.string.collective_order), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.acetaminophen), getString(R.string.nsaids), getString(R.string.opioid)}, null, DBAdapter.KEY_COLLECTIVEORDER));
+        items.get(items.size()-1).extraOptions = new String[]{getString(R.string.not_applicable)};
+        items.get(items.size()-1).hasNone = true;
         items.add(new FragmentItem(getString(R.string.history_of_dementia), FragmentItem.CellType.RADIO, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_HISTORYOFDEMENTIA));
         items.add(new FragmentItem(getString(R.string.altered_cognition), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.confusion), getString(R.string.agitation), getString(R.string.disorientation)}, null, DBAdapter.KEY_ALTEREDCOGNITION));
 
