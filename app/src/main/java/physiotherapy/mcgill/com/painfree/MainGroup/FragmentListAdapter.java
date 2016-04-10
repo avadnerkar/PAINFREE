@@ -1,5 +1,6 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
@@ -63,7 +65,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
 
         View rowView = null;
         TextView textView;
@@ -271,6 +273,19 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                                 @Override
                                 public void run() {
                                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, text);
+
+                                    //Synchronise arrival date and triage date
+                                    if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALDATE)){
+                                        ((Activity) context).runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                FragmentA.adapter.notifyDataSetChanged();
+                                                FragmentD.adapter.notifyDataSetChanged();
+                                            }
+                                        });
+
+                                    }
+
                                 }
                             };
                             thread.start();
@@ -281,11 +296,63 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     if (items.get(position).uiOptions != null && items.get(position).uiOptions.length >= 3) {
                         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
                         try {
-                            Date minDate = f.parse(items.get(position).uiOptions[1]);
-                            mDatePicker.getDatePicker().setMinDate(minDate.getTime());
 
+                            Date minDate = f.parse(items.get(position).uiOptions[1]);
                             Date maxDate = f.parse(items.get(position).uiOptions[2]);
+
+                            if (items.get(position).dbKey.equals(DBAdapter.KEY_ARRIVALDATE)){
+
+                                Cursor dateCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE, DBAdapter.KEY_DISCHARGE_DATE});
+                                if (dateCursor.moveToFirst()){
+                                    String maxDateString = dateCursor.getString(0);
+                                    String secondMaxDateString = dateCursor.getString(1);
+                                    if (maxDateString != null && !maxDateString.equals("") && !maxDateString.equals("None")){
+                                        maxDate = f.parse(maxDateString);
+                                    } else if (secondMaxDateString != null && !secondMaxDateString.equals("") && !secondMaxDateString.equals("None")){
+                                        maxDate = f.parse(secondMaxDateString);
+                                    }
+                                }
+                                dateCursor.close();
+                            }
+
+                            if (items.get(position).dbKey.equals(DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE)){
+
+                                Cursor dateCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_ARRIVALDATE, DBAdapter.KEY_DISCHARGE_DATE});
+                                if (dateCursor.moveToFirst()){
+
+                                    String minDateString = dateCursor.getString(0);
+                                    if (minDateString != null && !minDateString.equals("") && !minDateString.equals("None")){
+                                        minDate = f.parse(minDateString);
+                                    }
+
+                                    String maxDateString = dateCursor.getString(1);
+                                    if (maxDateString != null && !maxDateString.equals("") && !maxDateString.equals("None")){
+                                        maxDate = f.parse(maxDateString);
+                                    }
+                                }
+                                dateCursor.close();
+                            }
+
+                            if (items.get(position).dbKey.equals(DBAdapter.KEY_DISCHARGE_DATE)){
+
+                                Cursor dateCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_ARRIVALDATE, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE});
+                                if (dateCursor.moveToFirst()){
+
+                                    String minDateString = dateCursor.getString(1);
+                                    String secondMinDateString = dateCursor.getString(0);
+                                    if (minDateString != null && !minDateString.equals("") && !minDateString.equals("None")){
+                                        minDate = f.parse(minDateString);
+                                    } else if (secondMinDateString != null && !secondMinDateString.equals("") && !secondMinDateString.equals("None")){
+                                        minDate = f.parse(secondMinDateString);
+                                    }
+
+                                }
+                                dateCursor.close();
+                            }
+
+                            mDatePicker.getDatePicker().setMinDate(minDate.getTime());
                             mDatePicker.getDatePicker().setMaxDate(maxDate.getTime());
+
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -304,6 +371,16 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         @Override
                         public void run() {
                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
+                            //Synchronise arrival date and triage date
+                            if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALDATE)){
+                                ((Activity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        FragmentA.adapter.notifyDataSetChanged();
+                                        FragmentD.adapter.notifyDataSetChanged();
+                                    }
+                                });
+                            }
                         }
                     };
                     thread.start();
@@ -312,26 +389,31 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             noneBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
                     if (isChecked){
                         button.setText(context.getString(R.string.select_date));
-                        Thread thread = new Thread() {
-                            @Override
-                            public void run() {
+                    }
+
+                    Thread thread = new Thread(){
+                        @Override
+                        public void run() {
+                            if (isChecked){
                                 MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.none));
-                            }
-                        };
-                        thread.start();
-                    } else {
-                        Thread thread = new Thread() {
-                            @Override
-                            public void run() {
+                            } else {
                                 MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
                             }
-                        };
-                        thread.start();
-                    }
+                            if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALDATE)){
+                                ((Activity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        FragmentA.adapter.notifyDataSetChanged();
+                                        FragmentD.adapter.notifyDataSetChanged();
+                                    }
+                                });
+                            }
+                        }
+                    };
+                    thread.start();
 
                 }
             });
@@ -347,7 +429,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             timePickerButton.setText(context.getString(R.string.select_time));
 
             final Button clearButton1 = (Button) rowView.findViewById(R.id.clear);
-            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].equals("optional")) {
+            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("optional")) {
                 clearButton1.setVisibility(View.VISIBLE);
             } else {
                 clearButton1.setVisibility(View.GONE);
@@ -357,16 +439,31 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
 
+            final CheckBox noneBox = (CheckBox) rowView.findViewById(R.id.noneCheckbox);
+
+            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("none")) {
+                noneBox.setVisibility(View.VISIBLE);
+            } else {
+                noneBox.setVisibility(View.GONE);
+            }
+
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 
             if (cursor.moveToFirst()) {
                 String timeString = cursor.getString(0);
-                if (timeString != null && !timeString.equals("")) {
-                    timePickerButton.setText(timeString);
-                    String[] parts = timeString.split(":");
-                    hour = Integer.parseInt(parts[0]);
-                    minute = Integer.parseInt(parts[1]);
+
+                if (timeString != null){
+
+                    if (timeString.equals("None")){
+                        noneBox.setChecked(true);
+                    } else if (!timeString.equals("")) {
+                        timePickerButton.setText(timeString);
+                        String[] parts = timeString.split(":");
+                        hour = Integer.parseInt(parts[0]);
+                        minute = Integer.parseInt(parts[1]);
+                    }
                 }
+
             }
 
             final int mHour = hour;
@@ -382,10 +479,23 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                             final String value = String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute);
                             timePickerButton.setText(value);
+                            noneBox.setChecked(false);
                             Thread thread = new Thread() {
                                 @Override
                                 public void run() {
                                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, value);
+
+                                    //Synchronise arrival time and triage time
+                                    if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALTIME)){
+                                        ((Activity) context).runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                FragmentA.adapter.notifyDataSetChanged();
+                                                FragmentD.adapter.notifyDataSetChanged();
+                                            }
+                                        });
+
+                                    }
                                 }
                             };
                             thread.start();
@@ -403,9 +513,51 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         @Override
                         public void run() {
                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
+                            //Synchronise arrival date and triage date
+                            if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALTIME)){
+                                ((Activity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        FragmentA.adapter.notifyDataSetChanged();
+                                        FragmentD.adapter.notifyDataSetChanged();
+                                    }
+                                });
+                            }
                         }
                     };
                     thread.start();
+                }
+            });
+
+            noneBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+                    if (isChecked) {
+                        timePickerButton.setText(context.getString(R.string.select_time));
+                    }
+
+                    Thread thread = new Thread() {
+                        @Override
+                        public void run() {
+                            if (isChecked) {
+
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.none));
+                            } else {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
+                            }
+                            if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALTIME)) {
+                                ((Activity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        FragmentA.adapter.notifyDataSetChanged();
+                                        FragmentD.adapter.notifyDataSetChanged();
+                                    }
+                                });
+                            }
+                        }
+                    };
+                    thread.start();
+
                 }
             });
 
@@ -513,10 +665,18 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             textView = (TextView) rowView.findViewById(R.id.title);
             textView.setText(items.get(position).title);
 
-            Spinner spinner = (Spinner) rowView.findViewById(R.id.spinner);
+
+            final Spinner spinner = (Spinner) rowView.findViewById(R.id.spinner);
             ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, items.get(position).uiOptions);
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerAdapter);
+
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    spinner.performClick();
+                }
+            });
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 
@@ -582,6 +742,13 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             final Spinner spinnerWithOther = (Spinner) rowView.findViewById(R.id.spinner);
             SpinnerAdapter spinnerWithOtherAdapter = new SpinnerAdapter(context, spinnerOptions, extraOptions);
             spinnerWithOther.setAdapter(spinnerWithOtherAdapter);
+
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    spinnerWithOther.performClick();
+                }
+            });
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 

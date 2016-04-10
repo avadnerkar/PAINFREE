@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">PAINFREE</string>
-    <string name="patient_new">New patient</string>
+    <string name="patient_new">New</string>
     <string name="patient_list">Select patient</string>
     <string name="action_update_patient">Edit current patient</string>
     <string name="action_export_csv">Export to spreadsheet</string>
@@ -178,6 +178,8 @@
     <string name="other_pain_relief">Other pain relief</string>
     <string name="worsening_of_mental_status">Worsening of mental status while in ED:</string>
     <string name="mandatory_fields_title">The following mandatory fields must be filled</string>
+    <string name="title_activity_launch">LaunchActivity</string>
+    <string name="start">Start</string>
 
 
 </resources>

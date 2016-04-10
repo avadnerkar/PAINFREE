@@ -1,6 +1,7 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ public class FragmentC extends Fragment {
 
     public static FragmentListAdapter adapter;
     private static ListView listView;
+    private static ArrayList<FragmentItem> items;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,11 +30,12 @@ public class FragmentC extends Fragment {
 
         listView = (ListView) v.findViewById(R.id.list_c);
 
-        ArrayList<FragmentItem> items = new ArrayList<>();
+        items = new ArrayList<>();
 
         items.add(new FragmentItem(null, FragmentItem.CellType.FRACTURESITE, null, null, null));
-        items.add(new FragmentItem(getString(R.string.mechanism_of_injury), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{getString(R.string.none), getString(R.string.mechanism1), getString(R.string.mechanism2), getString(R.string.mechanism3), getString(R.string.mechanism4), getString(R.string.mechanism5), getString(R.string.mechanism6), getString(R.string.mechanism7), getString(R.string.mechanism8), getString(R.string.mechanism9), getString(R.string.mechanism10), getString(R.string.mechanism11), getString(R.string.mechanism12), getString(R.string.mechanism13)}, new String[]{getString(R.string.none), getString(R.string.mechanismCode1), getString(R.string.mechanismCode2), getString(R.string.mechanismCode3), getString(R.string.mechanismCode4), getString(R.string.mechanismCode5), getString(R.string.mechanismCode6), getString(R.string.mechanismCode7), getString(R.string.mechanismCode8), getString(R.string.mechanismCode9), getString(R.string.mechanismCode10), getString(R.string.mechanismCode11), getString(R.string.mechanismCode12), getString(R.string.mechanismCode13)}, DBAdapter.KEY_INJURY_MECHANISM));
-        items.get(items.size()-1).extraOptions = new String[]{"", getString(R.string.mechanismCode1), getString(R.string.mechanismCode2), getString(R.string.mechanismCode3), getString(R.string.mechanismCode4), getString(R.string.mechanismCode5), getString(R.string.mechanismCode6), getString(R.string.mechanismCode7), getString(R.string.mechanismCode8), getString(R.string.mechanismCode9), getString(R.string.mechanismCode10), getString(R.string.mechanismCode11), getString(R.string.mechanismCode12), getString(R.string.mechanismCode13)};
+        items.add(new FragmentItem(getString(R.string.mechanism_of_injury), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{"", getString(R.string.none), getString(R.string.mechanism1), getString(R.string.mechanism2), getString(R.string.mechanism3), getString(R.string.mechanism4), getString(R.string.mechanism5), getString(R.string.mechanism6), getString(R.string.mechanism7), getString(R.string.mechanism8), getString(R.string.mechanism9), getString(R.string.mechanism10), getString(R.string.mechanism11), getString(R.string.mechanism12), getString(R.string.mechanism13)}, new String[]{"", getString(R.string.none), getString(R.string.mechanismCode1), getString(R.string.mechanismCode2), getString(R.string.mechanismCode3), getString(R.string.mechanismCode4), getString(R.string.mechanismCode5), getString(R.string.mechanismCode6), getString(R.string.mechanismCode7), getString(R.string.mechanismCode8), getString(R.string.mechanismCode9), getString(R.string.mechanismCode10), getString(R.string.mechanismCode11), getString(R.string.mechanismCode12), getString(R.string.mechanismCode13)}, DBAdapter.KEY_INJURY_MECHANISM));
+        items.get(items.size()-1).extraOptions = new String[]{"", "", getString(R.string.mechanismCode1), getString(R.string.mechanismCode2), getString(R.string.mechanismCode3), getString(R.string.mechanismCode4), getString(R.string.mechanismCode5), getString(R.string.mechanismCode6), getString(R.string.mechanismCode7), getString(R.string.mechanismCode8), getString(R.string.mechanismCode9), getString(R.string.mechanismCode10), getString(R.string.mechanismCode11), getString(R.string.mechanismCode12), getString(R.string.mechanismCode13)};
+        items.get(items.size()-1).isMandatory = true;
 
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
@@ -59,5 +62,36 @@ public class FragmentC extends Fragment {
         } else {
             listView.setVisibility(View.VISIBLE);
         }
+    }
+
+
+    public static ArrayList<String> unfilledMandatoryFields() {
+
+        ArrayList<String> unfilledTitles = new ArrayList<>();
+
+        if (MainActivity.currentPatientId != -1) {
+            for (FragmentItem item : items) {
+                if (item.isMandatory) {
+                    Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, item.dbKey);
+                    boolean isFilled = false;
+                    if (cursor.moveToFirst()) {
+                        String value = cursor.getString(0);
+                        if (value != null && !value.equals("")) {
+                            isFilled = true;
+                        }
+                    }
+
+                    if (!isFilled) {
+                        String title = item.title;
+                        title = title.replace(":", "");
+                        unfilledTitles.add(title);
+                    }
+
+                    cursor.close();
+                }
+            }
+        }
+
+        return unfilledTitles;
     }
 }

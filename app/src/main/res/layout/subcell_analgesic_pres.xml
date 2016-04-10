@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:src="@drawable/ic_action_cancel"
                 app:elevation="4dp"
-                app:backgroundTint="@color/DarkRed"
+                app:backgroundTint="@color/MidnightBlue"
                 app:fabSize="mini"
                 android:layout_margin="@dimen/button_layout_margin"/>
 

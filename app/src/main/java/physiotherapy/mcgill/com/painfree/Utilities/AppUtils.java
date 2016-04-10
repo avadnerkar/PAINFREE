@@ -115,12 +115,24 @@ public class AppUtils {
         textView.setText(title);
     }
 
-    public static AlertDialog showDefaultAlertDialog(String title, String message, Context context){
+    public static void showDefaultAlertDialog(String title, String message, Context context, final DefaultAlertHandler handler){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message).setTitle(title);
-        return builder.create();
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                handler.onClick();
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+
     }
 
+    public interface DefaultAlertHandler{
+        void onClick();
+    }
 
 
 

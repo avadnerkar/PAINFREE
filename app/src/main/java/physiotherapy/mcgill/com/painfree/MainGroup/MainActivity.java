@@ -1,6 +1,7 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.opencsv.CSVWriter;
@@ -50,15 +53,17 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    ViewPager mViewPager;
+    public static ViewPager mViewPager;
     public static DBAdapter myDb;
     public static long currentPatientId;
     public static Context context;
     public static Toolbar actionBar;
+    public static TextView actionBarTitle;
     public static final String PREFS_NAME = "PAINFREE_PREFS";
     public static String deviceID;
     public static String KEY_DEVICE_ID = "device_ID";
-    public TabLayout tabLayout;
+    public static TabLayout tabLayout;
+    private static boolean programmaticallySelectTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
 
+        programmaticallySelectTab = false;
+
         // Set up the action bar.
         actionBar = (Toolbar) findViewById(R.id.toolbar);
+        actionBarTitle = (TextView) actionBar.findViewById(R.id.toolbar_title);
         setSupportActionBar(actionBar);
 
         // Create the adapter that will return a fragment for each of the three
@@ -85,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setOffscreenPageLimit(7);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setVisibility(View.GONE);
 
         // For each of the sections in the app, add a tab to the action bar.
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -97,22 +106,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Log.d("Debug", "Page scrolled");
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-                Log.d("Debug", "Page selected");
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                Log.d("Debug", "Page scroll state changed");
-            }
-        });
 
         assert tabLayout != null;
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -123,11 +117,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
-                if (checkMandatoryFields(tab.getPosition())){
-
+                if (!programmaticallySelectTab) {
+                    checkMandatoryFields(tab.getPosition());
                 }
-
             }
 
             @Override
@@ -237,8 +229,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void clearPatientSelection(){
-        actionBar.setTitle(R.string.app_name);
+        actionBarTitle.setText("");
         currentPatientId = -1;
+        tabLayout.setVisibility(View.GONE);
         FragmentA.setFragmentVisibility();
         FragmentB.setFragmentVisibility();
         FragmentC.setFragmentVisibility();
@@ -316,6 +309,11 @@ public class MainActivity extends AppCompatActivity {
             case 0:
                 unfilledMandatoryFields = FragmentA.unfilledMandatoryFields();
                 break;
+            case 1:
+                unfilledMandatoryFields = FragmentB.unfilledMandatoryFields();
+                break;
+            case 2:
+                unfilledMandatoryFields = FragmentC.unfilledMandatoryFields();
             default:
                 break;
         }
@@ -326,7 +324,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (!message.equals("")){
-            AppUtils.showDefaultAlertDialog(getString(R.string.mandatory_fields_title), message, context);
+
+            AppUtils.showDefaultAlertDialog(getString(R.string.mandatory_fields_title), message, context, new AppUtils.DefaultAlertHandler() {
+                @Override
+                public void onClick() {
+                    programmaticallySelectTab = true;
+                    mViewPager.setCurrentItem(tabPosition);
+                    programmaticallySelectTab = false;
+                }
+            });
             return true;
         } else {
             return false;
@@ -339,8 +345,10 @@ public class MainActivity extends AppCompatActivity {
             clearPatientSelection();
 
             long id = MainActivity.myDb.insertNewRow();
-            actionBar.setTitle(deviceID + "-" + id);
+            actionBarTitle.setText(deviceID + "-" + id);
             MainActivity.currentPatientId = id;
+            tabLayout.setVisibility(View.VISIBLE);
+            mViewPager.setCurrentItem(0);
             invalidateOptionsMenu();
             FragmentA.setFragmentVisibility();
             FragmentB.setFragmentVisibility();

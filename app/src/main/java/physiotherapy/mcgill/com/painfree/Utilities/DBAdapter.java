@@ -54,8 +54,8 @@ public class DBAdapter {
 
     public static final String KEY_INJURY_MECHANISM = "[Injury mechanism]";
 
-    public static final String KEY_TRIAGE_DATE = "[Triage date]";
-    public static final String KEY_TRIAGE_TIME = "[Triage time]";
+    //public static final String KEY_TRIAGE_DATE = "[Triage date]";
+    //public static final String KEY_TRIAGE_TIME = "[Triage time]";
     public static final String KEY_CTAS = "[CTAS priority]";
     public static final String KEY_GLASGOW = "[Glasgow scale]";
     public static final String KEY_PAINSCALE = "[Pain scale score]";
@@ -234,7 +234,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 16;
+    public static final int DATABASE_VERSION = 17;
 
 
     //Table Create Statements
@@ -287,8 +287,8 @@ public class DBAdapter {
 
         dataMap.add(KEY_INJURY_MECHANISM);
 
-        dataMap.add(KEY_TRIAGE_DATE);
-        dataMap.add(KEY_TRIAGE_TIME);
+        //dataMap.add(KEY_TRIAGE_DATE);
+        //dataMap.add(KEY_TRIAGE_TIME);
         dataMap.add(KEY_CTAS);
         dataMap.add(KEY_GLASGOW);
         dataMap.add(KEY_PAINSCALE);

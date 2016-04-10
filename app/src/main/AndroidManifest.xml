@@ -11,31 +11,36 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".MainGroup.MainActivity"
+        <activity
+            android:name=".MainGroup.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name=".MainGroup.NewPatientActivity"
+            android:parentActivityName=".MainGroup.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="physiotherapy.mcgill.com.painfree.MainGroup.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MainGroup.PatientListActivity"
+            android:label="@string/title_activity_patient_list"
+            android:parentActivityName=".MainGroup.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="physiotherapy.mcgill.com.painfree.MainGroup.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MainGroup.LaunchActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".MainGroup.NewPatientActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainGroup.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="physiotherapy.mcgill.com.painfree.MainGroup.MainActivity" />
-
-        </activity>
-        <activity
-            android:name=".MainGroup.PatientListActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_patient_list"
-            android:parentActivityName=".MainGroup.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="physiotherapy.mcgill.com.painfree.MainGroup.MainActivity" />
         </activity>
     </application>
 

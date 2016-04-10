@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/patient_new" android:title="@string/patient_new" android:icon="@drawable/ic_action_add"
-        app:showAsAction="always" />
-    <item android:id="@+id/patient_list" android:title="@string/patient_list" android:icon="@drawable/ic_action_database"
+    <item android:id="@+id/patient_new" android:title="@string/patient_new" app:showAsAction="always" />
+    <item android:id="@+id/patient_list" android:title="@string/patient_list" android:icon="@drawable/ic_action_database_white"
         app:showAsAction="ifRoom" />
     <item android:id="@+id/action_export_csv" android:title="@string/action_export_csv"
         android:icon="@drawable/ic_action_export" app:showAsAction="ifRoom" />

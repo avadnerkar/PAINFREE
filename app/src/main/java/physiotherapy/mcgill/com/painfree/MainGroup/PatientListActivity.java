@@ -172,7 +172,9 @@ public class PatientListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MainActivity.currentPatientId = IDarray[i];
-                MainActivity.actionBar.setTitle(items.get(i));
+                MainActivity.tabLayout.setVisibility(View.VISIBLE);
+                MainActivity.mViewPager.setCurrentItem(0);
+                MainActivity.actionBarTitle.setText(items.get(i));
                 finish();
             }
         });

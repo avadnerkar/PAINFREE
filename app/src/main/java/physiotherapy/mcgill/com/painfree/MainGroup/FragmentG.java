@@ -30,7 +30,9 @@ public class FragmentG extends Fragment {
 
         ArrayList<FragmentItem> items = new ArrayList<>();
         items.add(new FragmentItem(getString(R.string.discharge_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_DISCHARGE_DATE));
+        items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.add(new FragmentItem(getString(R.string.discharge_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_DISCHARGE_TIME));
+        items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.add(new FragmentItem(getString(R.string.discharge_destination), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{"", getString(R.string.return_home), getString(R.string.admitting), getString(R.string.transfer), getString(R.string.lwbs), getString(R.string.death), getString(R.string.not_available)}, null, DBAdapter.KEY_DISCHARGE_DESTINATION));
         items.add(new FragmentItem(getString(R.string.discharge_tool_given), FragmentItem.CellType.RADIO, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_DISCHARGE_TOOL));
 

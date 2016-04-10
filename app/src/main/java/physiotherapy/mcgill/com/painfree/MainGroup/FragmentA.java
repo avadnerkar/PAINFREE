@@ -40,9 +40,11 @@ public class FragmentA extends Fragment {
         items.add(new FragmentItem(getString(R.string.date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_DATE));
         items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.subject_id), FragmentItem.CellType.NUMERIC, null, null, DBAdapter.KEY_SUBJECTID));
-        items.add(new FragmentItem(getString(R.string.date_of_arrival), FragmentItem.CellType.DATEPICKER, null, null, DBAdapter.KEY_ARRIVALDATE));
+        items.add(new FragmentItem(getString(R.string.date_of_arrival), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_ARRIVALDATE));
+        items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.time_of_arrival), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_ARRIVALTIME));
+        items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.get(items.size()-1).isMandatory = true;
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
@@ -74,22 +76,29 @@ public class FragmentA extends Fragment {
 
         ArrayList<String> unfilledTitles = new ArrayList<>();
 
-        for (FragmentItem item : items){
-            if (item.isMandatory){
-                Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, item.dbKey);
-                boolean isFilled = false;
-                if (cursor.moveToFirst()){
-                    String value = cursor.getString(0);
-                    if (value != null && !value.equals("")){
-                        isFilled = true;
+        if (MainActivity.currentPatientId != -1){
+            for (FragmentItem item : items){
+                if (item.isMandatory){
+                    Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, item.dbKey);
+                    boolean isFilled = false;
+                    if (cursor.moveToFirst()){
+                        String value = cursor.getString(0);
+                        if (value != null && !value.equals("")){
+                            isFilled = true;
+                        }
                     }
-                }
 
-                if (isFilled){
-                    unfilledTitles.add(item.title);
+                    if (!isFilled){
+                        String title = item.title;
+                        title = title.replace(":", "");
+                        unfilledTitles.add(title);
+                    }
+
+                    cursor.close();
                 }
             }
         }
+
 
         return unfilledTitles;
 
