@@ -181,6 +181,8 @@
     <string name="title_activity_launch">LaunchActivity</string>
     <string name="start">Start</string>
     <string name="medical_record_number">Medical record number:</string>
+    <string name="specify">Please specify</string>
+    <string name="past_diagnosis_of_altered_cognition">Past diagnosis of altered cognition:</string>
 
 
 </resources>

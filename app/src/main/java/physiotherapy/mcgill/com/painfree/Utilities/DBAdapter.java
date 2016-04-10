@@ -61,7 +61,8 @@ public class DBAdapter {
     public static final String KEY_GLASGOW = "[Glasgow scale]";
     public static final String KEY_PAINSCALE = "[Pain scale score]";
     public static final String KEY_COLLECTIVEORDER = "[Collective order]";
-    public static final String KEY_HISTORYOFDEMENTIA = "[History of dementia]";
+    public static final String KEY_HISTORYOFALTEREDCOGNITION = "[Past diagnosis of altered cognition]";
+    public static final String KEY_HISTORYOFALTEREDCOGNITIONSPECIFY = "[Specify altered cognition]";
     public static final String KEY_ALTEREDCOGNITION = "[Altered cognition]";
 
     public static final String KEY_PHYSICIAN_EXAMINATION_DATE = "[Physician examination date]";
@@ -295,7 +296,8 @@ public class DBAdapter {
         dataMap.add(KEY_GLASGOW);
         dataMap.add(KEY_PAINSCALE);
         dataMap.add(KEY_COLLECTIVEORDER);
-        dataMap.add(KEY_HISTORYOFDEMENTIA);
+        dataMap.add(KEY_HISTORYOFALTEREDCOGNITION);
+        dataMap.add(KEY_HISTORYOFALTEREDCOGNITIONSPECIFY);
         dataMap.add(KEY_ALTEREDCOGNITION);
 
         dataMap.add(KEY_PHYSICIAN_EXAMINATION_DATE);

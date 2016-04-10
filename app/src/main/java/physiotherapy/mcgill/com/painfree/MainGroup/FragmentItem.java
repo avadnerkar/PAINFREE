@@ -8,7 +8,7 @@ public class FragmentItem {
     public String dbKey;
     public String title;
     public enum CellType {
-        RADIO, NUMERIC, DATEPICKER, TIMEPICKER, FRACTURESITE, TEXT, SPINNER, SPINNER_WITH_OTHER, CHECKBOX, PAIN_ASSESSMENTS, ANALGESIC_PRESCRIPTION, ANALGESIC_ADMINISTRATION
+        RADIO, RADIO_WITH_SPECIFY, NUMERIC, DATEPICKER, TIMEPICKER, FRACTURESITE, TEXT, SPINNER, SPINNER_WITH_OTHER, CHECKBOX, PAIN_ASSESSMENTS, ANALGESIC_PRESCRIPTION, ANALGESIC_ADMINISTRATION
     }
     public CellType cellType;
     public enum Group {
@@ -20,6 +20,7 @@ public class FragmentItem {
     public String[] extraOptions;
     public boolean isMandatory;
     public boolean hasNone;
+    public boolean hasOther;
 
 
     public FragmentItem(String title, CellType cellType, String[] uiOptions, String[] databaseOptions, String dbKey){
@@ -30,6 +31,7 @@ public class FragmentItem {
         this.dbKey = dbKey;
         this.isMandatory = false;
         this.hasNone = false;
+        this.hasOther = false;
     }
 
 }

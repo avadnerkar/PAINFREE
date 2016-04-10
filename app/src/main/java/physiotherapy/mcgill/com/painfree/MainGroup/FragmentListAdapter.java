@@ -184,7 +184,114 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             cursor.close();
 
-        } else if (i1 == FragmentItem.CellType.DATEPICKER) {
+        } else if (i1 == FragmentItem.CellType.RADIO_WITH_SPECIFY) {
+            rowView = inflater.inflate(R.layout.cell_fragment_radio_with_specify, parent, false);
+            textView = (TextView) rowView.findViewById(R.id.title);
+            textView.setText(items.get(position).title);
+
+            EditText editText = (EditText) rowView.findViewById(R.id.specify);
+
+            final RadioGroup rg = (RadioGroup) rowView.findViewById(R.id.rg);
+
+            if (items.get(position).databaseOptions == null) {
+                items.get(position).databaseOptions = items.get(position).uiOptions;
+            }
+
+            if (items.get(position).uiOptions.length > 2 && items.get(position).uiOptions.length < 7) {
+                rg.setOrientation(RadioGroup.VERTICAL);
+                rg.setOrientation(RadioGroup.VERTICAL);
+            } else {
+                rg.setOrientation(RadioGroup.HORIZONTAL);
+            }
+
+            for (int i = 0; i < items.get(position).uiOptions.length; i++) {
+                RadioButton rb = new RadioButton(context);
+                rb.setText(items.get(position).uiOptions[i]);
+                rg.addView(rb);
+
+                final int index = i;
+                rb.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(final View view) {
+
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, items.get(position).databaseOptions[index]);
+                            }
+                        };
+                        thread.start();
+
+                    }
+                });
+            }
+
+            cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
+
+            if (cursor.moveToFirst()) {
+                String radioValue = cursor.getString(0);
+                if (radioValue != null && !radioValue.equals("")) {
+                    for (int i = 0; i < items.get(position).databaseOptions.length; i++) {
+                        String rbString = items.get(position).databaseOptions[i];
+                        if (rbString.equals(radioValue)) {
+                            ((RadioButton) rg.getChildAt(i)).setChecked(true);
+                        }
+                    }
+                } else {
+                    rg.clearCheck();
+                }
+
+            } else {
+                rg.clearCheck();
+            }
+
+            cursor.close();
+
+
+            Cursor cursor2 = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).extraOptions[0]);
+
+            if (cursor2.moveToFirst()) {
+                String text = cursor2.getString(0);
+                if (text != null) {
+                    editText.setText(text);
+                } else {
+                    editText.setText("");
+                }
+
+            } else {
+                editText.setText("");
+            }
+
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
+                    Thread thread = new Thread() {
+                        @Override
+                        public void run() {
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).extraOptions[0], charSequence.toString());
+                        }
+                    };
+                    thread.start();
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+            cursor2.close();
+
+        }
+
+        else if (i1 == FragmentItem.CellType.DATEPICKER) {
             rowView = inflater.inflate(R.layout.cell_fragment_datepicker, parent, false);
             textView = (TextView) rowView.findViewById(R.id.title);
             textView.setText(items.get(position).title);
@@ -390,7 +497,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             noneBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final boolean isChecked = ((CheckBox)v).isChecked();
+                    final boolean isChecked = ((CheckBox) v).isChecked();
                     if (isChecked) {
                         button.setText(context.getString(R.string.select_date));
                     }
@@ -868,6 +975,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             textView = (TextView) rowView.findViewById(R.id.title);
             textView.setText(items.get(position).title);
 
+            final EditText editText = (EditText) rowView.findViewById(R.id.other);
+            editText.setVisibility(View.GONE);
+
             final LinearLayout cg = (LinearLayout) rowView.findViewById(R.id.checkGroup);
 
             if (items.get(position).uiOptions.length > 2) {
@@ -890,6 +1000,14 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             }
             final CheckBox cbNoneFinal = cbNone;
 
+
+            CheckBox cbOther = null;
+            if (items.get(position).hasOther){
+                cbOther = new CheckBox(context);
+                cbOther.setText(context.getString(R.string.other));
+            }
+            final CheckBox cbOtherFinal = cbOther;
+
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 CheckBox cb = new CheckBox(context);
                 cb.setText(items.get(position).uiOptions[i]);
@@ -902,6 +1020,12 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         if (((CheckBox) v).isChecked()) {
                             if (cbNoneFinal != null) {
                                 cbNoneFinal.setChecked(false);
+                            }
+
+                            if (cbOtherFinal != null) {
+                                cbOtherFinal.setChecked(false);
+                                editText.setVisibility(View.GONE);
+
                             }
                         }
 
@@ -936,14 +1060,17 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         Thread thread = new Thread() {
                             @Override
                             public void run() {
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, cbNoneFinal.getText().toString());
+
                                 if (cbNoneFinal.isChecked()) {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, cbNoneFinal.getText().toString());
                                     ((Activity) context).runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
                                             notifyDataSetChanged();
                                         }
                                     });
+                                } else {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
                                 }
                             }
                         };
@@ -953,24 +1080,82 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             }
 
+            if (cbOtherFinal != null){
+                cg.addView(cbOtherFinal);
+
+                cbOtherFinal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+
+                                if (cbOtherFinal.isChecked()) {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.other));
+                                    ((Activity)context).runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            notifyDataSetChanged();
+                                        }
+                                    });
+                                } else {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
+                                    ((Activity)context).runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            editText.setVisibility(View.GONE);
+                                        }
+                                    });
+                                }
+
+                            }
+                        };
+                        thread.start();
+                    }
+                });
+            }
+
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 
             if (cursor.moveToFirst()) {
                 String answer = cursor.getString(0);
 
                 if (answer != null) {
-                    for (int i = 0; i < cg.getChildCount()-1; i++) {
+                    for (int i = 0; i < checkboxDataArray.length; i++) {
                         if (answer.contains(checkboxDataArray[i])) {
                             ((CheckBox) cg.getChildAt(i)).setChecked(true);
                         } else {
                             ((CheckBox) cg.getChildAt(i)).setChecked(false);
                         }
                     }
-                    if (items.get(position).hasNone && answer.equals(items.get(position).extraOptions[0])){
-                        ((CheckBox) cg.getChildAt(cg.getChildCount()-1)).setChecked(true);
-                    } else {
-                        ((CheckBox) cg.getChildAt(cg.getChildCount()-1)).setChecked(false);
+                    if (items.get(position).hasNone){
+                        if (answer.equals(items.get(position).extraOptions[0])){
+                            cbNoneFinal.setChecked(true);
+                        } else {
+                            cbNoneFinal.setChecked(false);
+                        }
                     }
+
+                    if (items.get(position).hasOther){
+
+                        if (answer.startsWith(context.getString(R.string.other))){
+                            cbOtherFinal.setChecked(true);
+                            editText.setVisibility(View.VISIBLE);
+
+                            editText.setTag("tag");
+                            if (answer.length() > context.getString(R.string.other).length()) {
+                                editText.setText(answer.substring(context.getString(R.string.other).length() + 3));
+                            } else {
+                                editText.setText("");
+                            }
+                            editText.setTag(null);
+                        } else {
+                            cbOtherFinal.setChecked(false);
+                            editText.setVisibility(View.GONE);
+                        }
+
+                    }
+
                 } else {
                     for (int i = 0; i < cg.getChildCount(); i++) {
                         CheckBox box = (CheckBox) cg.getChildAt(i);
@@ -984,6 +1169,31 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     box.setChecked(false);
                 }
             }
+
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
+                    if (editText.getTag() == null) {
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.other) + " - " + charSequence.toString());
+                            }
+                        };
+                        thread.start();
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
 
             cursor.close();
 
@@ -1008,7 +1218,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFractureSiteVisibility(cb, cbLeft, cbRight, ((CheckBox)v).isChecked(), view);
+                setFractureSiteVisibility(cb, cbLeft, cbRight, ((CheckBox) v).isChecked(), view);
                 writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
             }
         });

@@ -6,12 +6,11 @@
     android:padding="@dimen/card_border"
     android:clipToPadding="false">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/container"
         android:background="@drawable/card"
-        android:orientation="vertical"
         android:elevation="2dp">
 
 
@@ -22,20 +21,25 @@
             android:layout_alignParentLeft="true"
             style="@style/textFormStyle"/>
 
-        <LinearLayout
-            android:id="@+id/checkGroup"
-            android:layout_width="wrap_content"
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/rg"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal"
+            android:layout_below="@id/title"
+            android:layout_margin="@dimen/text_padding">
+
+        </RadioGroup>
 
         <EditText
-            android:id="@+id/other"
-            android:hint="@string/other"
-            style="@style/editTextFormStyle"/>
+            android:id="@+id/specify"
+            android:hint="@string/specify"
+            style="@style/editTextFormStyle"
+            android:layout_below="@id/rg"/>
 
 
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>
