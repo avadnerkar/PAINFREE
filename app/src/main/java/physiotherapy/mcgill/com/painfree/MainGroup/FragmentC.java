@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
@@ -70,6 +71,32 @@ public class FragmentC extends Fragment {
         ArrayList<String> unfilledTitles = new ArrayList<>();
 
         if (MainActivity.currentPatientId != -1) {
+
+            String[] keys = new String[]{
+                    DBAdapter.KEY_FRACTURESITE_FOOT,
+                    DBAdapter.KEY_FRACTURESITE_ANKLE,
+                    DBAdapter.KEY_FRACTURESITE_TIBIA,
+                    DBAdapter.KEY_FRACTURESITE_FEMUR,
+                    DBAdapter.KEY_FRACTURESITE_HIP,
+                    DBAdapter.KEY_FRACTURESITE_RIB,
+                    DBAdapter.KEY_FRACTURESITE_HUMERUS,
+                    DBAdapter.KEY_FRACTURESITE_FOREARM,
+                    DBAdapter.KEY_FRACTURESITE_WRIST};
+            Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
+
+            if (cursor1.moveToFirst()){
+                for (int i=0; i<cursor1.getColumnCount(); i++){
+                    if (cursor1.getString(i) != null && cursor1.getString(i).equals("Incomplete")){
+                        String charToDel = "[]";
+                        String pat = "[" + Pattern.quote(charToDel) + "]";
+                        String strippedkey = keys[i].replaceAll(pat,"");
+                        unfilledTitles.add(strippedkey);
+                    }
+                }
+            }
+
+            cursor1.close();
+
             for (FragmentItem item : items) {
                 if (item.isMandatory) {
                     Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, item.dbKey);
@@ -90,6 +117,8 @@ public class FragmentC extends Fragment {
                     cursor.close();
                 }
             }
+
+
         }
 
         return unfilledTitles;
