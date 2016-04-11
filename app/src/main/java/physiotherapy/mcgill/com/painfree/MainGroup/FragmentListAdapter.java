@@ -689,34 +689,43 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             CheckBox cbFootLeft = (CheckBox) rowView.findViewById(R.id.leftFoot);
             CheckBox cbFootRight = (CheckBox) rowView.findViewById(R.id.rightFoot);
+            CheckBox cbFootUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedFoot);
             CheckBox cbAnkleLeft = (CheckBox) rowView.findViewById(R.id.leftAnkle);
             CheckBox cbAnkleRight = (CheckBox) rowView.findViewById(R.id.rightAnkle);
+            CheckBox cbAnkleUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedAnkle);
             CheckBox cbTibiaLeft = (CheckBox) rowView.findViewById(R.id.leftTibiaFibula);
             CheckBox cbTibiaRight = (CheckBox) rowView.findViewById(R.id.rightTibiaFibula);
+            CheckBox cbTibiaUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedTibiaFibula);
             CheckBox cbFemurLeft = (CheckBox) rowView.findViewById(R.id.leftFemur);
             CheckBox cbFemurRight = (CheckBox) rowView.findViewById(R.id.rightFemur);
+            CheckBox cbFemurUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedFemur);
             CheckBox cbHipLeft = (CheckBox) rowView.findViewById(R.id.leftHip);
             CheckBox cbHipRight = (CheckBox) rowView.findViewById(R.id.rightHip);
+            CheckBox cbHipUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedHip);
             CheckBox cbRibLeft = (CheckBox) rowView.findViewById(R.id.leftRib);
             CheckBox cbRibRight = (CheckBox) rowView.findViewById(R.id.rightRib);
+            CheckBox cbRibUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedRib);
             CheckBox cbHumerusLeft = (CheckBox) rowView.findViewById(R.id.leftHumerus);
             CheckBox cbHumerusRight = (CheckBox) rowView.findViewById(R.id.rightHumerus);
+            CheckBox cbHumerusUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedHumerus);
             CheckBox cbForearmLeft = (CheckBox) rowView.findViewById(R.id.leftForearm);
             CheckBox cbForearmRight = (CheckBox) rowView.findViewById(R.id.rightForearm);
+            CheckBox cbForearmUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedForearm);
             CheckBox cbWristLeft = (CheckBox) rowView.findViewById(R.id.leftWrist);
             CheckBox cbWristRight = (CheckBox) rowView.findViewById(R.id.rightWrist);
+            CheckBox cbWristUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedWrist);
 
-            setupFractureSiteClickListener(cbFoot, cbFootLeft, cbFootRight, DBAdapter.KEY_FRACTURESITE_FOOT, rowView);
-            setupFractureSiteClickListener(cbAnkle, cbAnkleLeft, cbAnkleRight, DBAdapter.KEY_FRACTURESITE_ANKLE, rowView);
-            setupFractureSiteClickListener(cbTibia, cbTibiaLeft, cbTibiaRight, DBAdapter.KEY_FRACTURESITE_TIBIA, rowView);
-            setupFractureSiteClickListener(cbFemur, cbFemurLeft, cbFemurRight, DBAdapter.KEY_FRACTURESITE_FEMUR, rowView);
-            setupFractureSiteClickListener(cbHip, cbHipLeft, cbHipRight, DBAdapter.KEY_FRACTURESITE_HIP, rowView);
-            setupFractureSiteClickListener(cbPelvis, null, null, DBAdapter.KEY_FRACTURESITE_PELVIS, rowView);
-            setupFractureSiteClickListener(cbVertebra, null, null, DBAdapter.KEY_FRACTURESITE_VERTEBRA, rowView);
-            setupFractureSiteClickListener(cbRib, cbRibLeft, cbRibRight, DBAdapter.KEY_FRACTURESITE_RIB, rowView);
-            setupFractureSiteClickListener(cbHumerus, cbHumerusLeft, cbHumerusRight, DBAdapter.KEY_FRACTURESITE_HUMERUS, rowView);
-            setupFractureSiteClickListener(cbForearm, cbForearmLeft, cbForearmRight, DBAdapter.KEY_FRACTURESITE_FOREARM, rowView);
-            setupFractureSiteClickListener(cbWrist, cbWristLeft, cbWristRight, DBAdapter.KEY_FRACTURESITE_WRIST, rowView);
+            setupFractureSiteClickListener(cbFoot, cbFootLeft, cbFootRight, cbFootUnspecified, DBAdapter.KEY_FRACTURESITE_FOOT, rowView);
+            setupFractureSiteClickListener(cbAnkle, cbAnkleLeft, cbAnkleRight, cbAnkleUnspecified, DBAdapter.KEY_FRACTURESITE_ANKLE, rowView);
+            setupFractureSiteClickListener(cbTibia, cbTibiaLeft, cbTibiaRight, cbTibiaUnspecified, DBAdapter.KEY_FRACTURESITE_TIBIA, rowView);
+            setupFractureSiteClickListener(cbFemur, cbFemurLeft, cbFemurRight, cbFemurUnspecified, DBAdapter.KEY_FRACTURESITE_FEMUR, rowView);
+            setupFractureSiteClickListener(cbHip, cbHipLeft, cbHipRight, cbHipUnspecified, DBAdapter.KEY_FRACTURESITE_HIP, rowView);
+            setupFractureSiteClickListener(cbPelvis, null, null, null, DBAdapter.KEY_FRACTURESITE_PELVIS, rowView);
+            setupFractureSiteClickListener(cbVertebra, null, null, null, DBAdapter.KEY_FRACTURESITE_VERTEBRA, rowView);
+            setupFractureSiteClickListener(cbRib, cbRibLeft, cbRibRight, cbRibUnspecified, DBAdapter.KEY_FRACTURESITE_RIB, rowView);
+            setupFractureSiteClickListener(cbHumerus, cbHumerusLeft, cbHumerusRight, cbHumerusUnspecified, DBAdapter.KEY_FRACTURESITE_HUMERUS, rowView);
+            setupFractureSiteClickListener(cbForearm, cbForearmLeft, cbForearmRight, cbForearmUnspecified, DBAdapter.KEY_FRACTURESITE_FOREARM, rowView);
+            setupFractureSiteClickListener(cbWrist, cbWristLeft, cbWristRight, cbWristUnspecified, DBAdapter.KEY_FRACTURESITE_WRIST, rowView);
 
 
         } else if (i1 == FragmentItem.CellType.TEXT) {
@@ -1211,15 +1220,15 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
     }
 
 
-    private void setupFractureSiteClickListener(final CheckBox cb, final CheckBox cbLeft, final CheckBox cbRight, final String dbKey, final View view){
+    private void setupFractureSiteClickListener(final CheckBox cb, final CheckBox cbLeft, final CheckBox cbRight, final CheckBox cbUnspecified, final String dbKey, final View view){
 
-        loadFractureSiteCheckbox(cb, cbLeft, cbRight, dbKey, view);
+        loadFractureSiteCheckbox(cb, cbLeft, cbRight, cbUnspecified, dbKey, view);
 
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFractureSiteVisibility(cb, cbLeft, cbRight, ((CheckBox) v).isChecked(), view);
-                writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
+                setFractureSiteVisibility(cb, cbLeft, cbRight, cbUnspecified, ((CheckBox) v).isChecked(), view);
+                writeFractureSiteVisibility(cb, cbLeft, cbRight, cbUnspecified, dbKey);
             }
         });
 
@@ -1228,7 +1237,8 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cbLeft.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
+                    cbUnspecified.setChecked(false);
+                    writeFractureSiteVisibility(cb, cbLeft, cbRight, cbUnspecified, dbKey);
                 }
             });
         }
@@ -1238,13 +1248,26 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cbRight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    writeFractureSiteVisibility(cb, cbLeft, cbRight, dbKey);
+                    cbUnspecified.setChecked(false);
+                    writeFractureSiteVisibility(cb, cbLeft, cbRight, cbUnspecified, dbKey);
+                }
+            });
+        }
+
+        if (cbUnspecified != null){
+
+            cbUnspecified.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cbLeft.setChecked(false);
+                    cbRight.setChecked(false);
+                    writeFractureSiteVisibility(cb, cbLeft, cbRight, cbUnspecified, dbKey);
                 }
             });
         }
     }
 
-    private void setFractureSiteVisibility(CheckBox cb, CheckBox cbLeft, CheckBox cbRight, boolean isChecked, View view){
+    private void setFractureSiteVisibility(CheckBox cb, CheckBox cbLeft, CheckBox cbRight, CheckBox cbUnspecified, boolean isChecked, View view){
         if (cbLeft != null) {
 
             String tag = cb.getTag().toString();
@@ -1257,14 +1280,19 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 layout.setVisibility(View.GONE);
                 cbLeft.setChecked(false);
                 cbRight.setChecked(false);
+                cbUnspecified.setChecked(false);
             }
         }
     }
 
-    private void writeFractureSiteVisibility(CheckBox cb, CheckBox cbLeft, CheckBox cbRight, final String dbKey){
+    private void writeFractureSiteVisibility(CheckBox cb, CheckBox cbLeft, CheckBox cbRight, CheckBox cbUnspecified, final String dbKey){
         String value = "";
         if (cb.isChecked()){
             if (cbLeft != null){
+
+                if (cbUnspecified.isChecked()){
+                    value = context.getString(R.string.unspecified);
+                }
 
                 if (cbLeft.isChecked()){
                     value = context.getString(R.string.left);
@@ -1275,8 +1303,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 }
 
                 if (value.equals("")){
-                    value = context.getString(R.string.unspecified);
+                    value = "Incomplete";
                 }
+
 
             } else {
                 value = context.getString(R.string.yes);
@@ -1299,7 +1328,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
     }
 
 
-    private void loadFractureSiteCheckbox(final CheckBox cb, final CheckBox cbLeft, final CheckBox cbRight, final String dbKey, final View view){
+    private void loadFractureSiteCheckbox(final CheckBox cb, final CheckBox cbLeft, final CheckBox cbRight, final CheckBox cbUnspecified, final String dbKey, final View view){
         Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, dbKey);
 
         if (cursor.moveToFirst()){
@@ -1307,13 +1336,16 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             if (checkValue != null  && !checkValue.equals("")){
 
                 cb.setChecked(true);
-                setFractureSiteVisibility(cb, cbLeft, cbRight, true, view);
+                setFractureSiteVisibility(cb, cbLeft, cbRight, cbUnspecified, true, view);
 
                 if (cbLeft != null){
                     if (checkValue.equals(context.getString(R.string.unspecified))){
                         cbLeft.setChecked(false);
                         cbRight.setChecked(false);
+                        cbUnspecified.setChecked(true);
                     } else {
+                        cbUnspecified.setChecked(false);
+
                         if (checkValue.contains(context.getString(R.string.left))){
                             cbLeft.setChecked(true);
                         } else {
@@ -1330,11 +1362,12 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             } else {
                 cb.setChecked(false);
-                setFractureSiteVisibility(cb, cbLeft, cbRight, false, view);
+                setFractureSiteVisibility(cb, cbLeft, cbRight, cbUnspecified, false, view);
 
                 if (cbLeft != null){
                     cbLeft.setChecked(false);
                     cbRight.setChecked(false);
+                    cbUnspecified.setChecked(false);
                 }
             }
         }

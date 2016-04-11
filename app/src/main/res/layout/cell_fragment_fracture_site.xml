@@ -61,6 +61,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
+            <CheckBox
+                android:id="@+id/unspecifiedFoot"
+                android:text="@string/not_specified"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
         </LinearLayout>
 
 
@@ -99,6 +109,16 @@
                 android:id="@+id/rightAnkle"
                 android:tag="Right"
                 android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/unspecifiedAnkle"
+                android:text="@string/not_specified"
                 style="@style/checkboxStyle"/>
 
             <View
@@ -151,6 +171,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
+            <CheckBox
+                android:id="@+id/unspecifiedTibiaFibula"
+                android:text="@string/not_specified"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
         </LinearLayout>
 
 
@@ -196,6 +226,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
+            <CheckBox
+                android:id="@+id/unspecifiedFemur"
+                android:text="@string/not_specified"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
         </LinearLayout>
 
 
@@ -234,6 +274,16 @@
                 android:id="@+id/rightHip"
                 android:tag="Right"
                 android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/unspecifiedHip"
+                android:text="@string/not_specified"
                 style="@style/checkboxStyle"/>
 
             <View
@@ -302,6 +352,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
+            <CheckBox
+                android:id="@+id/unspecifiedRib"
+                android:text="@string/not_specified"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
         </LinearLayout>
 
 
@@ -341,6 +401,16 @@
                 android:id="@+id/rightHumerus"
                 android:tag="Right"
                 android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/unspecifiedHumerus"
+                android:text="@string/not_specified"
                 style="@style/checkboxStyle"/>
 
             <View
@@ -392,6 +462,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
 
+            <CheckBox
+                android:id="@+id/unspecifiedForearm"
+                android:text="@string/not_specified"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
         </LinearLayout>
 
 
@@ -430,6 +510,16 @@
                 android:id="@+id/rightWrist"
                 android:tag="Right"
                 android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/unspecifiedWrist"
+                android:text="@string/not_specified"
                 style="@style/checkboxStyle"/>
 
             <View

@@ -173,7 +173,9 @@ public class PatientListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MainActivity.currentPatientId = IDarray[i];
                 MainActivity.tabLayout.setVisibility(View.VISIBLE);
+                MainActivity.programmaticallySelectTab = true;
                 MainActivity.mViewPager.setCurrentItem(0);
+                MainActivity.programmaticallySelectTab = false;
                 MainActivity.actionBarTitle.setText(items.get(i));
                 finish();
             }

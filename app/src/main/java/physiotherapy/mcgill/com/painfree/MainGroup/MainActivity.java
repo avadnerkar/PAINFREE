@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     public static String deviceID;
     public static String KEY_DEVICE_ID = "device_ID";
     public static TabLayout tabLayout;
-    private static boolean programmaticallySelectTab;
+    public static boolean programmaticallySelectTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -348,7 +348,9 @@ public class MainActivity extends AppCompatActivity {
             actionBarTitle.setText(deviceID + "-" + id);
             MainActivity.currentPatientId = id;
             tabLayout.setVisibility(View.VISIBLE);
+            programmaticallySelectTab = true;
             mViewPager.setCurrentItem(0);
+            programmaticallySelectTab = false;
             invalidateOptionsMenu();
             FragmentA.setFragmentVisibility();
             FragmentB.setFragmentVisibility();
