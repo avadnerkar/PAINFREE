@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -51,6 +52,38 @@ public class PainAssessments {
         final LinearLayout container = (LinearLayout) rowView.findViewById(R.id.container);
         container.removeAllViews();
 
+        CheckBox cbNone = (CheckBox) rowView.findViewById(R.id.checkboxNone);
+        cbNone.setChecked(false);
+        Cursor cursorNone = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENTS_BOOL);
+        if (cursorNone.moveToFirst()){
+            if (cursorNone.getString(0) != null && cursorNone.getString(0).equals(context.getString(R.string.yes))){
+                cbNone.setChecked(true);
+            }
+        }
+
+        cbNone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENTS_BOOL, context.getString(R.string.yes));
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(0));
+
+                    for (int i = 0; i < 6; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[i * 3 + j + 1], null);
+                        }
+                    }
+
+
+                } else {
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENTS_BOOL, null);
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         final String[] painSpinnerOptions = new String[]{"None", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
         Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
@@ -63,6 +96,7 @@ public class PainAssessments {
                 @Override
                 public void onClick(View v) {
                     int addedIndex = Math.min(numAssessments + 1, 6);
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENTS_BOOL, null);
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(addedIndex));
                     adapter.notifyDataSetChanged();
                 }
@@ -80,6 +114,14 @@ public class PainAssessments {
                 ArrayAdapter<String> painSpinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, painSpinnerOptions);
                 painSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 painSpinner.setAdapter(painSpinnerAdapter);
+
+                TextView spinnerTitle = (TextView) assessmentView.findViewById(R.id.spinner_title);
+                spinnerTitle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        painSpinner.performClick();
+                    }
+                });
 
                 painSpinner.setSelection(0);
                 String value = cursor.getString(i*3+3);

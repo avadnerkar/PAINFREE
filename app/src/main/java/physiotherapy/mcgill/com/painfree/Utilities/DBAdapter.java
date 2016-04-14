@@ -68,6 +68,7 @@ public class DBAdapter {
     public static final String KEY_PHYSICIAN_EXAMINATION_DATE = "[Physician examination date]";
     public static final String KEY_PHYSICIAN_EXAMINATION_TIME = "[Physician examination time]";
 
+    public static final String KEY_PAIN_ASSESSMENTS_BOOL = "[No pain assessments]";
     public static final String KEY_PAIN_ASSESSMENT_NUM = "[Number of pain assessments]";
     public static final String KEY_PAIN_ASSESSMENT_1_DATE = "[Pain assessment 1 date]";
     public static final String KEY_PAIN_ASSESSMENT_1_TIME = "[Pain assessment 1 time]";
@@ -303,6 +304,7 @@ public class DBAdapter {
         dataMap.add(KEY_PHYSICIAN_EXAMINATION_DATE);
         dataMap.add(KEY_PHYSICIAN_EXAMINATION_TIME);
 
+        dataMap.add(KEY_PAIN_ASSESSMENTS_BOOL);
         dataMap.add(KEY_PAIN_ASSESSMENT_NUM);
         dataMap.add(KEY_PAIN_ASSESSMENT_1_DATE);
         dataMap.add(KEY_PAIN_ASSESSMENT_1_TIME);

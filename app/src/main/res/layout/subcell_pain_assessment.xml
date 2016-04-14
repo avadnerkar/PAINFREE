@@ -55,6 +55,7 @@
             android:text="@string/select_time"/>
 
         <TextView
+            android:id="@+id/spinner_title"
             android:text="@string/pain_scale_score"
             android:textStyle="bold"
             style="@style/textFormStyle" />
