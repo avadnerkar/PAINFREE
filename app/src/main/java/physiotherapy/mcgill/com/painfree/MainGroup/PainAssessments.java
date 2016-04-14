@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +22,12 @@ import android.widget.TimePicker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
 import physiotherapy.mcgill.com.painfree.R;
+import physiotherapy.mcgill.com.painfree.Utilities.AppUtils;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 
 /**
@@ -60,6 +64,7 @@ public class PainAssessments {
                 cbNone.setChecked(true);
             }
         }
+        cursorNone.close();
 
         cbNone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +91,7 @@ public class PainAssessments {
 
         final String[] painSpinnerOptions = new String[]{"None", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
-        Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
+        final Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
 
         if (cursor.moveToFirst()) {
             final int numAssessments = cursor.getInt(0);
@@ -95,6 +100,29 @@ public class PainAssessments {
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    if (numAssessments > 0){
+                        Cursor newCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, (numAssessments-1)*3+1, numAssessments*3+1));
+
+                        boolean complete = true;
+                        for (int i=0; i<3; i++){
+                            if (newCursor.getString(i) == null || newCursor.getString(i).equals(context.getString(R.string.none))){
+                                complete = false;
+                                break;
+                            }
+                        }
+                        newCursor.close();
+
+                        if (!complete){
+                            AppUtils.showDefaultAlertDialog("Please complete the current pain assessment", "", context, new AppUtils.DefaultAlertHandler() {
+                                @Override
+                                public void onClick() {
+
+                                }
+                            });
+                            return;
+                        }
+                    }
                     int addedIndex = Math.min(numAssessments + 1, 6);
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENTS_BOOL, null);
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(addedIndex));
@@ -187,22 +215,29 @@ public class PainAssessments {
                             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                                 final String text = selectedyear + "-" + String.format("%02d", selectedmonth + 1) + "-" + String.format("%02d", selectedday);
                                 buttonDate.setText(text);
-                                Thread thread = new Thread() {
-                                    @Override
-                                    public void run() {
-                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * 3 + 1], text);
-                                    }
-                                };
-                                thread.start();
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * 3 + 1], text);
+                                adapter.notifyDataSetChanged();
+
 
                             }
                         }, year, month, day);
                         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
                         try {
                             Date minDate = f.parse("2016-02-01");
+
+                            if (I>0){
+                                String previousDateString = cursor.getString((I-1)*3+1);
+                                minDate = f.parse(previousDateString);
+                            }
                             mDatePicker.getDatePicker().setMinDate(minDate.getTime());
 
                             Date maxDate = f.parse("2019-12-31");
+                            if (I<numAssessments-1){
+                                String nextDateString = cursor.getString((I+1)*3+1);
+                                if (nextDateString != null && !nextDateString.equals("")){
+                                    maxDate = f.parse(nextDateString);
+                                }
+                            }
                             mDatePicker.getDatePicker().setMaxDate(maxDate.getTime());
                         } catch (ParseException e) {
                             e.printStackTrace();
