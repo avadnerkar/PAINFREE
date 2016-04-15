@@ -116,6 +116,7 @@
     <string name="glasgow">Glasgow scale score:</string>
     <string name="pain_scale_score">Pain scale score:</string>
     <string name="collective_order">Collective order:</string>
+    <string name="collective_order_body">Collective order</string>
     <string name="history_of_dementia">History of dementia:</string>
     <string name="acetaminophen">Acetaminophen</string>
     <string name="nsaids">NSAIDs</string>
@@ -132,9 +133,9 @@
     <string name="type_of_analgesic_prescribed">Type of analgesic prescribed:</string>
     <string name="standard_order">Standard order</string>
     <string name="pharmaceutical_algorithm">Pharmaceutical algorithm</string>
-    <string name="evidence_altered_cognition">Evidence of altered cognition:</string>
+    <string name="evidence_altered_cognition">New evidence of altered cognition within 48 hours (select all that apply):</string>
     <string name="not_specified">Not specified</string>
-    <string name="short_cam_score">Short CAM score:</string>
+    <string name="short_cam_score">CAM score:</string>
     <string name="not_applicable">Not applicable</string>
     <string name="discharge_date">Discharge date:</string>
     <string name="discharge_time">Discharge time:</string>
@@ -183,6 +184,7 @@
     <string name="medical_record_number">Medical record number:</string>
     <string name="specify">Please specify</string>
     <string name="past_diagnosis_of_altered_cognition">Past diagnosis of altered cognition:</string>
+    <string name="no_information">No information</string>
 
 
 </resources>

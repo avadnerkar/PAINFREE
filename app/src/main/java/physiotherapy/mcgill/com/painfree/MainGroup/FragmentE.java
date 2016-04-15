@@ -1,6 +1,7 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
@@ -21,6 +24,7 @@ public class FragmentE extends Fragment {
 
     public static FragmentListAdapter adapter;
     private static ListView listView;
+    private static ArrayList<FragmentItem> items;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,7 +32,7 @@ public class FragmentE extends Fragment {
 
         listView = (ListView) v.findViewById(R.id.list_e);
 
-        ArrayList<FragmentItem> items = new ArrayList<>();
+        items = new ArrayList<>();
         items.add(new FragmentItem(getString(R.string.physician_examination_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE));
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.add(new FragmentItem(getString(R.string.physician_examination_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_PHYSICIAN_EXAMINATION_TIME));
@@ -60,5 +64,40 @@ public class FragmentE extends Fragment {
         } else {
             listView.setVisibility(View.VISIBLE);
         }
+    }
+
+
+    public static ArrayList<String> unfilledMandatoryFields() {
+
+        ArrayList<String> unfilledTitles = new ArrayList<>();
+
+        if (MainActivity.currentPatientId != -1) {
+
+            Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_NUM, DBAdapter.KEY_PAIN_ASSESSMENTS_BOOL});
+
+            if (cursor.moveToFirst()){
+                if (cursor.getString(1) == null){
+                    int numAssessments = cursor.getInt(0);
+                    if (numAssessments == 0){
+                        unfilledTitles.add("Pain assessments");
+                    } else {
+                        String[] keys = Arrays.copyOfRange(PainAssessments.keys, (numAssessments-1)*3+1, numAssessments*3+1);
+                        Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
+                        for (int i=0; i<3; i++){
+                            if (cursor1.getString(i) == null || cursor1.getString(i).equals("None")){
+                                unfilledTitles.add("Pain assessments");
+                                break;
+                            }
+                        }
+                        cursor1.close();
+                    }
+                }
+            }
+
+            cursor.close();
+
+        }
+
+        return unfilledTitles;
     }
 }

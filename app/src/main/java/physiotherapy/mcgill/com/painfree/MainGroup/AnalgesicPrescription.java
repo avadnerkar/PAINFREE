@@ -54,7 +54,7 @@ public class AnalgesicPrescription {
         final LinearLayout container = (LinearLayout) rowView.findViewById(R.id.container);
         container.removeAllViews();
 
-        final String[] spinnerOptions = new String[]{"", context.getString(R.string.standard_order), context.getString(R.string.collective_order), context.getString(R.string.pharmaceutical_algorithm)};
+        final String[] spinnerOptions = new String[]{"", context.getString(R.string.standard_order), context.getString(R.string.collective_order_body), context.getString(R.string.pharmaceutical_algorithm)};
         final String[] checkBoxItems = new String[]{context.getString(R.string.acetaminophen), context.getString(R.string.nsaids), context.getString(R.string.opioid)};
 
 
