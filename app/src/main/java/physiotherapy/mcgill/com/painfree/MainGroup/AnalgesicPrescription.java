@@ -431,10 +431,10 @@ public class AnalgesicPrescription {
                     //Analgesic type, dose, frequency, route, order
 
                     CheckBox[] analgesicCheckboxes = new CheckBox[]{(CheckBox) assessmentView.findViewById(R.id.checkbox_acetaminophen), (CheckBox) assessmentView.findViewById(R.id.checkbox_nsaids), (CheckBox) assessmentView.findViewById(R.id.checkbox_opioid)};
-                    EditText[] doses = new EditText[]{(EditText) assessmentView.findViewById(R.id.edit_acetaminophen_dose), (EditText) assessmentView.findViewById(R.id.edit_nsaids_dose), (EditText) assessmentView.findViewById(R.id.edit_opioid_dose)};
-                    EditText[] frequencies = new EditText[]{(EditText) assessmentView.findViewById(R.id.edit_acetaminophen_frequency), (EditText) assessmentView.findViewById(R.id.edit_nsaids_frequency), (EditText) assessmentView.findViewById(R.id.edit_opioid_frequency)};
-                    Spinner[] routes = new Spinner[]{(Spinner) assessmentView.findViewById(R.id.acetaminophen_route), (Spinner) assessmentView.findViewById(R.id.nsaids_route), (Spinner) assessmentView.findViewById(R.id.opioid_route)};
-                    Spinner[] orders = new Spinner[]{(Spinner) assessmentView.findViewById(R.id.acetaminophen_order), (Spinner) assessmentView.findViewById(R.id.nsaids_order), (Spinner) assessmentView.findViewById(R.id.opioid_order)};
+                    final EditText[] doses = new EditText[]{(EditText) assessmentView.findViewById(R.id.edit_acetaminophen_dose), (EditText) assessmentView.findViewById(R.id.edit_nsaids_dose), (EditText) assessmentView.findViewById(R.id.edit_opioid_dose)};
+                    final EditText[] frequencies = new EditText[]{(EditText) assessmentView.findViewById(R.id.edit_acetaminophen_frequency), (EditText) assessmentView.findViewById(R.id.edit_nsaids_frequency), (EditText) assessmentView.findViewById(R.id.edit_opioid_frequency)};
+                    final Spinner[] routes = new Spinner[]{(Spinner) assessmentView.findViewById(R.id.acetaminophen_route), (Spinner) assessmentView.findViewById(R.id.nsaids_route), (Spinner) assessmentView.findViewById(R.id.opioid_route)};
+                    final Spinner[] orders = new Spinner[]{(Spinner) assessmentView.findViewById(R.id.acetaminophen_order), (Spinner) assessmentView.findViewById(R.id.nsaids_order), (Spinner) assessmentView.findViewById(R.id.opioid_order)};
                     final LinearLayout fields[] = new LinearLayout[]{(LinearLayout) assessmentView.findViewById(R.id.acetaminophenGroup), (LinearLayout) assessmentView.findViewById(R.id.nsaidsGroup), (LinearLayout) assessmentView.findViewById(R.id.opioidGroup)};
 
                     for (int j=0; j<3; j++){
@@ -444,8 +444,10 @@ public class AnalgesicPrescription {
                         String analgesicValue = cursor.getString(I*numFields + 7 + j*5);
                         if (analgesicValue != null && analgesicValue.equals(context.getString(R.string.yes))){
                             fields[j].setVisibility(View.VISIBLE);
+                            analgesicCheckboxes[j].setChecked(true);
                         } else {
                             fields[j].setVisibility(View.GONE);
+                            analgesicCheckboxes[j].setChecked(false);
                         }
 
 
@@ -458,6 +460,10 @@ public class AnalgesicPrescription {
                                 } else {
                                     MainActivity.myDb.updateFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, I*numFields + 7 + J*5, I*numFields + 7 + (J+1)*5), new String[]{null, null, null, null, null});
                                     fields[J].setVisibility(View.GONE);
+                                    doses[J].setText("");
+                                    frequencies[J].setText("");
+                                    routes[J].setSelection(0);
+                                    orders[J].setSelection(0);
                                 }
                             }
                         });
@@ -602,7 +608,7 @@ public class AnalgesicPrescription {
                     mMonth = mcurrentDate.get(Calendar.MONTH);
                     mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
-                    String dateString = cursor.getString(i * numFields + 14);
+                    String dateString = cursor.getString(i * numFields + 22);
                     if (dateString != null && !dateString.equals("")) {
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         try {
@@ -636,7 +642,7 @@ public class AnalgesicPrescription {
                                     Thread thread = new Thread() {
                                         @Override
                                         public void run() {
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 14], text);
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 22], text);
                                         }
                                     };
                                     thread.start();
@@ -670,7 +676,7 @@ public class AnalgesicPrescription {
                     int hour = c.get(Calendar.HOUR_OF_DAY);
                     int minute = c.get(Calendar.MINUTE);
 
-                    String timeString = cursor.getString(I * numFields + 15);
+                    String timeString = cursor.getString(I * numFields + 23);
                     if (timeString != null && !timeString.equals("")) {
                         nerveBlockTimePickerButton.setText(timeString);
                         String[] parts = timeString.split(":");
@@ -694,7 +700,7 @@ public class AnalgesicPrescription {
                                     Thread thread = new Thread() {
                                         @Override
                                         public void run() {
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 15], value);
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 23], value);
                                         }
                                     };
                                     thread.start();
@@ -714,7 +720,7 @@ public class AnalgesicPrescription {
                     spinnerNerveBlockOrder.setAdapter(spinnerNerveBlockOrderAdapter);
 
                     spinnerNerveBlockOrder.setSelection(0);
-                    String value = cursor.getString(i * numFields + 16);
+                    String value = cursor.getString(i * numFields + 24);
                     if (value != null && !value.equals("")) {
                         for (int k = 0; k < spinnerOrderOptions.length; k++) {
                             if (value.equals(spinnerOrderOptions[k])) {
@@ -728,7 +734,7 @@ public class AnalgesicPrescription {
                     spinnerNerveBlockOrder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 16], spinnerOrderOptions[position]);
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 24], spinnerOrderOptions[position]);
                         }
 
                         @Override
@@ -754,7 +760,7 @@ public class AnalgesicPrescription {
                                 @Override
                                 public void run() {
 
-                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 17], s.toString());
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 25], s.toString());
                                 }
                             };
                             thread.start();
@@ -766,7 +772,7 @@ public class AnalgesicPrescription {
                         }
                     });
 
-                    String type = cursor.getString(i * numFields + 17);
+                    String type = cursor.getString(i * numFields + 25);
                     if (type != null) {
                         editNerveBlockType.setText(type);
                     } else {
@@ -810,7 +816,7 @@ public class AnalgesicPrescription {
                                             }
                                         }
 
-                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 18], answer);
+                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 26], answer);
                                     }
                                 };
                                 thread.start();
@@ -819,7 +825,7 @@ public class AnalgesicPrescription {
 
                     }
 
-                    String answer = cursor.getString(i * numFields + 18);
+                    String answer = cursor.getString(i * numFields + 26);
 
                     if (answer != null) {
                         for (int j = 0; j < cgPainRelief.getChildCount(); j++) {
@@ -848,7 +854,7 @@ public class AnalgesicPrescription {
                                 @Override
                                 public void run() {
 
-                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 19], s.toString());
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 27], s.toString());
                                 }
                             };
                             thread.start();
@@ -860,7 +866,7 @@ public class AnalgesicPrescription {
                         }
                     });
 
-                    String other = cursor.getString(i * numFields + 19);
+                    String other = cursor.getString(i * numFields + 27);
                     if (other != null) {
                         editPainReliefOther.setText(other);
                     } else {
@@ -879,14 +885,14 @@ public class AnalgesicPrescription {
                                 @Override
                                 public void run() {
 
-                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 20], isChecked ? context.getString(R.string.yes) : "");
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 28], isChecked ? context.getString(R.string.yes) : "");
                                 }
                             };
                             thread.start();
                         }
                     });
 
-                    String refused = cursor.getString(i * numFields + 20);
+                    String refused = cursor.getString(i * numFields + 28);
                     if (refused != null && refused != "") {
                         cbRefusal.setChecked(true);
                     } else {

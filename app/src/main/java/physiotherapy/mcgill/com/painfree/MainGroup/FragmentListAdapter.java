@@ -1210,8 +1210,6 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             rowView = PainAssessments.setupPainAssessmentSection(context, parent, this);
         } else if (i1 == FragmentItem.CellType.ANALGESIC_PRESCRIPTION){
             rowView = AnalgesicPrescription.setupAnalgesicPrescriptionSection(context, parent, this);
-        } else if (i1 == FragmentItem.CellType.ANALGESIC_ADMINISTRATION){
-            rowView = AnalgesicAdministration.setupAnalgesicAdministration(context, parent, this);
         }
 
 
