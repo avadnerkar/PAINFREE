@@ -187,6 +187,8 @@
     <string name="no_information">No information</string>
     <string name="administration">Administration</string>
     <string name="prescription">Prescription</string>
+    <string name="dose">Dose:</string>
+    <string name="enter_frequency">Enter frequency</string>
 
 
 </resources>
