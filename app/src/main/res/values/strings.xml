@@ -185,6 +185,8 @@
     <string name="specify">Please specify</string>
     <string name="past_diagnosis_of_altered_cognition">Past diagnosis of altered cognition:</string>
     <string name="no_information">No information</string>
+    <string name="administration">Administration</string>
+    <string name="prescription">Prescription</string>
 
 
 </resources>

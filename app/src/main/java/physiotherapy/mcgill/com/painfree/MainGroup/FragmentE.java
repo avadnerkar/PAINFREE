@@ -39,7 +39,6 @@ public class FragmentE extends Fragment {
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.add(new FragmentItem(null, FragmentItem.CellType.PAIN_ASSESSMENTS, null, null, null));
         items.add(new FragmentItem(null, FragmentItem.CellType.ANALGESIC_PRESCRIPTION, null, null, null));
-        items.add(new FragmentItem(null, FragmentItem.CellType.ANALGESIC_ADMINISTRATION, null, null, null));
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 

@@ -49,7 +49,7 @@ public class AnalgesicAdministration {
         View rowView = inflater.inflate(R.layout.cell_fragment_analgesic_admin, parent, false);
         final int numFields = 16;
 
-        final String[] keys = new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_NUM,
+        final String[] keys = new String[]{
                 DBAdapter.KEY_ANALGESIC_ADMIN_1_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_1_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_1_TYPE, DBAdapter.KEY_ANALGESIC_ADMIN_1_DOSE_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_1_DOSE_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_1_DOSE_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_1_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_1_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_1_FREQUENCY, DBAdapter.KEY_ANALGESIC_ADMIN_1_NERVE_BLOCK_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_1_NERVE_BLOCK_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_1_NERVE_BLOCK_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_1_NERVE_BLOCK_TYPE, DBAdapter.KEY_ANALGESIC_ADMIN_1_ALTERNATIVE_PAIN_RELIEF, DBAdapter.KEY_ANALGESIC_ADMIN_1_ALTERNATIVE_PAIN_RELIEF_OTHER, DBAdapter.KEY_ANALGESIC_ADMIN_1_REFUSAL,
                 DBAdapter.KEY_ANALGESIC_ADMIN_2_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_2_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_2_TYPE, DBAdapter.KEY_ANALGESIC_ADMIN_2_DOSE_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_2_DOSE_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_2_DOSE_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_2_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_2_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_2_FREQUENCY, DBAdapter.KEY_ANALGESIC_ADMIN_2_NERVE_BLOCK_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_2_NERVE_BLOCK_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_2_NERVE_BLOCK_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_2_NERVE_BLOCK_TYPE, DBAdapter.KEY_ANALGESIC_ADMIN_2_ALTERNATIVE_PAIN_RELIEF, DBAdapter.KEY_ANALGESIC_ADMIN_2_ALTERNATIVE_PAIN_RELIEF_OTHER, DBAdapter.KEY_ANALGESIC_ADMIN_2_REFUSAL,
                 DBAdapter.KEY_ANALGESIC_ADMIN_3_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_3_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_3_TYPE, DBAdapter.KEY_ANALGESIC_ADMIN_3_DOSE_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_3_DOSE_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_3_DOSE_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_3_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_3_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_3_FREQUENCY, DBAdapter.KEY_ANALGESIC_ADMIN_3_NERVE_BLOCK_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_3_NERVE_BLOCK_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_3_NERVE_BLOCK_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_3_NERVE_BLOCK_TYPE, DBAdapter.KEY_ANALGESIC_ADMIN_3_ALTERNATIVE_PAIN_RELIEF, DBAdapter.KEY_ANALGESIC_ADMIN_3_ALTERNATIVE_PAIN_RELIEF_OTHER, DBAdapter.KEY_ANALGESIC_ADMIN_3_REFUSAL,
@@ -77,7 +77,7 @@ public class AnalgesicAdministration {
                 @Override
                 public void onClick(View v) {
                     int addedIndex = Math.min(numAssessments + 1, 6);
-                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, String.valueOf(addedIndex));
+                    //MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, String.valueOf(addedIndex));
                     adapter.notifyDataSetChanged();
                 }
             });
@@ -712,7 +712,7 @@ public class AnalgesicAdministration {
 
                         Cursor tempCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
 
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, String.valueOf(Math.max(numAssessments - 1, 0)));
+                        //MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, String.valueOf(Math.max(numAssessments - 1, 0)));
 
                         for (int j=I; j<numAssessments-1; j++){
 

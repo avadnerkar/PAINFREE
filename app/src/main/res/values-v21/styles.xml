@@ -11,6 +11,28 @@
         <item name="android:activatedBackgroundIndicator">@drawable/list_activated_background</item>
         <item name="android:datePickerDialogTheme">@style/style_date_picker_dialog</item>
         <item name="android:timePickerDialogTheme">@style/style_time_picker_dialog</item>
+
+        <!-- For the resting Spinner style -->
+        <item name="android:spinnerItemStyle">
+            @style/spinnerItemStyle
+        </item>
+
+        <!-- For each individual Spinner list item once clicked on -->
+        <item name="android:spinnerDropDownItemStyle">
+            @style/spinnerDropDownItemStyle
+        </item>
+    </style>
+
+    <style name="spinnerItemStyle">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:paddingStart">@dimen/text_padding</item>
+        <item name="android:paddingEnd">@dimen/text_padding</item>
+    </style>
+
+    <style name="spinnerDropDownItemStyle">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:paddingStart">@dimen/text_padding</item>
+        <item name="android:paddingEnd">@dimen/text_padding</item>
     </style>
 
     <style name="style_date_picker_dialog" parent="@android:style/Theme.DeviceDefault.Light">
