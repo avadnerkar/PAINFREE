@@ -95,6 +95,31 @@ public class FragmentE extends Fragment {
 
             cursor.close();
 
+
+            cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_ANALGESIC_PRES_NUM, DBAdapter.KEY_ANALGESIC_PRES_BOOL});
+
+            if (cursor.moveToFirst()){
+                if (cursor.getString(1) == null){
+                    int numAssessments = cursor.getInt(0);
+                    if (numAssessments == 0){
+                        unfilledTitles.add("Analgesic prescription");
+                    } else {
+                        String[] keys = Arrays.copyOfRange(AnalgesicPrescription.keys, (numAssessments-1)*28+1, numAssessments*28+1);
+                        boolean[] mandatoryKeys = Arrays.copyOfRange(AnalgesicPrescription.manadatoryKeys, (numAssessments-1)*28+1, numAssessments*28+1);
+                        Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
+                        for (int i=0; i<28; i++){
+                            if (mandatoryKeys[i] && (cursor1.getString(i) == null || cursor1.getString(i).equals(""))){
+                                unfilledTitles.add("Analgesic prescription");
+                                break;
+                            }
+                        }
+                        cursor1.close();
+                    }
+                }
+            }
+
+            cursor.close();
+
         }
 
         return unfilledTitles;

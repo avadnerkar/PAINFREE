@@ -47,19 +47,11 @@ public class PainAssessments {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         int mMonth;
-        Button button;
         Calendar mcurrentDate;
         int mDay;
         int mYear;
         View rowView = inflater.inflate(R.layout.cell_fragment_pain_assessment, parent, false);
 
-//        final String[] keys = new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_NUM,
-//                DBAdapter.KEY_PAIN_ASSESSMENT_1_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_1_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_1_SCORE,
-//                DBAdapter.KEY_PAIN_ASSESSMENT_2_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_2_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_2_SCORE,
-//                DBAdapter.KEY_PAIN_ASSESSMENT_3_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_3_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_3_SCORE,
-//                DBAdapter.KEY_PAIN_ASSESSMENT_4_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_4_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_4_SCORE,
-//                DBAdapter.KEY_PAIN_ASSESSMENT_5_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_5_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_5_SCORE,
-//                DBAdapter.KEY_PAIN_ASSESSMENT_6_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_6_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_6_SCORE};
 
         final LinearLayout container = (LinearLayout) rowView.findViewById(R.id.container);
         container.removeAllViews();

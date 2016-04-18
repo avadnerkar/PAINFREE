@@ -32,6 +32,8 @@
     </style>
 
     <style name="spinnerDropDownItemStyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:paddingStart">@dimen/text_padding</item>
         <item name="android:paddingEnd">@dimen/text_padding</item>

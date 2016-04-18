@@ -668,7 +668,12 @@ public class DBAdapter {
         String where = KEY_ROWID + "= ?";
         ContentValues newValues = new ContentValues();
         for (int i=0; i<keys.length; i++){
-            newValues.put(keys[i], values[i]);
+            if (values != null){
+                newValues.put(keys[i], values[i]);
+            } else {
+                newValues.putNull(keys[i]);
+            }
+
         }
         return db.update(DATA_TABLE, newValues, where, new String[]{String.valueOf(rowId)}) != 0;
 
