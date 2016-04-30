@@ -29,7 +29,7 @@ public class FragmentG extends Fragment {
         listView = (ListView) v.findViewById(R.id.list_g);
 
         ArrayList<FragmentItem> items = new ArrayList<>();
-        items.add(new FragmentItem(getString(R.string.discharge_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_DISCHARGE_DATE));
+        items.add(new FragmentItem(getString(R.string.discharge_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-01-01", "2019-12-31"}, null, DBAdapter.KEY_DISCHARGE_DATE));
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.add(new FragmentItem(getString(R.string.discharge_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_DISCHARGE_TIME));
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};

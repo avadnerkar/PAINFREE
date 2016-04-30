@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import physiotherapy.mcgill.com.painfree.Dialogs.DialogEditText;
 import physiotherapy.mcgill.com.painfree.Dialogs.DialogTwoButton;
@@ -397,7 +398,8 @@ public class MainActivity extends AppCompatActivity {
                             List<String> list = new ArrayList<>();
                             for (int i=0; i<c.getColumnCount(); i++){
 
-                                if (c.getColumnName(i).equals(DBAdapter.KEY_SUBJECTID)){
+
+                                if (c.getColumnName(i).equals("Medical record number")){
                                     list.add("Confidential");
                                 } else {
                                     list.add(c.getString(i));
@@ -425,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
 
                     File idFilename = new File(path, "/PainFree_ids.csv");
                     CSVWriter idWriter = new CSVWriter(new FileWriter(idFilename), '\t');
-                    c = myDb.getAllRowDataWithKeys(new String[]{DBAdapter.KEY_UNIQUEID, DBAdapter.KEY_SUBJECTID});
+                    c = myDb.getAllRowDataWithKeys(new String[]{DBAdapter.KEY_UNIQUEID, DBAdapter.KEY_MEDICALRECORDNUMBER});
 
                     idWriter.writeNext(new String[]{"sep=\t"});
                     idWriter.writeNext(c.getColumnNames());

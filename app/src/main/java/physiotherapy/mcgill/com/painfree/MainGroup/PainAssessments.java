@@ -89,7 +89,7 @@ public class PainAssessments {
             }
         });
 
-        final String[] painSpinnerOptions = new String[]{"None", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        final String[] painSpinnerOptions = new String[]{"", "None", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
         final Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
 
@@ -106,7 +106,7 @@ public class PainAssessments {
 
                         boolean complete = true;
                         for (int i=0; i<3; i++){
-                            if (newCursor.getString(i) == null || newCursor.getString(i).equals(context.getString(R.string.none))){
+                            if (newCursor.getString(i) == null || newCursor.getString(i).equals("")){
                                 complete = false;
                                 break;
                             }
@@ -223,7 +223,7 @@ public class PainAssessments {
                         }, year, month, day);
                         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
                         try {
-                            Date minDate = f.parse("2016-02-01");
+                            Date minDate = f.parse("2016-01-01");
 
                             if (I>0){
                                 String previousDateString = cursor.getString((I-1)*3+1);
@@ -319,6 +319,7 @@ public class PainAssessments {
 
             }
         }
+        cursor.close();
 
         return rowView;
 

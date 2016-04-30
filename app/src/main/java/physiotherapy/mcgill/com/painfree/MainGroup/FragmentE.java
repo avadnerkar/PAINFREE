@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
@@ -33,7 +32,7 @@ public class FragmentE extends Fragment {
         listView = (ListView) v.findViewById(R.id.list_e);
 
         items = new ArrayList<>();
-        items.add(new FragmentItem(getString(R.string.physician_examination_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-02-01", "2019-12-31"}, null, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE));
+        items.add(new FragmentItem(getString(R.string.physician_examination_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-01-01", "2019-12-31"}, null, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE));
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.add(new FragmentItem(getString(R.string.physician_examination_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_PHYSICIAN_EXAMINATION_TIME));
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
@@ -83,7 +82,7 @@ public class FragmentE extends Fragment {
                         String[] keys = Arrays.copyOfRange(PainAssessments.keys, (numAssessments-1)*3+1, numAssessments*3+1);
                         Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
                         for (int i=0; i<3; i++){
-                            if (cursor1.getString(i) == null || cursor1.getString(i).equals("None")){
+                            if (cursor1.getString(i) == null || cursor1.getString(i).equals("")){
                                 unfilledTitles.add("Pain assessments");
                                 break;
                             }
@@ -105,10 +104,10 @@ public class FragmentE extends Fragment {
                         unfilledTitles.add("Analgesic prescription");
                     } else {
                         String[] keys = Arrays.copyOfRange(AnalgesicPrescription.keys, (numAssessments-1)*28+1, numAssessments*28+1);
-                        boolean[] mandatoryKeys = Arrays.copyOfRange(AnalgesicPrescription.manadatoryKeys, (numAssessments-1)*28+1, numAssessments*28+1);
+                        //boolean[] mandatoryKeys = Arrays.copyOfRange(AnalgesicPrescription.mandatoryKeys, (numAssessments-1)*28+1, numAssessments*28+1);
                         Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
                         for (int i=0; i<28; i++){
-                            if (mandatoryKeys[i] && (cursor1.getString(i) == null || cursor1.getString(i).equals(""))){
+                            if (AnalgesicPrescription.mandatoryKeys[i] && (cursor1.getString(i) == null || cursor1.getString(i).equals(""))){
                                 unfilledTitles.add("Analgesic prescription");
                                 break;
                             }

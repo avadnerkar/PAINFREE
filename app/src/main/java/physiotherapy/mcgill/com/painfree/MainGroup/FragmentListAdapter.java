@@ -144,6 +144,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 RadioButton rb = new RadioButton(context);
                 rb.setText(items.get(position).uiOptions[i]);
+                rb.setTextSize(context.getResources().getDimension(R.dimen.text_medium));
                 rg.addView(rb);
 
                 final int index = i;
@@ -207,6 +208,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 RadioButton rb = new RadioButton(context);
                 rb.setText(items.get(position).uiOptions[i]);
+                rb.setTextSize(context.getResources().getDimension(R.dimen.text_medium));
                 rg.addView(rb);
 
                 final int index = i;
@@ -1005,6 +1007,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             CheckBox cbNone = null;
             if (items.get(position).hasNone){
                 cbNone = new CheckBox(context);
+                cbNone.setTextSize(context.getResources().getDimension(R.dimen.text_medium));
                 cbNone.setText(items.get(position).extraOptions[0]);
             }
             final CheckBox cbNoneFinal = cbNone;
@@ -1013,12 +1016,14 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             CheckBox cbOther = null;
             if (items.get(position).hasOther){
                 cbOther = new CheckBox(context);
+                cbOther.setTextSize(context.getResources().getDimension(R.dimen.text_medium));
                 cbOther.setText(context.getString(R.string.other));
             }
             final CheckBox cbOtherFinal = cbOther;
 
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 CheckBox cb = new CheckBox(context);
+                cb.setTextSize(context.getResources().getDimension(R.dimen.text_medium));
                 cb.setText(items.get(position).uiOptions[i]);
                 cg.addView(cb);
 

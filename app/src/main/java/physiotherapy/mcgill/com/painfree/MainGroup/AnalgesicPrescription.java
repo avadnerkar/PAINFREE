@@ -1,6 +1,5 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -8,7 +7,6 @@ import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +23,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import org.w3c.dom.Text;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.AppUtils;
@@ -51,13 +46,8 @@ public class AnalgesicPrescription {
             DBAdapter.KEY_ANALGESIC_PRES_5_DATE, DBAdapter.KEY_ANALGESIC_PRES_5_TIME, DBAdapter.KEY_ANALGESIC_PRES_5_TYPE, DBAdapter.KEY_ANALGESIC_PRES_5_MODE, DBAdapter.KEY_ANALGESIC_ADMIN_5_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_5_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN_FREQUENCY, DBAdapter.KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_5_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_5_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_5_NSAIDS_FREQUENCY, DBAdapter.KEY_ANALGESIC_ADMIN_5_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_5_NSAIDS_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_5_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_5_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_5_OPIOID_FREQUENCY, DBAdapter.KEY_ANALGESIC_ADMIN_5_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_5_OPIOID_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_5_NERVE_BLOCK_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_5_NERVE_BLOCK_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_5_NERVE_BLOCK_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_5_NERVE_BLOCK_TYPE, DBAdapter.KEY_ANALGESIC_ADMIN_5_ALTERNATIVE_PAIN_RELIEF, DBAdapter.KEY_ANALGESIC_ADMIN_5_ALTERNATIVE_PAIN_RELIEF_OTHER, DBAdapter.KEY_ANALGESIC_ADMIN_5_REFUSAL,
             DBAdapter.KEY_ANALGESIC_PRES_6_DATE, DBAdapter.KEY_ANALGESIC_PRES_6_TIME, DBAdapter.KEY_ANALGESIC_PRES_6_TYPE, DBAdapter.KEY_ANALGESIC_PRES_6_MODE, DBAdapter.KEY_ANALGESIC_ADMIN_6_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_6_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN_FREQUENCY, DBAdapter.KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_6_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_6_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_6_NSAIDS_FREQUENCY, DBAdapter.KEY_ANALGESIC_ADMIN_6_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_6_NSAIDS_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_6_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_6_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_6_OPIOID_FREQUENCY, DBAdapter.KEY_ANALGESIC_ADMIN_6_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_6_OPIOID_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_6_NERVE_BLOCK_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_6_NERVE_BLOCK_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_6_NERVE_BLOCK_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_6_NERVE_BLOCK_TYPE, DBAdapter.KEY_ANALGESIC_ADMIN_6_ALTERNATIVE_PAIN_RELIEF, DBAdapter.KEY_ANALGESIC_ADMIN_6_ALTERNATIVE_PAIN_RELIEF_OTHER, DBAdapter.KEY_ANALGESIC_ADMIN_6_REFUSAL};
 
-    public static final boolean[] manadatoryKeys = new boolean[]{true,
-    true, true, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false,
-            true, true, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false,
-            true, true, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false,
-            true, true, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false,
-            true, true, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false,
-            true, true, false, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false};
+    public static final boolean[] mandatoryKeys = new boolean[]{
+    true, true, true, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false};
 
     public static View setupAnalgesicPrescriptionSection(final Context context, ViewGroup parent, final ArrayAdapter adapter){
 
@@ -107,7 +97,7 @@ public class AnalgesicPrescription {
         final String[] spinnerRouteOptions = new String[]{"", context.getString(R.string.im), context.getString(R.string.iv), context.getString(R.string.po), context.getString(R.string.sc), context.getString(R.string.pr)};
         final String[] checkBoxAlternativeRelief = new String[]{context.getString(R.string.ice), context.getString(R.string.cool_cloths), context.getString(R.string.soft_cushions)};
 
-        Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
+        final Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
 
         if (cursor.moveToFirst()) {
             final int numAssessments = cursor.getInt(0);
@@ -120,10 +110,10 @@ public class AnalgesicPrescription {
                     if (numAssessments > 0){
                         Cursor newCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, (numAssessments-1)*numFields+1, numAssessments*numFields+1));
 
-                        boolean[] mandatory = Arrays.copyOfRange(manadatoryKeys, (numAssessments-1)*numFields+1, numAssessments*numFields+1);
+                        //boolean[] mandatory = Arrays.copyOfRange(mandatoryKeys, (numAssessments-1)*numFields+1, numAssessments*numFields+1);
                         boolean complete = true;
                         for (int i=0; i<numFields; i++){
-                            if (mandatory[i] && (newCursor.getString(i) == null || newCursor.getString(i).equals(""))){
+                            if (mandatoryKeys[i] && (newCursor.getString(i) == null || newCursor.getString(i).equals(""))){
                                 complete = false;
                                 break;
                             }
@@ -167,15 +157,18 @@ public class AnalgesicPrescription {
                         MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM, String.valueOf(Math.max(numAssessments - 1, 0)));
 
                         for (int j=I; j<numAssessments-1; j++){
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+1], tempCursor.getString((j+1)*numFields+1));
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+2], tempCursor.getString((j+1)*numFields+2));
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+3], tempCursor.getString((j+1)*numFields+3));
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+4], tempCursor.getString((j+1)*numFields+4));
+
+                            for (int k=1; k<=numFields; k++){
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+k], tempCursor.getString((j+1)*numFields+k));
+
+                            }
+
                         }
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*numFields+1], null);
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*numFields+2], null);
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*numFields+3], null);
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*numFields+4], null);
+
+                        for (int k=1; k<=numFields; k++){
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*numFields+k], null);
+                        }
+
 
                         tempCursor.close();
 
@@ -256,22 +249,27 @@ public class AnalgesicPrescription {
                                     final String text = selectedyear + "-" + String.format("%02d", selectedmonth + 1) + "-" + String.format("%02d", selectedday);
                                     buttonDate.setText(text);
                                     noneBox.setChecked(false);
-                                    Thread thread = new Thread() {
-                                        @Override
-                                        public void run() {
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 1], text);
-                                        }
-                                    };
-                                    thread.start();
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 1], text);
+                                    adapter.notifyDataSetChanged();
 
                                 }
                             }, year, month, day);
                             SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
                             try {
-                                Date minDate = f.parse("2016-02-01");
+                                Date minDate = f.parse("2016-01-01");
+                                if (I>0){
+                                    String previousDateString = cursor.getString((I-1)*numFields+1);
+                                    minDate = f.parse(previousDateString);
+                                }
                                 mDatePicker.getDatePicker().setMinDate(minDate.getTime());
 
                                 Date maxDate = f.parse("2019-12-31");
+                                if (I<numAssessments-1){
+                                    String nextDateString = cursor.getString((I+1)*numFields+1);
+                                    if (nextDateString != null && !nextDateString.equals("")){
+                                        maxDate = f.parse(nextDateString);
+                                    }
+                                }
                                 mDatePicker.getDatePicker().setMaxDate(maxDate.getTime());
                             } catch (ParseException e) {
                                 e.printStackTrace();
@@ -371,21 +369,26 @@ public class AnalgesicPrescription {
                         cg.setOrientation(RadioGroup.HORIZONTAL);
                     }
 
+                    final CheckBox cbAnalgesicNone = new CheckBox(context);
+                    cbAnalgesicNone.setTextSize(context.getResources().getDimension(R.dimen.text_medium));
+                    cbAnalgesicNone.setText(context.getString(R.string.not_specified));
+
                     for (String checkBoxItem : checkBoxItems) {
                         CheckBox cb = new CheckBox(context);
+                        cb.setTextSize(context.getResources().getDimension(R.dimen.text_medium));
                         cb.setText(checkBoxItem);
                         cb.setChecked(false);
                         cg.addView(cb);
 
-
-                        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        cb.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                            public void onClick(View v) {
+                                cbAnalgesicNone.setChecked(false);
                                 Thread thread = new Thread() {
                                     @Override
                                     public void run() {
                                         String answer = "";
-                                        for (int k = 0; k < cg.getChildCount(); k++) {
+                                        for (int k = 0; k < checkBoxItems.length; k++) {
                                             CheckBox cb = (CheckBox) cg.getChildAt(k);
                                             if (cb.isChecked()) {
                                                 answer = answer + " " + checkBoxItems[k];
@@ -399,17 +402,36 @@ public class AnalgesicPrescription {
                             }
                         });
 
+
                     }
+
+                    cbAnalgesicNone.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (((CheckBox) v).isChecked()){
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 3], context.getString(R.string.not_specified));
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 3], null);
+                            }
+                        }
+                    });
+
+                    cg.addView(cbAnalgesicNone);
 
                     String answer = cursor.getString(i * numFields + 3);
 
                     if (answer != null) {
-                        for (int j = 0; j < cg.getChildCount(); j++) {
+                        for (int j = 0; j < checkBoxItems.length; j++) {
                             if (answer.contains(checkBoxItems[j])) {
                                 ((CheckBox) cg.getChildAt(j)).setChecked(true);
                             } else {
                                 ((CheckBox) cg.getChildAt(j)).setChecked(false);
                             }
+                        }
+
+                        if (answer.equals(context.getString(R.string.not_specified))){
+                            cbAnalgesicNone.setChecked(true);
                         }
                     }
                 }
@@ -528,22 +550,27 @@ public class AnalgesicPrescription {
                                     final String text = selectedyear + "-" + String.format("%02d", selectedmonth + 1) + "-" + String.format("%02d", selectedday);
                                     buttonDate.setText(text);
                                     noneBox.setChecked(false);
-                                    Thread thread = new Thread() {
-                                        @Override
-                                        public void run() {
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 5], text);
-                                        }
-                                    };
-                                    thread.start();
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 5], text);
+                                    adapter.notifyDataSetChanged();
 
                                 }
                             }, year, month, day);
                             SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
                             try {
-                                Date minDate = f.parse("2016-02-01");
+                                Date minDate = f.parse("2016-01-01");
+                                if (I>0){
+                                    String previousDateString = cursor.getString((I-1)*numFields+5);
+                                    minDate = f.parse(previousDateString);
+                                }
                                 mDatePicker.getDatePicker().setMinDate(minDate.getTime());
 
                                 Date maxDate = f.parse("2019-12-31");
+                                if (I<numAssessments-1){
+                                    String nextDateString = cursor.getString((I+1)*numFields+5);
+                                    if (nextDateString != null && !nextDateString.equals("")){
+                                        maxDate = f.parse(nextDateString);
+                                    }
+                                }
                                 mDatePicker.getDatePicker().setMaxDate(maxDate.getTime());
                             } catch (ParseException e) {
                                 e.printStackTrace();
@@ -894,22 +921,27 @@ public class AnalgesicPrescription {
                                     final String text = selectedyear + "-" + String.format("%02d", selectedmonth + 1) + "-" + String.format("%02d", selectedday);
                                     nerveBlockButtonDate.setText(text);
                                     noneBox.setChecked(false);
-                                    Thread thread = new Thread() {
-                                        @Override
-                                        public void run() {
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 22], text);
-                                        }
-                                    };
-                                    thread.start();
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 22], text);
+                                    adapter.notifyDataSetChanged();
 
                                 }
                             }, nerveBlockYear, nerveBlockMonth, nerveBlockDay);
                             SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
                             try {
-                                Date minDate = f.parse("2016-02-01");
+                                Date minDate = f.parse("2016-01-01");
+                                if (I>0){
+                                    String previousDateString = cursor.getString((I-1)*numFields+22);
+                                    minDate = f.parse(previousDateString);
+                                }
                                 mDatePicker.getDatePicker().setMinDate(minDate.getTime());
 
                                 Date maxDate = f.parse("2019-12-31");
+                                if (I<numAssessments-1){
+                                    String nextDateString = cursor.getString((I+1)*numFields+22);
+                                    if (nextDateString != null && !nextDateString.equals("")){
+                                        maxDate = f.parse(nextDateString);
+                                    }
+                                }
                                 mDatePicker.getDatePicker().setMaxDate(maxDate.getTime());
                             } catch (ParseException e) {
                                 e.printStackTrace();
@@ -1088,11 +1120,13 @@ public class AnalgesicPrescription {
                     }
 
                     final CheckBox cbPainReliefNone = new CheckBox(context);
+                    cbPainReliefNone.setTextSize(context.getResources().getDimension(R.dimen.text_medium));
                     cbPainReliefNone.setText(context.getString(R.string.none));
 
-                    for (int j = 0; j < checkBoxAlternativeRelief.length; j++) {
+                    for (String aCheckBoxAlternativeRelief : checkBoxAlternativeRelief) {
                         CheckBox cb = new CheckBox(context);
-                        cb.setText(checkBoxAlternativeRelief[j]);
+                        cb.setTextSize(context.getResources().getDimension(R.dimen.text_medium));
+                        cb.setText(aCheckBoxAlternativeRelief);
                         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         layoutParams.setMargins(0, 10, 0, 10);
@@ -1199,22 +1233,17 @@ public class AnalgesicPrescription {
                 {
                     //Checkbox - refusal
                     CheckBox cbRefusal = (CheckBox) assessmentView.findViewById(R.id.analgesia_refused);
-                    cbRefusal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
-                            Thread thread = new Thread() {
-                                @Override
-                                public void run() {
 
-                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 28], isChecked ? context.getString(R.string.yes) : "");
-                                }
-                            };
-                            thread.start();
+                    cbRefusal.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            boolean checked = ((CheckBox) v).isChecked();
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[I * numFields + 28], checked ? context.getString(R.string.yes) : null);
                         }
                     });
 
                     String refused = cursor.getString(i * numFields + 28);
-                    if (refused != null && refused != "") {
+                    if (refused != null && !refused.equals("")) {
                         cbRefusal.setChecked(true);
                     } else {
                         cbRefusal.setChecked(false);

@@ -46,9 +46,10 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TabLayout
+        app:tabTextAppearance="@style/MyCustomTab"
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/RoyalBlue"
         android:elevation="8dp"
         android:minHeight="?attr/actionBarSize"

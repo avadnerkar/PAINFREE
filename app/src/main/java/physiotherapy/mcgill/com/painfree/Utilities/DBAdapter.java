@@ -30,7 +30,7 @@ public class DBAdapter {
     public static final String KEY_ROWID = "_id";
     public static final String KEY_UNIQUEID = "[Device Specific ID]";
     public static final String KEY_EXTRACTIONPERIOD = "[Period of extraction]";
-    public static final String KEY_SUBJECTID = "[Subject ID]";
+    //public static final String KEY_SUBJECTID = "[Subject ID]";
     public static final String KEY_MEDICALRECORDNUMBER = "[Medical record number]";
     public static final String KEY_SITE = "[Site]";
     public static final String KEY_COMPLETED_BY = "[Completed by]";
@@ -283,7 +283,7 @@ public class DBAdapter {
     public static final String DATA_TABLE = "dataTable";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 17;
+    public static final int DATABASE_VERSION = 18;
 
 
     //Table Create Statements
@@ -312,7 +312,7 @@ public class DBAdapter {
         dataMap.add(KEY_UNIQUEID);
 
         dataMap.add(KEY_EXTRACTIONPERIOD);
-        dataMap.add(KEY_SUBJECTID);
+        //dataMap.add(KEY_SUBJECTID);
         dataMap.add(KEY_MEDICALRECORDNUMBER);
         dataMap.add(KEY_SITE);
         dataMap.add(KEY_COMPLETED_BY);
