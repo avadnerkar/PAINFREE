@@ -54,6 +54,8 @@ public class EDEvents {
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(0));
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, null);
                     PainAssessments.clearData();
+                    AnalgesicPrescription.clearData();
+                    AnalgesicAdministration.clearData();
 
 
                 } else {
@@ -100,8 +102,22 @@ public class EDEvents {
                                     }
                                     break;
                                 case 1:
+                                    int numAnalgesicPres = cursor1.getInt(1);
+                                    if (numAnalgesicPres>=maxEvents){
+                                        AppUtils.showAlert("Error", "Reached analgesic prescription limit", context);
+                                        return;
+                                    } else {
+                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM, String.valueOf(numAnalgesicPres+1));
+                                    }
                                     break;
                                 case 2:
+                                    int numAnalgesicAdmin = cursor1.getInt(2);
+                                    if (numAnalgesicAdmin>=maxEvents){
+                                        AppUtils.showAlert("Error", "Reached analgesic administration limit", context);
+                                        return;
+                                    } else {
+                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, String.valueOf(numAnalgesicAdmin+1));
+                                    }
                                     break;
                             }
                             cursor1.close();
@@ -121,13 +137,18 @@ public class EDEvents {
             });
 
 
+            int painAssessmentIndex = 0;
+            int analgesicPresIndex = 0;
+            int analgesicAdminIndex = 0;
             for (int i=0; i<orderOfEvents.size(); i++){
                 Integer type = orderOfEvents.get(i);
                 final int I = i;
                 View childView = null;
+
                 switch (type){
                     case 0:{
-                        childView = PainAssessments.setupPainAssessmentSection(context, container, adapter, i, new MinusHandler() {
+
+                        childView = PainAssessments.setupPainAssessmentSection(context, container, adapter, painAssessmentIndex, i, new MinusHandler() {
                             @Override
                             public void onClick() {
                                 orderOfEvents.remove(I);
@@ -137,13 +158,38 @@ public class EDEvents {
                                 adapter.notifyDataSetChanged();
                             }
                         });
+                        painAssessmentIndex++;
                         break;
                     }
                     case 1:{
+
+                        childView = AnalgesicPrescription.setupAnalgesicPrescriptionSection(context, container, adapter, analgesicPresIndex, i, new MinusHandler() {
+                            @Override
+                            public void onClick() {
+                                orderOfEvents.remove(I);
+                                String orderStringNew = TextUtils.join("", orderOfEvents);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, orderStringNew);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(numEvents-1));
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                        analgesicPresIndex++;
                         break;
                     }
 
                     case 2:{
+
+                        childView = AnalgesicAdministration.setupAnalgesicAdministrationSection(context, container, adapter, analgesicAdminIndex, i, new MinusHandler() {
+                            @Override
+                            public void onClick() {
+                                orderOfEvents.remove(I);
+                                String orderStringNew = TextUtils.join("", orderOfEvents);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, orderStringNew);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(numEvents-1));
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                        analgesicAdminIndex++;
                         break;
                     }
                 }

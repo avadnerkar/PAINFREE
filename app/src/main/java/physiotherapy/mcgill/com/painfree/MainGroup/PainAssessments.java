@@ -43,7 +43,7 @@ public class PainAssessments {
             DBAdapter.KEY_PAIN_ASSESSMENT_5_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_5_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_5_SCORE,
             DBAdapter.KEY_PAIN_ASSESSMENT_6_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_6_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_6_SCORE};
 
-    public static View setupPainAssessmentSection(final Context context, ViewGroup parent, final ArrayAdapter adapter, final int index, final EDEvents.MinusHandler handler){
+    public static View setupPainAssessmentSection(final Context context, ViewGroup parent, final ArrayAdapter adapter, final int index, final int globalIndex, final EDEvents.MinusHandler handler){
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         int mMonth;
@@ -61,7 +61,7 @@ public class PainAssessments {
 
             final View assessmentView = inflater.inflate(R.layout.subcell_pain_assessment, parent, false);
             TextView assessmentTitle = (TextView) assessmentView.findViewById(R.id.title);
-            assessmentTitle.setText("Assessment" + " " + String.valueOf(index + 1));
+            assessmentTitle.setText("Event" + " " + String.valueOf(globalIndex + 1) + " - Pain assessment");
 
 
             //Spinner
@@ -241,6 +241,7 @@ public class PainAssessments {
             });
 
 
+            cursor.close();
             return assessmentView;
 
         }

@@ -382,11 +382,32 @@ public class DBAdapter {
 
         //dataMap.add(KEY_ANALGESIC_PRES_BOOL);
         dataMap.add(KEY_ANALGESIC_PRES_NUM);
-        dataMap.add(KEY_ANALGESIC_ADMIN_NUM);
         dataMap.add(KEY_ANALGESIC_PRES_1_DATE);
         dataMap.add(KEY_ANALGESIC_PRES_1_TIME);
         dataMap.add(KEY_ANALGESIC_PRES_1_TYPE);
         dataMap.add(KEY_ANALGESIC_PRES_1_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_2_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_2_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_2_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_2_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_3_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_3_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_3_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_3_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_4_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_4_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_4_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_4_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_5_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_5_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_5_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_5_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_6_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_6_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_6_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_6_MODE);
+
+        dataMap.add(KEY_ANALGESIC_ADMIN_NUM);
         dataMap.add(KEY_ANALGESIC_ADMIN_1_DATE);
         dataMap.add(KEY_ANALGESIC_ADMIN_1_TIME);
         dataMap.add(KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN);
@@ -411,10 +432,6 @@ public class DBAdapter {
         dataMap.add(KEY_ANALGESIC_ADMIN_1_ALTERNATIVE_PAIN_RELIEF);
         dataMap.add(KEY_ANALGESIC_ADMIN_1_ALTERNATIVE_PAIN_RELIEF_OTHER);
         dataMap.add(KEY_ANALGESIC_ADMIN_1_REFUSAL);
-        dataMap.add(KEY_ANALGESIC_PRES_2_DATE);
-        dataMap.add(KEY_ANALGESIC_PRES_2_TIME);
-        dataMap.add(KEY_ANALGESIC_PRES_2_TYPE);
-        dataMap.add(KEY_ANALGESIC_PRES_2_MODE);
         dataMap.add(KEY_ANALGESIC_ADMIN_2_DATE);
         dataMap.add(KEY_ANALGESIC_ADMIN_2_TIME);
         dataMap.add(KEY_ANALGESIC_ADMIN_2_ACETAMINOPHEN);
@@ -439,10 +456,6 @@ public class DBAdapter {
         dataMap.add(KEY_ANALGESIC_ADMIN_2_ALTERNATIVE_PAIN_RELIEF);
         dataMap.add(KEY_ANALGESIC_ADMIN_2_ALTERNATIVE_PAIN_RELIEF_OTHER);
         dataMap.add(KEY_ANALGESIC_ADMIN_2_REFUSAL);
-        dataMap.add(KEY_ANALGESIC_PRES_3_DATE);
-        dataMap.add(KEY_ANALGESIC_PRES_3_TIME);
-        dataMap.add(KEY_ANALGESIC_PRES_3_TYPE);
-        dataMap.add(KEY_ANALGESIC_PRES_3_MODE);
         dataMap.add(KEY_ANALGESIC_ADMIN_3_DATE);
         dataMap.add(KEY_ANALGESIC_ADMIN_3_TIME);
         dataMap.add(KEY_ANALGESIC_ADMIN_3_ACETAMINOPHEN);
@@ -467,10 +480,6 @@ public class DBAdapter {
         dataMap.add(KEY_ANALGESIC_ADMIN_3_ALTERNATIVE_PAIN_RELIEF);
         dataMap.add(KEY_ANALGESIC_ADMIN_3_ALTERNATIVE_PAIN_RELIEF_OTHER);
         dataMap.add(KEY_ANALGESIC_ADMIN_3_REFUSAL);
-        dataMap.add(KEY_ANALGESIC_PRES_4_DATE);
-        dataMap.add(KEY_ANALGESIC_PRES_4_TIME);
-        dataMap.add(KEY_ANALGESIC_PRES_4_TYPE);
-        dataMap.add(KEY_ANALGESIC_PRES_4_MODE);
         dataMap.add(KEY_ANALGESIC_ADMIN_4_DATE);
         dataMap.add(KEY_ANALGESIC_ADMIN_4_TIME);
         dataMap.add(KEY_ANALGESIC_ADMIN_4_ACETAMINOPHEN);
@@ -495,10 +504,6 @@ public class DBAdapter {
         dataMap.add(KEY_ANALGESIC_ADMIN_4_ALTERNATIVE_PAIN_RELIEF);
         dataMap.add(KEY_ANALGESIC_ADMIN_4_ALTERNATIVE_PAIN_RELIEF_OTHER);
         dataMap.add(KEY_ANALGESIC_ADMIN_4_REFUSAL);
-        dataMap.add(KEY_ANALGESIC_PRES_5_DATE);
-        dataMap.add(KEY_ANALGESIC_PRES_5_TIME);
-        dataMap.add(KEY_ANALGESIC_PRES_5_TYPE);
-        dataMap.add(KEY_ANALGESIC_PRES_5_MODE);
         dataMap.add(KEY_ANALGESIC_ADMIN_5_DATE);
         dataMap.add(KEY_ANALGESIC_ADMIN_5_TIME);
         dataMap.add(KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN);
@@ -523,10 +528,6 @@ public class DBAdapter {
         dataMap.add(KEY_ANALGESIC_ADMIN_5_ALTERNATIVE_PAIN_RELIEF);
         dataMap.add(KEY_ANALGESIC_ADMIN_5_ALTERNATIVE_PAIN_RELIEF_OTHER);
         dataMap.add(KEY_ANALGESIC_ADMIN_5_REFUSAL);
-        dataMap.add(KEY_ANALGESIC_PRES_6_DATE);
-        dataMap.add(KEY_ANALGESIC_PRES_6_TIME);
-        dataMap.add(KEY_ANALGESIC_PRES_6_TYPE);
-        dataMap.add(KEY_ANALGESIC_PRES_6_MODE);
         dataMap.add(KEY_ANALGESIC_ADMIN_6_DATE);
         dataMap.add(KEY_ANALGESIC_ADMIN_6_TIME);
         dataMap.add(KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN);
