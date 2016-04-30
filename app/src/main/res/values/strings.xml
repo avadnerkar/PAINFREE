@@ -189,6 +189,11 @@
     <string name="prescription">Prescription</string>
     <string name="dose">Dose:</string>
     <string name="enter_frequency">Enter frequency</string>
+    <string name="events">Events</string>
+    <string name="select_type_of_event">Select type of event</string>
+    <string name="pain_assessment">Pain assessment</string>
+    <string name="analgesic_prescription">Analgesic prescription</string>
+    <string name="analgesic_administration">Analgesic administration</string>
 
 
 </resources>

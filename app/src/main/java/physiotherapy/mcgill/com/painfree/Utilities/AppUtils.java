@@ -96,14 +96,14 @@ public class AppUtils {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                h.onClick(items[i]);
+                h.onClick(i);
             }
         });
         builder.show();
     }
 
     public interface ListHandler{
-        void onClick(String text);
+        void onClick(int index);
     }
 
 

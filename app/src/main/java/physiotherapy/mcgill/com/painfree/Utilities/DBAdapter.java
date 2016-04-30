@@ -68,7 +68,11 @@ public class DBAdapter {
     public static final String KEY_PHYSICIAN_EXAMINATION_DATE = "[Physician examination date]";
     public static final String KEY_PHYSICIAN_EXAMINATION_TIME = "[Physician examination time]";
 
-    public static final String KEY_PAIN_ASSESSMENTS_BOOL = "[No pain assessments]";
+    public static final String KEY_EVENTS_NUM = "[Number of events]";
+    public static final String KEY_EVENTS_BOOL = "[No events]";
+    public static final String KEY_EVENTS_ORDER = "[Order of events]";
+
+    //public static final String KEY_PAIN_ASSESSMENTS_BOOL = "[No pain assessments]";
     public static final String KEY_PAIN_ASSESSMENT_NUM = "[Number of pain assessments]";
     public static final String KEY_PAIN_ASSESSMENT_1_DATE = "[Pain assessment 1 date]";
     public static final String KEY_PAIN_ASSESSMENT_1_TIME = "[Pain assessment 1 time]";
@@ -89,7 +93,7 @@ public class DBAdapter {
     public static final String KEY_PAIN_ASSESSMENT_6_TIME = "[Pain assessment 6 time]";
     public static final String KEY_PAIN_ASSESSMENT_6_SCORE = "[Pain assessment 6 score]";
 
-    public static final String KEY_ANALGESIC_PRES_BOOL = "[No analgesic prescriptions]";
+    //public static final String KEY_ANALGESIC_PRES_BOOL = "[No analgesic prescriptions]";
     public static final String KEY_ANALGESIC_PRES_NUM = "[Number of analgesic prescriptions]";
     public static final String KEY_ANALGESIC_PRES_1_DATE = "[Analgesic prescription 1 date]";
     public static final String KEY_ANALGESIC_PRES_1_TIME = "[Analgesic prescription 1 time]";
@@ -116,6 +120,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_6_TYPE = "[Analgesic prescription 6 type]";
     public static final String KEY_ANALGESIC_PRES_6_MODE = "[Analgesic prescription 6 mode]";
 
+    public static final String KEY_ANALGESIC_ADMIN_NUM = "[Number of analgesic administrations]";
     public static final String KEY_ANALGESIC_ADMIN_1_DATE = "[Analgesic administration 1 date]";
     public static final String KEY_ANALGESIC_ADMIN_1_TIME = "[Analgesic administration 1 time]";
     public static final String KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN = "[Analgesic administration 1 acetaminophen]";
@@ -350,7 +355,11 @@ public class DBAdapter {
         dataMap.add(KEY_PHYSICIAN_EXAMINATION_DATE);
         dataMap.add(KEY_PHYSICIAN_EXAMINATION_TIME);
 
-        dataMap.add(KEY_PAIN_ASSESSMENTS_BOOL);
+        dataMap.add(KEY_EVENTS_BOOL);
+        dataMap.add(KEY_EVENTS_NUM);
+        dataMap.add(KEY_EVENTS_ORDER);
+
+        //dataMap.add(KEY_PAIN_ASSESSMENTS_BOOL);
         dataMap.add(KEY_PAIN_ASSESSMENT_NUM);
         dataMap.add(KEY_PAIN_ASSESSMENT_1_DATE);
         dataMap.add(KEY_PAIN_ASSESSMENT_1_TIME);
@@ -371,8 +380,9 @@ public class DBAdapter {
         dataMap.add(KEY_PAIN_ASSESSMENT_6_TIME);
         dataMap.add(KEY_PAIN_ASSESSMENT_6_SCORE);
 
-        dataMap.add(KEY_ANALGESIC_PRES_BOOL);
+        //dataMap.add(KEY_ANALGESIC_PRES_BOOL);
         dataMap.add(KEY_ANALGESIC_PRES_NUM);
+        dataMap.add(KEY_ANALGESIC_ADMIN_NUM);
         dataMap.add(KEY_ANALGESIC_PRES_1_DATE);
         dataMap.add(KEY_ANALGESIC_PRES_1_TIME);
         dataMap.add(KEY_ANALGESIC_PRES_1_TYPE);
