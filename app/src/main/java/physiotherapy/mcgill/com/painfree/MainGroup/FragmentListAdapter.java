@@ -1211,10 +1211,8 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             cursor.close();
 
-        } else if (i1 == FragmentItem.CellType.PAIN_ASSESSMENTS) {
-            rowView = PainAssessments.setupPainAssessmentSection(context, parent, this);
-        } else if (i1 == FragmentItem.CellType.ANALGESIC_PRESCRIPTION){
-            rowView = AnalgesicPrescription.setupAnalgesicPrescriptionSection(context, parent, this);
+        } else if (i1 == FragmentItem.CellType.ED_EVENTS) {
+            rowView = EDEvents.setupEventSection(context, parent, this);
         }
 
 

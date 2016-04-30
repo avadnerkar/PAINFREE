@@ -53,8 +53,7 @@ public class EDEvents {
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_BOOL, context.getString(R.string.yes));
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(0));
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, null);
-
-
+                    PainAssessments.clearData();
 
 
                 } else {
@@ -66,7 +65,7 @@ public class EDEvents {
         });
 
         final ArrayList<Integer> orderOfEvents = new ArrayList<>();
-        Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_EVENTS_BOOL, DBAdapter.KEY_EVENTS_NUM, DBAdapter.KEY_EVENTS_ORDER});
+        final Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_EVENTS_BOOL, DBAdapter.KEY_EVENTS_NUM, DBAdapter.KEY_EVENTS_ORDER});
 
         if (cursor.moveToFirst()){
             final int numEvents = cursor.getInt(1);
@@ -88,20 +87,32 @@ public class EDEvents {
                         @Override
                         public void onClick(int i) {
 
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(numEvents+1));
-                            orderOfEvents.add(i);
-
-                            String orderStringNew = TextUtils.join("", orderOfEvents);
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, orderStringNew);
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_BOOL, null);
+                            Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_NUM, DBAdapter.KEY_ANALGESIC_PRES_NUM, DBAdapter.KEY_ANALGESIC_ADMIN_NUM});
+                            cursor1.moveToFirst();
                             switch (i){
                                 case 0:
+                                    int numPainAssessments = cursor1.getInt(0);
+                                    if (numPainAssessments>=maxEvents){
+                                        AppUtils.showAlert("Error", "Reached pain assessment limit", context);
+                                        return;
+                                    } else {
+                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(numPainAssessments+1));
+                                    }
                                     break;
                                 case 1:
                                     break;
                                 case 2:
                                     break;
                             }
+                            cursor1.close();
+
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(numEvents+1));
+                            orderOfEvents.add(i);
+
+                            String orderStringNew = TextUtils.join("", orderOfEvents);
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, orderStringNew);
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_BOOL, null);
+
                             adapter.notifyDataSetChanged();
                         }
                     });
@@ -112,9 +123,20 @@ public class EDEvents {
 
             for (int i=0; i<orderOfEvents.size(); i++){
                 Integer type = orderOfEvents.get(i);
-
+                final int I = i;
+                View childView = null;
                 switch (type){
                     case 0:{
+                        childView = PainAssessments.setupPainAssessmentSection(context, container, adapter, i, new MinusHandler() {
+                            @Override
+                            public void onClick() {
+                                orderOfEvents.remove(I);
+                                String orderStringNew = TextUtils.join("", orderOfEvents);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, orderStringNew);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(numEvents-1));
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
                         break;
                     }
                     case 1:{
@@ -125,15 +147,20 @@ public class EDEvents {
                         break;
                     }
                 }
+
+                container.addView(childView);
             }
 
         }
 
-
-
+        cursor.close();
 
         return rowView;
 
+    }
+
+    public interface MinusHandler{
+        void onClick();
     }
 
 }
