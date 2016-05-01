@@ -316,8 +316,17 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 unfilledMandatoryFields = FragmentC.unfilledMandatoryFields();
                 break;
+            case 3:
+                unfilledMandatoryFields = FragmentD.unfilledMandatoryFields();
+                break;
             case 4:
                 unfilledMandatoryFields = FragmentE.unfilledMandatoryFields();
+                break;
+            case 5:
+                unfilledMandatoryFields = FragmentF.unfilledMandatoryFields();
+                break;
+            case 6:
+                unfilledMandatoryFields = FragmentG.unfilledMandatoryFields();
                 break;
             default:
                 break;

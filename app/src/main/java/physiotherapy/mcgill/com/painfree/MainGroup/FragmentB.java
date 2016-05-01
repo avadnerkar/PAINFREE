@@ -33,6 +33,7 @@ public class FragmentB extends Fragment {
         items = new ArrayList<>();
 
         items.add(new FragmentItem(getString(R.string.date_of_birth), FragmentItem.CellType.DATEPICKER, new String[]{"1916-01-01", "1916-01-01", "1944-12-31"}, null, DBAdapter.KEY_DATEOFBIRTH));
+        items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.sex), FragmentItem.CellType.RADIO, new String[]{getString(R.string.female), getString(R.string.male)}, null, DBAdapter.KEY_SEX));
         items.get(items.size()-1).isMandatory = true;
         adapter = new FragmentListAdapter(getActivity(), items);

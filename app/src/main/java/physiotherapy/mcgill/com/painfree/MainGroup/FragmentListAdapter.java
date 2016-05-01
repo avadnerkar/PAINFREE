@@ -207,7 +207,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
         } else if (i1 == FragmentItem.CellType.RADIO_WITH_SPECIFY) {
 
-            ViewHolderRadioWithSpecify holder;
+            final ViewHolderRadioWithSpecify holder;
             if (convertView == null){
                 convertView = inflater.inflate(R.layout.cell_fragment_radio_with_specify, parent, false);
                 holder = new ViewHolderRadioWithSpecify();
@@ -245,10 +245,20 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     @Override
                     public void onClick(final View view) {
 
+                        if (index==0){
+                            holder.editText.setVisibility(View.VISIBLE);
+                        } else {
+                            holder.editText.setVisibility(View.GONE);
+                            holder.editText.setText("");
+                        }
+
                         Thread thread = new Thread() {
                             @Override
                             public void run() {
                                 MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, items.get(position).databaseOptions[index]);
+                                if (index == 1){
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).extraOptions[0], "");
+                                }
                             }
                         };
                         thread.start();
@@ -259,6 +269,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
 
+            holder.editText.setVisibility(View.GONE);
             if (cursor.moveToFirst()) {
                 String radioValue = cursor.getString(0);
                 if (radioValue != null && !radioValue.equals("")) {
@@ -266,6 +277,10 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         String rbString = items.get(position).databaseOptions[i];
                         if (rbString.equals(radioValue)) {
                             ((RadioButton) holder.rg.getChildAt(i)).setChecked(true);
+
+                            if (i==0){
+                                holder.editText.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
                 } else {
