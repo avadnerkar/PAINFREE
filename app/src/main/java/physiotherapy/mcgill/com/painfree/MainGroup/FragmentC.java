@@ -111,9 +111,11 @@ public class FragmentC extends Fragment {
                         ArrayList<String> warning = new ArrayList<>();
                         warning.add("EXCLUSION");
                         warning.add("Head, toe, and finger fractures are excluded from this study");
+                        cursor2.close();
                         return warning;
                     }
                 }
+                cursor2.close();
             }
 
             for (FragmentItem item : items) {

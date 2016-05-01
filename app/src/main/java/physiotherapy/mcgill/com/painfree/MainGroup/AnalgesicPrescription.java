@@ -48,8 +48,6 @@ public class AnalgesicPrescription {
             DBAdapter.KEY_ANALGESIC_PRES_6_DATE, DBAdapter.KEY_ANALGESIC_PRES_6_TIME, DBAdapter.KEY_ANALGESIC_PRES_6_TYPE, DBAdapter.KEY_ANALGESIC_PRES_6_MODE};
 
     public static final int numFields = 4;
-    public static final boolean[] mandatoryKeys = new boolean[]{
-    true, true, true, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false};
 
     public static View setupAnalgesicPrescriptionSection(final Context context, ViewGroup parent, final ArrayAdapter adapter, final int index, final int globalIndex, final EDEvents.MinusHandler handler){
 
@@ -59,7 +57,7 @@ public class AnalgesicPrescription {
         int mDay;
         int mYear;
 
-        final String[] spinnerOptions = new String[]{"", context.getString(R.string.standard_order), context.getString(R.string.collective_order_body), context.getString(R.string.pharmaceutical_algorithm)};
+        final String[] spinnerOptions = new String[]{"", context.getString(R.string.not_specified), context.getString(R.string.standard_order), context.getString(R.string.collective_order_body), context.getString(R.string.pharmaceutical_algorithm)};
         final String[] checkBoxItems = new String[]{context.getString(R.string.acetaminophen), context.getString(R.string.nsaids), context.getString(R.string.opioid)};
 
         final Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
@@ -400,6 +398,22 @@ public class AnalgesicPrescription {
 
     }
 
+    public static boolean canAdd(){
+        Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM);
+        int num = cursor.getInt(0);
+        cursor.close();
+        boolean canAdd = true;
+        if (num > 0){
+            cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, (num-1)*numFields+1, num*numFields+1));
+            for (int i=0; i<cursor.getColumnCount(); i++){
+                if (cursor.getString(i) == null || cursor.getString(i).equals("")){
+                    canAdd = false;
+                    break;
+                }
+            }
+        }
+        return canAdd;
+    }
 
     public static void clearData(){
         MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[0], "0");

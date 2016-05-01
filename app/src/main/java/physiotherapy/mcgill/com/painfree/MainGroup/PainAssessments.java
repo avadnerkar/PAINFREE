@@ -252,6 +252,24 @@ public class PainAssessments {
 
     }
 
+    public static boolean canAdd(){
+        Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM);
+        int num = cursor.getInt(0);
+        cursor.close();
+        boolean canAdd = true;
+        if (num > 0){
+            cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, (num-1)*numFields+1, num*numFields+1));
+            for (int i=0; i<cursor.getColumnCount(); i++){
+                if (cursor.getString(i) == null || cursor.getString(i).equals("")){
+                    canAdd = false;
+                    break;
+                }
+            }
+        }
+        return canAdd;
+    }
+
+
 
     public static void clearData(){
         MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[0], "0");

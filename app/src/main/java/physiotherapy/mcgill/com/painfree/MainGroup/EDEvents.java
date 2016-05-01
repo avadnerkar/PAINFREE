@@ -93,69 +93,101 @@ public class EDEvents {
                 @Override
                 public void onClick(View v) {
 
-                    AppUtils.showListDialog(context.getString(R.string.select_type_of_event), new String[]{context.getString(R.string.pain_assessment), context.getString(R.string.analgesic_prescription), context.getString(R.string.analgesic_administration)}, context, new AppUtils.ListHandler() {
-                        @Override
-                        public void onClick(int i) {
+                    boolean canAdd = true;
+                    if (numEvents >0){
+                        int lastEventType = orderOfEvents.get(orderOfEvents.size()-1);
 
-                            Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_NUM, DBAdapter.KEY_ANALGESIC_PRES_NUM, DBAdapter.KEY_ANALGESIC_ADMIN_NUM});
-                            cursor1.moveToFirst();
 
-                            Cursor dateCursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_ARRIVALDATE);
-                            dateCursor.moveToFirst();
-                            String defaultDate = dateCursor.getString(0);
-                            dateCursor.close();
-                            switch (i){
-                                case 0:
-                                    int numPainAssessments = cursor1.getInt(0);
-                                    if (numPainAssessments>=maxEvents){
-                                        AppUtils.showAlert("Error", "Reached pain assessment limit", context);
-                                        return;
-                                    } else {
-                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(numPainAssessments+1));
-                                        if (!defaultDate.equals(context.getString(R.string.none))){
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, PainAssessments.keys[(numPainAssessments)*PainAssessments.numFields+1], defaultDate);
-                                        }
-
-                                    }
-                                    break;
-                                case 1:
-                                    int numAnalgesicPres = cursor1.getInt(1);
-                                    if (numAnalgesicPres>=maxEvents){
-                                        AppUtils.showAlert("Error", "Reached analgesic prescription limit", context);
-                                        return;
-                                    } else {
-                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM, String.valueOf(numAnalgesicPres+1));
-                                        if (!defaultDate.equals(context.getString(R.string.none))){
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicPrescription.keys[(numAnalgesicPres)*AnalgesicPrescription.numFields+1], defaultDate);
-                                        }
-                                    }
-                                    break;
-                                case 2:
-                                    int numAnalgesicAdmin = cursor1.getInt(2);
-                                    if (numAnalgesicAdmin>=maxEvents){
-                                        AppUtils.showAlert("Error", "Reached analgesic administration limit", context);
-                                        return;
-                                    } else {
-                                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, String.valueOf(numAnalgesicAdmin+1));
-                                        if (!defaultDate.equals(context.getString(R.string.none))){
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicAdministration.keys[(numAnalgesicAdmin)*AnalgesicAdministration.numFields+1], defaultDate);
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicAdministration.keys[(numAnalgesicAdmin)*AnalgesicAdministration.numFields+18], defaultDate);
-                                        }
-                                    }
-                                    break;
+                        switch (lastEventType){
+                            case 0:{
+                                canAdd = PainAssessments.canAdd();
+                                break;
                             }
-                            cursor1.close();
-
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(numEvents+1));
-                            orderOfEvents.add(i);
-
-                            String orderStringNew = TextUtils.join("", orderOfEvents);
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, orderStringNew);
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_BOOL, null);
-
-                            adapter.notifyDataSetChanged();
+                            case 1:{
+                                canAdd = AnalgesicPrescription.canAdd();
+                                break;
+                            }
+                            case 2:{
+                                canAdd = AnalgesicAdministration.canAdd();
+                                break;
+                            }
                         }
-                    });
+                    }
+
+                    if (canAdd){
+                        AppUtils.showListDialog(context.getString(R.string.select_type_of_event), new String[]{context.getString(R.string.pain_assessment), context.getString(R.string.analgesic_prescription), context.getString(R.string.analgesic_administration)}, context, new AppUtils.ListHandler() {
+                            @Override
+                            public void onClick(int i) {
+
+                                Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_NUM, DBAdapter.KEY_ANALGESIC_PRES_NUM, DBAdapter.KEY_ANALGESIC_ADMIN_NUM});
+                                cursor1.moveToFirst();
+
+                                Cursor dateCursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_ARRIVALDATE);
+                                dateCursor.moveToFirst();
+                                String defaultDate = dateCursor.getString(0);
+                                dateCursor.close();
+                                switch (i){
+                                    case 0:
+                                        int numPainAssessments = cursor1.getInt(0);
+                                        if (numPainAssessments>=maxEvents){
+                                            AppUtils.showAlert("Error", "Reached pain assessment limit", context);
+                                            return;
+                                        } else {
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(numPainAssessments+1));
+                                            if (!defaultDate.equals(context.getString(R.string.none))){
+                                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, PainAssessments.keys[(numPainAssessments)*PainAssessments.numFields+1], defaultDate);
+                                            }
+
+                                        }
+                                        break;
+                                    case 1:
+                                        int numAnalgesicPres = cursor1.getInt(1);
+                                        if (numAnalgesicPres>=maxEvents){
+                                            AppUtils.showAlert("Error", "Reached analgesic prescription limit", context);
+                                            return;
+                                        } else {
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM, String.valueOf(numAnalgesicPres+1));
+                                            if (!defaultDate.equals(context.getString(R.string.none))){
+                                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicPrescription.keys[(numAnalgesicPres)*AnalgesicPrescription.numFields+1], defaultDate);
+                                            }
+                                        }
+                                        break;
+                                    case 2:
+                                        int numAnalgesicAdmin = cursor1.getInt(2);
+                                        if (numAnalgesicAdmin>=maxEvents){
+                                            AppUtils.showAlert("Error", "Reached analgesic administration limit", context);
+                                            return;
+                                        } else {
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, String.valueOf(numAnalgesicAdmin+1));
+                                            if (!defaultDate.equals(context.getString(R.string.none))){
+                                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicAdministration.keys[(numAnalgesicAdmin)*AnalgesicAdministration.numFields+1], defaultDate);
+                                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicAdministration.keys[(numAnalgesicAdmin)*AnalgesicAdministration.numFields+18], defaultDate);
+                                            }
+                                        }
+                                        break;
+                                }
+                                cursor1.close();
+
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(numEvents+1));
+                                orderOfEvents.add(i);
+
+                                String orderStringNew = TextUtils.join("", orderOfEvents);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, orderStringNew);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_BOOL, null);
+
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                    } else {
+                        AppUtils.showDefaultAlertDialog("Error", "Please complete the current event", context, new AppUtils.DefaultAlertHandler() {
+                            @Override
+                            public void onClick() {
+
+                            }
+                        });
+                    }
+
+
 
                 }
             });

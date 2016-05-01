@@ -70,7 +70,7 @@ public class FragmentE extends Fragment {
 
         if (MainActivity.currentPatientId != -1) {
 
-            Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_EVENTS_NUM, DBAdapter.KEY_EVENTS_BOOL});
+            Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_EVENTS_NUM, DBAdapter.KEY_EVENTS_BOOL, DBAdapter.KEY_EVENTS_ORDER});
 
             if (cursor.moveToFirst()){
                 if (cursor.getString(1) == null){
@@ -78,46 +78,41 @@ public class FragmentE extends Fragment {
                     if (numAssessments == 0){
                         unfilledTitles.add("ED Events");
                     } else {
-//                        String[] keys = Arrays.copyOfRange(PainAssessments.keys, (numAssessments-1)*3+1, numAssessments*3+1);
-//                        Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
-//                        for (int i=0; i<3; i++){
-//                            if (cursor1.getString(i) == null || cursor1.getString(i).equals("")){
-//                                unfilledTitles.add("Pain assessments");
-//                                break;
-//                            }
-//                        }
-//                        cursor1.close();
+
+                        final ArrayList<Integer> orderOfEvents = new ArrayList<>();
+                        final String orderString = cursor.getString(2);
+                        if (orderString != null) {
+                            for (int i = 0; i < orderString.length(); i++) {
+                                Integer type = Character.getNumericValue(orderString.charAt(i));
+                                orderOfEvents.add(type);
+                            }
+                        }
+
+                        boolean complete = true;
+                        int lastEventType = orderOfEvents.get(orderOfEvents.size()-1);
+                        switch (lastEventType){
+                            case 0:{
+                                complete = PainAssessments.canAdd();
+                                break;
+                            }
+                            case 1:{
+                                complete = AnalgesicPrescription.canAdd();
+                                break;
+                            }
+                            case 2:{
+                                complete = AnalgesicAdministration.canAdd();
+                                break;
+                            }
+                        }
+
+                        if (!complete){
+                            unfilledTitles.add("ED Events");
+                        }
                     }
                 }
             }
 
             cursor.close();
-
-
-//            cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_ANALGESIC_PRES_NUM, DBAdapter.KEY_ANALGESIC_PRES_BOOL});
-//
-//            if (cursor.moveToFirst()){
-//                if (cursor.getString(1) == null){
-//                    int numAssessments = cursor.getInt(0);
-//                    if (numAssessments == 0){
-//                        unfilledTitles.add("Analgesic prescription");
-//                    } else {
-//                        String[] keys = Arrays.copyOfRange(AnalgesicPrescription.keys, (numAssessments-1)*28+1, numAssessments*28+1);
-//                        //boolean[] mandatoryKeys = Arrays.copyOfRange(AnalgesicPrescription.mandatoryKeys, (numAssessments-1)*28+1, numAssessments*28+1);
-//                        Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
-//                        for (int i=0; i<28; i++){
-//                            if (AnalgesicPrescription.mandatoryKeys[i] && (cursor1.getString(i) == null || cursor1.getString(i).equals(""))){
-//                                unfilledTitles.add("Analgesic prescription");
-//                                break;
-//                            }
-//                        }
-//                        cursor1.close();
-//                    }
-//                }
-//            }
-//
-//            cursor.close();
-
         }
 
         return unfilledTitles;
