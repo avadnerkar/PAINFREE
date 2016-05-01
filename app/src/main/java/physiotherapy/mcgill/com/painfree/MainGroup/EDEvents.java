@@ -24,8 +24,8 @@ import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
  */
 public class EDEvents {
 
-    public static View setupEventSection(final Context context, ViewGroup parent, final ArrayAdapter adapter){
-
+    public static View setupEventSection(final Context context, ViewGroup parent, View convertView, final ArrayAdapter adapter){
+        
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.cell_fragment_event, parent, false);
 

@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         openDB();
         currentPatientId = -1;
 
-        context = this.getApplicationContext();
+        context = this;
 
         programmaticallySelectTab = false;
 
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.patient_list) {
 
             clearPatientSelection();
-            Intent intent = new Intent(this.getApplicationContext(), PatientListActivity.class);
+            Intent intent = new Intent(this, PatientListActivity.class);
             startActivity(intent);
 
             return true;

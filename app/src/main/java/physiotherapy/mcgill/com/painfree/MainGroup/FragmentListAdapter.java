@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -65,22 +66,30 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
     }
 
     @Override
-    public View getView(final int position, final View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
-        View rowView = null;
-        TextView textView;
         final Cursor cursor;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        FragmentItem.CellType i1 = items.get(position).cellType;
-        if (i1 == FragmentItem.CellType.NUMERIC) {
-            rowView = inflater.inflate(R.layout.cell_fragment_numeric, parent, false);
-            textView = (TextView) rowView.findViewById(R.id.title);
-            textView.setText(items.get(position).title);
-            EditText editText = (EditText) rowView.findViewById(R.id.edit);
+        FragmentItem.CellType i1 = FragmentItem.CellType.values()[this.getItemViewType(position)];
 
+        if (i1 == FragmentItem.CellType.NUMERIC) {
+
+            ViewHolderNumeric holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_numeric, parent, false);
+                holder = new ViewHolderNumeric();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.editText = (EditText) convertView.findViewById(R.id.edit);
+
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolderNumeric) convertView.getTag();
+            }
+
+            holder.textView.setText(items.get(position).title);
 
             if (items.get(position).uiOptions != null) {
-                editText.setHint(items.get(position).uiOptions[0]);
+                holder.editText.setHint(items.get(position).uiOptions[0]);
             }
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
@@ -88,16 +97,16 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             if (cursor.moveToFirst()) {
                 String text = cursor.getString(0);
                 if (text != null) {
-                    editText.setText(text);
+                    holder.editText.setText(text);
                 } else {
-                    editText.setText("");
+                    holder.editText.setText("");
                 }
 
             } else {
-                editText.setText("");
+                holder.editText.setText("");
             }
 
-            editText.addTextChangedListener(new TextWatcher() {
+            holder.editText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -125,27 +134,37 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
 
         } else if (i1 == FragmentItem.CellType.RADIO) {
-            rowView = inflater.inflate(R.layout.cell_fragment_radio, parent, false);
-            textView = (TextView) rowView.findViewById(R.id.title);
-            textView.setText(items.get(position).title);
 
-            final RadioGroup rg = (RadioGroup) rowView.findViewById(R.id.rg);
+            ViewHolderRadio holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_radio, parent, false);
+                holder = new ViewHolderRadio();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.rg = (RadioGroup) convertView.findViewById(R.id.rg);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolderRadio) convertView.getTag();
+
+            }
+
+            holder.textView.setText(items.get(position).title);
+            holder.rg.removeAllViews();
 
             if (items.get(position).databaseOptions == null) {
                 items.get(position).databaseOptions = items.get(position).uiOptions;
             }
 
             if (items.get(position).uiOptions.length > 2 && items.get(position).uiOptions.length < 7) {
-                rg.setOrientation(RadioGroup.VERTICAL);
+                holder.rg.setOrientation(RadioGroup.VERTICAL);
             } else {
-                rg.setOrientation(RadioGroup.HORIZONTAL);
+                holder.rg.setOrientation(RadioGroup.HORIZONTAL);
             }
 
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 RadioButton rb = new RadioButton(context);
                 rb.setText(items.get(position).uiOptions[i]);
                 rb.setTextSize(context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
-                rg.addView(rb);
+                holder.rg.addView(rb);
 
                 final int index = i;
                 rb.setOnClickListener(new View.OnClickListener() {
@@ -172,44 +191,51 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     for (int i = 0; i < items.get(position).databaseOptions.length; i++) {
                         String rbString = items.get(position).databaseOptions[i];
                         if (rbString.equals(radioValue)) {
-                            ((RadioButton) rg.getChildAt(i)).setChecked(true);
+                            ((RadioButton) holder.rg.getChildAt(i)).setChecked(true);
                         }
                     }
                 } else {
-                    rg.clearCheck();
+                    holder.rg.clearCheck();
                 }
 
             } else {
-                rg.clearCheck();
+                holder.rg.clearCheck();
             }
 
             cursor.close();
 
         } else if (i1 == FragmentItem.CellType.RADIO_WITH_SPECIFY) {
-            rowView = inflater.inflate(R.layout.cell_fragment_radio_with_specify, parent, false);
-            textView = (TextView) rowView.findViewById(R.id.title);
-            textView.setText(items.get(position).title);
 
-            EditText editText = (EditText) rowView.findViewById(R.id.specify);
+            ViewHolderRadioWithSpecify holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_radio_with_specify, parent, false);
+                holder = new ViewHolderRadioWithSpecify();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.editText = (EditText) convertView.findViewById(R.id.specify);
+                holder.rg = (RadioGroup) convertView.findViewById(R.id.rg);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolderRadioWithSpecify) convertView.getTag();
+            }
 
-            final RadioGroup rg = (RadioGroup) rowView.findViewById(R.id.rg);
+            holder.textView.setText(items.get(position).title);
 
             if (items.get(position).databaseOptions == null) {
                 items.get(position).databaseOptions = items.get(position).uiOptions;
             }
 
             if (items.get(position).uiOptions.length > 2 && items.get(position).uiOptions.length < 7) {
-                rg.setOrientation(RadioGroup.VERTICAL);
-                rg.setOrientation(RadioGroup.VERTICAL);
+                holder.rg.setOrientation(RadioGroup.VERTICAL);
+                holder.rg.setOrientation(RadioGroup.VERTICAL);
             } else {
-                rg.setOrientation(RadioGroup.HORIZONTAL);
+                holder.rg.setOrientation(RadioGroup.HORIZONTAL);
             }
 
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 RadioButton rb = new RadioButton(context);
                 rb.setText(items.get(position).uiOptions[i]);
                 rb.setTextSize(context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
-                rg.addView(rb);
+                holder.rg.addView(rb);
 
                 final int index = i;
                 rb.setOnClickListener(new View.OnClickListener() {
@@ -237,15 +263,15 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     for (int i = 0; i < items.get(position).databaseOptions.length; i++) {
                         String rbString = items.get(position).databaseOptions[i];
                         if (rbString.equals(radioValue)) {
-                            ((RadioButton) rg.getChildAt(i)).setChecked(true);
+                            ((RadioButton) holder.rg.getChildAt(i)).setChecked(true);
                         }
                     }
                 } else {
-                    rg.clearCheck();
+                    holder.rg.clearCheck();
                 }
 
             } else {
-                rg.clearCheck();
+                holder.rg.clearCheck();
             }
 
             cursor.close();
@@ -256,16 +282,16 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             if (cursor2.moveToFirst()) {
                 String text = cursor2.getString(0);
                 if (text != null) {
-                    editText.setText(text);
+                    holder.editText.setText(text);
                 } else {
-                    editText.setText("");
+                    holder.editText.setText("");
                 }
 
             } else {
-                editText.setText("");
+                holder.editText.setText("");
             }
 
-            editText.addTextChangedListener(new TextWatcher() {
+            holder.editText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -294,26 +320,35 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
         }
 
         else if (i1 == FragmentItem.CellType.DATEPICKER) {
-            rowView = inflater.inflate(R.layout.cell_fragment_datepicker, parent, false);
-            textView = (TextView) rowView.findViewById(R.id.title);
-            textView.setText(items.get(position).title);
 
-            final Button button = (Button) rowView.findViewById(R.id.button);
-            button.setText(context.getString(R.string.select_date));
-
-            final Button clearButton = (Button) rowView.findViewById(R.id.clear);
-            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("optional")) {
-                clearButton.setVisibility(View.VISIBLE);
+            final ViewHolderDatePicker holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_datepicker, parent, false);
+                holder = new ViewHolderDatePicker();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.button = (Button) convertView.findViewById(R.id.button);
+                holder.clearButton = (Button) convertView.findViewById(R.id.clear);
+                holder.noneBox = (CheckBox) convertView.findViewById(R.id.noneCheckbox);
+                convertView.setTag(holder);
             } else {
-                clearButton.setVisibility(View.GONE);
+                holder = (ViewHolderDatePicker) convertView.getTag();
             }
 
-            final CheckBox noneBox = (CheckBox) rowView.findViewById(R.id.noneCheckbox);
+
+            holder.textView.setText(items.get(position).title);
+            holder.button.setText(context.getString(R.string.select_date));
+
+            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("optional")) {
+                holder.clearButton.setVisibility(View.VISIBLE);
+            } else {
+                holder.clearButton.setVisibility(View.GONE);
+            }
+
 
             if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("none")) {
-                noneBox.setVisibility(View.VISIBLE);
+                holder.noneBox.setVisibility(View.VISIBLE);
             } else {
-                noneBox.setVisibility(View.GONE);
+                holder.noneBox.setVisibility(View.GONE);
             }
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
@@ -344,7 +379,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 if (dateString != null){
 
                     if (dateString.equals("None")){
-                        noneBox.setChecked(true);
+                        holder.noneBox.setChecked(true);
                     } else if (!dateString.equals("")) {
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         try {
@@ -355,7 +390,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                             mMonth = cal.get(Calendar.MONTH);
                             mDay = cal.get(Calendar.DAY_OF_MONTH);
 
-                            button.setText(mYear + "-" + String.format("%02d", mMonth + 1) + "-" + String.format("%02d", mDay));
+                            holder.button.setText(mYear + "-" + String.format("%02d", mMonth + 1) + "-" + String.format("%02d", mDay));
                         } catch (ParseException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
@@ -368,7 +403,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             final int month = mMonth;
             final int day = mDay;
 
-            button.setOnClickListener(new View.OnClickListener() {
+            holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -376,8 +411,8 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     DatePickerDialog mDatePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                         public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                             final String text = selectedyear + "-" + String.format("%02d", selectedmonth + 1) + "-" + String.format("%02d", selectedday);
-                            button.setText(text);
-                            noneBox.setChecked(false);
+                            holder.button.setText(text);
+                            holder.noneBox.setChecked(false);
                             Thread thread = new Thread() {
                                 @Override
                                 public void run() {
@@ -472,10 +507,10 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 }
             });
 
-            clearButton.setOnClickListener(new View.OnClickListener() {
+            holder.clearButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    button.setText(context.getString(R.string.select_date));
+                    holder.button.setText(context.getString(R.string.select_date));
                     Thread thread = new Thread() {
                         @Override
                         public void run() {
@@ -496,12 +531,12 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 }
             });
 
-            noneBox.setOnClickListener(new View.OnClickListener() {
+            holder.noneBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final boolean isChecked = ((CheckBox) v).isChecked();
                     if (isChecked) {
-                        button.setText(context.getString(R.string.select_date));
+                        holder.button.setText(context.getString(R.string.select_date));
                     }
 
                     Thread thread = new Thread() {
@@ -531,30 +566,39 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cursor.close();
 
         } else if (i1 == FragmentItem.CellType.TIMEPICKER) {
-            rowView = inflater.inflate(R.layout.cell_fragment_datepicker, parent, false);
-            textView = (TextView) rowView.findViewById(R.id.title);
-            textView.setText(items.get(position).title);
 
-            final Button timePickerButton = (Button) rowView.findViewById(R.id.button);
-            timePickerButton.setText(context.getString(R.string.select_time));
-
-            final Button clearButton1 = (Button) rowView.findViewById(R.id.clear);
-            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("optional")) {
-                clearButton1.setVisibility(View.VISIBLE);
+            final ViewHolderTimePicker holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_datepicker, parent, false);
+                holder = new ViewHolderTimePicker();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.button = (Button) convertView.findViewById(R.id.button);
+                holder.clearButton = (Button) convertView.findViewById(R.id.clear);
+                holder.noneBox = (CheckBox) convertView.findViewById(R.id.noneCheckbox);
+                convertView.setTag(holder);
             } else {
-                clearButton1.setVisibility(View.GONE);
+                holder = (ViewHolderTimePicker) convertView.getTag();
+            }
+
+            holder.textView.setText(items.get(position).title);
+
+            holder.button.setText(context.getString(R.string.select_time));
+
+            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("optional")) {
+                holder.clearButton.setVisibility(View.VISIBLE);
+            } else {
+                holder.clearButton.setVisibility(View.GONE);
             }
 
             final Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
 
-            final CheckBox noneBox = (CheckBox) rowView.findViewById(R.id.noneCheckbox);
 
             if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("none")) {
-                noneBox.setVisibility(View.VISIBLE);
+                holder.noneBox.setVisibility(View.VISIBLE);
             } else {
-                noneBox.setVisibility(View.GONE);
+                holder.noneBox.setVisibility(View.GONE);
             }
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
@@ -565,9 +609,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 if (timeString != null){
 
                     if (timeString.equals("None")){
-                        noneBox.setChecked(true);
+                        holder.noneBox.setChecked(true);
                     } else if (!timeString.equals("")) {
-                        timePickerButton.setText(timeString);
+                        holder.button.setText(timeString);
                         String[] parts = timeString.split(":");
                         hour = Integer.parseInt(parts[0]);
                         minute = Integer.parseInt(parts[1]);
@@ -579,7 +623,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             final int mHour = hour;
             final int mMinute = minute;
 
-            timePickerButton.setOnClickListener(new View.OnClickListener() {
+            holder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -588,8 +632,8 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                             final String value = String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute);
-                            timePickerButton.setText(value);
-                            noneBox.setChecked(false);
+                            holder.button.setText(value);
+                            holder.noneBox.setChecked(false);
                             Thread thread = new Thread() {
                                 @Override
                                 public void run() {
@@ -615,10 +659,10 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 }
             });
 
-            clearButton1.setOnClickListener(new View.OnClickListener() {
+            holder.clearButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    timePickerButton.setText(context.getString(R.string.select_date));
+                    holder.button.setText(context.getString(R.string.select_date));
                     Thread thread = new Thread() {
                         @Override
                         public void run() {
@@ -639,12 +683,12 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 }
             });
 
-            noneBox.setOnClickListener(new View.OnClickListener() {
+            holder.noneBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final boolean isChecked = ((CheckBox) v).isChecked();
                     if (isChecked) {
-                        timePickerButton.setText(context.getString(R.string.select_time));
+                        holder.button.setText(context.getString(R.string.select_time));
                     }
 
                     Thread thread = new Thread() {
@@ -676,68 +720,85 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cursor.close();
 
         } else if (i1 == FragmentItem.CellType.FRACTURESITE) {
-            rowView = inflater.inflate(R.layout.cell_fragment_fracture_site, parent, false);
-            CheckBox cbFoot = (CheckBox) rowView.findViewById(R.id.foot);
-            CheckBox cbAnkle = (CheckBox) rowView.findViewById(R.id.ankle);
-            CheckBox cbTibia = (CheckBox) rowView.findViewById(R.id.tibiaFibula);
-            CheckBox cbFemur = (CheckBox) rowView.findViewById(R.id.femur);
-            CheckBox cbHip = (CheckBox) rowView.findViewById(R.id.hip);
-            CheckBox cbPelvis = (CheckBox) rowView.findViewById(R.id.pelvis);
-            CheckBox cbVertebra = (CheckBox) rowView.findViewById(R.id.vertebra);
-            CheckBox cbRib = (CheckBox) rowView.findViewById(R.id.rib);
-            CheckBox cbHumerus = (CheckBox) rowView.findViewById(R.id.humerus);
-            CheckBox cbForearm = (CheckBox) rowView.findViewById(R.id.forearm);
-            CheckBox cbWrist = (CheckBox) rowView.findViewById(R.id.wrist);
 
-            CheckBox cbFootLeft = (CheckBox) rowView.findViewById(R.id.leftFoot);
-            CheckBox cbFootRight = (CheckBox) rowView.findViewById(R.id.rightFoot);
-            CheckBox cbFootUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedFoot);
-            CheckBox cbAnkleLeft = (CheckBox) rowView.findViewById(R.id.leftAnkle);
-            CheckBox cbAnkleRight = (CheckBox) rowView.findViewById(R.id.rightAnkle);
-            CheckBox cbAnkleUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedAnkle);
-            CheckBox cbTibiaLeft = (CheckBox) rowView.findViewById(R.id.leftTibiaFibula);
-            CheckBox cbTibiaRight = (CheckBox) rowView.findViewById(R.id.rightTibiaFibula);
-            CheckBox cbTibiaUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedTibiaFibula);
-            CheckBox cbFemurLeft = (CheckBox) rowView.findViewById(R.id.leftFemur);
-            CheckBox cbFemurRight = (CheckBox) rowView.findViewById(R.id.rightFemur);
-            CheckBox cbFemurUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedFemur);
-            CheckBox cbHipLeft = (CheckBox) rowView.findViewById(R.id.leftHip);
-            CheckBox cbHipRight = (CheckBox) rowView.findViewById(R.id.rightHip);
-            CheckBox cbHipUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedHip);
-            CheckBox cbRibLeft = (CheckBox) rowView.findViewById(R.id.leftRib);
-            CheckBox cbRibRight = (CheckBox) rowView.findViewById(R.id.rightRib);
-            CheckBox cbRibUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedRib);
-            CheckBox cbHumerusLeft = (CheckBox) rowView.findViewById(R.id.leftHumerus);
-            CheckBox cbHumerusRight = (CheckBox) rowView.findViewById(R.id.rightHumerus);
-            CheckBox cbHumerusUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedHumerus);
-            CheckBox cbForearmLeft = (CheckBox) rowView.findViewById(R.id.leftForearm);
-            CheckBox cbForearmRight = (CheckBox) rowView.findViewById(R.id.rightForearm);
-            CheckBox cbForearmUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedForearm);
-            CheckBox cbWristLeft = (CheckBox) rowView.findViewById(R.id.leftWrist);
-            CheckBox cbWristRight = (CheckBox) rowView.findViewById(R.id.rightWrist);
-            CheckBox cbWristUnspecified = (CheckBox) rowView.findViewById(R.id.unspecifiedWrist);
+            final ViewHolderFractureSite holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_fracture_site, parent, false);
+                holder = new ViewHolderFractureSite();
+                holder.cbFoot = (CheckBox) convertView.findViewById(R.id.foot);
+                holder.cbAnkle = (CheckBox) convertView.findViewById(R.id.ankle);
+                holder.cbTibia = (CheckBox) convertView.findViewById(R.id.tibiaFibula);
+                holder.cbFemur = (CheckBox) convertView.findViewById(R.id.femur);
+                holder.cbHip = (CheckBox) convertView.findViewById(R.id.hip);
+                holder.cbPelvis = (CheckBox) convertView.findViewById(R.id.pelvis);
+                holder.cbVertebra = (CheckBox) convertView.findViewById(R.id.vertebra);
+                holder.cbRib = (CheckBox) convertView.findViewById(R.id.rib);
+                holder.cbHumerus = (CheckBox) convertView.findViewById(R.id.humerus);
+                holder.cbForearm = (CheckBox) convertView.findViewById(R.id.forearm);
+                holder.cbWrist = (CheckBox) convertView.findViewById(R.id.wrist);
 
-            setupFractureSiteClickListener(cbFoot, cbFootLeft, cbFootRight, cbFootUnspecified, DBAdapter.KEY_FRACTURESITE_FOOT, rowView);
-            setupFractureSiteClickListener(cbAnkle, cbAnkleLeft, cbAnkleRight, cbAnkleUnspecified, DBAdapter.KEY_FRACTURESITE_ANKLE, rowView);
-            setupFractureSiteClickListener(cbTibia, cbTibiaLeft, cbTibiaRight, cbTibiaUnspecified, DBAdapter.KEY_FRACTURESITE_TIBIA, rowView);
-            setupFractureSiteClickListener(cbFemur, cbFemurLeft, cbFemurRight, cbFemurUnspecified, DBAdapter.KEY_FRACTURESITE_FEMUR, rowView);
-            setupFractureSiteClickListener(cbHip, cbHipLeft, cbHipRight, cbHipUnspecified, DBAdapter.KEY_FRACTURESITE_HIP, rowView);
-            setupFractureSiteClickListener(cbPelvis, null, null, null, DBAdapter.KEY_FRACTURESITE_PELVIS, rowView);
-            setupFractureSiteClickListener(cbVertebra, null, null, null, DBAdapter.KEY_FRACTURESITE_VERTEBRA, rowView);
-            setupFractureSiteClickListener(cbRib, cbRibLeft, cbRibRight, cbRibUnspecified, DBAdapter.KEY_FRACTURESITE_RIB, rowView);
-            setupFractureSiteClickListener(cbHumerus, cbHumerusLeft, cbHumerusRight, cbHumerusUnspecified, DBAdapter.KEY_FRACTURESITE_HUMERUS, rowView);
-            setupFractureSiteClickListener(cbForearm, cbForearmLeft, cbForearmRight, cbForearmUnspecified, DBAdapter.KEY_FRACTURESITE_FOREARM, rowView);
-            setupFractureSiteClickListener(cbWrist, cbWristLeft, cbWristRight, cbWristUnspecified, DBAdapter.KEY_FRACTURESITE_WRIST, rowView);
+                holder.cbFootLeft = (CheckBox) convertView.findViewById(R.id.leftFoot);
+                holder.cbFootRight = (CheckBox) convertView.findViewById(R.id.rightFoot);
+                holder.cbFootUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedFoot);
+                holder.cbAnkleLeft = (CheckBox) convertView.findViewById(R.id.leftAnkle);
+                holder.cbAnkleRight = (CheckBox) convertView.findViewById(R.id.rightAnkle);
+                holder.cbAnkleUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedAnkle);
+                holder.cbTibiaLeft = (CheckBox) convertView.findViewById(R.id.leftTibiaFibula);
+                holder.cbTibiaRight = (CheckBox) convertView.findViewById(R.id.rightTibiaFibula);
+                holder.cbTibiaUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedTibiaFibula);
+                holder.cbFemurLeft = (CheckBox) convertView.findViewById(R.id.leftFemur);
+                holder.cbFemurRight = (CheckBox) convertView.findViewById(R.id.rightFemur);
+                holder.cbFemurUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedFemur);
+                holder.cbHipLeft = (CheckBox) convertView.findViewById(R.id.leftHip);
+                holder.cbHipRight = (CheckBox) convertView.findViewById(R.id.rightHip);
+                holder.cbHipUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedHip);
+                holder.cbRibLeft = (CheckBox) convertView.findViewById(R.id.leftRib);
+                holder.cbRibRight = (CheckBox) convertView.findViewById(R.id.rightRib);
+                holder.cbRibUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedRib);
+                holder.cbHumerusLeft = (CheckBox) convertView.findViewById(R.id.leftHumerus);
+                holder.cbHumerusRight = (CheckBox) convertView.findViewById(R.id.rightHumerus);
+                holder.cbHumerusUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedHumerus);
+                holder.cbForearmLeft = (CheckBox) convertView.findViewById(R.id.leftForearm);
+                holder.cbForearmRight = (CheckBox) convertView.findViewById(R.id.rightForearm);
+                holder.cbForearmUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedForearm);
+                holder.cbWristLeft = (CheckBox) convertView.findViewById(R.id.leftWrist);
+                holder.cbWristRight = (CheckBox) convertView.findViewById(R.id.rightWrist);
+                holder.cbWristUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedWrist);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolderFractureSite) convertView.getTag();
+            }
+
+            setupFractureSiteClickListener(holder.cbFoot, holder.cbFootLeft, holder.cbFootRight, holder.cbFootUnspecified, DBAdapter.KEY_FRACTURESITE_FOOT, convertView);
+            setupFractureSiteClickListener(holder.cbAnkle, holder.cbAnkleLeft, holder.cbAnkleRight, holder.cbAnkleUnspecified, DBAdapter.KEY_FRACTURESITE_ANKLE, convertView);
+            setupFractureSiteClickListener(holder.cbTibia, holder.cbTibiaLeft, holder.cbTibiaRight, holder.cbTibiaUnspecified, DBAdapter.KEY_FRACTURESITE_TIBIA, convertView);
+            setupFractureSiteClickListener(holder.cbFemur, holder.cbFemurLeft, holder.cbFemurRight, holder.cbFemurUnspecified, DBAdapter.KEY_FRACTURESITE_FEMUR, convertView);
+            setupFractureSiteClickListener(holder.cbHip, holder.cbHipLeft, holder.cbHipRight, holder.cbHipUnspecified, DBAdapter.KEY_FRACTURESITE_HIP, convertView);
+            setupFractureSiteClickListener(holder.cbPelvis, null, null, null, DBAdapter.KEY_FRACTURESITE_PELVIS, convertView);
+            setupFractureSiteClickListener(holder.cbVertebra, null, null, null, DBAdapter.KEY_FRACTURESITE_VERTEBRA, convertView);
+            setupFractureSiteClickListener(holder.cbRib, holder.cbRibLeft, holder.cbRibRight, holder.cbRibUnspecified, DBAdapter.KEY_FRACTURESITE_RIB, convertView);
+            setupFractureSiteClickListener(holder.cbHumerus, holder.cbHumerusLeft, holder.cbHumerusRight, holder.cbHumerusUnspecified, DBAdapter.KEY_FRACTURESITE_HUMERUS, convertView);
+            setupFractureSiteClickListener(holder.cbForearm, holder.cbForearmLeft, holder.cbForearmRight, holder.cbForearmUnspecified, DBAdapter.KEY_FRACTURESITE_FOREARM, convertView);
+            setupFractureSiteClickListener(holder.cbWrist, holder.cbWristLeft, holder.cbWristRight, holder.cbWristUnspecified, DBAdapter.KEY_FRACTURESITE_WRIST, convertView);
 
 
         } else if (i1 == FragmentItem.CellType.TEXT) {
-            rowView = inflater.inflate(R.layout.cell_fragment_text, parent, false);
-            textView = (TextView) rowView.findViewById(R.id.title);
-            textView.setText(items.get(position).title);
-            EditText edit = (EditText) rowView.findViewById(R.id.text);
+
+            ViewHolderText holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_text, parent, false);
+                holder = new ViewHolderText();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.editText = (EditText) convertView.findViewById(R.id.text);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolderText) convertView.getTag();
+            }
+
+            holder.textView.setText(items.get(position).title);
 
             if (items.get(position).uiOptions != null) {
-                edit.setHint(items.get(position).uiOptions[0]);
+                holder.editText.setHint(items.get(position).uiOptions[0]);
             }
 
 
@@ -746,16 +807,16 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             if (cursor.moveToFirst()) {
                 String text = cursor.getString(0);
                 if (text != null) {
-                    edit.setText(text);
+                    holder.editText.setText(text);
                 } else {
-                    edit.setText("");
+                    holder.editText.setText("");
                 }
 
             } else {
-                edit.setText("");
+                holder.editText.setText("");
             }
 
-            edit.addTextChangedListener(new TextWatcher() {
+            holder.editText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -782,20 +843,28 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cursor.close();
 
         } else if (i1 == FragmentItem.CellType.SPINNER) {
-            rowView = inflater.inflate(R.layout.cell_fragment_spinner, parent, false);
-            textView = (TextView) rowView.findViewById(R.id.title);
-            textView.setText(items.get(position).title);
 
+            final ViewHolderSpinner holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_spinner, parent, false);
+                holder = new ViewHolderSpinner();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.spinner = (Spinner) convertView.findViewById(R.id.spinner);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolderSpinner) convertView.getTag();
+            }
 
-            final Spinner spinner = (Spinner) rowView.findViewById(R.id.spinner);
+            holder.textView.setText(items.get(position).title);
+
             ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, items.get(position).uiOptions);
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(spinnerAdapter);
+            holder.spinner.setAdapter(spinnerAdapter);
 
-            textView.setOnClickListener(new View.OnClickListener() {
+            holder.textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    spinner.performClick();
+                    holder.spinner.performClick();
                 }
             });
 
@@ -808,13 +877,13 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 databaseArray = items.get(position).databaseOptions;
             }
 
-            spinner.setSelection(0);
+            holder.spinner.setSelection(0);
             if (cursor.moveToFirst()) {
                 String value = cursor.getString(0);
                 if (value != null && !value.equals("")) {
                     for (int i = 0; i < databaseArray.length; i++) {
                         if (value.equals(databaseArray[i])) {
-                            spinner.setSelection(i);
+                            holder.spinner.setSelection(i);
                             break;
                         }
                     }
@@ -822,7 +891,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             }
             cursor.close();
 
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, final int j, long id) {
                     Thread thread = new Thread() {
@@ -842,9 +911,20 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
 
         } else if (i1 == FragmentItem.CellType.SPINNER_WITH_OTHER) {
-            rowView = inflater.inflate(R.layout.cell_fragment_spinner_with_other, parent, false);
-            textView = (TextView) rowView.findViewById(R.id.title);
-            textView.setText(items.get(position).title);
+
+            final ViewHolderSpinnerWithOther holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_spinner_with_other, parent, false);
+                holder = new ViewHolderSpinnerWithOther();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.spinner = (Spinner) convertView.findViewById(R.id.spinner);
+                holder.editText = (EditText) convertView.findViewById(R.id.other);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolderSpinnerWithOther) convertView.getTag();
+            }
+
+            holder.textView.setText(items.get(position).title);
 
             final String[] spinnerOptions = Arrays.copyOf(items.get(position).uiOptions, items.get(position).uiOptions.length + 1);
             spinnerOptions[spinnerOptions.length - 1] = context.getString(R.string.other);
@@ -857,17 +937,13 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 extraOptions = null;
             }
 
-
-            final EditText editOther = (EditText) rowView.findViewById(R.id.other);
-
-            final Spinner spinnerWithOther = (Spinner) rowView.findViewById(R.id.spinner);
             SpinnerAdapter spinnerWithOtherAdapter = new SpinnerAdapter(context, spinnerOptions, extraOptions);
-            spinnerWithOther.setAdapter(spinnerWithOtherAdapter);
+            holder.spinner.setAdapter(spinnerWithOtherAdapter);
 
-            textView.setOnClickListener(new View.OnClickListener() {
+            holder.textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    spinnerWithOther.performClick();
+                    holder.spinner.performClick();
                 }
             });
 
@@ -880,31 +956,31 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 dataArray = items.get(position).databaseOptions;
             }
 
-            spinnerWithOther.setSelection(0, false);
+            holder.spinner.setSelection(0, false);
             if (cursor.moveToFirst()) {
                 String value = cursor.getString(0);
                 if (value != null && !value.equals("")) {
 
                     if (value.startsWith(context.getString(R.string.other))) {
-                        spinnerWithOther.setSelection(spinnerOptions.length - 1, false);
-                        editOther.setVisibility(View.VISIBLE);
+                        holder.spinner.setSelection(spinnerOptions.length - 1, false);
+                        holder.editText.setVisibility(View.VISIBLE);
 
-                        editOther.setTag("tag");
+                        holder.editText.setTag("tag");
                         if (value.length() > context.getString(R.string.other).length()) {
-                            editOther.setText(value.substring(context.getString(R.string.other).length() + 3));
+                            holder.editText.setText(value.substring(context.getString(R.string.other).length() + 3));
                         } else {
-                            editOther.setText("");
+                            holder.editText.setText("");
                         }
 
-                        editOther.setTag(null);
+                        holder.editText.setTag(null);
                     } else {
-                        editOther.setVisibility(View.GONE);
-                        editOther.setTag("tag");
-                        editOther.setText("");
-                        editOther.setTag(null);
+                        holder.editText.setVisibility(View.GONE);
+                        holder.editText.setTag("tag");
+                        holder.editText.setText("");
+                        holder.editText.setTag(null);
                         for (int i = 0; i < dataArray.length; i++) {
                             if (value.equals(dataArray[i])) {
-                                spinnerWithOther.setSelection(i, false);
+                                holder.spinner.setSelection(i, false);
                                 break;
                             }
                         }
@@ -912,30 +988,30 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
 
                 } else {
-                    editOther.setVisibility(View.GONE);
+                    holder.editText.setVisibility(View.GONE);
                 }
             }
             cursor.close();
 
-            spinnerWithOther.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, final int j, long id) {
 
-                    editOther.setTag("tag");
-                    editOther.setText("");
-                    editOther.setTag(null);
+                    holder.editText.setTag("tag");
+                    holder.editText.setText("");
+                    holder.editText.setTag(null);
                     if (j == spinnerOptions.length - 1) {
-                        editOther.setVisibility(View.VISIBLE);
+                        holder.editText.setVisibility(View.VISIBLE);
 
                         Thread thread = new Thread() {
                             @Override
                             public void run() {
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.other) + " - " + editOther.getText().toString());
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.other) + " - " + holder.editText.getText().toString());
                             }
                         };
                         thread.start();
                     } else {
-                        editOther.setVisibility(View.GONE);
+                        holder.editText.setVisibility(View.GONE);
 
                         Thread thread = new Thread() {
                             @Override
@@ -954,7 +1030,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 }
             });
 
-            editOther.addTextChangedListener(new TextWatcher() {
+            holder.editText.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -962,7 +1038,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
                 @Override
                 public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
-                    if (editOther.getTag() == null) {
+                    if (holder.editText.getTag() == null) {
                         Thread thread = new Thread() {
                             @Override
                             public void run() {
@@ -981,20 +1057,29 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
 
         } else if (i1 == FragmentItem.CellType.CHECKBOX) {
-            rowView = inflater.inflate(R.layout.cell_fragment_checkbox, parent, false);
 
-            textView = (TextView) rowView.findViewById(R.id.title);
-            textView.setText(items.get(position).title);
+            final ViewHolderCheckBox holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_checkbox, parent, false);
+                holder = new ViewHolderCheckBox();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.cg = (LinearLayout) convertView.findViewById(R.id.checkGroup);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolderCheckBox) convertView.getTag();
+            }
 
-            final EditText editText = (EditText) rowView.findViewById(R.id.other);
+            holder.textView.setText(items.get(position).title);
+
+            final EditText editText = (EditText) convertView.findViewById(R.id.other);
             editText.setVisibility(View.GONE);
 
-            final LinearLayout cg = (LinearLayout) rowView.findViewById(R.id.checkGroup);
+            holder.cg.removeAllViews();
 
             if (items.get(position).uiOptions.length > 2) {
-                cg.setOrientation(RadioGroup.VERTICAL);
+                holder.cg.setOrientation(RadioGroup.VERTICAL);
             } else {
-                cg.setOrientation(RadioGroup.HORIZONTAL);
+                holder.cg.setOrientation(RadioGroup.HORIZONTAL);
             }
 
             final String[] checkboxDataArray;
@@ -1025,7 +1110,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 CheckBox cb = new CheckBox(context);
                 cb.setTextSize(context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
                 cb.setText(items.get(position).uiOptions[i]);
-                cg.addView(cb);
+                holder.cg.addView(cb);
 
 
                 cb.setOnClickListener(new View.OnClickListener() {
@@ -1047,8 +1132,8 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                             @Override
                             public void run() {
                                 String answer = "";
-                                for (int i = 0; i < cg.getChildCount(); i++) {
-                                    CheckBox cb = (CheckBox) cg.getChildAt(i);
+                                for (int i = 0; i < holder.cg.getChildCount(); i++) {
+                                    CheckBox cb = (CheckBox) holder.cg.getChildAt(i);
                                     if (cb.isChecked()) {
                                         answer = answer + " " + checkboxDataArray[i];
                                     }
@@ -1066,7 +1151,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             }
 
             if (cbNoneFinal != null){
-                cg.addView(cbNoneFinal);
+                holder.cg.addView(cbNoneFinal);
 
                 cbNoneFinal.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -1095,7 +1180,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             }
 
             if (cbOtherFinal != null){
-                cg.addView(cbOtherFinal);
+                holder.cg.addView(cbOtherFinal);
 
                 cbOtherFinal.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -1137,9 +1222,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 if (answer != null) {
                     for (int i = 0; i < checkboxDataArray.length; i++) {
                         if (answer.contains(checkboxDataArray[i])) {
-                            ((CheckBox) cg.getChildAt(i)).setChecked(true);
+                            ((CheckBox) holder.cg.getChildAt(i)).setChecked(true);
                         } else {
-                            ((CheckBox) cg.getChildAt(i)).setChecked(false);
+                            ((CheckBox) holder.cg.getChildAt(i)).setChecked(false);
                         }
                     }
                     if (items.get(position).hasNone){
@@ -1171,15 +1256,15 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     }
 
                 } else {
-                    for (int i = 0; i < cg.getChildCount(); i++) {
-                        CheckBox box = (CheckBox) cg.getChildAt(i);
+                    for (int i = 0; i < holder.cg.getChildCount(); i++) {
+                        CheckBox box = (CheckBox) holder.cg.getChildAt(i);
                         box.setChecked(false);
                     }
                 }
 
             } else {
-                for (int i = 0; i < cg.getChildCount(); i++) {
-                    CheckBox box = (CheckBox) cg.getChildAt(i);
+                for (int i = 0; i < holder.cg.getChildCount(); i++) {
+                    CheckBox box = (CheckBox) holder.cg.getChildAt(i);
                     box.setChecked(false);
                 }
             }
@@ -1212,12 +1297,14 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             cursor.close();
 
         } else if (i1 == FragmentItem.CellType.ED_EVENTS) {
-            rowView = EDEvents.setupEventSection(context, parent, this);
+
+            convertView = EDEvents.setupEventSection(context, parent, convertView, this);
+
         }
 
 
 
-        return rowView;
+        return convertView;
     }
 
 
@@ -1427,4 +1514,103 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
         }
     }
 
+
+    static class ViewHolderNumeric{
+        private TextView textView;
+        private EditText editText;
+    }
+
+    static class ViewHolderRadio{
+        private TextView textView;
+        private RadioGroup rg;
+    }
+
+    static class ViewHolderRadioWithSpecify{
+        private TextView textView;
+        private EditText editText;
+        private RadioGroup rg;
+    }
+
+    static class ViewHolderDatePicker{
+        private TextView textView;
+        private Button button;
+        private Button clearButton;
+        private CheckBox noneBox;
+    }
+
+    static class ViewHolderTimePicker{
+        private TextView textView;
+        private Button button;
+        private Button clearButton;
+        private CheckBox noneBox;
+    }
+
+    static class ViewHolderFractureSite{
+        private CheckBox cbFoot;
+        private CheckBox cbAnkle;
+        private CheckBox cbTibia;
+        private CheckBox cbFemur;
+        private CheckBox cbHip;
+        private CheckBox cbPelvis;
+        private CheckBox cbVertebra;
+        private CheckBox cbRib;
+        private CheckBox cbHumerus;
+        private CheckBox cbForearm;
+        private CheckBox cbWrist;
+
+        private CheckBox cbFootLeft;
+        private CheckBox cbFootRight;
+        private CheckBox cbFootUnspecified;
+        private CheckBox cbAnkleLeft;
+        private CheckBox cbAnkleRight;
+        private CheckBox cbAnkleUnspecified;
+        private CheckBox cbTibiaLeft;
+        private CheckBox cbTibiaRight;
+        private CheckBox cbTibiaUnspecified;
+        private CheckBox cbFemurLeft;
+        private CheckBox cbFemurRight;
+        private CheckBox cbFemurUnspecified;
+        private CheckBox cbHipLeft;
+        private CheckBox cbHipRight;
+        private CheckBox cbHipUnspecified;
+        private CheckBox cbRibLeft;
+        private CheckBox cbRibRight;
+        private CheckBox cbRibUnspecified;
+        private CheckBox cbHumerusLeft;
+        private CheckBox cbHumerusRight;
+        private CheckBox cbHumerusUnspecified;
+        private CheckBox cbForearmLeft;
+        private CheckBox cbForearmRight;
+        private CheckBox cbForearmUnspecified;
+        private CheckBox cbWristLeft;
+        private CheckBox cbWristRight;
+        private CheckBox cbWristUnspecified;
+
+    }
+
+    static class ViewHolderText{
+        private TextView textView;
+        private EditText editText;
+    }
+
+    static class ViewHolderSpinner{
+        private TextView textView;
+        private Spinner spinner;
+
+    }
+
+    static class ViewHolderSpinnerWithOther{
+        private TextView textView;
+        private EditText editText;
+        private Spinner spinner;
+    }
+
+    static class ViewHolderCheckBox{
+        private TextView textView;
+        private EditText editText;
+        private LinearLayout cg;
+    }
+
 }
+
+
