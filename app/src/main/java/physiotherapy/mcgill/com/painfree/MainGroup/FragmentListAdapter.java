@@ -337,6 +337,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             holder.textView.setText(items.get(position).title);
             holder.button.setText(context.getString(R.string.select_date));
+            holder.noneBox.setChecked(false);
 
             if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("optional")) {
                 holder.clearButton.setVisibility(View.VISIBLE);
@@ -583,7 +584,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             holder.textView.setText(items.get(position).title);
 
             holder.button.setText(context.getString(R.string.select_time));
-
+            holder.noneBox.setChecked(false);
             if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].contains("optional")) {
                 holder.clearButton.setVisibility(View.VISIBLE);
             } else {

@@ -25,27 +25,36 @@ import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 public class EDEvents {
 
     public static View setupEventSection(final Context context, ViewGroup parent, View convertView, final ArrayAdapter adapter){
-        
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.cell_fragment_event, parent, false);
+        View rowView;
+        ViewHolderEvents holder;
+        if (convertView == null){
+            rowView = inflater.inflate(R.layout.cell_fragment_event, parent, false);
+            holder = new ViewHolderEvents();
+            holder.container = (LinearLayout) rowView.findViewById(R.id.container);
+            holder.cbNone = (CheckBox) rowView.findViewById(R.id.checkboxNone);
+            holder.addButton = (FloatingActionButton) rowView.findViewById(R.id.fabPlus);
+            rowView.setTag(holder);
+        } else {
+            rowView = convertView;
+            holder = (ViewHolderEvents) rowView.getTag();
+        }
 
         final int maxEvents = 6;
 
+        holder.container.removeAllViews();
 
-        final LinearLayout container = (LinearLayout) rowView.findViewById(R.id.container);
-        container.removeAllViews();
-
-        CheckBox cbNone = (CheckBox) rowView.findViewById(R.id.checkboxNone);
-        cbNone.setChecked(false);
+        holder.cbNone.setChecked(false);
         Cursor cursorNone = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_BOOL);
         if (cursorNone.moveToFirst()){
             if (cursorNone.getString(0) != null && cursorNone.getString(0).equals(context.getString(R.string.yes))){
-                cbNone.setChecked(true);
+                holder.cbNone.setChecked(true);
             }
         }
         cursorNone.close();
 
-        cbNone.setOnClickListener(new View.OnClickListener() {
+        holder.cbNone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
@@ -80,8 +89,7 @@ public class EDEvents {
                 }
             }
 
-            FloatingActionButton addButton = (FloatingActionButton) rowView.findViewById(R.id.fabPlus);
-            addButton.setOnClickListener(new View.OnClickListener() {
+            holder.addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -148,7 +156,7 @@ public class EDEvents {
                 switch (type){
                     case 0:{
 
-                        childView = PainAssessments.setupPainAssessmentSection(context, container, adapter, painAssessmentIndex, i, new MinusHandler() {
+                        childView = PainAssessments.setupPainAssessmentSection(context, holder.container, adapter, painAssessmentIndex, i, new MinusHandler() {
                             @Override
                             public void onClick() {
                                 orderOfEvents.remove(I);
@@ -163,7 +171,7 @@ public class EDEvents {
                     }
                     case 1:{
 
-                        childView = AnalgesicPrescription.setupAnalgesicPrescriptionSection(context, container, adapter, analgesicPresIndex, i, new MinusHandler() {
+                        childView = AnalgesicPrescription.setupAnalgesicPrescriptionSection(context, holder.container, adapter, analgesicPresIndex, i, new MinusHandler() {
                             @Override
                             public void onClick() {
                                 orderOfEvents.remove(I);
@@ -179,7 +187,7 @@ public class EDEvents {
 
                     case 2:{
 
-                        childView = AnalgesicAdministration.setupAnalgesicAdministrationSection(context, container, adapter, analgesicAdminIndex, i, new MinusHandler() {
+                        childView = AnalgesicAdministration.setupAnalgesicAdministrationSection(context, holder.container, adapter, analgesicAdminIndex, i, new MinusHandler() {
                             @Override
                             public void onClick() {
                                 orderOfEvents.remove(I);
@@ -194,7 +202,7 @@ public class EDEvents {
                     }
                 }
 
-                container.addView(childView);
+                holder.container.addView(childView);
             }
 
         }
@@ -207,6 +215,12 @@ public class EDEvents {
 
     public interface MinusHandler{
         void onClick();
+    }
+
+    static class ViewHolderEvents{
+        private LinearLayout container;
+        private CheckBox cbNone;
+        private FloatingActionButton addButton;
     }
 
 }
