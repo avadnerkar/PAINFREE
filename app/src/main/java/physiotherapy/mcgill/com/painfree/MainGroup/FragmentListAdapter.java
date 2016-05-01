@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -163,7 +164,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 RadioButton rb = new RadioButton(context);
                 rb.setText(items.get(position).uiOptions[i]);
-                rb.setTextSize(context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
+                rb.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
                 holder.rg.addView(rb);
 
                 final int index = i;
@@ -219,6 +220,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             }
 
             holder.textView.setText(items.get(position).title);
+            holder.rg.removeAllViews();
 
             if (items.get(position).databaseOptions == null) {
                 items.get(position).databaseOptions = items.get(position).uiOptions;
@@ -234,7 +236,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 RadioButton rb = new RadioButton(context);
                 rb.setText(items.get(position).uiOptions[i]);
-                rb.setTextSize(context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
+                rb.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
                 holder.rg.addView(rb);
 
                 final int index = i;
@@ -421,11 +423,26 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
                                     //Synchronise arrival date and triage date
                                     if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALDATE)){
+
+                                        Cursor syncCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_TRIAGE_DATE, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE, DBAdapter.KEY_DISCHARGE_DATE});
+                                        syncCursor.moveToFirst();
+                                        if (syncCursor.getString(0) == null || syncCursor.getString(0).equals("")){
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_TRIAGE_DATE, text);
+                                        }
+                                        if (syncCursor.getString(1) == null || syncCursor.getString(1).equals("")){
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE, text);
+                                        }
+                                        if (syncCursor.getString(2) == null || syncCursor.getString(2).equals("")){
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_DISCHARGE_DATE, text);
+                                        }
+                                        syncCursor.close();
+
                                         ((Activity) context).runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
-                                                FragmentA.adapter.notifyDataSetChanged();
                                                 FragmentD.adapter.notifyDataSetChanged();
+                                                FragmentE.adapter.notifyDataSetChanged();
+                                                FragmentG.adapter.notifyDataSetChanged();
                                             }
                                         });
 
@@ -445,55 +462,55 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                             Date minDate = f.parse(items.get(position).uiOptions[1]);
                             Date maxDate = f.parse(items.get(position).uiOptions[2]);
 
-                            if (items.get(position).dbKey.equals(DBAdapter.KEY_ARRIVALDATE)){
-
-                                Cursor dateCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE, DBAdapter.KEY_DISCHARGE_DATE});
-                                if (dateCursor.moveToFirst()){
-                                    String maxDateString = dateCursor.getString(0);
-                                    String secondMaxDateString = dateCursor.getString(1);
-                                    if (maxDateString != null && !maxDateString.equals("") && !maxDateString.equals("None")){
-                                        maxDate = f.parse(maxDateString);
-                                    } else if (secondMaxDateString != null && !secondMaxDateString.equals("") && !secondMaxDateString.equals("None")){
-                                        maxDate = f.parse(secondMaxDateString);
-                                    }
-                                }
-                                dateCursor.close();
-                            }
-
-                            if (items.get(position).dbKey.equals(DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE)){
-
-                                Cursor dateCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_ARRIVALDATE, DBAdapter.KEY_DISCHARGE_DATE});
-                                if (dateCursor.moveToFirst()){
-
-                                    String minDateString = dateCursor.getString(0);
-                                    if (minDateString != null && !minDateString.equals("") && !minDateString.equals("None")){
-                                        minDate = f.parse(minDateString);
-                                    }
-
-                                    String maxDateString = dateCursor.getString(1);
-                                    if (maxDateString != null && !maxDateString.equals("") && !maxDateString.equals("None")){
-                                        maxDate = f.parse(maxDateString);
-                                    }
-                                }
-                                dateCursor.close();
-                            }
-
-                            if (items.get(position).dbKey.equals(DBAdapter.KEY_DISCHARGE_DATE)){
-
-                                Cursor dateCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_ARRIVALDATE, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE});
-                                if (dateCursor.moveToFirst()){
-
-                                    String minDateString = dateCursor.getString(1);
-                                    String secondMinDateString = dateCursor.getString(0);
-                                    if (minDateString != null && !minDateString.equals("") && !minDateString.equals("None")){
-                                        minDate = f.parse(minDateString);
-                                    } else if (secondMinDateString != null && !secondMinDateString.equals("") && !secondMinDateString.equals("None")){
-                                        minDate = f.parse(secondMinDateString);
-                                    }
-
-                                }
-                                dateCursor.close();
-                            }
+//                            if (items.get(position).dbKey.equals(DBAdapter.KEY_ARRIVALDATE)){
+//
+//                                Cursor dateCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE, DBAdapter.KEY_DISCHARGE_DATE});
+//                                if (dateCursor.moveToFirst()){
+//                                    String maxDateString = dateCursor.getString(0);
+//                                    String secondMaxDateString = dateCursor.getString(1);
+//                                    if (maxDateString != null && !maxDateString.equals("") && !maxDateString.equals("None")){
+//                                        maxDate = f.parse(maxDateString);
+//                                    } else if (secondMaxDateString != null && !secondMaxDateString.equals("") && !secondMaxDateString.equals("None")){
+//                                        maxDate = f.parse(secondMaxDateString);
+//                                    }
+//                                }
+//                                dateCursor.close();
+//                            }
+//
+//                            if (items.get(position).dbKey.equals(DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE)){
+//
+//                                Cursor dateCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_ARRIVALDATE, DBAdapter.KEY_DISCHARGE_DATE});
+//                                if (dateCursor.moveToFirst()){
+//
+//                                    String minDateString = dateCursor.getString(0);
+//                                    if (minDateString != null && !minDateString.equals("") && !minDateString.equals("None")){
+//                                        minDate = f.parse(minDateString);
+//                                    }
+//
+//                                    String maxDateString = dateCursor.getString(1);
+//                                    if (maxDateString != null && !maxDateString.equals("") && !maxDateString.equals("None")){
+//                                        maxDate = f.parse(maxDateString);
+//                                    }
+//                                }
+//                                dateCursor.close();
+//                            }
+//
+//                            if (items.get(position).dbKey.equals(DBAdapter.KEY_DISCHARGE_DATE)){
+//
+//                                Cursor dateCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_ARRIVALDATE, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE});
+//                                if (dateCursor.moveToFirst()){
+//
+//                                    String minDateString = dateCursor.getString(1);
+//                                    String secondMinDateString = dateCursor.getString(0);
+//                                    if (minDateString != null && !minDateString.equals("") && !minDateString.equals("None")){
+//                                        minDate = f.parse(minDateString);
+//                                    } else if (secondMinDateString != null && !secondMinDateString.equals("") && !secondMinDateString.equals("None")){
+//                                        minDate = f.parse(secondMinDateString);
+//                                    }
+//
+//                                }
+//                                dateCursor.close();
+//                            }
 
                             mDatePicker.getDatePicker().setMinDate(minDate.getTime());
                             mDatePicker.getDatePicker().setMaxDate(maxDate.getTime());
@@ -516,16 +533,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         @Override
                         public void run() {
                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
-                            //Synchronise arrival date and triage date
-                            if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALDATE)){
-                                ((Activity) context).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        FragmentA.adapter.notifyDataSetChanged();
-                                        FragmentD.adapter.notifyDataSetChanged();
-                                    }
-                                });
-                            }
+
                         }
                     };
                     thread.start();
@@ -548,15 +556,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                             } else {
                                 MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
                             }
-                            if (Objects.equals(items.get(position).dbKey, DBAdapter.KEY_ARRIVALDATE)) {
-                                ((Activity) context).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        FragmentA.adapter.notifyDataSetChanged();
-                                        FragmentD.adapter.notifyDataSetChanged();
-                                    }
-                                });
-                            }
+
                         }
                     };
                     thread.start();
@@ -655,7 +655,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                             };
                             thread.start();
                         }
-                    }, mHour, mMinute, false);
+                    }, mHour, mMinute, true);
                     tpd.show();
                 }
             });
@@ -737,6 +737,10 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 holder.cbHumerus = (CheckBox) convertView.findViewById(R.id.humerus);
                 holder.cbForearm = (CheckBox) convertView.findViewById(R.id.forearm);
                 holder.cbWrist = (CheckBox) convertView.findViewById(R.id.wrist);
+                holder.cbHead = (CheckBox) convertView.findViewById(R.id.head);
+                holder.cbToes = (CheckBox) convertView.findViewById(R.id.toes);
+                holder.cbFingers = (CheckBox) convertView.findViewById(R.id.fingers);
+
 
                 holder.cbFootLeft = (CheckBox) convertView.findViewById(R.id.leftFoot);
                 holder.cbFootRight = (CheckBox) convertView.findViewById(R.id.rightFoot);
@@ -781,7 +785,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             setupFractureSiteClickListener(holder.cbHumerus, holder.cbHumerusLeft, holder.cbHumerusRight, holder.cbHumerusUnspecified, DBAdapter.KEY_FRACTURESITE_HUMERUS, convertView);
             setupFractureSiteClickListener(holder.cbForearm, holder.cbForearmLeft, holder.cbForearmRight, holder.cbForearmUnspecified, DBAdapter.KEY_FRACTURESITE_FOREARM, convertView);
             setupFractureSiteClickListener(holder.cbWrist, holder.cbWristLeft, holder.cbWristRight, holder.cbWristUnspecified, DBAdapter.KEY_FRACTURESITE_WRIST, convertView);
-
+            setupFractureSiteClickListener(holder.cbHead, null, null, null, DBAdapter.KEY_FRACTURESITE_HEAD, convertView);
+            setupFractureSiteClickListener(holder.cbToes, null, null, null, DBAdapter.KEY_FRACTURESITE_TOES, convertView);
+            setupFractureSiteClickListener(holder.cbFingers, null, null, null, DBAdapter.KEY_FRACTURESITE_FINGERS, convertView);
 
         } else if (i1 == FragmentItem.CellType.TEXT) {
 
@@ -1093,7 +1099,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             CheckBox cbNone = null;
             if (items.get(position).hasNone){
                 cbNone = new CheckBox(context);
-                cbNone.setTextSize(context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
+                cbNone.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
                 cbNone.setText(items.get(position).extraOptions[0]);
             }
             final CheckBox cbNoneFinal = cbNone;
@@ -1102,14 +1108,14 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             CheckBox cbOther = null;
             if (items.get(position).hasOther){
                 cbOther = new CheckBox(context);
-                cbOther.setTextSize(context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
+                cbOther.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
                 cbOther.setText(context.getString(R.string.other));
             }
             final CheckBox cbOtherFinal = cbOther;
 
             for (int i = 0; i < items.get(position).uiOptions.length; i++) {
                 CheckBox cb = new CheckBox(context);
-                cb.setTextSize(context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
+                cb.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
                 cb.setText(items.get(position).uiOptions[i]);
                 holder.cg.addView(cb);
 
@@ -1558,6 +1564,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
         private CheckBox cbHumerus;
         private CheckBox cbForearm;
         private CheckBox cbWrist;
+        private CheckBox cbHead;
+        private CheckBox cbToes;
+        private CheckBox cbFingers;
 
         private CheckBox cbFootLeft;
         private CheckBox cbFootRight;

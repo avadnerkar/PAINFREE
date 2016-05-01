@@ -29,9 +29,9 @@ public class FragmentD extends Fragment {
         listView = (ListView) v.findViewById(R.id.list_d);
 
         ArrayList<FragmentItem> items = new ArrayList<>();
-        items.add(new FragmentItem(getString(R.string.triage_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-01-01", "2019-12-31"}, null, DBAdapter.KEY_ARRIVALDATE));
+        items.add(new FragmentItem(getString(R.string.triage_date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-01-01", "2019-12-31"}, null, DBAdapter.KEY_TRIAGE_DATE));
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
-        items.add(new FragmentItem(getString(R.string.triage_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_ARRIVALTIME));
+        items.add(new FragmentItem(getString(R.string.triage_time), FragmentItem.CellType.TIMEPICKER, null, null, DBAdapter.KEY_TRIAGE_TIME));
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.add(new FragmentItem(getString(R.string.ctas_priority), FragmentItem.CellType.SPINNER, new String[]{getString(R.string.none), getString(R.string.ctas_1), getString(R.string.ctas_2), getString(R.string.ctas_3), getString(R.string.ctas_4), getString(R.string.ctas_5)}, null, DBAdapter.KEY_CTAS));
         items.add(new FragmentItem(getString(R.string.glasgow), FragmentItem.CellType.SPINNER, new String[]{"None", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"}, null, DBAdapter.KEY_GLASGOW));
@@ -41,10 +41,10 @@ public class FragmentD extends Fragment {
         items.get(items.size()-1).hasNone = true;
         items.add(new FragmentItem(getString(R.string.past_diagnosis_of_altered_cognition), FragmentItem.CellType.RADIO_WITH_SPECIFY, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_HISTORYOFALTEREDCOGNITION));
         items.get(items.size()-1).extraOptions = new String[]{DBAdapter.KEY_HISTORYOFALTEREDCOGNITIONSPECIFY};
-        items.add(new FragmentItem(getString(R.string.altered_cognition), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.confusion), getString(R.string.agitation), getString(R.string.disorientation)}, null, DBAdapter.KEY_ALTEREDCOGNITION));
-        items.get(items.size()-1).extraOptions = new String[]{getString(R.string.none)};
-        items.get(items.size()-1).hasNone = true;
-        items.get(items.size()-1).hasOther = true;
+        items.add(new FragmentItem(getString(R.string.altered_cognition), FragmentItem.CellType.RADIO, new String[]{getString(R.string.positive), getString(R.string.negative), getString(R.string.not_specified)}, null, DBAdapter.KEY_ALTEREDCOGNITION));
+        //items.get(items.size()-1).extraOptions = new String[]{getString(R.string.none)};
+        //items.get(items.size()-1).hasNone = true;
+        //items.get(items.size()-1).hasOther = true;
 
         adapter = new FragmentListAdapter(getActivity(), items);
         listView.setAdapter(adapter);

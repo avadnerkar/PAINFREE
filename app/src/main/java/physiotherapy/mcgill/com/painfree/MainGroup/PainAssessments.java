@@ -42,6 +42,7 @@ public class PainAssessments {
             DBAdapter.KEY_PAIN_ASSESSMENT_4_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_4_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_4_SCORE,
             DBAdapter.KEY_PAIN_ASSESSMENT_5_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_5_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_5_SCORE,
             DBAdapter.KEY_PAIN_ASSESSMENT_6_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_6_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_6_SCORE};
+    public static final int numFields = 3;
 
     public static View setupPainAssessmentSection(final Context context, ViewGroup parent, final ArrayAdapter adapter, final int index, final int globalIndex, final EDEvents.MinusHandler handler){
 
@@ -79,7 +80,7 @@ public class PainAssessments {
             });
 
             painSpinner.setSelection(0);
-            String value = cursor.getString(index*3+3);
+            String value = cursor.getString(index*numFields+3);
             if (value != null && !value.equals("")) {
                 for (int k = 0; k < painSpinnerOptions.length; k++) {
                     if (value.equals(painSpinnerOptions[k])) {
@@ -92,7 +93,7 @@ public class PainAssessments {
             painSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * 3 + 3], painSpinnerOptions[position]);
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 3], painSpinnerOptions[position]);
                 }
 
                 @Override
@@ -110,7 +111,7 @@ public class PainAssessments {
             mMonth = mcurrentDate.get(Calendar.MONTH);
             mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
-            String dateString = cursor.getString(index * 3 + 1);
+            String dateString = cursor.getString(index * numFields + 1);
             if (dateString != null && !dateString.equals("")) {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 try {
@@ -141,7 +142,7 @@ public class PainAssessments {
                         public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
                             final String text = selectedyear + "-" + String.format("%02d", selectedmonth + 1) + "-" + String.format("%02d", selectedday);
                             buttonDate.setText(text);
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * 3 + 1], text);
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 1], text);
                             adapter.notifyDataSetChanged();
 
 
@@ -183,7 +184,7 @@ public class PainAssessments {
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
 
-            String timeString = cursor.getString(index*3+2);
+            String timeString = cursor.getString(index*numFields+2);
             if (timeString != null && !timeString.equals("")) {
                 timePickerButton.setText(timeString);
                 String[] parts = timeString.split(":");
@@ -207,12 +208,12 @@ public class PainAssessments {
                             Thread thread = new Thread() {
                                 @Override
                                 public void run() {
-                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index*3+2], value);
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index*numFields+2], value);
                                 }
                             };
                             thread.start();
                         }
-                    }, mHour, mMinute, false);
+                    }, mHour, mMinute, true);
                     tpd.show();
                 }
             });
@@ -227,13 +228,13 @@ public class PainAssessments {
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(Math.max(numAssessments - 1, 0)));
 
                     for (int j=index; j<numAssessments-1; j++){
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*3+1], tempCursor.getString((j+1)*3+1));
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*3+2], tempCursor.getString((j+1)*3+2));
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*3+3], tempCursor.getString((j+1)*3+3));
+                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+1], tempCursor.getString((j+1)*numFields+1));
+                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+2], tempCursor.getString((j+1)*numFields+2));
+                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+3], tempCursor.getString((j+1)*numFields+3));
                     }
-                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*3+1], null);
-                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*3+2], null);
-                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*3+3], null);
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*numFields+1], null);
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*numFields+2], null);
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[(numAssessments - 1)*numFields+3], null);
 
                     tempCursor.close();
                     handler.onClick();

@@ -133,16 +133,16 @@
     <string name="type_of_analgesic_prescribed">Type of analgesic prescribed:</string>
     <string name="standard_order">Standard order</string>
     <string name="pharmaceutical_algorithm">Pharmaceutical algorithm</string>
-    <string name="evidence_altered_cognition">New evidence of altered cognition within 48 hours (select all that apply):</string>
+    <string name="evidence_altered_cognition">New evidence of altered cognition within 48 hours:</string>
     <string name="not_specified">Not specified</string>
     <string name="short_cam_score">CAM score:</string>
     <string name="not_applicable">Not applicable</string>
     <string name="discharge_date">Discharge date:</string>
     <string name="discharge_time">Discharge time:</string>
     <string name="discharge_destination">Discharge destination:</string>
-    <string name="return_home">Return home</string>
+    <string name="return_home">Return home/residence</string>
     <string name="admitting">Admitting</string>
-    <string name="transfer">Transfer</string>
+    <string name="transfer">Transfer to another hospital</string>
     <string name="lwbs">LWBS</string>
     <string name="death">Death</string>
     <string name="not_available">Not available</string>
@@ -194,6 +194,12 @@
     <string name="pain_assessment">Pain assessment</string>
     <string name="analgesic_prescription">Analgesic prescription</string>
     <string name="analgesic_administration">Analgesic administration</string>
+    <string name="positive">Positive</string>
+    <string name="negative">Negative</string>
+    <string name="head">Head</string>
+    <string name="toes">Toes</string>
+    <string name="fingers">Fingers</string>
+    <string name="notice">Notice</string>
 
 
 </resources>

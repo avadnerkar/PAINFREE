@@ -72,6 +72,7 @@ public class FragmentC extends Fragment {
 
         if (MainActivity.currentPatientId != -1) {
 
+
             String[] keys = new String[]{
                     DBAdapter.KEY_FRACTURESITE_FOOT,
                     DBAdapter.KEY_FRACTURESITE_ANKLE,
@@ -84,6 +85,8 @@ public class FragmentC extends Fragment {
                     DBAdapter.KEY_FRACTURESITE_WRIST};
             Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
 
+
+            Boolean fractures = false;
             if (cursor1.moveToFirst()){
                 for (int i=0; i<cursor1.getColumnCount(); i++){
                     if (cursor1.getString(i) != null && cursor1.getString(i).equals("Incomplete")){
@@ -92,10 +95,26 @@ public class FragmentC extends Fragment {
                         String strippedkey = keys[i].replaceAll(pat,"");
                         unfilledTitles.add(strippedkey);
                     }
+
+                    if (cursor1.getString(i) != null && !cursor1.getString(i).equals("")){
+                        fractures = true;
+                    }
                 }
             }
 
             cursor1.close();
+
+            if (!fractures){
+                Cursor cursor2 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_FRACTURESITE_HEAD, DBAdapter.KEY_FRACTURESITE_TOES, DBAdapter.KEY_FRACTURESITE_FINGERS});
+                for (int i=0; i<cursor2.getColumnCount(); i++){
+                    if (cursor2.getString(i) != null && !cursor2.getString(i).equals("")){
+                        ArrayList<String> warning = new ArrayList<>();
+                        warning.add("EXCLUSION");
+                        warning.add("Head, toe, and finger fractures are excluded from this study");
+                        return warning;
+                    }
+                }
+            }
 
             for (FragmentItem item : items) {
                 if (item.isMandatory) {

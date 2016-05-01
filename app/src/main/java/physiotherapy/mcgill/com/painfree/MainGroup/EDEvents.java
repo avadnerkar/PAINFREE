@@ -99,6 +99,11 @@ public class EDEvents {
 
                             Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_NUM, DBAdapter.KEY_ANALGESIC_PRES_NUM, DBAdapter.KEY_ANALGESIC_ADMIN_NUM});
                             cursor1.moveToFirst();
+
+                            Cursor dateCursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_ARRIVALDATE);
+                            dateCursor.moveToFirst();
+                            String defaultDate = dateCursor.getString(0);
+                            dateCursor.close();
                             switch (i){
                                 case 0:
                                     int numPainAssessments = cursor1.getInt(0);
@@ -107,6 +112,10 @@ public class EDEvents {
                                         return;
                                     } else {
                                         MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PAIN_ASSESSMENT_NUM, String.valueOf(numPainAssessments+1));
+                                        if (!defaultDate.equals(context.getString(R.string.none))){
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, PainAssessments.keys[(numPainAssessments)*PainAssessments.numFields+1], defaultDate);
+                                        }
+
                                     }
                                     break;
                                 case 1:
@@ -116,6 +125,9 @@ public class EDEvents {
                                         return;
                                     } else {
                                         MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM, String.valueOf(numAnalgesicPres+1));
+                                        if (!defaultDate.equals(context.getString(R.string.none))){
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicPrescription.keys[(numAnalgesicPres)*AnalgesicPrescription.numFields+1], defaultDate);
+                                        }
                                     }
                                     break;
                                 case 2:
@@ -125,6 +137,10 @@ public class EDEvents {
                                         return;
                                     } else {
                                         MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, String.valueOf(numAnalgesicAdmin+1));
+                                        if (!defaultDate.equals(context.getString(R.string.none))){
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicAdministration.keys[(numAnalgesicAdmin)*AnalgesicAdministration.numFields+1], defaultDate);
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicAdministration.keys[(numAnalgesicAdmin)*AnalgesicAdministration.numFields+18], defaultDate);
+                                        }
                                     }
                                     break;
                             }

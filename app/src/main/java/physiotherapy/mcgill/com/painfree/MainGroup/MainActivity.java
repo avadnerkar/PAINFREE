@@ -323,25 +323,37 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        String message = "";
-        for (String field : unfilledMandatoryFields){
-            message = message + field + "\n";
-        }
-
-        if (!message.equals("")){
-
-            AppUtils.showDefaultAlertDialog(getString(R.string.mandatory_fields_title), message, context, new AppUtils.DefaultAlertHandler() {
+        if (unfilledMandatoryFields.size() == 2 && unfilledMandatoryFields.get(0).equals("EXCLUSION")){
+            AppUtils.showDefaultAlertDialog(getString(R.string.notice), unfilledMandatoryFields.get(1), context, new AppUtils.DefaultAlertHandler() {
                 @Override
                 public void onClick() {
-                    programmaticallySelectTab = true;
-                    mViewPager.setCurrentItem(tabPosition);
-                    programmaticallySelectTab = false;
+
                 }
             });
-            return true;
-        } else {
             return false;
+        } else {
+            String message = "";
+            for (String field : unfilledMandatoryFields){
+                message = message + field + "\n";
+            }
+
+            if (!message.equals("")){
+
+                AppUtils.showDefaultAlertDialog(getString(R.string.mandatory_fields_title), message, context, new AppUtils.DefaultAlertHandler() {
+                    @Override
+                    public void onClick() {
+                        programmaticallySelectTab = true;
+                        mViewPager.setCurrentItem(tabPosition);
+                        programmaticallySelectTab = false;
+                    }
+                });
+                return true;
+            } else {
+                return false;
+            }
         }
+
+
     }
 
 

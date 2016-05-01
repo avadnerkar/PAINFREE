@@ -110,6 +110,7 @@ public class AppUtils {
     public static void showEditTextDialog(String title, Context context, final DialogEditText.ClickHandler h){
         final DialogEditText dialog = new DialogEditText(context, h);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
         dialog.show();
         TextView textView = (TextView) dialog.findViewById(R.id.dialog_title);
         textView.setText(title);

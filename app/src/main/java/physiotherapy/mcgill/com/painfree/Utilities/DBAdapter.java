@@ -52,11 +52,14 @@ public class DBAdapter {
     public static final String KEY_FRACTURESITE_HUMERUS = "[Humerus]";
     public static final String KEY_FRACTURESITE_FOREARM = "[Forearm]";
     public static final String KEY_FRACTURESITE_WRIST = "[Wrist]";
+    public static final String KEY_FRACTURESITE_HEAD = "[Head]";
+    public static final String KEY_FRACTURESITE_TOES = "[Toes]";
+    public static final String KEY_FRACTURESITE_FINGERS = "[Fingers]";
 
     public static final String KEY_INJURY_MECHANISM = "[Injury mechanism]";
 
-    //public static final String KEY_TRIAGE_DATE = "[Triage date]";
-    //public static final String KEY_TRIAGE_TIME = "[Triage time]";
+    public static final String KEY_TRIAGE_DATE = "[Triage date]";
+    public static final String KEY_TRIAGE_TIME = "[Triage time]";
     public static final String KEY_CTAS = "[CTAS priority]";
     public static final String KEY_GLASGOW = "[Glasgow scale]";
     public static final String KEY_PAINSCALE = "[Pain scale score]";
@@ -339,11 +342,14 @@ public class DBAdapter {
         dataMap.add(KEY_FRACTURESITE_HUMERUS);
         dataMap.add(KEY_FRACTURESITE_FOREARM);
         dataMap.add(KEY_FRACTURESITE_WRIST);
+        dataMap.add(KEY_FRACTURESITE_HEAD);
+        dataMap.add(KEY_FRACTURESITE_TOES);
+        dataMap.add(KEY_FRACTURESITE_FINGERS);
 
         dataMap.add(KEY_INJURY_MECHANISM);
 
-        //dataMap.add(KEY_TRIAGE_DATE);
-        //dataMap.add(KEY_TRIAGE_TIME);
+        dataMap.add(KEY_TRIAGE_DATE);
+        dataMap.add(KEY_TRIAGE_TIME);
         dataMap.add(KEY_CTAS);
         dataMap.add(KEY_GLASGOW);
         dataMap.add(KEY_PAINSCALE);

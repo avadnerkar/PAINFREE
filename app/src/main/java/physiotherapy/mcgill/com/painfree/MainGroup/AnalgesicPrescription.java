@@ -47,6 +47,7 @@ public class AnalgesicPrescription {
             DBAdapter.KEY_ANALGESIC_PRES_5_DATE, DBAdapter.KEY_ANALGESIC_PRES_5_TIME, DBAdapter.KEY_ANALGESIC_PRES_5_TYPE, DBAdapter.KEY_ANALGESIC_PRES_5_MODE,
             DBAdapter.KEY_ANALGESIC_PRES_6_DATE, DBAdapter.KEY_ANALGESIC_PRES_6_TIME, DBAdapter.KEY_ANALGESIC_PRES_6_TYPE, DBAdapter.KEY_ANALGESIC_PRES_6_MODE};
 
+    public static final int numFields = 4;
     public static final boolean[] mandatoryKeys = new boolean[]{
     true, true, true, false, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, false, false, true, false, false};
 
@@ -57,7 +58,6 @@ public class AnalgesicPrescription {
         Calendar mcurrentDate;
         int mDay;
         int mYear;
-        final int numFields = 4;
 
         final String[] spinnerOptions = new String[]{"", context.getString(R.string.standard_order), context.getString(R.string.collective_order_body), context.getString(R.string.pharmaceutical_algorithm)};
         final String[] checkBoxItems = new String[]{context.getString(R.string.acetaminophen), context.getString(R.string.nsaids), context.getString(R.string.opioid)};
@@ -267,7 +267,7 @@ public class AnalgesicPrescription {
                                 };
                                 thread.start();
                             }
-                        }, mHour, mMinute, false);
+                        }, mHour, mMinute, true);
                         tpd.show();
                     }
                 });
@@ -284,12 +284,12 @@ public class AnalgesicPrescription {
                 }
 
                 final CheckBox cbAnalgesicNone = new CheckBox(context);
-                cbAnalgesicNone.setTextSize(TypedValue.COMPLEX_UNIT_SP, context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
+                cbAnalgesicNone.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
                 cbAnalgesicNone.setText(context.getString(R.string.not_specified));
 
                 for (String checkBoxItem : checkBoxItems) {
                     CheckBox cb = new CheckBox(context);
-                    cb.setTextSize(TypedValue.COMPLEX_UNIT_SP, context.getResources().getDimension(R.dimen.text_medium) / context.getResources().getDisplayMetrics().density);
+                    cb.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
                     cb.setText(checkBoxItem);
                     cb.setChecked(false);
                     cg.addView(cb);
