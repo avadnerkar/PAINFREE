@@ -273,7 +273,7 @@ public class PainAssessments {
 
     public static void clearData(){
         MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[0], "0");
-        MainActivity.myDb.updateFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, 1, keys.length-1), null);
+        MainActivity.myDb.updateFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, 1, keys.length), null);
     }
 
 }

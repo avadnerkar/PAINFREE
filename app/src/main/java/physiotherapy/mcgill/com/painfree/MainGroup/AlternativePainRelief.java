@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -31,25 +30,28 @@ import java.util.Calendar;
 import java.util.Date;
 
 import physiotherapy.mcgill.com.painfree.R;
-import physiotherapy.mcgill.com.painfree.Utilities.AppUtils;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 
 /**
- * Created by Abhishek Vadnerkar on 16-03-20.
+ * Created by Abhishek Vadnerkar on 16-05-07.
  */
-public class AnalgesicPrescription {
+public class AlternativePainRelief {
 
-    public static final String[] keys = new String[]{DBAdapter.KEY_ANALGESIC_PRES_NUM,
-            DBAdapter.KEY_ANALGESIC_PRES_1_DATE, DBAdapter.KEY_ANALGESIC_PRES_1_TIME, DBAdapter.KEY_ANALGESIC_PRES_1_TYPE, DBAdapter.KEY_ANALGESIC_PRES_1_MODE,
-            DBAdapter.KEY_ANALGESIC_PRES_2_DATE, DBAdapter.KEY_ANALGESIC_PRES_2_TIME, DBAdapter.KEY_ANALGESIC_PRES_2_TYPE, DBAdapter.KEY_ANALGESIC_PRES_2_MODE,
-            DBAdapter.KEY_ANALGESIC_PRES_3_DATE, DBAdapter.KEY_ANALGESIC_PRES_3_TIME, DBAdapter.KEY_ANALGESIC_PRES_3_TYPE, DBAdapter.KEY_ANALGESIC_PRES_3_MODE,
-            DBAdapter.KEY_ANALGESIC_PRES_4_DATE, DBAdapter.KEY_ANALGESIC_PRES_4_TIME, DBAdapter.KEY_ANALGESIC_PRES_4_TYPE, DBAdapter.KEY_ANALGESIC_PRES_4_MODE,
-            DBAdapter.KEY_ANALGESIC_PRES_5_DATE, DBAdapter.KEY_ANALGESIC_PRES_5_TIME, DBAdapter.KEY_ANALGESIC_PRES_5_TYPE, DBAdapter.KEY_ANALGESIC_PRES_5_MODE,
-            DBAdapter.KEY_ANALGESIC_PRES_6_DATE, DBAdapter.KEY_ANALGESIC_PRES_6_TIME, DBAdapter.KEY_ANALGESIC_PRES_6_TYPE, DBAdapter.KEY_ANALGESIC_PRES_6_MODE};
+    public static final String[] keys = new String[]{DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_NUM,
+            DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_1_DATE, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_1_TIME, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_1, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_1_OTHER,
+            DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_2_DATE, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_2_TIME, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_2, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_2_OTHER,
+            DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_3_DATE, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_3_TIME, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_3, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_3_OTHER,
+            DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_4_DATE, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_4_TIME, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_4, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_4_OTHER,
+            DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_5_DATE, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_5_TIME, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_5, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_5_OTHER,
+            DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_6_DATE, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_6_TIME, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_6, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_6_OTHER};
+
+    public static final boolean[] mandatoryKeys = new boolean[]{
+            true, true, false, false};
+
 
     public static final int numFields = 4;
 
-    public static View setupAnalgesicPrescriptionSection(final Context context, ViewGroup parent, final ArrayAdapter adapter, final int index, final int globalIndex, final EDEvents.MinusHandler handler){
+    public static View setupAlternativePainReliefSection(final Context context, ViewGroup parent, final ArrayAdapter adapter, final int index, final int globalIndex, final EDEvents.MinusHandler handler){
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         int mMonth;
@@ -57,17 +59,16 @@ public class AnalgesicPrescription {
         int mDay;
         int mYear;
 
-        final String[] spinnerOptions = new String[]{"", context.getString(R.string.not_specified), context.getString(R.string.standard_order), context.getString(R.string.collective_order_body), context.getString(R.string.pharmaceutical_algorithm)};
-        final String[] checkBoxItems = new String[]{context.getString(R.string.acetaminophen), context.getString(R.string.nsaids), context.getString(R.string.opioid)};
+        final String[] checkBoxAlternativeRelief = new String[]{context.getString(R.string.ice), context.getString(R.string.cool_cloths), context.getString(R.string.soft_cushions)};
 
         final Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
 
         if (cursor.moveToFirst()) {
             final int numAssessments = cursor.getInt(0);
 
-            final View assessmentView = inflater.inflate(R.layout.subcell_analgesic_pres, parent, false);
+            final View assessmentView = inflater.inflate(R.layout.subcell_alternative_pain_relief, parent, false);
             TextView assessmentTitle = (TextView) assessmentView.findViewById(R.id.title);
-            assessmentTitle.setText("Event" + " " + String.valueOf(globalIndex + 1) + " - Analgesic prescription");
+            assessmentTitle.setText("Event" + " " + String.valueOf(globalIndex + 1) + " - Alternative pain relief");
 
             FloatingActionButton minusButton = (FloatingActionButton) assessmentView.findViewById(R.id.fabMinus);
             minusButton.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +76,7 @@ public class AnalgesicPrescription {
                 public void onClick(View v) {
 
                     Cursor tempCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
-                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM, String.valueOf(Math.max(numAssessments - 1, 0)));
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_NUM, String.valueOf(Math.max(numAssessments - 1, 0)));
 
                     for (int j=index; j<numAssessments-1; j++){
                         for (int k=1; k<=numFields; k++){
@@ -88,8 +89,11 @@ public class AnalgesicPrescription {
                 }
             });
 
-            //Datepicker
+
+
             {
+                //Datepicker
+
                 final Button buttonDate = (Button) assessmentView.findViewById(R.id.buttonDate);
 
                 mcurrentDate = Calendar.getInstance();
@@ -125,7 +129,6 @@ public class AnalgesicPrescription {
                 String dateString = cursor.getString(index * numFields + 1);
 
                 if (dateString != null){
-
                     if (dateString.equals("None")){
                         noneBox.setChecked(true);
                     } else if (!dateString.equals("")) {
@@ -145,6 +148,7 @@ public class AnalgesicPrescription {
                         }
                     }
                 }
+
 
 
                 final int year = mYear;
@@ -170,14 +174,14 @@ public class AnalgesicPrescription {
                         try {
                             Date minDate = f.parse("2016-01-01");
 //                            if (index>0){
-//                                String previousDateString = cursor.getString((index-1)*numFields+1);
+//                                String previousDateString = cursor.getString((index-1)*numFields+22);
 //                                minDate = f.parse(previousDateString);
 //                            }
                             mDatePicker.getDatePicker().setMinDate(minDate.getTime());
 
                             Date maxDate = f.parse("2019-12-31");
 //                            if (index<numAssessments-1){
-//                                String nextDateString = cursor.getString((index+1)*numFields+1);
+//                                String nextDateString = cursor.getString((index+1)*numFields+22);
 //                                if (nextDateString != null && !nextDateString.equals("")){
 //                                    maxDate = f.parse(nextDateString);
 //                                }
@@ -193,12 +197,13 @@ public class AnalgesicPrescription {
                 });
             }
 
+
             {
                 //Time picker
                 final Button timePickerButton = (Button) assessmentView.findViewById(R.id.buttonTime);
                 timePickerButton.setText(context.getString(R.string.select_time));
 
-                final Calendar c = Calendar.getInstance();
+                Calendar c = Calendar.getInstance();
                 int hour = c.get(Calendar.HOUR_OF_DAY);
                 int minute = c.get(Calendar.MINUTE);
 
@@ -230,7 +235,6 @@ public class AnalgesicPrescription {
                 String timeString = cursor.getString(index * numFields + 2);
 
                 if (timeString != null){
-
                     if (timeString.equals("None")){
                         noneBox.setChecked(true);
                     } else if (!timeString.equals("")) {
@@ -243,8 +247,8 @@ public class AnalgesicPrescription {
 
 
 
-                final int mHour = hour;
-                final int mMinute = minute;
+                final int hour1 = hour;
+                final int minute1 = minute;
 
                 timePickerButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -265,45 +269,53 @@ public class AnalgesicPrescription {
                                 };
                                 thread.start();
                             }
-                        }, mHour, mMinute, true);
+                        }, hour1, minute1, true);
                         tpd.show();
                     }
                 });
             }
 
-            {
-                //Checkbox
-                final LinearLayout cg = (LinearLayout) assessmentView.findViewById(R.id.checkGroup);
 
-                if (checkBoxItems.length > 2) {
-                    cg.setOrientation(RadioGroup.VERTICAL);
+            {
+                //Checkbox - alternative pain relief
+                final LinearLayout cgPainRelief = (LinearLayout) assessmentView.findViewById(R.id.checkGroupPainRelief);
+
+                if (checkBoxAlternativeRelief.length > 2) {
+                    cgPainRelief.setOrientation(RadioGroup.VERTICAL);
                 } else {
-                    cg.setOrientation(RadioGroup.HORIZONTAL);
+                    cgPainRelief.setOrientation(RadioGroup.HORIZONTAL);
                 }
 
-                final CheckBox cbAnalgesicNone = new CheckBox(context);
-                cbAnalgesicNone.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
-                cbAnalgesicNone.setText(context.getString(R.string.not_specified));
+                final CheckBox cbPainReliefNone = new CheckBox(context);
+                cbPainReliefNone.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
+                cbPainReliefNone.setText(context.getString(R.string.none));
 
-                for (String checkBoxItem : checkBoxItems) {
+                for (String aCheckBoxAlternativeRelief : checkBoxAlternativeRelief) {
                     CheckBox cb = new CheckBox(context);
                     cb.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
-                    cb.setText(checkBoxItem);
+                    cb.setText(aCheckBoxAlternativeRelief);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams.setMargins(0, 10, 0, 10);
+                    cb.setLayoutParams(layoutParams);
                     cb.setChecked(false);
-                    cg.addView(cb);
+                    cgPainRelief.addView(cb);
+
 
                     cb.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            cbAnalgesicNone.setChecked(false);
+
+                            cbPainReliefNone.setChecked(false);
+
                             Thread thread = new Thread() {
                                 @Override
                                 public void run() {
                                     String answer = "";
-                                    for (int k = 0; k < checkBoxItems.length; k++) {
-                                        CheckBox cb = (CheckBox) cg.getChildAt(k);
+                                    for (int k = 0; k < checkBoxAlternativeRelief.length; k++) {
+                                        CheckBox cb = (CheckBox) cgPainRelief.getChildAt(k);
                                         if (cb.isChecked()) {
-                                            answer = answer + " " + checkBoxItems[k];
+                                            answer = answer + " " + checkBoxAlternativeRelief[k];
                                         }
                                     }
 
@@ -314,14 +326,13 @@ public class AnalgesicPrescription {
                         }
                     });
 
-
                 }
 
-                cbAnalgesicNone.setOnClickListener(new View.OnClickListener() {
+                cbPainReliefNone.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (((CheckBox) v).isChecked()){
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 3], context.getString(R.string.not_specified));
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 3], context.getString(R.string.none));
                             adapter.notifyDataSetChanged();
                         } else {
                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 3], null);
@@ -329,64 +340,60 @@ public class AnalgesicPrescription {
                     }
                 });
 
-                cg.addView(cbAnalgesicNone);
+                cgPainRelief.addView(cbPainReliefNone);
 
                 String answer = cursor.getString(index * numFields + 3);
 
+                cbPainReliefNone.setChecked(false);
                 if (answer != null) {
-                    for (int j = 0; j < checkBoxItems.length; j++) {
-                        if (answer.contains(checkBoxItems[j])) {
-                            ((CheckBox) cg.getChildAt(j)).setChecked(true);
+                    for (int j = 0; j < checkBoxAlternativeRelief.length; j++) {
+                        if (answer.contains(checkBoxAlternativeRelief[j])) {
+                            ((CheckBox) cgPainRelief.getChildAt(j)).setChecked(true);
                         } else {
-                            ((CheckBox) cg.getChildAt(j)).setChecked(false);
+                            ((CheckBox) cgPainRelief.getChildAt(j)).setChecked(false);
                         }
                     }
 
-                    if (answer.equals(context.getString(R.string.not_specified))){
-                        cbAnalgesicNone.setChecked(true);
+                    if (answer.equals(context.getString(R.string.none))){
+                        cbPainReliefNone.setChecked(true);
                     }
                 }
             }
 
 
             {
-                //Spinner
-                final Spinner spinner = (Spinner) assessmentView.findViewById(R.id.spinner);
-                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, spinnerOptions);
-                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(spinnerAdapter);
+                //Pain relief other
+                EditText editPainReliefOther = (EditText) assessmentView.findViewById(R.id.editPainReliefOther);
+                editPainReliefOther.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                spinner.setSelection(0);
-                String value = cursor.getString(index * numFields + 4);
-                if (value != null && !value.equals("")) {
-                    for (int k = 0; k < spinnerOptions.length; k++) {
-                        if (value.equals(spinnerOptions[k])) {
-                            spinner.setSelection(k);
-                            break;
-                        }
                     }
+
+                    @Override
+                    public void onTextChanged(final CharSequence s, int start, int before, int count) {
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 4], s.toString());
+                            }
+                        };
+                        thread.start();
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+
+                String other = cursor.getString(index * numFields + 4);
+                if (other != null) {
+                    editPainReliefOther.setText(other);
+                } else {
+                    editPainReliefOther.setText("");
                 }
-
-
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 4], spinnerOptions[position]);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
-                TextView textView = (TextView) assessmentView.findViewById(R.id.text_mode_of_prescription);
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        spinner.performClick();
-                    }
-                });
             }
 
             cursor.close();
@@ -395,18 +402,17 @@ public class AnalgesicPrescription {
 
         cursor.close();
         return null;
-
     }
 
     public static boolean canAdd(){
-        Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM);
+        Cursor cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_NUM);
         int num = cursor.getInt(0);
         cursor.close();
         boolean canAdd = true;
         if (num > 0){
             cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, (num-1)*numFields+1, num*numFields+1));
             for (int i=0; i<cursor.getColumnCount(); i++){
-                if (cursor.getString(i) == null || cursor.getString(i).equals("")){
+                if (mandatoryKeys[i] && (cursor.getString(i) == null || cursor.getString(i).equals(""))){
                     canAdd = false;
                     break;
                 }
@@ -414,6 +420,7 @@ public class AnalgesicPrescription {
         }
         return canAdd;
     }
+
 
     public static void clearData(){
         MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[0], "0");

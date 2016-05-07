@@ -103,6 +103,15 @@ public class FragmentE extends Fragment {
                                 complete = AnalgesicAdministration.canAdd();
                                 break;
                             }
+                            case 3:{
+                                complete = NerveBlock.canAdd();
+                                break;
+                            }
+                            case 4:{
+                                complete = AlternativePainRelief.canAdd();
+                                break;
+                            }
+
                         }
 
                         if (!complete){

@@ -160,9 +160,9 @@
     <string name="type_of_order">Type of order:</string>
     <string name="route">Route:</string>
     <string name="frequency">Frequency:</string>
-    <string name="nerve_block">Nerve block:</string>
+    <string name="nerve_block">Nerve block</string>
     <string name="type_of_nerve_block">Type of nerve block:</string>
-    <string name="alternative_pain_relief">Alternative pain relief:</string>
+    <string name="alternative_pain_relief">Alternative pain relief</string>
     <string name="refusal_of_analgesia">Analgesia refused</string>
     <string name="analgesic_administrations">Analgesic administrations</string>
     <string name="written">Written</string>

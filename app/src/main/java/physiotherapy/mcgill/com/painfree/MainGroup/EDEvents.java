@@ -65,6 +65,8 @@ public class EDEvents {
                     PainAssessments.clearData();
                     AnalgesicPrescription.clearData();
                     AnalgesicAdministration.clearData();
+                    NerveBlock.clearData();
+                    AlternativePainRelief.clearData();
 
 
                 } else {
@@ -111,15 +113,23 @@ public class EDEvents {
                                 canAdd = AnalgesicAdministration.canAdd();
                                 break;
                             }
+                            case 3:{
+                                canAdd = NerveBlock.canAdd();
+                                break;
+                            }
+                            case 4:{
+                                canAdd = AlternativePainRelief.canAdd();
+                                break;
+                            }
                         }
                     }
 
                     if (canAdd){
-                        AppUtils.showListDialog(context.getString(R.string.select_type_of_event), new String[]{context.getString(R.string.pain_assessment), context.getString(R.string.analgesic_prescription), context.getString(R.string.analgesic_administration)}, context, new AppUtils.ListHandler() {
+                        AppUtils.showListDialog(context.getString(R.string.select_type_of_event), new String[]{context.getString(R.string.pain_assessment), context.getString(R.string.analgesic_prescription), context.getString(R.string.analgesic_administration), context.getString(R.string.nerve_block), context.getString(R.string.alternative_pain_relief)}, context, new AppUtils.ListHandler() {
                             @Override
                             public void onClick(int i) {
 
-                                Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_NUM, DBAdapter.KEY_ANALGESIC_PRES_NUM, DBAdapter.KEY_ANALGESIC_ADMIN_NUM});
+                                Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_NUM, DBAdapter.KEY_ANALGESIC_PRES_NUM, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, DBAdapter.KEY_NERVE_BLOCK_NUM, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_NUM});
                                 cursor1.moveToFirst();
 
                                 Cursor dateCursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_ARRIVALDATE);
@@ -161,7 +171,30 @@ public class EDEvents {
                                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_ADMIN_NUM, String.valueOf(numAnalgesicAdmin+1));
                                             if (!defaultDate.equals(context.getString(R.string.none))){
                                                 MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicAdministration.keys[(numAnalgesicAdmin)*AnalgesicAdministration.numFields+1], defaultDate);
-                                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicAdministration.keys[(numAnalgesicAdmin)*AnalgesicAdministration.numFields+18], defaultDate);
+                                            }
+                                        }
+                                        break;
+                                    case 3:
+                                        int numNerveBlock = cursor1.getInt(3);
+                                        if (numNerveBlock>=maxEvents){
+                                            AppUtils.showAlert("Error", "Reached nerve block limit", context);
+                                            return;
+                                        } else {
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_NERVE_BLOCK_NUM, String.valueOf(numNerveBlock+1));
+                                            if (!defaultDate.equals(context.getString(R.string.none))){
+                                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, NerveBlock.keys[(numNerveBlock)*NerveBlock.numFields+1], defaultDate);
+                                            }
+                                        }
+                                        break;
+                                    case 4:
+                                        int numAlternativePainRelief = cursor1.getInt(4);
+                                        if (numAlternativePainRelief>=maxEvents){
+                                            AppUtils.showAlert("Error", "Reached alternative pain relief limit", context);
+                                            return;
+                                        } else {
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_NUM, String.valueOf(numAlternativePainRelief+1));
+                                            if (!defaultDate.equals(context.getString(R.string.none))){
+                                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AlternativePainRelief.keys[(numAlternativePainRelief)*AlternativePainRelief.numFields+1], defaultDate);
                                             }
                                         }
                                         break;
@@ -196,6 +229,8 @@ public class EDEvents {
             int painAssessmentIndex = 0;
             int analgesicPresIndex = 0;
             int analgesicAdminIndex = 0;
+            int nerveBlockIndex = 0;
+            int alternativePainReliefIndex = 0;
             for (int i=0; i<orderOfEvents.size(); i++){
                 Integer type = orderOfEvents.get(i);
                 final int I = i;
@@ -246,6 +281,38 @@ public class EDEvents {
                             }
                         });
                         analgesicAdminIndex++;
+                        break;
+                    }
+
+                    case 3:{
+
+                        childView = NerveBlock.setupNerveBlockSection(context, holder.container, adapter, nerveBlockIndex, i, new MinusHandler() {
+                            @Override
+                            public void onClick() {
+                                orderOfEvents.remove(I);
+                                String orderStringNew = TextUtils.join("", orderOfEvents);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, orderStringNew);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(numEvents-1));
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                        nerveBlockIndex++;
+                        break;
+                    }
+
+                    case 4:{
+
+                        childView = AlternativePainRelief.setupAlternativePainReliefSection(context, holder.container, adapter, alternativePainReliefIndex, i, new MinusHandler() {
+                            @Override
+                            public void onClick() {
+                                orderOfEvents.remove(I);
+                                String orderStringNew = TextUtils.join("", orderOfEvents);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_ORDER, orderStringNew);
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_EVENTS_NUM, String.valueOf(numEvents-1));
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+                        alternativePainReliefIndex++;
                         break;
                     }
                 }

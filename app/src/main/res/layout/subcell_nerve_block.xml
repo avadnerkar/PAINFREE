@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/card_border"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card_secondary"
+        android:elevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/title"
+                android:textStyle="bold"
+                android:text="@string/assessment1"
+                android:gravity="center"
+                style="@style/textFormStyle"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_action_cancel"
+                app:elevation="4dp"
+                app:backgroundTint="@color/MidnightBlue"
+                app:fabSize="mini"
+                android:layout_margin="@dimen/button_layout_margin"/>
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/nerveBlockButtonDate"
+                style="@style/buttonCard"
+                android:text="@string/select_date"/>
+
+            <CheckBox
+                android:id="@+id/nerveBlockButtonDateNone"
+                android:paddingEnd="@dimen/button_layout_margin"
+                android:layout_gravity="center_vertical"
+                android:text="@string/none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/checkboxStyle"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/nerveBlockButtonTime"
+                style="@style/buttonCard"
+                android:text="@string/select_time"/>
+
+            <CheckBox
+                android:id="@+id/nerveBlockButtonTimeNone"
+                android:paddingEnd="@dimen/button_layout_margin"
+                android:layout_gravity="center_vertical"
+                android:text="@string/none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/checkboxStyle"/>
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/text_type_of_order"
+            android:textStyle="bold"
+            android:text="@string/type_of_order"
+            style="@style/textFormStyle" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerNerveBlockOrder"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:text="@string/type_of_nerve_block"
+            style="@style/textFormStyle" />
+
+        <EditText
+            android:id="@+id/editNerveBlockType"
+            style="@style/editTextFormStyle"/>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
