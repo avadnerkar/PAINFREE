@@ -74,6 +74,7 @@ public class DBAdapter {
     public static final String KEY_EVENTS_NUM = "[Number of events]";
     public static final String KEY_EVENTS_BOOL = "[No events]";
     public static final String KEY_EVENTS_ORDER = "[Order of events]";
+    public static final String KEY_FIRST_EVENT = "[Hours to first event]";
 
     //public static final String KEY_PAIN_ASSESSMENTS_BOOL = "[No pain assessments]";
     public static final String KEY_PAIN_ASSESSMENT_NUM = "[Number of pain assessments]";
@@ -381,6 +382,7 @@ public class DBAdapter {
         dataMap.add(KEY_EVENTS_BOOL);
         dataMap.add(KEY_EVENTS_NUM);
         dataMap.add(KEY_EVENTS_ORDER);
+        dataMap.add(KEY_FIRST_EVENT);
 
         //dataMap.add(KEY_PAIN_ASSESSMENTS_BOOL);
         dataMap.add(KEY_PAIN_ASSESSMENT_NUM);

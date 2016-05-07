@@ -27,7 +27,10 @@ import com.opencsv.CSVWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -400,6 +403,9 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityIndicator.showProgressDialog(this);
 
+
+
+
         Thread thread = new Thread(){
             @Override
             public void run() {
@@ -422,9 +428,17 @@ public class MainActivity extends AppCompatActivity {
 
                                 if (c.getColumnName(i).equals("Medical record number")){
                                     list.add("Confidential");
+                                } else if (c.getColumnName(i).equals("Hours to first event")){
+                                    Float hours = updateTimeToFirstEvent(c.getLong(c.getColumnIndex(DBAdapter.KEY_ROWID)));
+                                    if (hours == null){
+                                        list.add("Not applicable");
+                                    } else {
+                                        list.add(String.format("%.2f", hours));
+                                    }
                                 } else {
                                     list.add(c.getString(i));
                                 }
+
 
                             }
                             String[] arrStr = list.toArray(new String[list.size()]);
@@ -489,6 +503,104 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         thread.start();
+
+
+    }
+
+    private Float updateTimeToFirstEvent(long patientId){
+        Cursor cursor = myDb.getDataFields(patientId, new String[]{DBAdapter.KEY_EVENTS_ORDER, DBAdapter.KEY_ARRIVALDATE, DBAdapter.KEY_ARRIVALTIME});
+        if (cursor.moveToFirst()){
+            String order = cursor.getString(0);
+            String arrivalDate = cursor.getString(1);
+            String arrivalTime = cursor.getString(2);
+
+            cursor.close();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date date = null;
+            if (arrivalDate == null || arrivalDate.equals("") || arrivalDate.equals(context.getString(R.string.none)) || arrivalTime == null || arrivalTime.equals("") || arrivalTime.equals(context.getString(R.string.none))){
+                return null;
+            } else {
+                String combinedDate = arrivalDate + " " + arrivalTime;
+                try {
+                    date = format.parse(combinedDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            if (order != null && (order.length()>0)){
+                Date eventDate = null;
+                String eventDateString = null;
+                String eventTimeString = null;
+                Integer type = Character.getNumericValue(order.charAt(0));
+
+                switch (type){
+                    case 0:{
+                        Cursor c = myDb.getDataFields(patientId, new String[]{DBAdapter.KEY_PAIN_ASSESSMENT_1_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_1_TIME});
+                        eventDateString = c.getString(0);
+                        eventTimeString = c.getString(1);
+                        c.close();
+                        break;
+                    }
+
+                    case 1:{
+                        Cursor c = myDb.getDataFields(patientId, new String[]{DBAdapter.KEY_ANALGESIC_PRES_1_DATE, DBAdapter.KEY_ANALGESIC_PRES_1_TIME});
+                        eventDateString = c.getString(0);
+                        eventTimeString = c.getString(1);
+                        c.close();
+                        break;
+                    }
+
+                    case 2:{
+                        Cursor c = myDb.getDataFields(patientId, new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_1_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_1_TIME});
+                        eventDateString = c.getString(0);
+                        eventTimeString = c.getString(1);
+                        c.close();
+                        break;
+                    }
+
+                    case 3:{
+                        Cursor c = myDb.getDataFields(patientId, new String[]{DBAdapter.KEY_NERVE_BLOCK_1_DATE, DBAdapter.KEY_NERVE_BLOCK_1_TIME});
+                        eventDateString = c.getString(0);
+                        eventTimeString = c.getString(1);
+                        c.close();
+                        break;
+                    }
+
+                    case 4:{
+                        Cursor c = myDb.getDataFields(patientId, new String[]{DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_1_DATE, DBAdapter.KEY_ALTERNATIVE_PAIN_RELIEF_1_TIME});
+                        eventDateString = c.getString(0);
+                        eventTimeString = c.getString(1);
+                        c.close();
+                        break;
+                    }
+
+                }
+
+                if (eventDateString == null || eventDateString.equals("") || eventDateString.equals(context.getString(R.string.none)) || eventTimeString == null || eventTimeString.equals("") || eventTimeString.equals(context.getString(R.string.none))){
+                    return null;
+                } else {
+                    String combinedEventDate = eventDateString + " " + eventTimeString;
+                    try {
+                        eventDate = format.parse(combinedEventDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    long time = (eventDate.getTime() - date.getTime())/1000;
+
+                    return time/3600.0f;
+                }
+
+
+            } else {
+                return null;
+            }
+        } else {
+            cursor.close();
+            return null;
+        }
 
 
     }
