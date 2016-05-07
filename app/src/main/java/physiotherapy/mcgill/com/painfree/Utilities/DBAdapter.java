@@ -96,6 +96,12 @@ public class DBAdapter {
     public static final String KEY_PAIN_ASSESSMENT_6_DATE = "[Pain assessment 6 date]";
     public static final String KEY_PAIN_ASSESSMENT_6_TIME = "[Pain assessment 6 time]";
     public static final String KEY_PAIN_ASSESSMENT_6_SCORE = "[Pain assessment 6 score]";
+    public static final String KEY_PAIN_ASSESSMENT_7_DATE = "[Pain assessment 7 date]";
+    public static final String KEY_PAIN_ASSESSMENT_7_TIME = "[Pain assessment 7 time]";
+    public static final String KEY_PAIN_ASSESSMENT_7_SCORE = "[Pain assessment 7 score]";
+    public static final String KEY_PAIN_ASSESSMENT_8_DATE = "[Pain assessment 8 date]";
+    public static final String KEY_PAIN_ASSESSMENT_8_TIME = "[Pain assessment 8 time]";
+    public static final String KEY_PAIN_ASSESSMENT_8_SCORE = "[Pain assessment 8 score]";
 
     //public static final String KEY_ANALGESIC_PRES_BOOL = "[No analgesic prescriptions]";
     public static final String KEY_ANALGESIC_PRES_NUM = "[Number of analgesic prescriptions]";
@@ -123,6 +129,14 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_6_TIME = "[Analgesic prescription 6 time]";
     public static final String KEY_ANALGESIC_PRES_6_TYPE = "[Analgesic prescription 6 type]";
     public static final String KEY_ANALGESIC_PRES_6_MODE = "[Analgesic prescription 6 mode]";
+    public static final String KEY_ANALGESIC_PRES_7_DATE = "[Analgesic prescription 7 date]";
+    public static final String KEY_ANALGESIC_PRES_7_TIME = "[Analgesic prescription 7 time]";
+    public static final String KEY_ANALGESIC_PRES_7_TYPE = "[Analgesic prescription 7 type]";
+    public static final String KEY_ANALGESIC_PRES_7_MODE = "[Analgesic prescription 7 mode]";
+    public static final String KEY_ANALGESIC_PRES_8_DATE = "[Analgesic prescription 8 date]";
+    public static final String KEY_ANALGESIC_PRES_8_TIME = "[Analgesic prescription 8 time]";
+    public static final String KEY_ANALGESIC_PRES_8_TYPE = "[Analgesic prescription 8 type]";
+    public static final String KEY_ANALGESIC_PRES_8_MODE = "[Analgesic prescription 8 mode]";
 
     public static final String KEY_ANALGESIC_ADMIN_NUM = "[Number of analgesic administrations]";
     public static final String KEY_ANALGESIC_ADMIN_1_DATE = "[Analgesic administration 1 date]";
@@ -233,6 +247,42 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_ADMIN_6_OPIOID_ROUTE = "[Analgesic administration 6 opioid route]";
     public static final String KEY_ANALGESIC_ADMIN_6_OPIOID_ORDER = "[Analgesic administration 6 opioid order]";
     public static final String KEY_ANALGESIC_ADMIN_6_REFUSAL = "[Analgesic administration 6 refused]";
+    public static final String KEY_ANALGESIC_ADMIN_7_DATE = "[Analgesic administration 7 date]";
+    public static final String KEY_ANALGESIC_ADMIN_7_TIME = "[Analgesic administration 7 time]";
+    public static final String KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN = "[Analgesic administration 7 acetaminophen]";
+    public static final String KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_DOSE = "[Analgesic administration 7 acetaminophen dose]";
+    public static final String KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_FREQUENCY = "[Analgesic administration 7 acetaminophen frequency]";
+    public static final String KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_ROUTE = "[Analgesic administration 7 acetaminophen route]";
+    public static final String KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_ORDER = "[Analgesic administration 7 acetaminophen order]";
+    public static final String KEY_ANALGESIC_ADMIN_7_NSAIDS = "[Analgesic administration 7 NSAIDs]";
+    public static final String KEY_ANALGESIC_ADMIN_7_NSAIDS_DOSE = "[Analgesic administration 7 NSAIDs dose]";
+    public static final String KEY_ANALGESIC_ADMIN_7_NSAIDS_FREQUENCY = "[Analgesic administration 7 NSAIDs frequency]";
+    public static final String KEY_ANALGESIC_ADMIN_7_NSAIDS_ROUTE = "[Analgesic administration 7 NSAIDs route]";
+    public static final String KEY_ANALGESIC_ADMIN_7_NSAIDS_ORDER = "[Analgesic administration 7 NSAIDs order]";
+    public static final String KEY_ANALGESIC_ADMIN_7_OPIOID = "[Analgesic administration 7 opioid]";
+    public static final String KEY_ANALGESIC_ADMIN_7_OPIOID_DOSE = "[Analgesic administration 7 opioid dose]";
+    public static final String KEY_ANALGESIC_ADMIN_7_OPIOID_FREQUENCY = "[Analgesic administration 7 opioid frequency]";
+    public static final String KEY_ANALGESIC_ADMIN_7_OPIOID_ROUTE = "[Analgesic administration 7 opioid route]";
+    public static final String KEY_ANALGESIC_ADMIN_7_OPIOID_ORDER = "[Analgesic administration 7 opioid order]";
+    public static final String KEY_ANALGESIC_ADMIN_7_REFUSAL = "[Analgesic administration 7 refused]";
+    public static final String KEY_ANALGESIC_ADMIN_8_DATE = "[Analgesic administration 8 date]";
+    public static final String KEY_ANALGESIC_ADMIN_8_TIME = "[Analgesic administration 8 time]";
+    public static final String KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN = "[Analgesic administration 8 acetaminophen]";
+    public static final String KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_DOSE = "[Analgesic administration 8 acetaminophen dose]";
+    public static final String KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_FREQUENCY = "[Analgesic administration 8 acetaminophen frequency]";
+    public static final String KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_ROUTE = "[Analgesic administration 8 acetaminophen route]";
+    public static final String KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_ORDER = "[Analgesic administration 8 acetaminophen order]";
+    public static final String KEY_ANALGESIC_ADMIN_8_NSAIDS = "[Analgesic administration 8 NSAIDs]";
+    public static final String KEY_ANALGESIC_ADMIN_8_NSAIDS_DOSE = "[Analgesic administration 8 NSAIDs dose]";
+    public static final String KEY_ANALGESIC_ADMIN_8_NSAIDS_FREQUENCY = "[Analgesic administration 8 NSAIDs frequency]";
+    public static final String KEY_ANALGESIC_ADMIN_8_NSAIDS_ROUTE = "[Analgesic administration 8 NSAIDs route]";
+    public static final String KEY_ANALGESIC_ADMIN_8_NSAIDS_ORDER = "[Analgesic administration 8 NSAIDs order]";
+    public static final String KEY_ANALGESIC_ADMIN_8_OPIOID = "[Analgesic administration 8 opioid]";
+    public static final String KEY_ANALGESIC_ADMIN_8_OPIOID_DOSE = "[Analgesic administration 8 opioid dose]";
+    public static final String KEY_ANALGESIC_ADMIN_8_OPIOID_FREQUENCY = "[Analgesic administration 8 opioid frequency]";
+    public static final String KEY_ANALGESIC_ADMIN_8_OPIOID_ROUTE = "[Analgesic administration 8 opioid route]";
+    public static final String KEY_ANALGESIC_ADMIN_8_OPIOID_ORDER = "[Analgesic administration 8 opioid order]";
+    public static final String KEY_ANALGESIC_ADMIN_8_REFUSAL = "[Analgesic administration 8 refused]";
 
     public static final String KEY_NERVE_BLOCK_NUM = "[Number of nerve block administrations]";
     public static final String KEY_NERVE_BLOCK_1_DATE = "[Nerve block 1 date]";
@@ -259,6 +309,14 @@ public class DBAdapter {
     public static final String KEY_NERVE_BLOCK_6_TIME = "[Nerve block 6 time]";
     public static final String KEY_NERVE_BLOCK_6_ORDER = "[Nerve block 6 order]";
     public static final String KEY_NERVE_BLOCK_6_TYPE = "[Nerve block 6 type]";
+    public static final String KEY_NERVE_BLOCK_7_DATE = "[Nerve block 7 date]";
+    public static final String KEY_NERVE_BLOCK_7_TIME = "[Nerve block 7 time]";
+    public static final String KEY_NERVE_BLOCK_7_ORDER = "[Nerve block 7 order]";
+    public static final String KEY_NERVE_BLOCK_7_TYPE = "[Nerve block 7 type]";
+    public static final String KEY_NERVE_BLOCK_8_DATE = "[Nerve block 8 date]";
+    public static final String KEY_NERVE_BLOCK_8_TIME = "[Nerve block 8 time]";
+    public static final String KEY_NERVE_BLOCK_8_ORDER = "[Nerve block 8 order]";
+    public static final String KEY_NERVE_BLOCK_8_TYPE = "[Nerve block 8 type]";
 
     public static final String KEY_ALTERNATIVE_PAIN_RELIEF_NUM = "[Number of alternative pain reliefs]";
     public static final String KEY_ALTERNATIVE_PAIN_RELIEF_1_DATE = "[Alternative pain relief 1 date]";
@@ -285,6 +343,14 @@ public class DBAdapter {
     public static final String KEY_ALTERNATIVE_PAIN_RELIEF_6_TIME = "[Alternative pain relief 6 time]";
     public static final String KEY_ALTERNATIVE_PAIN_RELIEF_6 = "[Alternative pain relief 6]";
     public static final String KEY_ALTERNATIVE_PAIN_RELIEF_6_OTHER = "[Alternative pain relief 6 other]";
+    public static final String KEY_ALTERNATIVE_PAIN_RELIEF_7_DATE = "[Alternative pain relief 7 date]";
+    public static final String KEY_ALTERNATIVE_PAIN_RELIEF_7_TIME = "[Alternative pain relief 7 time]";
+    public static final String KEY_ALTERNATIVE_PAIN_RELIEF_7 = "[Alternative pain relief 7]";
+    public static final String KEY_ALTERNATIVE_PAIN_RELIEF_7_OTHER = "[Alternative pain relief 7 other]";
+    public static final String KEY_ALTERNATIVE_PAIN_RELIEF_8_DATE = "[Alternative pain relief 8 date]";
+    public static final String KEY_ALTERNATIVE_PAIN_RELIEF_8_TIME = "[Alternative pain relief 8 time]";
+    public static final String KEY_ALTERNATIVE_PAIN_RELIEF_8 = "[Alternative pain relief 8]";
+    public static final String KEY_ALTERNATIVE_PAIN_RELIEF_8_OTHER = "[Alternative pain relief 8 other]";
 
 
     public static final String KEY_EVIDENCE_ALTERED_COGNITION = "[Evidence of altered cognition]";
@@ -404,6 +470,12 @@ public class DBAdapter {
         dataMap.add(KEY_PAIN_ASSESSMENT_6_DATE);
         dataMap.add(KEY_PAIN_ASSESSMENT_6_TIME);
         dataMap.add(KEY_PAIN_ASSESSMENT_6_SCORE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_7_DATE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_7_TIME);
+        dataMap.add(KEY_PAIN_ASSESSMENT_7_SCORE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_8_DATE);
+        dataMap.add(KEY_PAIN_ASSESSMENT_8_TIME);
+        dataMap.add(KEY_PAIN_ASSESSMENT_8_SCORE);
 
         //dataMap.add(KEY_ANALGESIC_PRES_BOOL);
         dataMap.add(KEY_ANALGESIC_PRES_NUM);
@@ -431,6 +503,14 @@ public class DBAdapter {
         dataMap.add(KEY_ANALGESIC_PRES_6_TIME);
         dataMap.add(KEY_ANALGESIC_PRES_6_TYPE);
         dataMap.add(KEY_ANALGESIC_PRES_6_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_7_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_7_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_7_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_7_MODE);
+        dataMap.add(KEY_ANALGESIC_PRES_8_DATE);
+        dataMap.add(KEY_ANALGESIC_PRES_8_TIME);
+        dataMap.add(KEY_ANALGESIC_PRES_8_TYPE);
+        dataMap.add(KEY_ANALGESIC_PRES_8_MODE);
 
         dataMap.add(KEY_ANALGESIC_ADMIN_NUM);
         dataMap.add(KEY_ANALGESIC_ADMIN_1_DATE);
@@ -541,6 +621,42 @@ public class DBAdapter {
         dataMap.add(KEY_ANALGESIC_ADMIN_6_OPIOID_ROUTE);
         dataMap.add(KEY_ANALGESIC_ADMIN_6_OPIOID_ORDER);
         dataMap.add(KEY_ANALGESIC_ADMIN_6_REFUSAL);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_DATE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_TIME);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_DOSE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_FREQUENCY);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_ROUTE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_ORDER);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_NSAIDS);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_NSAIDS_DOSE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_NSAIDS_FREQUENCY);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_NSAIDS_ROUTE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_NSAIDS_ORDER);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_OPIOID);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_OPIOID_DOSE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_OPIOID_FREQUENCY);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_OPIOID_ROUTE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_OPIOID_ORDER);
+        dataMap.add(KEY_ANALGESIC_ADMIN_7_REFUSAL);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_DATE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_TIME);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_DOSE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_FREQUENCY);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_ROUTE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_ORDER);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_NSAIDS);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_NSAIDS_DOSE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_NSAIDS_FREQUENCY);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_NSAIDS_ROUTE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_NSAIDS_ORDER);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_OPIOID);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_OPIOID_DOSE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_OPIOID_FREQUENCY);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_OPIOID_ROUTE);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_OPIOID_ORDER);
+        dataMap.add(KEY_ANALGESIC_ADMIN_8_REFUSAL);
 
         dataMap.add(KEY_NERVE_BLOCK_NUM);
         dataMap.add(KEY_NERVE_BLOCK_1_DATE);
@@ -567,6 +683,14 @@ public class DBAdapter {
         dataMap.add(KEY_NERVE_BLOCK_6_TIME);
         dataMap.add(KEY_NERVE_BLOCK_6_ORDER);
         dataMap.add(KEY_NERVE_BLOCK_6_TYPE);
+        dataMap.add(KEY_NERVE_BLOCK_7_DATE);
+        dataMap.add(KEY_NERVE_BLOCK_7_TIME);
+        dataMap.add(KEY_NERVE_BLOCK_7_ORDER);
+        dataMap.add(KEY_NERVE_BLOCK_7_TYPE);
+        dataMap.add(KEY_NERVE_BLOCK_8_DATE);
+        dataMap.add(KEY_NERVE_BLOCK_8_TIME);
+        dataMap.add(KEY_NERVE_BLOCK_8_ORDER);
+        dataMap.add(KEY_NERVE_BLOCK_8_TYPE);
 
         dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_NUM);
         dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_1_DATE);
@@ -593,6 +717,14 @@ public class DBAdapter {
         dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_6_TIME);
         dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_6);
         dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_6_OTHER);
+        dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_7_DATE);
+        dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_7_TIME);
+        dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_7);
+        dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_7_OTHER);
+        dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_8_DATE);
+        dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_8_TIME);
+        dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_8);
+        dataMap.add(KEY_ALTERNATIVE_PAIN_RELIEF_8_OTHER);
 
         dataMap.add(KEY_EVIDENCE_ALTERED_COGNITION);
         dataMap.add(KEY_SHORT_CAM_SCORE);

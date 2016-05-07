@@ -41,7 +41,9 @@ public class PainAssessments {
             DBAdapter.KEY_PAIN_ASSESSMENT_3_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_3_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_3_SCORE,
             DBAdapter.KEY_PAIN_ASSESSMENT_4_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_4_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_4_SCORE,
             DBAdapter.KEY_PAIN_ASSESSMENT_5_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_5_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_5_SCORE,
-            DBAdapter.KEY_PAIN_ASSESSMENT_6_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_6_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_6_SCORE};
+            DBAdapter.KEY_PAIN_ASSESSMENT_6_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_6_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_6_SCORE,
+            DBAdapter.KEY_PAIN_ASSESSMENT_7_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_7_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_7_SCORE,
+            DBAdapter.KEY_PAIN_ASSESSMENT_8_DATE, DBAdapter.KEY_PAIN_ASSESSMENT_8_TIME, DBAdapter.KEY_PAIN_ASSESSMENT_8_SCORE};
     public static final int numFields = 3;
 
     public static View setupPainAssessmentSection(final Context context, ViewGroup parent, final ArrayAdapter adapter, final int index, final int globalIndex, final EDEvents.MinusHandler handler){

@@ -41,7 +41,7 @@ public class EDEvents {
             holder = (ViewHolderEvents) rowView.getTag();
         }
 
-        final int maxEvents = 6;
+        final int maxEvents = 8;
 
         holder.container.removeAllViews();
 
