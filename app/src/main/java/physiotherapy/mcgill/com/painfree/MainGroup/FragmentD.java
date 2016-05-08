@@ -50,7 +50,12 @@ public class FragmentD extends Fragment {
         items.add(new FragmentItem(getString(R.string.past_diagnosis_of_altered_cognition), FragmentItem.CellType.RADIO_WITH_SPECIFY, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_HISTORYOFALTEREDCOGNITION));
         items.get(items.size()-1).isMandatory = true;
         items.get(items.size()-1).extraOptions = new String[]{DBAdapter.KEY_HISTORYOFALTEREDCOGNITIONSPECIFY};
-        items.add(new FragmentItem(getString(R.string.altered_cognition), FragmentItem.CellType.RADIO, new String[]{getString(R.string.positive), getString(R.string.negative), getString(R.string.not_specified)}, null, DBAdapter.KEY_ALTEREDCOGNITION));
+        //items.add(new FragmentItem(getString(R.string.altered_cognition), FragmentItem.CellType.RADIO, new String[]{getString(R.string.positive), getString(R.string.negative), getString(R.string.not_specified)}, null, DBAdapter.KEY_ALTEREDCOGNITION));
+        items.add(new FragmentItem(getString(R.string.altered_cognition), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.confusion), getString(R.string.agitation), getString(R.string.disorientation)}, null, DBAdapter.KEY_ALTEREDCOGNITION));
+        items.get(items.size()-1).extraOptions = new String[]{getString(R.string.none)};
+        items.get(items.size()-1).hasNone = true;
+        items.get(items.size()-1).hasOther = true;
+
         items.get(items.size()-1).isMandatory = true;
         //items.get(items.size()-1).extraOptions = new String[]{getString(R.string.none)};
         //items.get(items.size()-1).hasNone = true;
