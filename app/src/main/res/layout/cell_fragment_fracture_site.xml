@@ -550,6 +550,16 @@
             android:checked="false"
             style="@style/checkboxStyle" />
 
+        <TextView
+            android:textStyle="bold"
+            android:text="Other:"
+            style="@style/textFormStyle" />
+
+        <EditText
+            android:hint="@string/other"
+            android:id="@+id/editOther"
+            style="@style/editTextFormStyle" />
+
 
     </LinearLayout>
 

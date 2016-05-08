@@ -784,6 +784,8 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 holder.cbWristLeft = (CheckBox) convertView.findViewById(R.id.leftWrist);
                 holder.cbWristRight = (CheckBox) convertView.findViewById(R.id.rightWrist);
                 holder.cbWristUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedWrist);
+
+                holder.editOther = (EditText) convertView.findViewById(R.id.editOther);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolderFractureSite) convertView.getTag();
@@ -803,6 +805,46 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             setupFractureSiteClickListener(holder.cbHead, null, null, null, DBAdapter.KEY_FRACTURESITE_HEAD, convertView);
             setupFractureSiteClickListener(holder.cbToes, null, null, null, DBAdapter.KEY_FRACTURESITE_TOES, convertView);
             setupFractureSiteClickListener(holder.cbFingers, null, null, null, DBAdapter.KEY_FRACTURESITE_FINGERS, convertView);
+
+            cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_FRACTURESITE_OTHER);
+
+            if (cursor.moveToFirst()) {
+                String text = cursor.getString(0);
+                if (text != null) {
+                    holder.editOther.setText(text);
+                } else {
+                    holder.editOther.setText("");
+                }
+
+            } else {
+                holder.editOther.setText("");
+            }
+
+            holder.editOther.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
+                    Thread thread = new Thread() {
+                        @Override
+                        public void run() {
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_FRACTURESITE_OTHER, charSequence.toString());
+                        }
+                    };
+                    thread.start();
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+            cursor.close();
 
         } else if (i1 == FragmentItem.CellType.TEXT) {
 
@@ -1610,6 +1652,8 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
         private CheckBox cbWristLeft;
         private CheckBox cbWristRight;
         private CheckBox cbWristUnspecified;
+
+        private EditText editOther;
 
     }
 

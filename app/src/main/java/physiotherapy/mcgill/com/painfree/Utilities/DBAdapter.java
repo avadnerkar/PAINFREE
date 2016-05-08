@@ -56,6 +56,7 @@ public class DBAdapter {
     public static final String KEY_FRACTURESITE_HEAD = "[Frac_Head]";
     public static final String KEY_FRACTURESITE_TOES = "[Frac_Toes]";
     public static final String KEY_FRACTURESITE_FINGERS = "[Frac_Fingers]";
+    public static final String KEY_FRACTURESITE_OTHER = "[Frac_Other]";
 
     public static final String KEY_INJURY_MECHANISM = "[InjuryMechanism]";
 
@@ -430,6 +431,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_FRACTURESITE_HEAD, "xxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_FRACTURESITE_TOES, "xxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_FRACTURESITE_FINGERS, "xxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_FRACTURESITE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
 
         dataMap.add(new DBColumn(KEY_INJURY_MECHANISM, "xxxxxxxxxxxxxxxxxxxx"));
 
