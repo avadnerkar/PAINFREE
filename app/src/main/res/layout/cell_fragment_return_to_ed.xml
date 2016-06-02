@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="@dimen/card_border"
+    android:clipToPadding="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/container"
+        android:background="@drawable/card"
+        android:elevation="2dp">
+
+
+        <TextView
+            android:id="@+id/title"
+            android:textStyle="bold"
+            android:text="TITLE"
+            android:layout_alignParentLeft="true"
+            style="@style/textFormStyle"/>
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_below="@id/title"
+            android:layout_margin="@dimen/text_padding">
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/reasonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/rg">
+
+            <TextView
+                android:id="@+id/subtitle"
+                android:textStyle="bold"
+                android:text="Reason:"
+                style="@style/textFormStyle"/>
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cbUncontrolledPain"
+                android:text="@string/uncontrolled_pain"
+                style="@style/checkboxStyle"/>
+
+            <EditText
+                android:id="@+id/specify"
+                android:hint="@string/specify"
+                style="@style/editTextFormStyle"/>
+
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>

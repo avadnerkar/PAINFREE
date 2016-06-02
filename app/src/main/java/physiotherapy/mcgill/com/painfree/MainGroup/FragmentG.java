@@ -41,7 +41,7 @@ public class FragmentG extends Fragment {
         items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.discharge_tool_given), FragmentItem.CellType.RADIO, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_DISCHARGE_TOOL));
 
-        items.add(new FragmentItem(getString(R.string.return_to_ed), FragmentItem.CellType.RADIO_WITH_SPECIFY, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_RETURN_ED));
+        items.add(new FragmentItem(getString(R.string.return_to_ed), FragmentItem.CellType.RETURN_TO_ED, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_RETURN_ED));
         items.get(items.size()-1).isMandatory = true;
         items.get(items.size()-1).extraOptions = new String[]{DBAdapter.KEY_RETURN_ED_REASON};
         //items.add(new FragmentItem(getString(R.string.if_yes_why), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{"", getString(R.string.uncontrolled_pain), getString(R.string.scheduled_cast_check), getString(R.string.issues_with_cast), getString(R.string.swelling), getString(R.string.worsening_of_health_status), getString(R.string.new_fracture)}, null, DBAdapter.KEY_RETURN_ED_REASON));

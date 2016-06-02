@@ -43,7 +43,7 @@ public class FragmentD extends Fragment {
         items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.pain_scale_score), FragmentItem.CellType.SPINNER, new String[]{"", "None", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}, null, DBAdapter.KEY_PAINSCALE));
         items.get(items.size()-1).isMandatory = true;
-        items.add(new FragmentItem(getString(R.string.collective_order), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.acetaminophen), getString(R.string.nsaids), getString(R.string.opioid)}, null, DBAdapter.KEY_COLLECTIVEORDER));
+        items.add(new FragmentItem(getString(R.string.collective_order), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.acetaminophen), getString(R.string.nsaids), getString(R.string.opioid), getString(R.string.not_used)}, null, DBAdapter.KEY_COLLECTIVEORDER));
         items.get(items.size()-1).isMandatory = true;
         items.get(items.size()-1).extraOptions = new String[]{getString(R.string.not_applicable)};
         items.get(items.size()-1).hasNone = true;
@@ -51,7 +51,7 @@ public class FragmentD extends Fragment {
         items.get(items.size()-1).isMandatory = true;
         items.get(items.size()-1).extraOptions = new String[]{DBAdapter.KEY_HISTORYOFALTEREDCOGNITIONSPECIFY};
         //items.add(new FragmentItem(getString(R.string.altered_cognition), FragmentItem.CellType.RADIO, new String[]{getString(R.string.positive), getString(R.string.negative), getString(R.string.not_specified)}, null, DBAdapter.KEY_ALTEREDCOGNITION));
-        items.add(new FragmentItem(getString(R.string.altered_cognition), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.confusion), getString(R.string.agitation), getString(R.string.disorientation)}, null, DBAdapter.KEY_ALTEREDCOGNITION));
+        items.add(new FragmentItem(getString(R.string.altered_cognition), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.agitation), getString(R.string.disorientation)}, null, DBAdapter.KEY_ALTEREDCOGNITION));
         items.get(items.size()-1).extraOptions = new String[]{getString(R.string.none)};
         items.get(items.size()-1).hasNone = true;
         items.get(items.size()-1).hasOther = true;

@@ -336,6 +336,165 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
         }
 
+        else if (i1 == FragmentItem.CellType.RETURN_TO_ED) {
+
+            final ViewHolderReturnToED holder;
+            if (convertView == null){
+                convertView = inflater.inflate(R.layout.cell_fragment_return_to_ed, parent, false);
+                holder = new ViewHolderReturnToED();
+                holder.textView = (TextView) convertView.findViewById(R.id.title);
+                holder.editText = (EditText) convertView.findViewById(R.id.specify);
+                holder.reasonLayout = (LinearLayout) convertView.findViewById(R.id.reasonLayout);
+                holder.cbUncontrolledPain = (CheckBox) convertView.findViewById(R.id.cbUncontrolledPain);
+                holder.rg = (RadioGroup) convertView.findViewById(R.id.rg);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolderReturnToED) convertView.getTag();
+            }
+
+            holder.textView.setText(items.get(position).title);
+            holder.rg.removeAllViews();
+
+            if (items.get(position).databaseOptions == null) {
+                items.get(position).databaseOptions = items.get(position).uiOptions;
+            }
+
+            if (items.get(position).uiOptions.length > 2 && items.get(position).uiOptions.length < 7) {
+                holder.rg.setOrientation(RadioGroup.VERTICAL);
+                holder.rg.setOrientation(RadioGroup.VERTICAL);
+            } else {
+                holder.rg.setOrientation(RadioGroup.HORIZONTAL);
+            }
+
+            for (int i = 0; i < items.get(position).uiOptions.length; i++) {
+                RadioButton rb = new RadioButton(context);
+                rb.setText(items.get(position).uiOptions[i]);
+                rb.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
+                holder.rg.addView(rb);
+
+                final int index = i;
+                rb.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(final View view) {
+
+                        if (index==0){
+                            holder.reasonLayout.setVisibility(View.VISIBLE);
+                        } else {
+                            holder.reasonLayout.setVisibility(View.GONE);
+                            holder.editText.setText("");
+                            holder.cbUncontrolledPain.setChecked(false);
+                        }
+
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, items.get(position).databaseOptions[index]);
+                                if (index == 1){
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).extraOptions[0], "");
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_RETURN_ED_UNCONTROLLED_PAIN, null);
+                                }
+                            }
+                        };
+                        thread.start();
+
+                    }
+                });
+            }
+
+            cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
+
+            holder.reasonLayout.setVisibility(View.GONE);
+            if (cursor.moveToFirst()) {
+                String radioValue = cursor.getString(0);
+                if (radioValue != null && !radioValue.equals("")) {
+                    for (int i = 0; i < items.get(position).databaseOptions.length; i++) {
+                        String rbString = items.get(position).databaseOptions[i];
+                        if (rbString.equals(radioValue)) {
+                            ((RadioButton) holder.rg.getChildAt(i)).setChecked(true);
+
+                            if (i==0){
+                                holder.reasonLayout.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                } else {
+                    holder.rg.clearCheck();
+                }
+
+            } else {
+                holder.rg.clearCheck();
+            }
+
+            cursor.close();
+
+            Cursor cursor3 = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_RETURN_ED_UNCONTROLLED_PAIN);
+            if (cursor3.moveToFirst()){
+                String uncPain = cursor3.getString(0);
+                if (uncPain != null && uncPain.equals("Yes")){
+                    holder.cbUncontrolledPain.setChecked(true);
+                } else {
+                    holder.cbUncontrolledPain.setChecked(false);
+                }
+            }
+
+            cursor3.close();
+
+            holder.cbUncontrolledPain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String dbValue = null;
+                    if (((CheckBox)v).isChecked()){
+                        dbValue = "Yes";
+                    }
+
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_RETURN_ED_UNCONTROLLED_PAIN, dbValue);
+                }
+            });
+
+
+            Cursor cursor2 = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).extraOptions[0]);
+
+            if (cursor2.moveToFirst()) {
+                String text = cursor2.getString(0);
+                if (text != null) {
+                    holder.editText.setText(text);
+                } else {
+                    holder.editText.setText("");
+                }
+
+            } else {
+                holder.editText.setText("");
+            }
+
+            holder.editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
+                    Thread thread = new Thread() {
+                        @Override
+                        public void run() {
+                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).extraOptions[0], charSequence.toString());
+                        }
+                    };
+                    thread.start();
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+            cursor2.close();
+
+        }
+
         else if (i1 == FragmentItem.CellType.DATEPICKER) {
 
             final ViewHolderDatePicker holder;
@@ -1140,7 +1299,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             holder.cg.removeAllViews();
 
-            if (items.get(position).uiOptions.length > 2) {
+            if (items.get(position).uiOptions.length > 1) {
                 holder.cg.setOrientation(RadioGroup.VERTICAL);
             } else {
                 holder.cg.setOrientation(RadioGroup.HORIZONTAL);
@@ -1593,6 +1752,14 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
         private TextView textView;
         private EditText editText;
         private RadioGroup rg;
+    }
+
+    static class ViewHolderReturnToED{
+        private TextView textView;
+        private EditText editText;
+        private RadioGroup rg;
+        private LinearLayout reasonLayout;
+        private CheckBox cbUncontrolledPain;
     }
 
     static class ViewHolderDatePicker{
