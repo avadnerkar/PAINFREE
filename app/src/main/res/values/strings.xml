@@ -201,6 +201,7 @@
     <string name="fingers">Fingers</string>
     <string name="notice">Notice</string>
     <string name="not_used">Not used</string>
+    <string name="discharge_prescription_given">Discharge prescription given to patient:</string>
 
 
 </resources>

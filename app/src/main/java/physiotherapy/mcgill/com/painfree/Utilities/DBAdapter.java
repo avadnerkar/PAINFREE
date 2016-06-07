@@ -362,6 +362,7 @@ public class DBAdapter {
     public static final String KEY_DISCHARGE_DATE = "[DischargeDate]";
     public static final String KEY_DISCHARGE_TIME = "[DischargeTime]";
     public static final String KEY_DISCHARGE_DESTINATION = "[DischargeDestination]";
+    public static final String KEY_DISCHARGE_PRESCRIPTION = "[DischargePrescription]";
     public static final String KEY_DISCHARGE_TOOL = "[DischargeTool]";
     public static final String KEY_RETURN_ED = "[Return_ED_7_days]";
     public static final String KEY_RETURN_ED_UNCONTROLLED_PAIN = "[Return_ED_unc_pain]";
@@ -737,6 +738,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_DISCHARGE_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_DISCHARGE_TIME, "13:45"));
         dataMap.add(new DBColumn(KEY_DISCHARGE_DESTINATION, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_DISCHARGE_PRESCRIPTION, "xxx"));
         dataMap.add(new DBColumn(KEY_DISCHARGE_TOOL, "xxx"));
         dataMap.add(new DBColumn(KEY_RETURN_ED, "xxx"));
         dataMap.add(new DBColumn(KEY_RETURN_ED_UNCONTROLLED_PAIN, "xxx"));
