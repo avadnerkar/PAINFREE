@@ -57,6 +57,7 @@ public class DBAdapter {
     public static final String KEY_FRACTURESITE_OTHER = "[Frac_Other]";
 
     public static final String KEY_INJURY_MECHANISM = "[InjuryMechanism]";
+    public static final String KEY_INJURY_TRAUMA = "[Trauma]";
 
     public static final String KEY_TRIAGE_DATE = "[TriageDate]";
     public static final String KEY_TRIAGE_TIME = "[TriageTime]";
@@ -432,6 +433,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_FRACTURESITE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
 
         dataMap.add(new DBColumn(KEY_INJURY_MECHANISM, "xxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_INJURY_TRAUMA, "xxx"));
 
         dataMap.add(new DBColumn(KEY_TRIAGE_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_TRIAGE_TIME, "13:45"));

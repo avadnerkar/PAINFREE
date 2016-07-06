@@ -1324,6 +1324,14 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             }
             final CheckBox cbNoneFinal = cbNone;
 
+            CheckBox cbSecondNone = null;
+            if (items.get(position).hasSecondNone){
+                cbSecondNone = new CheckBox(context);
+                cbSecondNone.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
+                cbSecondNone.setText(items.get(position).extraOptions[1]);
+            }
+            final CheckBox cbSecondNoneFinal = cbSecondNone;
+
 
             CheckBox cbOther = null;
             if (items.get(position).hasOther){
@@ -1346,6 +1354,10 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                         if (((CheckBox) v).isChecked()) {
                             if (cbNoneFinal != null) {
                                 cbNoneFinal.setChecked(false);
+                            }
+
+                            if (cbSecondNoneFinal != null) {
+                                cbSecondNoneFinal.setChecked(false);
                             }
 
                             if (cbOtherFinal != null) {
@@ -1389,6 +1401,35 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
                                 if (cbNoneFinal.isChecked()) {
                                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, cbNoneFinal.getText().toString());
+                                    ((Activity) context).runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            notifyDataSetChanged();
+                                        }
+                                    });
+                                } else {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, "");
+                                }
+                            }
+                        };
+                        thread.start();
+                    }
+                });
+
+            }
+
+            if (cbSecondNoneFinal != null){
+                holder.cg.addView(cbSecondNoneFinal);
+
+                cbSecondNoneFinal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Thread thread = new Thread() {
+                            @Override
+                            public void run() {
+
+                                if (cbSecondNoneFinal.isChecked()) {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, cbSecondNoneFinal.getText().toString());
                                     ((Activity) context).runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -1459,6 +1500,14 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                             cbNoneFinal.setChecked(true);
                         } else {
                             cbNoneFinal.setChecked(false);
+                        }
+                    }
+
+                    if (items.get(position).hasSecondNone){
+                        if (answer.equals(items.get(position).extraOptions[1])){
+                            cbSecondNoneFinal.setChecked(true);
+                        } else {
+                            cbSecondNoneFinal.setChecked(false);
                         }
                     }
 

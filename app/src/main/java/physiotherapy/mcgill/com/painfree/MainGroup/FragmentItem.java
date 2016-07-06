@@ -20,6 +20,7 @@ public class FragmentItem {
     public String[] extraOptions;
     public boolean isMandatory;
     public boolean hasNone;
+    public boolean hasSecondNone;
     public boolean hasOther;
 
 
@@ -31,6 +32,7 @@ public class FragmentItem {
         this.dbKey = dbKey;
         this.isMandatory = false;
         this.hasNone = false;
+        this.hasSecondNone = false;
         this.hasOther = false;
     }
 
