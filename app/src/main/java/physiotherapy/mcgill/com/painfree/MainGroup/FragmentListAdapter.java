@@ -5,10 +5,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.database.Cursor;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,8 +26,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import org.w3c.dom.Text;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +33,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Random;
 
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
@@ -91,6 +88,12 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
             if (items.get(position).uiOptions != null) {
                 holder.editText.setHint(items.get(position).uiOptions[0]);
+            }
+
+            if (items.get(position).extraOptions != null && items.get(position).extraOptions[0].equals("password")) {
+                holder.editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            } else {
+                holder.editText.setTransformationMethod(null);
             }
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, items.get(position).dbKey);
@@ -911,9 +914,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 holder.cbHumerus = (CheckBox) convertView.findViewById(R.id.humerus);
                 holder.cbForearm = (CheckBox) convertView.findViewById(R.id.forearm);
                 holder.cbWrist = (CheckBox) convertView.findViewById(R.id.wrist);
-                holder.cbHead = (CheckBox) convertView.findViewById(R.id.head);
-                holder.cbToes = (CheckBox) convertView.findViewById(R.id.toes);
-                holder.cbFingers = (CheckBox) convertView.findViewById(R.id.fingers);
+                holder.cbHand = (CheckBox) convertView.findViewById(R.id.hand);
 
 
                 holder.cbFootLeft = (CheckBox) convertView.findViewById(R.id.leftFoot);
@@ -943,6 +944,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 holder.cbWristLeft = (CheckBox) convertView.findViewById(R.id.leftWrist);
                 holder.cbWristRight = (CheckBox) convertView.findViewById(R.id.rightWrist);
                 holder.cbWristUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedWrist);
+                holder.cbHandLeft = (CheckBox) convertView.findViewById(R.id.leftHand);
+                holder.cbHandRight = (CheckBox) convertView.findViewById(R.id.rightHand);
+                holder.cbHandUnspecified = (CheckBox) convertView.findViewById(R.id.unspecifiedHand);
 
                 holder.editOther = (EditText) convertView.findViewById(R.id.editOther);
                 convertView.setTag(holder);
@@ -961,9 +965,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             setupFractureSiteClickListener(holder.cbHumerus, holder.cbHumerusLeft, holder.cbHumerusRight, holder.cbHumerusUnspecified, DBAdapter.KEY_FRACTURESITE_HUMERUS, convertView);
             setupFractureSiteClickListener(holder.cbForearm, holder.cbForearmLeft, holder.cbForearmRight, holder.cbForearmUnspecified, DBAdapter.KEY_FRACTURESITE_FOREARM, convertView);
             setupFractureSiteClickListener(holder.cbWrist, holder.cbWristLeft, holder.cbWristRight, holder.cbWristUnspecified, DBAdapter.KEY_FRACTURESITE_WRIST, convertView);
-            setupFractureSiteClickListener(holder.cbHead, null, null, null, DBAdapter.KEY_FRACTURESITE_HEAD, convertView);
-            setupFractureSiteClickListener(holder.cbToes, null, null, null, DBAdapter.KEY_FRACTURESITE_TOES, convertView);
-            setupFractureSiteClickListener(holder.cbFingers, null, null, null, DBAdapter.KEY_FRACTURESITE_FINGERS, convertView);
+            setupFractureSiteClickListener(holder.cbHand, holder.cbHandLeft, holder.cbHandRight, holder.cbHandUnspecified, DBAdapter.KEY_FRACTURESITE_HAND, convertView);
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_FRACTURESITE_OTHER);
 
@@ -1146,7 +1148,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             } else {
                 holder = (ViewHolderSpinnerWithOther) convertView.getTag();
             }
-
+            holder.spinner.setOnItemSelectedListener(null);
             holder.textView.setText(items.get(position).title);
 
             final String[] spinnerOptions = Arrays.copyOf(items.get(position).uiOptions, items.get(position).uiOptions.length + 1);
@@ -1226,23 +1228,25 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                     if (j == spinnerOptions.length - 1) {
                         holder.editText.setVisibility(View.VISIBLE);
 
-                        Thread thread = new Thread() {
-                            @Override
-                            public void run() {
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.other) + " - " + holder.editText.getText().toString());
-                            }
-                        };
-                        thread.start();
+                            Thread thread = new Thread() {
+                                @Override
+                                public void run() {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, context.getString(R.string.other) + " - " + holder.editText.getText().toString());
+                                }
+                            };
+                            thread.start();
+
                     } else {
                         holder.editText.setVisibility(View.GONE);
 
-                        Thread thread = new Thread() {
-                            @Override
-                            public void run() {
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, dataArray[j]);
-                            }
-                        };
-                        thread.start();
+                            Thread thread = new Thread() {
+                                @Override
+                                public void run() {
+                                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, items.get(position).dbKey, dataArray[j]);
+                                }
+                            };
+                            thread.start();
+
                     }
                 }
 
@@ -1788,9 +1792,7 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
         private CheckBox cbHumerus;
         private CheckBox cbForearm;
         private CheckBox cbWrist;
-        private CheckBox cbHead;
-        private CheckBox cbToes;
-        private CheckBox cbFingers;
+        private CheckBox cbHand;
 
         private CheckBox cbFootLeft;
         private CheckBox cbFootRight;
@@ -1819,6 +1821,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
         private CheckBox cbWristLeft;
         private CheckBox cbWristRight;
         private CheckBox cbWristUnspecified;
+        private CheckBox cbHandLeft;
+        private CheckBox cbHandRight;
+        private CheckBox cbHandUnspecified;
 
         private EditText editOther;
 

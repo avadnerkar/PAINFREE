@@ -530,25 +530,57 @@
         </LinearLayout>
 
         <CheckBox
-            android:id="@+id/head"
-            android:tag="head"
-            android:text="@string/head"
+            android:id="@+id/hand"
+            android:tag="hand"
+            android:text="@string/hand"
             android:checked="false"
             style="@style/checkboxStyle" />
 
-        <CheckBox
-            android:id="@+id/toes"
-            android:tag="toes"
-            android:text="@string/toes"
-            android:checked="false"
-            style="@style/checkboxStyle" />
+        <LinearLayout
+            android:id="@+id/handLayout"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/fingers"
-            android:tag="fingers"
-            android:text="@string/fingers"
-            android:checked="false"
-            style="@style/checkboxStyle" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/leftHand"
+                android:tag="Left"
+                android:text="@string/left"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/rightHand"
+                android:tag="Right"
+                android:text="@string/right"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:id="@+id/unspecifiedHand"
+                android:text="@string/not_specified"
+                style="@style/checkboxStyle"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
 
         <TextView
             android:textStyle="bold"

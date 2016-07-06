@@ -35,7 +35,8 @@ public class FragmentA extends Fragment {
         items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.site), FragmentItem.CellType.SPINNER, new String[]{"", getString(R.string.jgh), getString(R.string.mgh), getString(R.string.lgh), getString(R.string.rvh), getString(R.string.hsc), getString(R.string.smh), getString(R.string.hdv)}, null, DBAdapter.KEY_SITE));
         items.get(items.size()-1).isMandatory = true;
-        items.add(new FragmentItem(getString(R.string.completed_by), FragmentItem.CellType.TEXT, null, null, DBAdapter.KEY_COMPLETED_BY));
+        //items.add(new FragmentItem(getString(R.string.completed_by), FragmentItem.CellType.TEXT, null, null, DBAdapter.KEY_COMPLETED_BY));
+        items.add(new FragmentItem(getString(R.string.completed_by), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{"", getString(R.string.user_maj), getString(R.string.user_vbc), getString(R.string.user_mw), getString(R.string.user_sm)}, null, DBAdapter.KEY_COMPLETED_BY));
         items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.date), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-01-01", "2019-12-31"}, null, DBAdapter.KEY_DATE));
         items.get(items.size()-1).isMandatory = true;
@@ -43,6 +44,7 @@ public class FragmentA extends Fragment {
         //items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.medical_record_number), FragmentItem.CellType.NUMERIC, null, null, DBAdapter.KEY_MEDICALRECORDNUMBER));
         items.get(items.size()-1).isMandatory = true;
+        items.get(items.size()-1).extraOptions = new String[]{"password"};
         items.add(new FragmentItem(getString(R.string.date_of_arrival), FragmentItem.CellType.DATEPICKER, new String[]{null, "2016-01-01", "2019-12-31"}, null, DBAdapter.KEY_ARRIVALDATE));
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.get(items.size()-1).isMandatory = true;

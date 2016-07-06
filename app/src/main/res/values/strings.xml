@@ -77,31 +77,46 @@
     <string name="mechanism_of_injury">Mechanism of Injury:</string>
     <string name="none">None</string>
     <string name="mechanism1">Fall on same level due to ice and snow</string>
-    <string name="mechanism2">Unspecified fall due to ice and snow</string>
-    <string name="mechanism3">Fall on same level from slipping, tripping and stumbling without subsequent striking against object</string>
-    <string name="mechanism4">Fall from non-moving wheelchair, nonmotorized and motorized mobility scooter</string>
-    <string name="mechanism5">Fall involving bed</string>
-    <string name="mechanism6">Fall from chair</string>
-    <string name="mechanism7">Fall from other furniture</string>
-    <string name="mechanism8">Fall on and from stairs and steps</string>
-    <string name="mechanism9">Fall on and from ladder</string>
-    <string name="mechanism10">Other slipping, tripping and stumbling and falls</string>
-    <string name="mechanism11">Unspecified fall</string>
-    <string name="mechanism12">Person boarding or alighting a car injured in noncollision transport accident</string>
-    <string name="mechanism13">Person boarding or alighting from bus injured in noncollision transport accident</string>
+    <string name="mechanism2">Fall on same level from slipping, tripping and stumbling without subsequent striking against object</string>
+
+    <string name="mechanism4">Other fall on same level due to collision with, or pushing by, another person</string>
+    <string name="mechanism5">Fall while being carried or supported by other persons</string>
+    <string name="mechanism6">Fall from non-moving wheelchair, non-motorized and motorized mobility scooter</string>
+    <string name="mechanism7">Fall involving bed</string>
+    <string name="mechanism8">Fall from chair</string>
+    <string name="mechanism9">Fall from other furniture</string>
+    <string name="mechanism10">Fall involving playground equipment</string>
+    <string name="mechanism11">Fall on and from stairs and steps</string>
+    <string name="mechanism12">Fall on and from ladder</string>
+    <string name="mechanism13">Fall on and from scaffolding</string>
+    <string name="mechanism14">Fall from, out of, or through building or structure</string>
+    <string name="mechanism15">Fall from tree</string>
+    <string name="mechanism16">Fall from cliff</string>
+    <string name="mechanism17">Fall, dive, or jump into water causing injury other than drowning or submersion</string>
+    <string name="mechanism18">Other fall from one level to another</string>
+    <string name="mechanism19">Other slipping, tripping and stumbling and falls</string>
+    <string name="mechanism20">Unspecified fall</string>
+
     <string name="mechanismCode1">W00</string>
-    <string name="mechanismCode2">W19</string>
-    <string name="mechanismCode3">W01</string>
-    <string name="mechanismCode4">W05</string>
-    <string name="mechanismCode5">W06</string>
-    <string name="mechanismCode6">W07</string>
-    <string name="mechanismCode7">W08</string>
-    <string name="mechanismCode8">W10</string>
-    <string name="mechanismCode9">W11</string>
-    <string name="mechanismCode10">W18</string>
-    <string name="mechanismCode11">W19</string>
-    <string name="mechanismCode12">V48.4</string>
-    <string name="mechanismCode13">V78.4</string>
+    <string name="mechanismCode2">W01</string>
+
+    <string name="mechanismCode4">W03</string>
+    <string name="mechanismCode5">W04</string>
+    <string name="mechanismCode6">W05</string>
+    <string name="mechanismCode7">W06</string>
+    <string name="mechanismCode8">W07</string>
+    <string name="mechanismCode9">W08</string>
+    <string name="mechanismCode10">W09</string>
+    <string name="mechanismCode11">W10</string>
+    <string name="mechanismCode12">W11</string>
+    <string name="mechanismCode13">W12</string>
+    <string name="mechanismCode14">W13</string>
+    <string name="mechanismCode15">W14</string>
+    <string name="mechanismCode16">W15</string>
+    <string name="mechanismCode17">W16</string>
+    <string name="mechanismCode18">W17</string>
+    <string name="mechanismCode19">W18</string>
+    <string name="mechanismCode20">W19</string>
     <string name="physician_examination_date">Physician examination date:</string>
     <string name="physician_examination_time">Physician examination time:</string>
     <string name="triage_date">Date of triage:</string>
@@ -202,6 +217,11 @@
     <string name="notice">Notice</string>
     <string name="not_used">Not used</string>
     <string name="discharge_prescription_given">Discharge prescription given to patient:</string>
+    <string name="user_maj">MAJ</string>
+    <string name="user_vbc">VBC</string>
+    <string name="user_mw">MW</string>
+    <string name="user_sm">SM</string>
+    <string name="hand">Hand</string>
 
 
 </resources>
