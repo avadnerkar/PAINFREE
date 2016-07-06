@@ -39,8 +39,8 @@ public class FragmentG extends Fragment {
         items.get(items.size()-1).extraOptions = new String[]{"optional none"};
         items.add(new FragmentItem(getString(R.string.discharge_destination), FragmentItem.CellType.SPINNER_WITH_OTHER, new String[]{"", getString(R.string.return_home), getString(R.string.admitting), getString(R.string.transfer), getString(R.string.lwbs), getString(R.string.death), getString(R.string.not_specified)}, null, DBAdapter.KEY_DISCHARGE_DESTINATION));
         items.get(items.size()-1).isMandatory = true;
-        items.add(new FragmentItem(getString(R.string.discharge_tool_given), FragmentItem.CellType.RADIO, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_DISCHARGE_TOOL));
-        items.add(new FragmentItem(getString(R.string.discharge_prescription_given), FragmentItem.CellType.RADIO, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_DISCHARGE_PRESCRIPTION));
+        items.add(new FragmentItem(getString(R.string.discharge_tool_given), FragmentItem.CellType.RADIO, new String[]{getString(R.string.yes), getString(R.string.no), getString(R.string.not_specified)}, null, DBAdapter.KEY_DISCHARGE_TOOL));
+        items.add(new FragmentItem(getString(R.string.discharge_prescription_given), FragmentItem.CellType.RADIO, new String[]{getString(R.string.yes), getString(R.string.no), getString(R.string.not_specified)}, null, DBAdapter.KEY_DISCHARGE_PRESCRIPTION));
         items.get(items.size()-1).isMandatory = true;
 
         items.add(new FragmentItem(getString(R.string.return_to_ed), FragmentItem.CellType.RETURN_TO_ED, new String[]{getString(R.string.yes), getString(R.string.no)}, null, DBAdapter.KEY_RETURN_ED));

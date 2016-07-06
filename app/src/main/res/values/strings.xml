@@ -148,7 +148,7 @@
     <string name="type_of_analgesic_prescribed">Type of analgesic prescribed:</string>
     <string name="standard_order">Standard order</string>
     <string name="pharmaceutical_algorithm">Pharmaceutical algorithm</string>
-    <string name="evidence_altered_cognition">New evidence of altered cognition within 48 hours:</string>
+    <string name="evidence_altered_cognition">New evidence of altered cognition within 24 hours:</string>
     <string name="not_specified">Not specified</string>
     <string name="short_cam_score">CAM score:</string>
     <string name="not_applicable">Not applicable</string>
@@ -223,6 +223,9 @@
     <string name="user_sm">SM</string>
     <string name="hand">Hand</string>
     <string name="trauma">Trauma:</string>
+    <string name="structured_prescription">Structured prescription</string>
+    <string name="comments">Comments</string>
+    <string name="notes_and_comments">Notes and comments:</string>
 
 
 </resources>

@@ -127,22 +127,6 @@
                     android:id="@+id/edit_acetaminophen_dose"
                     style="@style/editTextFormStyle" />
 
-                <EditText
-                    android:hint="@string/enter_frequency"
-                    android:id="@+id/edit_acetaminophen_frequency"
-                    style="@style/editTextFormStyle" />
-
-                <TextView
-                    android:id="@+id/text_acetaminophen_route"
-                    android:textStyle="bold"
-                    android:text="@string/route"
-                    style="@style/textFormStyle" />
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/acetaminophen_route"/>
-
                 <TextView
                     android:id="@+id/text_acetaminophen_order"
                     android:textStyle="bold"
@@ -187,22 +171,6 @@
                     android:id="@+id/edit_nsaids_dose"
                     style="@style/editTextFormStyle" />
 
-                <EditText
-                    android:hint="@string/enter_frequency"
-                    android:id="@+id/edit_nsaids_frequency"
-                    style="@style/editTextFormStyle" />
-
-                <TextView
-                    android:id="@+id/text_nsaids_route"
-                    android:textStyle="bold"
-                    android:text="@string/route"
-                    style="@style/textFormStyle" />
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/nsaids_route"/>
-
                 <TextView
                     android:id="@+id/text_nsaids_order"
                     android:textStyle="bold"
@@ -245,22 +213,6 @@
                     android:hint="@string/enter_dose"
                     android:id="@+id/edit_opioid_dose"
                     style="@style/editTextFormStyle" />
-
-                <EditText
-                    android:hint="@string/enter_frequency"
-                    android:id="@+id/edit_opioid_frequency"
-                    style="@style/editTextFormStyle" />
-
-                <TextView
-                    android:id="@+id/text_opioid_route"
-                    android:textStyle="bold"
-                    android:text="@string/route"
-                    style="@style/textFormStyle" />
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/opioid_route"/>
 
                 <TextView
                     android:id="@+id/text_opioid_order"

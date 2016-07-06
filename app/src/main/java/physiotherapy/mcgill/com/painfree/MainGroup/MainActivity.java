@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setOffscreenPageLimit(7);
+        mViewPager.setOffscreenPageLimit(8);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setVisibility(View.GONE);
@@ -244,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentE.setFragmentVisibility();
         FragmentF.setFragmentVisibility();
         FragmentG.setFragmentVisibility();
+        FragmentH.setFragmentVisibility();
 
         invalidateOptionsMenu();
 
@@ -273,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
                 case 4: return FragmentE.newInstance();
                 case 5: return FragmentF.newInstance();
                 case 6: return FragmentG.newInstance();
+                case 7: return FragmentH.newInstance();
                 default: return FragmentA.newInstance();
             }
 
@@ -281,8 +283,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 7 total pages.
-            return 7;
+            // Show 8 total pages.
+            return 8;
         }
 
         @Override
@@ -303,6 +305,8 @@ public class MainActivity extends AppCompatActivity {
                     return getString(R.string.title_sectionF).toUpperCase(l);
                 case 6:
                     return getString(R.string.title_sectionG).toUpperCase(l);
+                case 7:
+                    return getString(R.string.comments).toUpperCase(l);
             }
             return null;
         }
@@ -331,6 +335,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 6:
                 unfilledMandatoryFields = FragmentG.unfilledMandatoryFields();
+                break;
+            case 7:
+                unfilledMandatoryFields = FragmentH.unfilledMandatoryFields();
                 break;
             default:
                 break;
@@ -389,6 +396,7 @@ public class MainActivity extends AppCompatActivity {
             FragmentE.setFragmentVisibility();
             FragmentF.setFragmentVisibility();
             FragmentG.setFragmentVisibility();
+            FragmentH.setFragmentVisibility();
         }
     };
 
