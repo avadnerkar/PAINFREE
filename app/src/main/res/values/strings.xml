@@ -226,6 +226,15 @@
     <string name="structured_prescription">Structured prescription</string>
     <string name="comments">Comments</string>
     <string name="notes_and_comments">Notes and comments:</string>
+    <string name="prescribed_by">Prescribed by:</string>
+    <string name="same_analgesic_prescribed_by">Same analgesic prescribed by:</string>
+    <string name="number_of_times">Number of times</string>
+    <string name="er_md">ER MD:</string>
+    <string name="other_md">Other MD:</string>
+    <string name="unknown">Unknown:</string>
+    <string name="er_md_option">ER MD</string>
+    <string name="other_md_option">Other MD</string>
+    <string name="unknown_option">Unknown</string>
 
 
 </resources>

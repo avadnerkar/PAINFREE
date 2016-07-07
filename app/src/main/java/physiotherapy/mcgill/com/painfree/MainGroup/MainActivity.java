@@ -359,12 +359,17 @@ public class MainActivity extends AppCompatActivity {
 
             if (!message.equals("")){
 
-                AppUtils.showDefaultAlertDialog(getString(R.string.mandatory_fields_title), message, context, new AppUtils.DefaultAlertHandler() {
+                AppUtils.showDefaultTwoButtonAlertDialog(getString(R.string.mandatory_fields_title), message, "OK", "Ignore", context, new AppUtils.DefaultTwoButtonAlertHandler() {
                     @Override
-                    public void onClick() {
+                    public void onPositiveClick() {
                         programmaticallySelectTab = true;
                         mViewPager.setCurrentItem(tabPosition);
                         programmaticallySelectTab = false;
+                    }
+
+                    @Override
+                    public void onNegativeClick() {
+
                     }
                 });
                 return true;

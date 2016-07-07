@@ -131,8 +131,36 @@ public class AppUtils {
 
     }
 
+    public static void showDefaultTwoButtonAlertDialog(String title, String message, String button1, String button2, Context context, final DefaultTwoButtonAlertHandler handler){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message).setTitle(title);
+        builder.setCancelable(false);
+        builder.setPositiveButton(button1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                handler.onPositiveClick();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(button2, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                handler.onNegativeClick();
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+
+    }
+
     public interface DefaultAlertHandler{
         void onClick();
+    }
+
+    public interface DefaultTwoButtonAlertHandler{
+        void onPositiveClick();
+
+        void onNegativeClick();
     }
 
 
