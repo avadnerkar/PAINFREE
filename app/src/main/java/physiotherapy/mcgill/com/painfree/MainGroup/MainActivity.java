@@ -359,19 +359,32 @@ public class MainActivity extends AppCompatActivity {
 
             if (!message.equals("")){
 
-                AppUtils.showDefaultTwoButtonAlertDialog(getString(R.string.mandatory_fields_title), message, "OK", "Ignore", context, new AppUtils.DefaultTwoButtonAlertHandler() {
-                    @Override
-                    public void onPositiveClick() {
-                        programmaticallySelectTab = true;
-                        mViewPager.setCurrentItem(tabPosition);
-                        programmaticallySelectTab = false;
-                    }
+                if (tabPosition == 0) {
+                    AppUtils.showDefaultAlertDialog(getString(R.string.mandatory_fields_title), message, context, new AppUtils.DefaultAlertHandler() {
+                        @Override
+                        public void onClick() {
+                            programmaticallySelectTab = true;
+                            mViewPager.setCurrentItem(tabPosition);
+                            programmaticallySelectTab = false;
+                        }
+                    });
+                } else {
+                    AppUtils.showDefaultTwoButtonAlertDialog(getString(R.string.mandatory_fields_title), message, "OK", "Ignore", context, new AppUtils.DefaultTwoButtonAlertHandler() {
+                        @Override
+                        public void onPositiveClick() {
+                            programmaticallySelectTab = true;
+                            mViewPager.setCurrentItem(tabPosition);
+                            programmaticallySelectTab = false;
+                        }
 
-                    @Override
-                    public void onNegativeClick() {
+                        @Override
+                        public void onNegativeClick() {
 
-                    }
-                });
+                        }
+                    });
+                }
+
+
                 return true;
             } else {
                 return false;

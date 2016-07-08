@@ -62,12 +62,12 @@ public class DBAdapter {
     public static final String KEY_TRIAGE_DATE = "[TriageDate]";
     public static final String KEY_TRIAGE_TIME = "[TriageTime]";
     public static final String KEY_CTAS = "[CTAS_priority]";
-    public static final String KEY_GLASGOW = "[GlasgowScale]";
-    public static final String KEY_PAINSCALE = "[PainScaleScore]";
-    public static final String KEY_COLLECTIVEORDER = "[CollectiveOrder]";
-    public static final String KEY_HISTORYOFALTEREDCOGNITION = "[PastAlteredCog]";
-    public static final String KEY_HISTORYOFALTEREDCOGNITIONSPECIFY = "[SpecifyAlteredCog]";
-    public static final String KEY_ALTEREDCOGNITION = "[AlteredCog]";
+    public static final String KEY_GLASGOW = "[TGlasgowScale]";
+    public static final String KEY_PAINSCALE = "[TPainScaleScore]";
+    public static final String KEY_COLLECTIVEORDER = "[TCollectiveOrder]";
+    public static final String KEY_HISTORYOFALTEREDCOGNITION = "[TPastAlteredCog]";
+    public static final String KEY_HISTORYOFALTEREDCOGNITIONSPECIFY = "[TSpecifyAlteredCog]";
+    public static final String KEY_ALTEREDCOGNITION = "[TAlteredCog]";
 
     public static final String KEY_PHYSICIAN_EXAMINATION_DATE = "[PhysicianExamDate]";
     public static final String KEY_PHYSICIAN_EXAMINATION_TIME = "[PhysicianExamTime]";
@@ -109,6 +109,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_1_DATE = "[AngPres1_date]";
     public static final String KEY_ANALGESIC_PRES_1_TIME = "[AngPres1_time]";
     public static final String KEY_ANALGESIC_PRES_1_TYPE = "[AngPres1_type]";
+    public static final String KEY_ANALGESIC_PRES_1_TYPE_OTHER = "[AngPres1_type_other]";
     public static final String KEY_ANALGESIC_PRES_1_MODE = "[AngPres1_mode]";
     public static final String KEY_ANALGESIC_PRES_1_BY = "[AngPres1_pres_by]";
     public static final String KEY_ANALGESIC_PRES_1_NUM_ER = "[AngPres1_num_er_md]";
@@ -117,6 +118,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_2_DATE = "[AngPres2_date]";
     public static final String KEY_ANALGESIC_PRES_2_TIME = "[AngPres2_time]";
     public static final String KEY_ANALGESIC_PRES_2_TYPE = "[AngPres2_type]";
+    public static final String KEY_ANALGESIC_PRES_2_TYPE_OTHER = "[AngPres2_type_other]";
     public static final String KEY_ANALGESIC_PRES_2_MODE = "[AngPres2_mode]";
     public static final String KEY_ANALGESIC_PRES_2_BY = "[AngPres2_pres_by]";
     public static final String KEY_ANALGESIC_PRES_2_NUM_ER = "[AngPres2_num_er_md]";
@@ -125,6 +127,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_3_DATE = "[AngPres3_date]";
     public static final String KEY_ANALGESIC_PRES_3_TIME = "[AngPres3_time]";
     public static final String KEY_ANALGESIC_PRES_3_TYPE = "[AngPres3_type]";
+    public static final String KEY_ANALGESIC_PRES_3_TYPE_OTHER = "[AngPres3_type_other]";
     public static final String KEY_ANALGESIC_PRES_3_MODE = "[AngPres3_mode]";
     public static final String KEY_ANALGESIC_PRES_3_BY = "[AngPres3_pres_by]";
     public static final String KEY_ANALGESIC_PRES_3_NUM_ER = "[AngPres3_num_er_md]";
@@ -133,6 +136,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_4_DATE = "[AngPres4_date]";
     public static final String KEY_ANALGESIC_PRES_4_TIME = "[AngPres4_time]";
     public static final String KEY_ANALGESIC_PRES_4_TYPE = "[AngPres4_type]";
+    public static final String KEY_ANALGESIC_PRES_4_TYPE_OTHER = "[AngPres4_type_other]";
     public static final String KEY_ANALGESIC_PRES_4_MODE = "[AngPres4_mode]";
     public static final String KEY_ANALGESIC_PRES_4_BY = "[AngPres4_pres_by]";
     public static final String KEY_ANALGESIC_PRES_4_NUM_ER = "[AngPres4_num_er_md]";
@@ -141,6 +145,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_5_DATE = "[AngPres5_date]";
     public static final String KEY_ANALGESIC_PRES_5_TIME = "[AngPres5_time]";
     public static final String KEY_ANALGESIC_PRES_5_TYPE = "[AngPres5_type]";
+    public static final String KEY_ANALGESIC_PRES_5_TYPE_OTHER = "[AngPres5_type_other]";
     public static final String KEY_ANALGESIC_PRES_5_MODE = "[AngPres5_mode]";
     public static final String KEY_ANALGESIC_PRES_5_BY = "[AngPres5_pres_by]";
     public static final String KEY_ANALGESIC_PRES_5_NUM_ER = "[AngPres5_num_er_md]";
@@ -149,6 +154,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_6_DATE = "[AngPres6_date]";
     public static final String KEY_ANALGESIC_PRES_6_TIME = "[AngPres6_time]";
     public static final String KEY_ANALGESIC_PRES_6_TYPE = "[AngPres6_type]";
+    public static final String KEY_ANALGESIC_PRES_6_TYPE_OTHER = "[AngPres6_type_other]";
     public static final String KEY_ANALGESIC_PRES_6_MODE = "[AngPres6_mode]";
     public static final String KEY_ANALGESIC_PRES_6_BY = "[AngPres6_pres_by]";
     public static final String KEY_ANALGESIC_PRES_6_NUM_ER = "[AngPres6_num_er_md]";
@@ -157,6 +163,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_7_DATE = "[AngPres7_date]";
     public static final String KEY_ANALGESIC_PRES_7_TIME = "[AngPres7_time]";
     public static final String KEY_ANALGESIC_PRES_7_TYPE = "[AngPres7_type]";
+    public static final String KEY_ANALGESIC_PRES_7_TYPE_OTHER = "[AngPres7_type_other]";
     public static final String KEY_ANALGESIC_PRES_7_MODE = "[AngPres7_mode]";
     public static final String KEY_ANALGESIC_PRES_7_BY = "[AngPres7_pres_by]";
     public static final String KEY_ANALGESIC_PRES_7_NUM_ER = "[AngPres7_num_er_md]";
@@ -165,6 +172,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_PRES_8_DATE = "[AngPres8_date]";
     public static final String KEY_ANALGESIC_PRES_8_TIME = "[AngPres8_time]";
     public static final String KEY_ANALGESIC_PRES_8_TYPE = "[AngPres8_type]";
+    public static final String KEY_ANALGESIC_PRES_8_TYPE_OTHER = "[AngPres8_type_other]";
     public static final String KEY_ANALGESIC_PRES_8_MODE = "[AngPres8_mode]";
     public static final String KEY_ANALGESIC_PRES_8_BY = "[AngPres8_pres_by]";
     public static final String KEY_ANALGESIC_PRES_8_NUM_ER = "[AngPres8_num_er_md]";
@@ -470,6 +478,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_1_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_1_TIME, "13:45"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_1_TYPE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_1_TYPE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_1_MODE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_1_BY, "xxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_1_NUM_ER, "99"));
@@ -478,6 +487,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_2_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_2_TIME, "13:45"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_2_TYPE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_2_TYPE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_2_MODE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_2_BY, "xxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_2_NUM_ER, "99"));
@@ -486,6 +496,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_3_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_3_TIME, "13:45"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_3_TYPE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_3_TYPE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_3_MODE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_3_BY, "xxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_3_NUM_ER, "99"));
@@ -494,6 +505,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_4_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_4_TIME, "13:45"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_4_TYPE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_4_TYPE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_4_MODE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_4_BY, "xxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_4_NUM_ER, "99"));
@@ -502,6 +514,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_5_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_5_TIME, "13:45"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_5_TYPE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_5_TYPE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_5_MODE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_5_BY, "xxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_5_NUM_ER, "99"));
@@ -510,6 +523,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_6_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_6_TIME, "13:45"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_6_TYPE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_6_TYPE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_6_MODE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_6_BY, "xxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_6_NUM_ER, "99"));
@@ -518,6 +532,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_7_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_7_TIME, "13:45"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_7_TYPE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_7_TYPE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_7_MODE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_7_BY, "xxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_7_NUM_ER, "99"));
@@ -526,6 +541,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_8_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_8_TIME, "13:45"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_8_TYPE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_8_TYPE_OTHER, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_8_MODE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_8_BY, "xxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_PRES_8_NUM_ER, "99"));

@@ -235,6 +235,7 @@
     <string name="er_md_option">ER MD</string>
     <string name="other_md_option">Other MD</string>
     <string name="unknown_option">Unknown</string>
+    <string name="other_specify">Other - please specify</string>
 
 
 </resources>
