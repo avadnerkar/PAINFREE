@@ -1,6 +1,7 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
@@ -156,6 +157,12 @@ public class EDEvents {
                                             AppUtils.showAlert("Error", "Reached analgesic prescription limit", context);
                                             return;
                                         } else {
+                                            SharedPreferences sharedPreferences = context.getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
+                                            int latestId = sharedPreferences.getInt("presID" + String.valueOf(MainActivity.currentPatientId), 0) + 1;
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putInt("presID" + String.valueOf(MainActivity.currentPatientId), latestId);
+                                            editor.commit();
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicPrescription.idKeys[numAnalgesicPres], MainActivity.currentPatientId + "-" + latestId);
                                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM, String.valueOf(numAnalgesicPres+1));
                                             if (!defaultDate.equals(context.getString(R.string.none))){
                                                 MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicPrescription.keys[(numAnalgesicPres)*AnalgesicPrescription.numFields+1], defaultDate);

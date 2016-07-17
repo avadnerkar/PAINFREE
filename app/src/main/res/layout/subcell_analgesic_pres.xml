@@ -44,6 +44,15 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/pres_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/textFormStyle"
+            android:text="Prescription ID"
+            android:gravity="center"
+            android:textStyle="bold"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

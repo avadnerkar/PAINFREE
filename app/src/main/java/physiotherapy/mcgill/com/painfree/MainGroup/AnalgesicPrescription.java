@@ -3,9 +3,11 @@ package physiotherapy.mcgill.com.painfree.MainGroup;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -51,6 +53,8 @@ public class AnalgesicPrescription {
 
     public static final int numFields = 9;
 
+    public static final String[] idKeys = new String[]{DBAdapter.KEY_ANALGESIC_PRES_1_ID, DBAdapter.KEY_ANALGESIC_PRES_2_ID, DBAdapter.KEY_ANALGESIC_PRES_3_ID, DBAdapter.KEY_ANALGESIC_PRES_4_ID, DBAdapter.KEY_ANALGESIC_PRES_5_ID, DBAdapter.KEY_ANALGESIC_PRES_6_ID, DBAdapter.KEY_ANALGESIC_PRES_7_ID, DBAdapter.KEY_ANALGESIC_PRES_8_ID};
+
     public static View setupAnalgesicPrescriptionSection(final Context context, ViewGroup parent, final ArrayAdapter adapter, final int index, final int globalIndex, final EDEvents.MinusHandler handler){
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -64,6 +68,7 @@ public class AnalgesicPrescription {
         final String[] spinnerPresByOptions = new String[]{"", context.getString(R.string.er_md_option), context.getString(R.string.other_md_option), context.getString(R.string.unknown_option)};
 
         final Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
+        final Cursor cursor2 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, idKeys);
 
         if (cursor.moveToFirst()) {
             final int numAssessments = cursor.getInt(0);
@@ -90,6 +95,17 @@ public class AnalgesicPrescription {
                     handler.onClick();
                 }
             });
+
+            //Prescription ID
+            {
+                final TextView textView = (TextView) assessmentView.findViewById(R.id.pres_id);
+                String idString = cursor2.getString(index);
+                if (idString != null) {
+                    textView.setText("Prescription ID: " + idString);
+                } else {
+                    textView.setText("Prescription ID not found");
+                }
+            }
 
             //Datepicker
             {
@@ -542,10 +558,12 @@ public class AnalgesicPrescription {
             }
 
             cursor.close();
+            cursor2.close();
             return assessmentView;
         }
 
         cursor.close();
+        cursor2.close();
         return null;
 
     }
