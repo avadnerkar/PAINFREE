@@ -36,7 +36,6 @@ public class FragmentF extends Fragment {
         items.add(new FragmentItem(getString(R.string.evidence_altered_cognition), FragmentItem.CellType.CHECKBOX, new String[]{getString(R.string.agitation), getString(R.string.disorientation)}, null, DBAdapter.KEY_EVIDENCE_ALTERED_COGNITION));
         items.get(items.size()-1).extraOptions = new String[]{getString(R.string.none)};
         items.get(items.size()-1).hasNone = true;
-        items.get(items.size()-1).hasOther = true;
         items.get(items.size()-1).isMandatory = true;
         items.add(new FragmentItem(getString(R.string.short_cam_score), FragmentItem.CellType.RADIO, new String[]{getString(R.string.positive), getString(R.string.negative), getString(R.string.not_specified)}, null, DBAdapter.KEY_SHORT_CAM_SCORE));
         items.get(items.size()-1).isMandatory = true;

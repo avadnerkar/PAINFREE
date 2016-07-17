@@ -56,7 +56,6 @@ public class FragmentD extends Fragment {
         items.get(items.size()-1).extraOptions = new String[]{getString(R.string.none), getString(R.string.not_specified)};
         items.get(items.size()-1).hasNone = true;
         items.get(items.size()-1).hasSecondNone = true;
-        items.get(items.size()-1).hasOther = true;
 
         items.get(items.size()-1).isMandatory = true;
         //items.get(items.size()-1).extraOptions = new String[]{getString(R.string.none)};

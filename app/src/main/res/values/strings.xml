@@ -211,9 +211,9 @@
     <string name="analgesic_administration">Analgesic administration</string>
     <string name="positive">Positive</string>
     <string name="negative">Negative</string>
-    <string name="head">Head</string>
-    <string name="toes">Toes</string>
-    <string name="fingers">Fingers</string>
+    <string name="head">Skull</string>
+    <string name="toes">Toe</string>
+    <string name="fingers">Finger</string>
     <string name="notice">Notice</string>
     <string name="not_used">Not used</string>
     <string name="discharge_prescription_given">Discharge prescription given to patient:</string>
@@ -236,6 +236,7 @@
     <string name="other_md_option">Other MD</string>
     <string name="unknown_option">Unknown</string>
     <string name="other_specify">Other - please specify</string>
+    <string name="long_term_care_facility">Long term care facility</string>
 
 
 </resources>

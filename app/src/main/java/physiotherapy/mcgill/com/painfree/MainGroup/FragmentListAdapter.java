@@ -914,6 +914,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
                 holder.cbHumerus = (CheckBox) convertView.findViewById(R.id.humerus);
                 holder.cbForearm = (CheckBox) convertView.findViewById(R.id.forearm);
                 holder.cbWrist = (CheckBox) convertView.findViewById(R.id.wrist);
+                holder.cbHead = (CheckBox) convertView.findViewById(R.id.head);
+                holder.cbToes = (CheckBox) convertView.findViewById(R.id.toes);
+                holder.cbFingers = (CheckBox) convertView.findViewById(R.id.fingers);
                 holder.cbHand = (CheckBox) convertView.findViewById(R.id.hand);
 
 
@@ -965,6 +968,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
             setupFractureSiteClickListener(holder.cbHumerus, holder.cbHumerusLeft, holder.cbHumerusRight, holder.cbHumerusUnspecified, DBAdapter.KEY_FRACTURESITE_HUMERUS, convertView);
             setupFractureSiteClickListener(holder.cbForearm, holder.cbForearmLeft, holder.cbForearmRight, holder.cbForearmUnspecified, DBAdapter.KEY_FRACTURESITE_FOREARM, convertView);
             setupFractureSiteClickListener(holder.cbWrist, holder.cbWristLeft, holder.cbWristRight, holder.cbWristUnspecified, DBAdapter.KEY_FRACTURESITE_WRIST, convertView);
+            setupFractureSiteClickListener(holder.cbHead, null, null, null, DBAdapter.KEY_FRACTURESITE_HEAD, convertView);
+            setupFractureSiteClickListener(holder.cbToes, null, null, null, DBAdapter.KEY_FRACTURESITE_TOES, convertView);
+            setupFractureSiteClickListener(holder.cbFingers, null, null, null, DBAdapter.KEY_FRACTURESITE_FINGERS, convertView);
             setupFractureSiteClickListener(holder.cbHand, holder.cbHandLeft, holder.cbHandRight, holder.cbHandUnspecified, DBAdapter.KEY_FRACTURESITE_HAND, convertView);
 
             cursor = MainActivity.myDb.getDataField(MainActivity.currentPatientId, DBAdapter.KEY_FRACTURESITE_OTHER);
@@ -1841,6 +1847,9 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
         private CheckBox cbHumerus;
         private CheckBox cbForearm;
         private CheckBox cbWrist;
+        private CheckBox cbHead;
+        private CheckBox cbToes;
+        private CheckBox cbFingers;
         private CheckBox cbHand;
 
         private CheckBox cbFootLeft;

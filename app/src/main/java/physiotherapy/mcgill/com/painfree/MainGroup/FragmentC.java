@@ -106,19 +106,19 @@ public class FragmentC extends Fragment {
 
             cursor1.close();
 
-//            if (!fractures){
-//                Cursor cursor2 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_FRACTURESITE_HEAD, DBAdapter.KEY_FRACTURESITE_TOES, DBAdapter.KEY_FRACTURESITE_FINGERS});
-//                for (int i=0; i<cursor2.getColumnCount(); i++){
-//                    if (cursor2.getString(i) != null && !cursor2.getString(i).equals("")){
-//                        ArrayList<String> warning = new ArrayList<>();
-//                        warning.add("EXCLUSION");
-//                        warning.add("Head, toe, and finger fractures are excluded from this study");
-//                        cursor2.close();
-//                        return warning;
-//                    }
-//                }
-//                cursor2.close();
-//            }
+            if (!fractures){
+                Cursor cursor2 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_FRACTURESITE_HEAD, DBAdapter.KEY_FRACTURESITE_TOES, DBAdapter.KEY_FRACTURESITE_FINGERS});
+                for (int i=0; i<cursor2.getColumnCount(); i++){
+                    if (cursor2.getString(i) != null && !cursor2.getString(i).equals("")){
+                        ArrayList<String> warning = new ArrayList<>();
+                        warning.add("EXCLUSION");
+                        warning.add("Skull, toe, and finger fractures are excluded from this study");
+                        cursor2.close();
+                        return warning;
+                    }
+                }
+                cursor2.close();
+            }
 
             for (FragmentItem item : items) {
                 if (item.isMandatory) {

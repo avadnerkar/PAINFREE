@@ -288,10 +288,6 @@ public class AlternativePainRelief {
                     cgPainRelief.setOrientation(RadioGroup.HORIZONTAL);
                 }
 
-                final CheckBox cbPainReliefNone = new CheckBox(context);
-                cbPainReliefNone.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
-                cbPainReliefNone.setText(context.getString(R.string.none));
-
                 for (String aCheckBoxAlternativeRelief : checkBoxAlternativeRelief) {
                     CheckBox cb = new CheckBox(context);
                     cb.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimension(R.dimen.text_medium));
@@ -307,8 +303,6 @@ public class AlternativePainRelief {
                     cb.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-                            cbPainReliefNone.setChecked(false);
 
                             Thread thread = new Thread() {
                                 @Override
@@ -330,23 +324,9 @@ public class AlternativePainRelief {
 
                 }
 
-                cbPainReliefNone.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (((CheckBox) v).isChecked()){
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 3], context.getString(R.string.none));
-                            adapter.notifyDataSetChanged();
-                        } else {
-                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 3], null);
-                        }
-                    }
-                });
-
-                cgPainRelief.addView(cbPainReliefNone);
 
                 String answer = cursor.getString(index * numFields + 3);
 
-                cbPainReliefNone.setChecked(false);
                 if (answer != null) {
                     for (int j = 0; j < checkBoxAlternativeRelief.length; j++) {
                         if (answer.contains(checkBoxAlternativeRelief[j])) {
@@ -354,10 +334,6 @@ public class AlternativePainRelief {
                         } else {
                             ((CheckBox) cgPainRelief.getChildAt(j)).setChecked(false);
                         }
-                    }
-
-                    if (answer.equals(context.getString(R.string.none))){
-                        cbPainReliefNone.setChecked(true);
                     }
                 }
             }
