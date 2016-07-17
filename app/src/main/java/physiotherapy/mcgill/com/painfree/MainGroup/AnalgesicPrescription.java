@@ -83,15 +83,18 @@ public class AnalgesicPrescription {
                 public void onClick(View v) {
 
                     Cursor tempCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
+                    Cursor idCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, idKeys);
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM, String.valueOf(Math.max(numAssessments - 1, 0)));
-
                     for (int j=index; j<numAssessments-1; j++){
+                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, idKeys[j], idCursor.getString(j+1));
                         for (int k=1; k<=numFields; k++){
                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[j*numFields+k], tempCursor.getString((j+1)*numFields+k));
                         }
                     }
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, idKeys[numAssessments-1], null);
                     MainActivity.myDb.updateFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, (numAssessments - 1)*numFields + 1, (numAssessments)*numFields + 1), null);
                     tempCursor.close();
+                    idCursor.close();
                     handler.onClick();
                 }
             });

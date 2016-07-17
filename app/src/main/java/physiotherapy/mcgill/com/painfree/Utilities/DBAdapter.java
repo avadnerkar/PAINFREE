@@ -193,6 +193,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_ADMIN_NUM = "[N_ang_admin]";
     public static final String KEY_ANALGESIC_ADMIN_1_DATE = "[AngAdm1_date]";
     public static final String KEY_ANALGESIC_ADMIN_1_TIME = "[AngAdm1_time]";
+    public static final String KEY_ANALGESIC_ADMIN_1_PRES_ID = "[AngAdm1_linked_pres_id]";
     public static final String KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN = "[AngAdm1_acet]";
     public static final String KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN_DOSE = "[AngAdm1_acet_dose]";
     public static final String KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN_ORDER = "[AngAdm1_acet_order]";
@@ -205,6 +206,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_ADMIN_1_REFUSAL = "[AngAdm1_refused]";
     public static final String KEY_ANALGESIC_ADMIN_2_DATE = "[AngAdm2_date]";
     public static final String KEY_ANALGESIC_ADMIN_2_TIME = "[AngAdm2_time]";
+    public static final String KEY_ANALGESIC_ADMIN_2_PRES_ID = "[AngAdm2_linked_pres_id]";
     public static final String KEY_ANALGESIC_ADMIN_2_ACETAMINOPHEN = "[AngAdm2_acet]";
     public static final String KEY_ANALGESIC_ADMIN_2_ACETAMINOPHEN_DOSE = "[AngAdm2_acet_dose]";
     public static final String KEY_ANALGESIC_ADMIN_2_ACETAMINOPHEN_ORDER = "[AngAdm2_acet_order]";
@@ -217,6 +219,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_ADMIN_2_REFUSAL = "[AngAdm2_refused]";
     public static final String KEY_ANALGESIC_ADMIN_3_DATE = "[AngAdm3_date]";
     public static final String KEY_ANALGESIC_ADMIN_3_TIME = "[AngAdm3_time]";
+    public static final String KEY_ANALGESIC_ADMIN_3_PRES_ID = "[AngAdm3_linked_pres_id]";
     public static final String KEY_ANALGESIC_ADMIN_3_ACETAMINOPHEN = "[AngAdm3_acet]";
     public static final String KEY_ANALGESIC_ADMIN_3_ACETAMINOPHEN_DOSE = "[AngAdm3_acet_dose]";
     public static final String KEY_ANALGESIC_ADMIN_3_ACETAMINOPHEN_ORDER = "[AngAdm3_acet_order]";
@@ -229,6 +232,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_ADMIN_3_REFUSAL = "[AngAdm3_refused]";
     public static final String KEY_ANALGESIC_ADMIN_4_DATE = "[AngAdm4_date]";
     public static final String KEY_ANALGESIC_ADMIN_4_TIME = "[AngAdm4_time]";
+    public static final String KEY_ANALGESIC_ADMIN_4_PRES_ID = "[AngAdm4_linked_pres_id]";
     public static final String KEY_ANALGESIC_ADMIN_4_ACETAMINOPHEN = "[AngAdm4_acet]";
     public static final String KEY_ANALGESIC_ADMIN_4_ACETAMINOPHEN_DOSE = "[AngAdm4_acet_dose]";
     public static final String KEY_ANALGESIC_ADMIN_4_ACETAMINOPHEN_ORDER = "[AngAdm4_acet_order]";
@@ -241,6 +245,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_ADMIN_4_REFUSAL = "[AngAdm4_refused]";
     public static final String KEY_ANALGESIC_ADMIN_5_DATE = "[AngAdm5_date]";
     public static final String KEY_ANALGESIC_ADMIN_5_TIME = "[AngAdm5_time]";
+    public static final String KEY_ANALGESIC_ADMIN_5_PRES_ID = "[AngAdm5_linked_pres_id]";
     public static final String KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN = "[AngAdm5_acet]";
     public static final String KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN_DOSE = "[AngAdm5_acet_dose]";
     public static final String KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN_ORDER = "[AngAdm5_acet_order]";
@@ -253,6 +258,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_ADMIN_5_REFUSAL = "[AngAdm5_refused]";
     public static final String KEY_ANALGESIC_ADMIN_6_DATE = "[AngAdm6_date]";
     public static final String KEY_ANALGESIC_ADMIN_6_TIME = "[AngAdm6_time]";
+    public static final String KEY_ANALGESIC_ADMIN_6_PRES_ID = "[AngAdm6_linked_pres_id]";
     public static final String KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN = "[AngAdm6_acet]";
     public static final String KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN_DOSE = "[AngAdm6_acet_dose]";
     public static final String KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN_ORDER = "[AngAdm6_acet_order]";
@@ -265,6 +271,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_ADMIN_6_REFUSAL = "[AngAdm6_refused]";
     public static final String KEY_ANALGESIC_ADMIN_7_DATE = "[AngAdm7_date]";
     public static final String KEY_ANALGESIC_ADMIN_7_TIME = "[AngAdm7_time]";
+    public static final String KEY_ANALGESIC_ADMIN_7_PRES_ID = "[AngAdm7_linked_pres_id]";
     public static final String KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN = "[AngAdm7_acet]";
     public static final String KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_DOSE = "[AngAdm7_acet_dose]";
     public static final String KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_ORDER = "[AngAdm7_acet_order]";
@@ -277,6 +284,7 @@ public class DBAdapter {
     public static final String KEY_ANALGESIC_ADMIN_7_REFUSAL = "[AngAdm7_refused]";
     public static final String KEY_ANALGESIC_ADMIN_8_DATE = "[AngAdm8_date]";
     public static final String KEY_ANALGESIC_ADMIN_8_TIME = "[AngAdm8_time]";
+    public static final String KEY_ANALGESIC_ADMIN_8_PRES_ID = "[AngAdm8_linked_pres_id]";
     public static final String KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN = "[AngAdm8_acet]";
     public static final String KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_DOSE = "[AngAdm8_acet_dose]";
     public static final String KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_ORDER = "[AngAdm8_acet_order]";
@@ -573,6 +581,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_NUM, "9"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_1_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_1_TIME, "13:45"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_1_PRES_ID, "xxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN_DOSE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN_ORDER, "xxxxxxx"));
@@ -585,6 +594,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_1_REFUSAL, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_2_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_2_TIME, "13:45"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_2_PRES_ID, "xxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_2_ACETAMINOPHEN, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_2_ACETAMINOPHEN_DOSE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_2_ACETAMINOPHEN_ORDER, "xxxxxxx"));
@@ -597,6 +607,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_2_REFUSAL, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_3_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_3_TIME, "13:45"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_3_PRES_ID, "xxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_3_ACETAMINOPHEN, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_3_ACETAMINOPHEN_DOSE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_3_ACETAMINOPHEN_ORDER, "xxxxxxx"));
@@ -609,6 +620,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_3_REFUSAL, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_4_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_4_TIME, "13:45"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_4_PRES_ID, "xxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_4_ACETAMINOPHEN, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_4_ACETAMINOPHEN_DOSE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_4_ACETAMINOPHEN_ORDER, "xxxxxxx"));
@@ -621,6 +633,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_4_REFUSAL, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_5_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_5_TIME, "13:45"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_5_PRES_ID, "xxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN_DOSE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN_ORDER, "xxxxxxx"));
@@ -633,6 +646,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_5_REFUSAL, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_6_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_6_TIME, "13:45"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_6_PRES_ID, "xxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN_DOSE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN_ORDER, "xxxxxxx"));
@@ -645,6 +659,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_6_REFUSAL, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_7_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_7_TIME, "13:45"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_7_PRES_ID, "xxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_DOSE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN_ORDER, "xxxxxxx"));
@@ -657,6 +672,7 @@ public class DBAdapter {
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_7_REFUSAL, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_8_DATE, "2016-12-31"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_8_TIME, "13:45"));
+        dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_8_PRES_ID, "xxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN, "xxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_DOSE, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"));
         dataMap.add(new DBColumn(KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN_ORDER, "xxxxxxx"));

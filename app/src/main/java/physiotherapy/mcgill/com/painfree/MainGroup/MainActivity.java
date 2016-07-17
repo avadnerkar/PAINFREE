@@ -634,9 +634,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                long time = (eventDate.getTime() - date.getTime())/1000;
-
-                return time/3600.0f;
+                if (date == null || eventDate == null) {
+                    return null;
+                } else {
+                    long time = (eventDate.getTime() - date.getTime())/1000;
+                    return time/3600.0f;
+                }
 
             } else {
                 return null;

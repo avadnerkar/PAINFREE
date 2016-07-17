@@ -237,6 +237,7 @@
     <string name="unknown_option">Unknown</string>
     <string name="other_specify">Other - please specify</string>
     <string name="long_term_care_facility">Long term care facility</string>
+    <string name="linked_analgesic_prescription">Linked analgesic prescription:</string>
 
 
 </resources>

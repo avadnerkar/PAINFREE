@@ -93,7 +93,16 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/text_linked_pres"
+            android:textStyle="bold"
+            android:text="@string/linked_analgesic_prescription"
+            style="@style/textFormStyle" />
 
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"/>
 
         <TextView
             android:textStyle="bold"
