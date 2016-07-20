@@ -116,28 +116,6 @@
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:text="@string/other"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/textFormStyle"/>
-
-            <EditText
-                android:id="@+id/edit_type_other"
-                android:hint="@string/specify"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                style="@style/editTextFormStyle"/>
-
-        </LinearLayout>
-
 
 
         <TextView
@@ -150,94 +128,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinner"/>
-
-        <TextView
-            android:id="@+id/text_prescribed_by"
-            android:textStyle="bold"
-            android:text="@string/prescribed_by"
-            style="@style/textFormStyle" />
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_prescribed_by"/>
-
-        <TextView
-            android:text="@string/same_analgesic_prescribed_by"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/textFormStyle"
-            android:textStyle="bold"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:text="@string/er_md"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/textFormStyle"/>
-
-            <EditText
-                android:id="@+id/edit_number_er"
-                android:inputType="number"
-                android:hint="@string/number_of_times"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2.5"
-                style="@style/editTextFormStyle"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:text="@string/other_md"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/textFormStyle"/>
-
-            <EditText
-                android:id="@+id/edit_number_other"
-                android:inputType="number"
-                android:hint="@string/number_of_times"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2.5"
-                style="@style/editTextFormStyle"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:text="@string/unknown"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/textFormStyle"/>
-
-            <EditText
-                android:id="@+id/edit_number_unknown"
-                android:inputType="number"
-                android:hint="@string/number_of_times"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2.5"
-                style="@style/editTextFormStyle"/>
-
-        </LinearLayout>
-
 
 
     </LinearLayout>

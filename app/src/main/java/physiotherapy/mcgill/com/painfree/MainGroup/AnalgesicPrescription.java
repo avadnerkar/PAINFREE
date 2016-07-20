@@ -42,16 +42,16 @@ import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 public class AnalgesicPrescription {
 
     public static final String[] keys = new String[]{DBAdapter.KEY_ANALGESIC_PRES_NUM,
-            DBAdapter.KEY_ANALGESIC_PRES_1_DATE, DBAdapter.KEY_ANALGESIC_PRES_1_TIME, DBAdapter.KEY_ANALGESIC_PRES_1_TYPE, DBAdapter.KEY_ANALGESIC_PRES_1_TYPE_OTHER, DBAdapter.KEY_ANALGESIC_PRES_1_MODE, DBAdapter.KEY_ANALGESIC_PRES_1_BY, DBAdapter.KEY_ANALGESIC_PRES_1_NUM_ER, DBAdapter.KEY_ANALGESIC_PRES_1_NUM_OTHER, DBAdapter.KEY_ANALGESIC_PRES_1_NUM_UNKNOWN,
-            DBAdapter.KEY_ANALGESIC_PRES_2_DATE, DBAdapter.KEY_ANALGESIC_PRES_2_TIME, DBAdapter.KEY_ANALGESIC_PRES_2_TYPE, DBAdapter.KEY_ANALGESIC_PRES_2_TYPE_OTHER, DBAdapter.KEY_ANALGESIC_PRES_2_MODE, DBAdapter.KEY_ANALGESIC_PRES_2_BY, DBAdapter.KEY_ANALGESIC_PRES_2_NUM_ER, DBAdapter.KEY_ANALGESIC_PRES_2_NUM_OTHER, DBAdapter.KEY_ANALGESIC_PRES_2_NUM_UNKNOWN,
-            DBAdapter.KEY_ANALGESIC_PRES_3_DATE, DBAdapter.KEY_ANALGESIC_PRES_3_TIME, DBAdapter.KEY_ANALGESIC_PRES_3_TYPE, DBAdapter.KEY_ANALGESIC_PRES_3_TYPE_OTHER, DBAdapter.KEY_ANALGESIC_PRES_3_MODE, DBAdapter.KEY_ANALGESIC_PRES_3_BY, DBAdapter.KEY_ANALGESIC_PRES_3_NUM_ER, DBAdapter.KEY_ANALGESIC_PRES_3_NUM_OTHER, DBAdapter.KEY_ANALGESIC_PRES_3_NUM_UNKNOWN,
-            DBAdapter.KEY_ANALGESIC_PRES_4_DATE, DBAdapter.KEY_ANALGESIC_PRES_4_TIME, DBAdapter.KEY_ANALGESIC_PRES_4_TYPE, DBAdapter.KEY_ANALGESIC_PRES_4_TYPE_OTHER, DBAdapter.KEY_ANALGESIC_PRES_4_MODE, DBAdapter.KEY_ANALGESIC_PRES_4_BY, DBAdapter.KEY_ANALGESIC_PRES_4_NUM_ER, DBAdapter.KEY_ANALGESIC_PRES_4_NUM_OTHER, DBAdapter.KEY_ANALGESIC_PRES_4_NUM_UNKNOWN,
-            DBAdapter.KEY_ANALGESIC_PRES_5_DATE, DBAdapter.KEY_ANALGESIC_PRES_5_TIME, DBAdapter.KEY_ANALGESIC_PRES_5_TYPE, DBAdapter.KEY_ANALGESIC_PRES_5_TYPE_OTHER, DBAdapter.KEY_ANALGESIC_PRES_5_MODE, DBAdapter.KEY_ANALGESIC_PRES_5_BY, DBAdapter.KEY_ANALGESIC_PRES_5_NUM_ER, DBAdapter.KEY_ANALGESIC_PRES_5_NUM_OTHER, DBAdapter.KEY_ANALGESIC_PRES_5_NUM_UNKNOWN,
-            DBAdapter.KEY_ANALGESIC_PRES_6_DATE, DBAdapter.KEY_ANALGESIC_PRES_6_TIME, DBAdapter.KEY_ANALGESIC_PRES_6_TYPE, DBAdapter.KEY_ANALGESIC_PRES_6_TYPE_OTHER, DBAdapter.KEY_ANALGESIC_PRES_6_MODE, DBAdapter.KEY_ANALGESIC_PRES_6_BY, DBAdapter.KEY_ANALGESIC_PRES_6_NUM_ER, DBAdapter.KEY_ANALGESIC_PRES_6_NUM_OTHER, DBAdapter.KEY_ANALGESIC_PRES_6_NUM_UNKNOWN,
-            DBAdapter.KEY_ANALGESIC_PRES_7_DATE, DBAdapter.KEY_ANALGESIC_PRES_7_TIME, DBAdapter.KEY_ANALGESIC_PRES_7_TYPE, DBAdapter.KEY_ANALGESIC_PRES_7_TYPE_OTHER, DBAdapter.KEY_ANALGESIC_PRES_7_MODE, DBAdapter.KEY_ANALGESIC_PRES_7_BY, DBAdapter.KEY_ANALGESIC_PRES_7_NUM_ER, DBAdapter.KEY_ANALGESIC_PRES_7_NUM_OTHER, DBAdapter.KEY_ANALGESIC_PRES_7_NUM_UNKNOWN,
-            DBAdapter.KEY_ANALGESIC_PRES_8_DATE, DBAdapter.KEY_ANALGESIC_PRES_8_TIME, DBAdapter.KEY_ANALGESIC_PRES_8_TYPE, DBAdapter.KEY_ANALGESIC_PRES_8_TYPE_OTHER, DBAdapter.KEY_ANALGESIC_PRES_8_MODE, DBAdapter.KEY_ANALGESIC_PRES_8_BY, DBAdapter.KEY_ANALGESIC_PRES_8_NUM_ER, DBAdapter.KEY_ANALGESIC_PRES_8_NUM_OTHER, DBAdapter.KEY_ANALGESIC_PRES_8_NUM_UNKNOWN};
+            DBAdapter.KEY_ANALGESIC_PRES_1_DATE, DBAdapter.KEY_ANALGESIC_PRES_1_TIME, DBAdapter.KEY_ANALGESIC_PRES_1_TYPE, DBAdapter.KEY_ANALGESIC_PRES_1_MODE,
+            DBAdapter.KEY_ANALGESIC_PRES_2_DATE, DBAdapter.KEY_ANALGESIC_PRES_2_TIME, DBAdapter.KEY_ANALGESIC_PRES_2_TYPE, DBAdapter.KEY_ANALGESIC_PRES_2_MODE,
+            DBAdapter.KEY_ANALGESIC_PRES_3_DATE, DBAdapter.KEY_ANALGESIC_PRES_3_TIME, DBAdapter.KEY_ANALGESIC_PRES_3_TYPE, DBAdapter.KEY_ANALGESIC_PRES_3_MODE,
+            DBAdapter.KEY_ANALGESIC_PRES_4_DATE, DBAdapter.KEY_ANALGESIC_PRES_4_TIME, DBAdapter.KEY_ANALGESIC_PRES_4_TYPE, DBAdapter.KEY_ANALGESIC_PRES_4_MODE,
+            DBAdapter.KEY_ANALGESIC_PRES_5_DATE, DBAdapter.KEY_ANALGESIC_PRES_5_TIME, DBAdapter.KEY_ANALGESIC_PRES_5_TYPE, DBAdapter.KEY_ANALGESIC_PRES_5_MODE,
+            DBAdapter.KEY_ANALGESIC_PRES_6_DATE, DBAdapter.KEY_ANALGESIC_PRES_6_TIME, DBAdapter.KEY_ANALGESIC_PRES_6_TYPE, DBAdapter.KEY_ANALGESIC_PRES_6_MODE,
+            DBAdapter.KEY_ANALGESIC_PRES_7_DATE, DBAdapter.KEY_ANALGESIC_PRES_7_TIME, DBAdapter.KEY_ANALGESIC_PRES_7_TYPE, DBAdapter.KEY_ANALGESIC_PRES_7_MODE,
+            DBAdapter.KEY_ANALGESIC_PRES_8_DATE, DBAdapter.KEY_ANALGESIC_PRES_8_TIME, DBAdapter.KEY_ANALGESIC_PRES_8_TYPE, DBAdapter.KEY_ANALGESIC_PRES_8_MODE};
 
-    public static final int numFields = 9;
+    public static final int numFields = 4;
 
     public static final String[] idKeys = new String[]{DBAdapter.KEY_ANALGESIC_PRES_1_ID, DBAdapter.KEY_ANALGESIC_PRES_2_ID, DBAdapter.KEY_ANALGESIC_PRES_3_ID, DBAdapter.KEY_ANALGESIC_PRES_4_ID, DBAdapter.KEY_ANALGESIC_PRES_5_ID, DBAdapter.KEY_ANALGESIC_PRES_6_ID, DBAdapter.KEY_ANALGESIC_PRES_7_ID, DBAdapter.KEY_ANALGESIC_PRES_8_ID};
 
@@ -63,7 +63,7 @@ public class AnalgesicPrescription {
         int mDay;
         int mYear;
 
-        final String[] spinnerOptions = new String[]{"", context.getString(R.string.not_specified), context.getString(R.string.standard_order), context.getString(R.string.collective_order_body), context.getString(R.string.structured_prescription), context.getString(R.string.pharmaceutical_algorithm)};
+        final String[] spinnerOptions = new String[]{"", context.getString(R.string.standard_order), context.getString(R.string.collective_order_body), context.getString(R.string.structured_prescription)};
         final String[] checkBoxItems = new String[]{context.getString(R.string.acetaminophen), context.getString(R.string.nsaids), context.getString(R.string.opioid)};
         final String[] spinnerPresByOptions = new String[]{"", context.getString(R.string.er_md_option), context.getString(R.string.other_md_option), context.getString(R.string.unknown_option)};
 
@@ -334,9 +334,6 @@ public class AnalgesicPrescription {
 
                 }
 
-                final EditText editOther = (EditText) assessmentView.findViewById(R.id.edit_type_other);
-
-
                 String answer = cursor.getString(index * numFields + 3);
                 if (answer != null) {
                     for (int j = 0; j < checkBoxItems.length; j++) {
@@ -348,29 +345,6 @@ public class AnalgesicPrescription {
                     }
                 }
 
-                String other = cursor.getString(index * numFields + 4);
-                if (other != null) {
-                    editOther.setText(other);
-                } else {
-                    editOther.setText("");
-                }
-
-                editOther.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 4], s.toString());
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-                    }
-                });
             }
 
 
@@ -382,7 +356,7 @@ public class AnalgesicPrescription {
                 spinner.setAdapter(spinnerAdapter);
 
                 spinner.setSelection(0);
-                String value = cursor.getString(index * numFields + 5);
+                String value = cursor.getString(index * numFields + 4);
                 if (value != null && !value.equals("")) {
                     for (int k = 0; k < spinnerOptions.length; k++) {
                         if (value.equals(spinnerOptions[k])) {
@@ -396,7 +370,7 @@ public class AnalgesicPrescription {
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 5], spinnerOptions[position]);
+                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 4], spinnerOptions[position]);
                     }
 
                     @Override
@@ -412,152 +386,6 @@ public class AnalgesicPrescription {
                         spinner.performClick();
                     }
                 });
-            }
-
-
-            {
-                //Spinner - Prescribed by
-                final Spinner spinner = (Spinner) assessmentView.findViewById(R.id.spinner_prescribed_by);
-                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, spinnerPresByOptions);
-                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(spinnerAdapter);
-
-                spinner.setSelection(0);
-                String value = cursor.getString(index * numFields + 6);
-                if (value != null && !value.equals("")) {
-                    for (int k = 0; k < spinnerPresByOptions.length; k++) {
-                        if (value.equals(spinnerPresByOptions[k])) {
-                            spinner.setSelection(k);
-                            break;
-                        }
-                    }
-                }
-
-
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 6], spinnerPresByOptions[position]);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
-                TextView textView = (TextView) assessmentView.findViewById(R.id.text_prescribed_by);
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        spinner.performClick();
-                    }
-                });
-            }
-
-            {
-                //EditText - ER MD
-                EditText editText = (EditText) assessmentView.findViewById(R.id.edit_number_er);
-                editText.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(final CharSequence s, int start, int before, int count) {
-                        Thread thread = new Thread() {
-                            @Override
-                            public void run() {
-
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 7], s.toString());
-                            }
-                        };
-                        thread.start();
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-                    }
-                });
-
-                String type = cursor.getString(index * numFields + 7);
-                if (type != null) {
-                    editText.setText(type);
-                } else {
-                    editText.setText("");
-                }
-            }
-
-            {
-                //EditText - Other MD
-                EditText editText = (EditText) assessmentView.findViewById(R.id.edit_number_other);
-                editText.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(final CharSequence s, int start, int before, int count) {
-                        Thread thread = new Thread() {
-                            @Override
-                            public void run() {
-
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 8], s.toString());
-                            }
-                        };
-                        thread.start();
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-                    }
-                });
-
-                String type = cursor.getString(index * numFields + 8);
-                if (type != null) {
-                    editText.setText(type);
-                } else {
-                    editText.setText("");
-                }
-            }
-
-            {
-                //EditText - Unknown
-                EditText editText = (EditText) assessmentView.findViewById(R.id.edit_number_unknown);
-                editText.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(final CharSequence s, int start, int before, int count) {
-                        Thread thread = new Thread() {
-                            @Override
-                            public void run() {
-
-                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 9], s.toString());
-                            }
-                        };
-                        thread.start();
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-                    }
-                });
-
-                String type = cursor.getString(index * numFields + 9);
-                if (type != null) {
-                    editText.setText(type);
-                } else {
-                    editText.setText("");
-                }
             }
 
             cursor.close();
@@ -578,10 +406,7 @@ public class AnalgesicPrescription {
         boolean canAdd = true;
         if (num > 0){
             cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, Arrays.copyOfRange(keys, (num-1)*numFields+1, num*numFields+1));
-            for (int i=0; i<6; i++){
-
-                if (i==3)
-                    continue;
+            for (int i=0; i<numFields; i++){
 
                 if (cursor.getString(i) == null || cursor.getString(i).equals("")){
                     canAdd = false;
