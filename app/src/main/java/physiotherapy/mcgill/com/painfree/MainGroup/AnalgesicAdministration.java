@@ -62,7 +62,7 @@ public class AnalgesicAdministration {
         int mDay;
         int mYear;
 
-        final String[] spinnerOrderOptions = new String[]{"", context.getString(R.string.written), context.getString(R.string.verbal)};
+        final String[] spinnerOrderOptions = new String[]{context.getString(R.string.written), context.getString(R.string.verbal)};
 
         final Cursor cursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, keys);
 
@@ -385,6 +385,8 @@ public class AnalgesicAdministration {
                             break;
                         }
                     }
+                } else {
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 7], spinnerOrderOptions[0]);
                 }
 
 
@@ -410,23 +412,44 @@ public class AnalgesicAdministration {
 
 
             {
-                //Checkbox - refusal
-                CheckBox cbRefusal = (CheckBox) assessmentView.findViewById(R.id.analgesia_refused);
+                //Spinner - refusal
+                final String[] spinnerRefusalOptions = new String[]{"", context.getString(R.string.refusal_of_analgesia), context.getString(R.string.contraindicated)};
+                final Spinner refusal = (Spinner) assessmentView.findViewById(R.id.spinner_refusal);
+                TextView textView = (TextView) assessmentView.findViewById(R.id.text_spinner_refusal);
+                ArrayAdapter<String> spinnerRefusalAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, spinnerRefusalOptions);
+                spinnerRefusalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                refusal.setAdapter(spinnerRefusalAdapter);
 
-                cbRefusal.setOnClickListener(new View.OnClickListener() {
+                refusal.setSelection(0);
+                String value = cursor.getString(index * numFields + 8);
+                if (value != null && !value.equals("")) {
+                    for (int k = 0; k < spinnerRefusalOptions.length; k++) {
+                        if (value.equals(spinnerRefusalOptions[k])) {
+                            refusal.setSelection(k);
+                            break;
+                        }
+                    }
+                }
+
+
+                refusal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onClick(View v) {
-                        boolean checked = ((CheckBox) v).isChecked();
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 8], checked ? context.getString(R.string.yes) : null);
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 8], spinnerRefusalOptions[position]);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
                     }
                 });
 
-                String refused = cursor.getString(index * numFields + 8);
-                if (refused != null && !refused.equals("")) {
-                    cbRefusal.setChecked(true);
-                } else {
-                    cbRefusal.setChecked(false);
-                }
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        refusal.performClick();
+                    }
+                });
             }
 
             cursor.close();
