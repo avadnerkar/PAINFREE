@@ -104,31 +104,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinner"/>
 
-        <TextView
-            android:textStyle="bold"
-            android:text="@string/type_of_analgesic_administered"
-            style="@style/textFormStyle" />
-
-        <CheckBox
-            android:id="@+id/cb_acetaminophen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/checkboxStyle"
-            android:text="@string/acetaminophen"/>
-
-        <CheckBox
-            android:id="@+id/cb_nsaids"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/checkboxStyle"
-            android:text="@string/nsaids"/>
-
-        <CheckBox
-            android:id="@+id/cb_opioid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/checkboxStyle"
-            android:text="@string/opioid"/>
 
         <TextView
             android:id="@+id/text_spinner_order"

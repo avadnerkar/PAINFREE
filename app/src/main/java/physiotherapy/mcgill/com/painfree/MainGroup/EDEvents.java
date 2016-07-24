@@ -43,6 +43,7 @@ public class EDEvents {
         }
 
         final int maxEvents = 8;
+        final int maxAdminEvents = 15;
 
         holder.container.removeAllViews();
 
@@ -162,7 +163,7 @@ public class EDEvents {
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
                                             editor.putInt("presID" + String.valueOf(MainActivity.currentPatientId), latestId);
                                             editor.commit();
-                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicPrescription.idKeys[numAnalgesicPres], MainActivity.currentPatientId + "-" + latestId);
+                                            MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicPrescription.idKeys[numAnalgesicPres], "P" + MainActivity.currentPatientId + "-" + latestId);
                                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_ANALGESIC_PRES_NUM, String.valueOf(numAnalgesicPres+1));
                                             if (!defaultDate.equals(context.getString(R.string.none))){
                                                 MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, AnalgesicPrescription.keys[(numAnalgesicPres)*AnalgesicPrescription.numFields+1], defaultDate);
@@ -171,7 +172,7 @@ public class EDEvents {
                                         break;
                                     case 2:
                                         int numAnalgesicAdmin = cursor1.getInt(2);
-                                        if (numAnalgesicAdmin>=maxEvents){
+                                        if (numAnalgesicAdmin>=maxAdminEvents){
                                             AppUtils.showAlert("Error", "Reached analgesic administration limit", context);
                                             return;
                                         } else {
