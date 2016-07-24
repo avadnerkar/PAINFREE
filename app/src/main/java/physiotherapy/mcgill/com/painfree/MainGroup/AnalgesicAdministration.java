@@ -51,6 +51,16 @@ public class AnalgesicAdministration {
     public static final boolean[] mandatoryKeys = new boolean[]{
             true, true, false, false, false, false, false, false};
 
+    public static final String[][] adminPresKeys = new String[][]{
+            new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_OPIOID_FREQ},
+            new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_OPIOID_FREQ},
+            new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_OPIOID_FREQ},
+            new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_OPIOID_FREQ},
+            new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_OPIOID_FREQ},
+            new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_OPIOID_FREQ},
+            new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_OPIOID_FREQ},
+            new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_OPIOID_FREQ}
+    };
 
     public static final int numFields = 8;
 
@@ -280,13 +290,16 @@ public class AnalgesicAdministration {
                 final Spinner spinner = (Spinner) assessmentView.findViewById(R.id.spinner);
 
                 ArrayList<String> options = new ArrayList<>();
+                final ArrayList<String[]> optionIds = new ArrayList<>();
                 options.add("");
+                optionIds.add(null);
                 Cursor cursor1 = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, AnalgesicPrescription.idKeys);
                 if (cursor1.moveToFirst()) {
                     for (int i=0; i<AnalgesicPrescription.idKeys.length; i++) {
                         String option = cursor1.getString(i);
                         if (option != null && option.length() > 0) {
                             options.add(option);
+                            optionIds.add(AnalgesicPrescription.idArray[i]);
                         }
                     }
                 }
@@ -310,6 +323,7 @@ public class AnalgesicAdministration {
                 }
                 if (!valueFound) {
                     MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 3], null);
+                    MainActivity.myDb.updateFields(MainActivity.currentPatientId, adminPresKeys[index], null);
                 }
 
 
@@ -317,6 +331,21 @@ public class AnalgesicAdministration {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 3], spinnerOptions[position]);
+                        if (optionIds.get(position) != null) {
+                            Cursor cursorPres = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, optionIds.get(position));
+                            if (cursorPres.moveToFirst()) {
+                                ArrayList<String> presFields = new ArrayList<>();
+                                for (int m=0; m<cursorPres.getColumnCount(); m++) {
+                                    presFields.add(cursorPres.getString(m));
+                                }
+
+                                MainActivity.myDb.updateFields(MainActivity.currentPatientId, adminPresKeys[index], presFields.toArray(new String[presFields.size()]));
+                            }
+                            cursorPres.close();
+                        } else {
+                            MainActivity.myDb.updateFields(MainActivity.currentPatientId, adminPresKeys[index], null);
+                        }
+
                     }
 
                     @Override

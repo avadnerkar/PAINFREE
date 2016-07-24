@@ -240,6 +240,9 @@
     <string name="linked_analgesic_prescription">Linked analgesic prescription:</string>
     <string name="refusal">Refusal:</string>
     <string name="contraindicated">Contraindicated</string>
+    <string name="prescription_status">Prescription status:</string>
+    <string name="active">Active</string>
+    <string name="ceased">Ceased</string>
 
 
 </resources>
