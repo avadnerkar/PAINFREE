@@ -39,24 +39,24 @@ import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
 public class AnalgesicAdministration {
 
     public static final String[] keys = new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_NUM,
-            DBAdapter.KEY_ANALGESIC_ADMIN_1_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_1_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_1_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_1_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_2_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_2_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_2_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_2_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_3_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_3_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_3_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_3_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_4_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_4_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_4_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_4_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_5_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_5_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_5_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_5_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_6_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_6_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_6_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_6_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_7_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_7_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_7_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_7_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_8_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_8_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_8_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_8_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_9_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_9_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_9_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_9_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_9_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_10_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_10_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_10_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_10_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_10_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_11_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_11_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_11_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_11_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_11_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_12_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_12_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_12_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_12_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_12_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_13_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_13_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_13_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_13_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_13_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_14_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_14_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_14_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_14_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_14_REFUSAL,
-            DBAdapter.KEY_ANALGESIC_ADMIN_15_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_15_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_15_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_15_REFUSAL};
+            DBAdapter.KEY_ANALGESIC_ADMIN_1_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_1_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_1_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_1_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_1_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_1_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_1_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_2_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_2_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_2_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_2_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_2_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_2_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_2_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_2_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_3_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_3_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_3_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_3_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_3_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_3_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_3_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_3_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_4_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_4_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_4_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_4_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_4_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_4_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_4_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_4_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_5_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_5_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_5_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_5_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_5_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_5_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_5_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_5_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_6_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_6_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_6_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_6_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_6_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_6_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_6_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_6_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_7_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_7_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_7_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_7_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_7_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_7_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_7_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_7_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_8_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_8_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_8_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_8_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_8_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_8_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_8_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_8_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_9_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_9_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_9_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_9_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_9_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_9_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_9_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_9_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_10_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_10_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_10_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_10_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_10_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_10_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_10_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_10_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_11_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_11_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_11_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_11_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_11_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_11_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_11_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_11_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_12_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_12_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_12_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_12_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_12_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_12_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_12_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_12_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_13_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_13_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_13_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_13_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_13_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_13_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_13_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_13_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_14_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_14_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_14_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_14_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_14_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_14_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_14_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_14_REFUSAL,
+            DBAdapter.KEY_ANALGESIC_ADMIN_15_DATE, DBAdapter.KEY_ANALGESIC_ADMIN_15_TIME, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_ID, DBAdapter.KEY_ANALGESIC_ADMIN_15_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_15_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_15_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_15_ORDER, DBAdapter.KEY_ANALGESIC_ADMIN_15_REFUSAL};
 
     public static final boolean[] mandatoryKeys = new boolean[]{
-            true, true, false, false, false};
+            true, true, false, false, false, false, false, false};
 
     public static final String[][] adminPresKeys = new String[][]{
             new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_1_PRES_OPIOID_FREQ},
@@ -76,7 +76,7 @@ public class AnalgesicAdministration {
             new String[]{DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_ACETAMINOPHEN, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_ACETAMINOPHEN_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_ACETAMINOPHEN_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_ACETAMINOPHEN_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_NSAIDS, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_NSAIDS_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_NSAIDS_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_NSAIDS_FREQ, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_OPIOID, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_OPIOID_DOSE, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_OPIOID_ROUTE, DBAdapter.KEY_ANALGESIC_ADMIN_15_PRES_OPIOID_FREQ}
     };
 
-    public static final int numFields = 5;
+    public static final int numFields = 8;
 
     public static View setupAnalgesicAdministrationSection(final Context context, ViewGroup parent, final ArrayAdapter adapter, final int index, final int globalIndex, final EDEvents.MinusHandler handler){
 
@@ -379,6 +379,42 @@ public class AnalgesicAdministration {
 
 
             {
+                //Analgesic type
+
+                CheckBox[] analgesicCheckboxes = new CheckBox[]{(CheckBox) assessmentView.findViewById(R.id.cb_acetaminophen), (CheckBox) assessmentView.findViewById(R.id.cb_nsaids), (CheckBox) assessmentView.findViewById(R.id.cb_opioid)};
+
+                for (int j=0; j<3; j++){
+                    final int J = j;
+
+                    //Checkbox
+                    String analgesicValue = cursor.getString(index*numFields + 4 + j);
+                    if (analgesicValue != null && analgesicValue.equals(context.getString(R.string.yes))){
+                        analgesicCheckboxes[j].setChecked(true);
+                    } else {
+                        analgesicCheckboxes[j].setChecked(false);
+                    }
+
+
+                    analgesicCheckboxes[j].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (((CheckBox)v).isChecked()){
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index*numFields + 4 + J], context.getString(R.string.yes));
+                            } else {
+                                MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index*numFields + 4 + J], null);
+                            }
+                        }
+                    });
+
+
+
+
+                }
+            }
+
+
+
+            {
                 //Spinner - Order
                 final Spinner order = (Spinner) assessmentView.findViewById(R.id.spinner_order);
                 TextView textView = (TextView) assessmentView.findViewById(R.id.text_spinner_order);
@@ -387,7 +423,7 @@ public class AnalgesicAdministration {
                 order.setAdapter(spinnerOrderAdapter);
 
                 order.setSelection(0);
-                String value = cursor.getString(index * numFields + 4);
+                String value = cursor.getString(index * numFields + 7);
                 if (value != null && !value.equals("")) {
                     for (int k = 0; k < spinnerOrderOptions.length; k++) {
                         if (value.equals(spinnerOrderOptions[k])) {
@@ -396,14 +432,14 @@ public class AnalgesicAdministration {
                         }
                     }
                 } else {
-                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 4], spinnerOrderOptions[0]);
+                    MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 7], spinnerOrderOptions[0]);
                 }
 
 
                 order.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 4], spinnerOrderOptions[position]);
+                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 7], spinnerOrderOptions[position]);
                     }
 
                     @Override
@@ -431,7 +467,7 @@ public class AnalgesicAdministration {
                 refusal.setAdapter(spinnerRefusalAdapter);
 
                 refusal.setSelection(0);
-                String value = cursor.getString(index * numFields + 5);
+                String value = cursor.getString(index * numFields + 8);
                 if (value != null && !value.equals("")) {
                     for (int k = 0; k < spinnerRefusalOptions.length; k++) {
                         if (value.equals(spinnerRefusalOptions[k])) {
@@ -445,7 +481,7 @@ public class AnalgesicAdministration {
                 refusal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 5], spinnerRefusalOptions[position]);
+                        MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, keys[index * numFields + 8], spinnerRefusalOptions[position]);
                     }
 
                     @Override
