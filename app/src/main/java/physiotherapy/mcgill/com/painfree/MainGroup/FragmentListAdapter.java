@@ -33,7 +33,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
-import java.util.Random;
 
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.DBAdapter;
@@ -603,15 +602,15 @@ public class FragmentListAdapter extends ArrayAdapter<FragmentItem> {
 
                                         Cursor syncCursor = MainActivity.myDb.getDataFields(MainActivity.currentPatientId, new String[]{DBAdapter.KEY_TRIAGE_DATE, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE, DBAdapter.KEY_DISCHARGE_DATE});
                                         syncCursor.moveToFirst();
-                                        if (syncCursor.getString(0) == null || syncCursor.getString(0).equals("")){
+                                        //if (syncCursor.getString(0) == null || syncCursor.getString(0).equals("")){
                                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_TRIAGE_DATE, text);
-                                        }
-                                        if (syncCursor.getString(1) == null || syncCursor.getString(1).equals("")){
+                                        //}
+                                        //if (syncCursor.getString(1) == null || syncCursor.getString(1).equals("")){
                                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_PHYSICIAN_EXAMINATION_DATE, text);
-                                        }
-                                        if (syncCursor.getString(2) == null || syncCursor.getString(2).equals("")){
+                                        //}
+                                        //if (syncCursor.getString(2) == null || syncCursor.getString(2).equals("")){
                                             MainActivity.myDb.updateFieldData(MainActivity.currentPatientId, DBAdapter.KEY_DISCHARGE_DATE, text);
-                                        }
+                                        //}
                                         syncCursor.close();
 
                                         ((Activity) context).runOnUiThread(new Runnable() {

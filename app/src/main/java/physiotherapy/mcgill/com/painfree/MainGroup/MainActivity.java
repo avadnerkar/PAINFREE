@@ -1,7 +1,6 @@
 package physiotherapy.mcgill.com.painfree.MainGroup;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +14,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,10 +31,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 import physiotherapy.mcgill.com.painfree.Dialogs.DialogEditText;
-import physiotherapy.mcgill.com.painfree.Dialogs.DialogTwoButton;
 import physiotherapy.mcgill.com.painfree.R;
 import physiotherapy.mcgill.com.painfree.Utilities.ActivityIndicator;
 import physiotherapy.mcgill.com.painfree.Utilities.AppUtils;
@@ -457,10 +453,12 @@ public class MainActivity extends AppCompatActivity {
 
                     if (c.moveToFirst()){
                         do {
+                            String tempDate = null;
                             List<String> list = new ArrayList<>();
                             for (int i=0; i<c.getColumnCount(); i++){
 
-
+                                boolean dateFound = false;
+                                String value = c.getString(i);
                                 if (c.getColumnName(i).equals("MRN")){
                                     list.add("Confidential");
                                 } else if (c.getColumnName(i).equals("HoursFirstEvent")){
@@ -470,10 +468,19 @@ public class MainActivity extends AppCompatActivity {
                                     } else {
                                         list.add(String.format("%.2f", hours));
                                     }
+                                } else if (c.getColumnName(i).toLowerCase().contains("date")) {
+                                    tempDate = c.getString(i);
+                                    dateFound = true;
+                                    list.add(c.getString(i));
+                                } else if (tempDate != null && !tempDate.equals("") && !tempDate.equals("None") && c.getColumnName(i).toLowerCase().contains("time") && value != null && !value.equals("None") && !value.equals("")) {
+                                    list.add(tempDate + " " + value);
                                 } else {
                                     list.add(c.getString(i));
                                 }
 
+                                if (!dateFound) {
+                                    tempDate = null;
+                                }
 
                             }
                             String[] arrStr = list.toArray(new String[list.size()]);
