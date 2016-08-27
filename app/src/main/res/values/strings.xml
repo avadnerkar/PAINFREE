@@ -78,7 +78,7 @@
     <string name="none">None</string>
     <string name="mechanism1">Fall on same level due to ice and snow</string>
     <string name="mechanism2">Fall on same level from slipping, tripping and stumbling without subsequent striking against object</string>
-
+    <string name="mechanism3">Fall involving ice-skates, skis, roller-skates or skateboards</string>
     <string name="mechanism4">Other fall on same level due to collision with, or pushing by, another person</string>
     <string name="mechanism5">Fall while being carried or supported by other persons</string>
     <string name="mechanism6">Fall from non-moving wheelchair, non-motorized and motorized mobility scooter</string>
@@ -99,7 +99,7 @@
 
     <string name="mechanismCode1">W00</string>
     <string name="mechanismCode2">W01</string>
-
+    <string name="mechanismCode3">W02</string>
     <string name="mechanismCode4">W03</string>
     <string name="mechanismCode5">W04</string>
     <string name="mechanismCode6">W05</string>
